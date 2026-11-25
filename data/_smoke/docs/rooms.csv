@@ -1,0 +1,5 @@
+room,capacity,hourly_fee_usd,projector
+Reading Room,40,0,no
+Studio A,12,15,yes
+Studio B,6,10,no
+Lecture Hall,120,60,yes
