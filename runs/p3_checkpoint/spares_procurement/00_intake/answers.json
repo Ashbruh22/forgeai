@@ -2,19 +2,19 @@
   {
     "question_id": "Q1",
     "field": "scope_out",
-    "text": "The assistant should not avoid topics related to shipping regulations, compliance, or contractual negotiations, as these are integral to the spare parts process and are covered in the provided supplier terms and conditions documents.",
+    "text": "The assistant should avoid topics not directly related to ship spares, such as general maritime law, port infrastructure details, or unrelated equipment maintenance. It should also avoid discussing non-verified inventory data or speculative supplier performance metrics.",
     "answered_by": "ASSUMPTION"
   },
   {
     "question_id": "Q2",
     "field": "must_refuse",
-    "text": "The assistant should refuse to answer questions involving personal data, legal advice, confidential business information, or any queries that could compromise security or violate privacy policies.",
+    "text": "The assistant must refuse to answer questions involving confidential supplier information, pricing details outside of published catalogues, or any information that could compromise trade secrets or contractual obligations. It should also avoid providing legal or financial advice related to supplier agreements.",
     "answered_by": "ASSUMPTION"
   },
   {
     "question_id": "Q3",
     "field": "tone",
-    "text": "The assistant's responses should be formal and neutral to ensure clarity and professionalism when providing information about ship spares and supplier details.",
+    "text": "The assistant should use a clear, professional, and helpful tone, providing accurate and concise information while ensuring clarity on pricing, lead times, and availability across suppliers and ports.",
     "answered_by": "ASSUMPTION"
   },
   {

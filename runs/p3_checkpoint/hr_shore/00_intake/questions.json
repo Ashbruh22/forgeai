@@ -2,13 +2,13 @@
   {
     "id": "Q1",
     "field": "scope_out",
-    "text": "Should the assistant avoid any topics related to employee benefits, payroll procedures, or personal data handling, even if connected to HR policies?",
+    "text": "What specific topics related to HR policies or salary slips should the assistant avoid answering or assisting with?",
     "kind": "interview"
   },
   {
     "id": "Q2",
     "field": "must_refuse",
-    "text": "What types of questions related to HR policies and salary slips should the assistant always refuse to answer?",
+    "text": "What specific types of questions should the assistant always refuse to answer, such as personal data requests or legal advice?",
     "kind": "interview"
   },
   {

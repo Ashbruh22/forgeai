@@ -8,6 +8,7 @@ eligible for a question. Questions are only ever asked about unresolved fields.
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Literal
 
@@ -187,4 +188,22 @@ def answer_to_items(question: Question, answer: str, config: ForgeConfig) -> lis
         AnswerItems, model.name, 0.0, seed=model.seed,
         fallback=AnswerItems(values=[answer] if answer.strip() else []),
     )
-    return [v.strip() for v in items.values if v.strip()]
+    return clean_items(items.values)
+
+
+_SENTENCE_LIKE = re.compile(r"\b(should|must|shall|will|is|are)\b|^the assistant\b", re.IGNORECASE)
+MAX_ITEM_WORDS = 12
+
+
+def clean_items(values: list[str]) -> list[str]:
+    """Keep topic-like items; drop sentences and instructions the model slipped in.
+
+    A scope or refusal list is data that later steps compile into an agent prompt, so a
+    stray sentence such as "the assistant should not avoid X" would invert a rule.
+    """
+    seen: dict[str, None] = {}
+    for value in values:
+        item = value.strip().rstrip(".")
+        if item and len(item.split()) <= MAX_ITEM_WORDS and not _SENTENCE_LIKE.search(item):
+            seen.setdefault(item, None)
+    return list(seen)

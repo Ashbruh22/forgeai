@@ -217,3 +217,14 @@ def test_a_requirement_from_the_brief_is_kept_even_if_the_model_credits_the_docu
         docs_text="Leave policy: annual leave entitlements", log=log)
     assert checked.must_answer.values == ["Annual leave entitlements", "Salary slip interpretation"]
     assert any("Quantum computing" in note for note in log)  # unsupported items are dropped AND logged
+
+
+def test_sentences_and_inverted_rules_are_not_accepted_as_topic_items() -> None:
+    """Regression: Demo B got scope_out items like 'The assistant should not avoid topics related to
+    compliance', which would flip a rule once compiled into the agent prompt."""
+    cleaned = iv.clean_items([
+        "legal advice", "The assistant should not avoid topics related to compliance",
+        "These topics are integral to the spare parts process", "personal data.", "legal advice",
+        "one two three four five six seven eight nine ten eleven twelve thirteen",
+    ])
+    assert cleaned == ["legal advice", "personal data"]
