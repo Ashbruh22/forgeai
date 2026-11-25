@@ -1,0 +1,30 @@
+# Environments and secrets
+.venv/
+venv/
+.env
+.env.*
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Caches (rebuildable; never commit)
+.cache/
+.forgeai_cache/
+**/index_cache/
+**/llm_cache/
+
+# Model weights
+*.gguf
+*.safetensors
+*.bin
+
+# NOTE: runs/ is intentionally NOT ignored. Demo run outputs are required deliverables.
+
+# Hugging Face model cache must live outside the repo; belt and braces:
+hf_cache/
+huggingface/

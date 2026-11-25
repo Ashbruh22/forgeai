@@ -1,0 +1,37 @@
+# ForgeAI configuration. Exact model tags/digests are recorded in every run's manifest.json.
+ollama_host: http://localhost:11434
+num_ctx: 8192
+
+agent_model:            # agent + generator model
+  name: qwen3:8b
+  temperature: 0.1
+  seed: 7
+
+# Judge model is a config value, chosen by MEASURED canary accuracy (spec §6.2),
+# not by guesswork. Candidates: gemma3:4b, llama3.1:8b. Must differ in family
+# from agent_model (ConfigError otherwise).
+judge_model:
+  name: gemma3:4b
+  temperature: 0.0
+  seed: 7
+
+embedding_model: BAAI/bge-small-en-v1.5
+embedding_revision: 5c38ec7c405ec4b44b94cc5a9bb96e735b38267a   # pinned HF commit
+embedding_query_prefix: "Represent this sentence for searching relevant passages: "
+cache_dir: .cache
+
+thresholds:
+  dev_pass_rate: 0.90
+  max_fabricated_on_refusals: 0
+  canary_accuracy_min: 0.90
+  paraphrase_overlap_max: 0.50
+  dedup_similarity: 0.90
+  fewshot_leakage_similarity: 0.80
+  fact_fuzzy_score: 85
+
+limits:                 # hard limits from the assignment
+  max_clarifying_questions: 5
+  max_fix_cycles: 3
+  min_eval_cases: 20
+  max_tool_calls_per_turn: 3
+  max_llm_retries: 2
