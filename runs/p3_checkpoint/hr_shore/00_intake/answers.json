@@ -1,0 +1,20 @@
+[
+  {
+    "question_id": "Q1",
+    "field": "scope_out",
+    "text": "The assistant should avoid topics related to employee benefits, payroll procedures, or personal data handling unless specifically requested, as these areas are not covered by the provided HR policy documents and may require specialized guidance beyond the scope of the available information.",
+    "answered_by": "ASSUMPTION"
+  },
+  {
+    "question_id": "Q2",
+    "field": "must_refuse",
+    "text": "The assistant should always refuse to answer questions involving personal data, confidential employee information, or matters outside the scope of HR policies and salary slip inquiries, such as legal advice or disciplinary actions. Additionally, any questions that could compromise data privacy or security should be declined.",
+    "answered_by": "ASSUMPTION"
+  },
+  {
+    "question_id": "Q3",
+    "field": "gaps",
+    "text": "refuse",
+    "answered_by": "ASSUMPTION"
+  }
+]

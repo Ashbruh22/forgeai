@@ -1,0 +1,73 @@
+{
+  "title": "Supplier Terms and Conditions, Norvik Marine Supply (S01)",
+  "sections": [
+    [
+      "Scope and Pricing",
+      [
+        "Norvik Marine Supply, designated as supplier S01, provides ship spares to Calder Bay Ship Management Ltd.",
+        "All pricing for items supplied by Norvik Marine Supply is based on the unit prices listed in the spares catalogue.",
+        "Prices are quoted in US dollars and are exclusive of any discounts.",
+        "Calder Bay Ship Management Ltd is responsible for confirming the availability of items from Norvik Marine Supply prior to placing an order.",
+        "Norvik Marine Supply is required to deliver all ordered items within the timeframe specified in the purchase order.",
+        "Calder Bay Ship Management Ltd must provide written confirmation of the order details to Norvik Marine Supply before any shipment is dispatched.",
+        "All pricing terms and conditions for supplier S01 are subject to the terms outlined in this document."
+      ]
+    ],
+    [
+      "Volume Discounts",
+      [
+        "The applicable discount tier for an order is determined by the total value of the order before any discount is applied. 5% discount applies to orders with a total value between USD 5,000 and USD 14,999.",
+        "An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999. The discount is calculated on the total value of the order before discount.",
+        "A 12% discount is applicable to orders with a total value of USD 50,000 or more. The discount is calculated on the total value of the order before discount.",
+        "The discount is applied to the entire order and is not cumulative with any other discounts or promotions. The discount is calculated based on the total value of the order before discount.",
+        "The supplier shall confirm the applicable discount tier in writing upon receipt of the order. The confirmation shall include the total value of the order and the applicable discount rate.",
+        "The discount is valid for the order as originally submitted and cannot be adjusted or modified after the order has been confirmed. The discount is not transferable or applicable to subsequent orders.",
+        "The supplier shall ensure that all orders are processed in accordance with the applicable discount tier. The discount is applied automatically upon confirmation of the order."
+      ]
+    ],
+    [
+      "Delivery and Incoterms",
+      [
+        "S01 delivers all parts on Incoterms DAP to the port of call named in the order. The port of call is specified in the order and must be clearly identified for delivery purposes.",
+        "S01 is responsible for arranging and paying for transportation of the goods to the named port of call. This includes all costs and risks up to the point of delivery.",
+        "Upon arrival at the port of call, S01 will ensure the goods are made available for collection by the buyer. The buyer is responsible for all costs and risks from that point onward.",
+        "S01 will provide the buyer with a delivery confirmation upon completion of the delivery. This confirmation includes details of the goods delivered and the port of call.",
+        "S01 will handle all customs formalities and documentation required for delivery under DAP terms. The buyer is responsible for any additional customs requirements beyond this.",
+        "S01 will not be liable for any delays or losses incurred after the goods have been made available for collection at the port of call."
+      ]
+    ],
+    [
+      "Warranty",
+      [
+        "The warranty period for all new parts supplied by Norvik Marine Supply under this agreement is 12 months from the date of delivery.",
+        "The warranty covers defects in material and workmanship under normal use and maintenance conditions.",
+        "Norvik Marine Supply reserves the right to inspect the defective part at its own expense to determine the cause of the defect.",
+        "If the defect is found to be within the warranty period and attributable to materials or workmanship, Norvik Marine Supply will replace the defective part with a new one.",
+        "The recipient is responsible for providing all necessary documentation and information to support the warranty claim.",
+        "The warranty does not cover damage caused by misuse, neglect, accidental damage, or unauthorized modifications."
+      ]
+    ],
+    [
+      "Expedited Orders",
+      [
+        "The expedite surcharge for orders requiring delivery within 7 days shall be 15% of the order value. This surcharge is applicable when the requested delivery date is earlier than the standard lead time specified in the catalogue. The surcharge is calculated at the time of order confirmation and is included in the total invoice amount.",
+        "For orders requiring delivery within 48 hours, the expedite surcharge shall be 25% of the order value. This surcharge applies only when the requested delivery date is earlier than the standard lead time specified in the catalogue. The surcharge is calculated at the time of order confirmation and is included in the total invoice amount.",
+        "The expedite surcharge is non-refundable and is applicable regardless of the reason for the expedited delivery request. The surcharge is determined based on the delivery date requested by the customer and the standard lead time provided in the catalogue. The supplier shall confirm the expedite surcharge in writing upon receipt of the order.",
+        "This confirmation shall include the calculated surcharge amount and the total invoice value. The confirmation is required for all orders that include an expedited delivery request. The customer shall provide the requested delivery date at the time of placing the order.",
+        "The supplier shall assess the feasibility of the requested delivery date and confirm the surcharge accordingly. The customer is responsible for ensuring the requested delivery date is achievable. The expedite surcharge is applied to the total order value and is not subject to any further discounts or adjustments.",
+        "The surcharge is included in the invoice issued by the supplier and is payable in full upon receipt of the invoice. The supplier shall not be liable for any delays or additional costs incurred as a result of the expedited delivery request. The customer acknowledges that the expedite surcharge is a separate charge for the accelerated processing and delivery of the order."
+      ]
+    ],
+    [
+      "Payment and Cancellation",
+      [
+        "All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+        "Once an order has been dispatched by Norvik Marine Supply, it shall not be cancelled by the customer under any circumstances.",
+        "The customer shall notify Norvik Marine Supply in writing of any cancellation request prior to the dispatch of the order.",
+        "Norvik Marine Supply reserves the right to charge a restocking fee if an order is cancelled after dispatch, as determined by the terms of the order confirmation.",
+        "All payments shall be made to the bank account details provided by Norvik Marine Supply in writing at the time of order confirmation.",
+        "In the event of a dispute regarding payment or cancellation, the parties agree to resolve the matter through mutual agreement prior to any formal legal action."
+      ]
+    ]
+  ]
+}

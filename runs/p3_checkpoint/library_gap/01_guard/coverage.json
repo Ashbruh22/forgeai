@@ -1,0 +1,241 @@
+{
+  "topics": [
+    {
+      "topic_id": "T1",
+      "topic": "What is the loan period for books?",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What is the loan period for books at Brightwater Library?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c0",
+          "span": "Books may be borrowed for 21 days.",
+          "max_dense": 0.8290598392486572,
+          "reason": "verified"
+        },
+        {
+          "question": "What do the documents say about What is the loan period for books??",
+          "supported": true,
+          "chunk_id": "library_rules.md#c0",
+          "span": "Books may be borrowed for 21 days.",
+          "max_dense": 0.7197994589805603,
+          "reason": "verified"
+        },
+        {
+          "question": "What are the rules or limits for What is the loan period for books??",
+          "supported": true,
+          "chunk_id": "library_rules.md#c0",
+          "span": "Books may be borrowed for 21 days.",
+          "max_dense": 0.7724087238311768,
+          "reason": "verified"
+        }
+      ],
+      "evidence": [
+        "library_rules.md#c0"
+      ]
+    },
+    {
+      "topic_id": "T2",
+      "topic": "What are the fines for overdue items?",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What is the fine for overdue books and how much is it capped at?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c1",
+          "span": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item.",
+          "max_dense": 0.8634196519851685,
+          "reason": "verified"
+        },
+        {
+          "question": "How much is the daily fine for overdue DVDs and what is the maximum amount?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c1",
+          "span": "Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item.",
+          "max_dense": 0.8547104001045227,
+          "reason": "verified"
+        },
+        {
+          "question": "What is the maximum fine for an overdue item at Brightwater Library?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c1",
+          "span": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item.",
+          "max_dense": 0.866653561592102,
+          "reason": "verified"
+        }
+      ],
+      "evidence": [
+        "library_rules.md#c1"
+      ]
+    },
+    {
+      "topic_id": "T3",
+      "topic": "What are the requirements for a library card?",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What is the annual fee for a non-resident library card at Brightwater Library?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c2",
+          "span": "Non-residents pay an annual fee of 30 dollars.",
+          "max_dense": 0.8766826391220093,
+          "reason": "verified"
+        },
+        {
+          "question": "Do children under 12 need a parent or guardian to apply for a library card?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c2",
+          "span": "Children under 12 need a parent or guardian to sign the application form.",
+          "max_dense": 0.6842363476753235,
+          "reason": "verified"
+        },
+        {
+          "question": "What is the borrowing period for books at Brightwater Library?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c0",
+          "span": "Books may be borrowed for 21 days.",
+          "max_dense": 0.8524625301361084,
+          "reason": "verified"
+        }
+      ],
+      "evidence": [
+        "library_rules.md#c2",
+        "library_rules.md#c0"
+      ]
+    },
+    {
+      "topic_id": "T4",
+      "topic": "Is a specific book available on the shelf?",
+      "verdict": "UNSUPPORTED",
+      "probes": [
+        {
+          "question": "Is the book 'The Great Gatsby' available on the shelf?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.5054194927215576,
+          "reason": "model found no supporting span"
+        },
+        {
+          "question": "Can I check the availability of the book 'To Kill a Mockingbird'?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.47105345129966736,
+          "reason": "model found no supporting span"
+        },
+        {
+          "question": "Is the book '1984' currently on the shelf at Brightwater Library?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.6401210427284241,
+          "reason": "model found no supporting span"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "topic_id": "T5",
+      "topic": "What is the cafe menu?",
+      "verdict": "UNSUPPORTED",
+      "probes": [
+        {
+          "question": "What are the available items on the Brightwater Library cafe menu?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.682875394821167,
+          "reason": "model found no supporting span"
+        },
+        {
+          "question": "Is there a cafe menu available at the Brightwater Library?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.6962814331054688,
+          "reason": "model found no supporting span"
+        },
+        {
+          "question": "What food and drink options are offered at the Brightwater Library cafe?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.6754859685897827,
+          "reason": "model found no supporting span"
+        }
+      ],
+      "evidence": []
+    }
+  ],
+  "calibration": {
+    "min_score": 0.6627,
+    "min_score_bounds": [
+      0.5627,
+      0.7627
+    ],
+    "separable": false,
+    "calibrated": true,
+    "note": "LOW CONFIDENCE: distributions overlap (in-scope p10=0.713, near-miss p90=0.779); threshold set 0.05 below the in-scope p10 to preserve recall; unanswerable near-misses rely on the refusal policy",
+    "in_scope_probe_max_similarity": [
+      0.8291,
+      0.7198,
+      0.7724,
+      0.8634,
+      0.8547,
+      0.8667,
+      0.8767,
+      0.6842,
+      0.8525
+    ],
+    "near_miss_probe_max_similarity": [
+      0.7734,
+      0.7908,
+      0.5054,
+      0.4711,
+      0.6401,
+      0.6829,
+      0.6963,
+      0.6755
+    ]
+  },
+  "gaps": [
+    {
+      "id": "G-T4",
+      "kind": "unsupported_topic",
+      "description": "The brief asks for 'Is a specific book available on the shelf?', but none of the 3 probe questions could be answered from the documents.",
+      "recommended_action": "refuse_with_redirect",
+      "topic_id": "T4",
+      "evidence": [
+        "probe: Is the book 'The Great Gatsby' available on the shelf? (model found no supporting span)",
+        "probe: Can I check the availability of the book 'To Kill a Mockingbird'? (model found no supporting span)",
+        "probe: Is the book '1984' currently on the shelf at Brightwater Library? (model found no supporting span)"
+      ],
+      "redirect": "I do not have information on this. Please contact the relevant team directly."
+    },
+    {
+      "id": "G-T5",
+      "kind": "unsupported_topic",
+      "description": "The brief asks for 'What is the cafe menu?', but none of the 3 probe questions could be answered from the documents.",
+      "recommended_action": "refuse_with_redirect",
+      "topic_id": "T5",
+      "evidence": [
+        "probe: What are the available items on the Brightwater Library cafe menu? (model found no supporting span)",
+        "probe: Is there a cafe menu available at the Brightwater Library? (model found no supporting span)",
+        "probe: What food and drink options are offered at the Brightwater Library cafe? (model found no supporting span)"
+      ],
+      "redirect": "I do not have information on this. Please contact the relevant team directly."
+    },
+    {
+      "id": "G-LIVE-1",
+      "kind": "live_data",
+      "description": "The brief asks for current or real-time information, but the documents are a static snapshot and no tool provides it: 'It should also tell visitors whether a specific book is on the shelf right now, and answer questions about the cafe menu.'",
+      "recommended_action": "refuse_with_redirect",
+      "topic_id": null,
+      "evidence": [
+        "It should also tell visitors whether a specific book is on the shelf right now, and answer questions about the cafe menu."
+      ],
+      "redirect": ""
+    }
+  ]
+}

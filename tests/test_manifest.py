@@ -17,6 +17,7 @@ def test_manifest_records_models_digests_embedding_revision_and_prompts(tmp_path
     assert data["embedding"] == {"name": "BAAI/bge-small-en-v1.5", "revision": "abc123"}
     assert data["prompt_versions"]["runner/agent_turn"] == 1
     assert data["limits"]["max_fix_cycles"] == 3
+    assert data["llm"]["think"] is False
 
 
 def test_prompt_versions_cover_every_prompt_file() -> None:

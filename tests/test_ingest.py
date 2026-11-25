@@ -28,7 +28,7 @@ PROSE = (
 class JsonTransport:
     """Answers any call with schema-valid JSON, chosen by the schema's fields."""
 
-    def chat(self, *, model: str, messages: list[dict[str, str]], schema: dict[str, Any], options: dict[str, Any]) -> ChatResult:
+    def chat(self, *, model: str, messages: list[dict[str, str]], schema: dict[str, Any], options: dict[str, Any], think: bool = False) -> ChatResult:
         props = schema.get("properties", {})
         body = (
             {"title": "A Title", "summary": "A short summary."}
@@ -185,3 +185,49 @@ def test_ingest_folder_skips_bad_files_and_writes_artifacts(
 def test_missing_folder_is_an_error(config: ForgeConfig, tmp_path: Path) -> None:
     with pytest.raises(FileNotFoundError):
         ingest_folder(tmp_path / "nope", config, FakeEmbedder())
+
+
+# --- seed spans and chunk offsets (DECISIONS.md, 2026-11-25) -------------------------------
+
+def test_chunk_offsets_point_into_the_canonical_text(docs: Path) -> None:
+    doc = load_document(docs / "policy.txt")
+    canonical = doc.canonical_text
+    for chunk in chunk_document(doc):
+        assert chunk.char_start is not None and chunk.char_end is not None
+        # With no overlap, the chunk is its canonical slice (blocks re-joined by a space).
+        from forgeai.textmatch import normalize
+
+        assert normalize(canonical[chunk.char_start : chunk.char_end]) == chunk.text
+
+
+def test_seed_span_survives_a_smaller_chunk_size(tmp_path: Path) -> None:
+    from forgeai.ingest.spans import chunk_overlaps_seed, make_seed_span, span_matches_document
+
+    sentences = [f"Sentence number {i} says something about policy item {i}." for i in range(60)]
+    path = tmp_path / "long.txt"
+    path.write_text("1. Big Section\n\n" + " ".join(sentences), encoding="utf-8")
+    doc = load_document(path)
+    canonical = doc.canonical_text
+    start = canonical.index("Sentence number 30")
+    end = canonical.index("Sentence number 34")
+    seed = make_seed_span(doc, start, end)
+    assert span_matches_document(seed, doc) and "Sentence number 33" in seed.span_text
+
+    big = chunk_document(doc, size_tokens=400, overlap_tokens=20)
+    small = chunk_document(doc, size_tokens=40, overlap_tokens=5)
+    hits_big = [c for c in big if chunk_overlaps_seed(c, seed)]
+    hits_small = [c for c in small if chunk_overlaps_seed(c, seed)]
+    assert hits_big and hits_small
+    assert len(small) > len(big)
+    # Exact-text matching would have failed: at the small size the span is not inside one chunk.
+    assert not any(seed.span_text in c.text for c in small)
+    # A chunk from another document or outside the range never matches.
+    assert not any(chunk_overlaps_seed(c, seed) for c in small if c.char_end <= start or c.char_start >= end)
+
+
+def test_csv_row_chunks_carry_offsets_but_schema_chunk_does_not(docs: Path) -> None:
+    doc = load_document(docs / "parts.csv")
+    chunks = chunk_document(doc)
+    assert chunks[0].char_start is None
+    row = chunks[2]
+    assert doc.canonical_text[row.char_start : row.char_end] == row.text

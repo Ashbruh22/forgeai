@@ -1,12 +1,14 @@
 """Chunking: heading-aware recursive splitting for prose, row-as-record for tables.
 
-Chunk ids are ``<file>#c<N>`` and are stable for identical input and parameters,
-so eval cases and citations can refer to them across runs.
+Chunk ids are ``<file>#c<N>`` and are stable for identical input and parameters. Every
+chunk also records its character range in the document's canonical text, which is what
+eval seed spans are measured in, so gold-chunk matching survives a change of chunk size.
 """
 
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 
 from forgeai.ingest.models import Chunk, LoadedDoc
 
@@ -15,6 +17,16 @@ TOKENS_PER_WORD = 1.3  # rough, tokenizer-free estimate; good enough for sizing
 
 def estimate_tokens(text: str) -> int:
     return int(len(text.split()) * TOKENS_PER_WORD) + 1
+
+
+@dataclass(frozen=True)
+class Unit:
+    """A piece of body text with its place in the canonical text."""
+
+    text: str
+    page: int | None
+    start: int
+    end: int
 
 
 _SENTENCE_END = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9(\"'])")
@@ -33,35 +45,70 @@ def _split_oversized(paragraph: str, size_tokens: int) -> list[str]:
     return units
 
 
-def _tail_words(text: str, overlap_tokens: int) -> str:
-    n_words = max(0, int(overlap_tokens / TOKENS_PER_WORD))
-    return " ".join(text.split()[-n_words:]) if n_words else ""
+def _block_units(text: str, page: int | None, start: int, size_tokens: int) -> list[Unit]:
+    """Turn one block into units, locating each sub-span inside the block for offsets."""
+    if estimate_tokens(text) <= size_tokens:
+        return [Unit(text, page, start, start + len(text))]
+    units: list[Unit] = []
+    cursor = 0
+    for piece in _split_oversized(text, size_tokens):
+        found = text.find(piece, cursor)
+        offset = found if found >= 0 else cursor
+        units.append(Unit(piece, page, start + offset, start + min(offset + len(piece), len(text))))
+        cursor = offset + len(piece)
+    return units
+
+
+def _tail_start(units: list[Unit], overlap_tokens: int) -> tuple[str, int | None]:
+    """The trailing words (about ``overlap_tokens``) of a finished chunk and where they start."""
+    wanted = max(0, int(overlap_tokens / TOKENS_PER_WORD))
+    if not wanted:
+        return "", None
+    remaining = wanted
+    words: list[str] = []
+    start: int | None = None
+    for unit in reversed(units):
+        unit_words = unit.text.split()
+        if len(unit_words) >= remaining:
+            taken = unit_words[-remaining:]
+            words = taken + words
+            start = unit.end - len(" ".join(taken))
+            break
+        words = unit_words + words
+        remaining -= len(unit_words)
+        start = unit.start
+    return " ".join(words), start
 
 
 def _pack_section(
-    units: list[tuple[str, int | None]], size_tokens: int, overlap_tokens: int
-) -> list[tuple[str, int | None]]:
-    """Greedily pack ``(text, page)`` units into chunks of <= size_tokens (plus overlap)."""
-    chunks: list[tuple[str, int | None]] = []
-    current: list[str] = []
-    current_tokens = 0
-    current_page: int | None = None
+    units: list[Unit], size_tokens: int, overlap_tokens: int
+) -> list[tuple[str, int | None, int, int]]:
+    """Greedily pack units into ``(text, page, start, end)`` chunks of <= size_tokens + overlap."""
+    chunks: list[tuple[str, int | None, int, int]] = []
+    current: list[Unit] = []
     carry = ""
-    for text, page in units:
-        tokens = estimate_tokens(text)
-        if current and current_tokens + tokens > size_tokens:
-            body = " ".join(current)
-            chunks.append((body, current_page))
-            carry = _tail_words(body, overlap_tokens)
-            current = [carry] if carry else []
-            current_tokens = estimate_tokens(carry) if carry else 0
-            current_page = None
-        if not current or current_page is None:
-            current_page = current_page if current_page is not None else page
-        current.append(text)
-        current_tokens += tokens
-    if current and (not carry or " ".join(current) != carry):
-        chunks.append((" ".join(current), current_page))
+    carry_start: int | None = None
+    tokens = 0
+
+    def body() -> str:
+        parts = ([carry] if carry else []) + [u.text for u in current]
+        return " ".join(parts)
+
+    def close() -> None:
+        first = min([u.start for u in current] + ([carry_start] if carry_start is not None else []))
+        chunks.append((body(), current[0].page, first, max(u.end for u in current)))
+
+    for unit in units:
+        unit_tokens = estimate_tokens(unit.text)
+        if current and tokens + unit_tokens > size_tokens:
+            close()
+            carry, carry_start = _tail_start(current, overlap_tokens)
+            current = []
+            tokens = estimate_tokens(carry) if carry else 0
+        current.append(unit)
+        tokens += unit_tokens
+    if current:
+        close()
     return chunks
 
 
@@ -82,7 +129,8 @@ def _chunk_table(doc: LoadedDoc) -> list[Chunk]:
         f"Table {doc.file} has {doc.row_count} rows. Columns: {', '.join(doc.columns)}."
     )
     chunks = [Chunk(chunk_id=f"{doc.file}#c0", doc=doc.file, index=0, text=schema_text, kind="schema")]
-    for block in doc.blocks:
+    _, spans = doc.layout()
+    for block, span in zip(doc.blocks, spans, strict=True):
         row = block.row or len(chunks)
         chunks.append(
             Chunk(
@@ -92,6 +140,8 @@ def _chunk_table(doc: LoadedDoc) -> list[Chunk]:
                 text=block.text,
                 row=row,
                 kind="row",
+                char_start=span[0] if span else None,
+                char_end=span[1] if span else None,
             )
         )
     return chunks
@@ -100,12 +150,12 @@ def _chunk_table(doc: LoadedDoc) -> list[Chunk]:
 def _chunk_prose(doc: LoadedDoc, size_tokens: int, overlap_tokens: int) -> list[Chunk]:
     chunks: list[Chunk] = []
     heading_stack: list[str] = []
-    section: list[tuple[str, int | None]] = []
+    section: list[Unit] = []
     section_path: list[str] = []
+    _, spans = doc.layout()
 
     def flush() -> None:
-        packed = _pack_section(section, size_tokens, overlap_tokens)
-        for text, page in packed:
+        for text, page, start, end in _pack_section(section, size_tokens, overlap_tokens):
             index = len(chunks)
             chunks.append(
                 Chunk(
@@ -115,23 +165,22 @@ def _chunk_prose(doc: LoadedDoc, size_tokens: int, overlap_tokens: int) -> list[
                     text=text,
                     heading_path=list(section_path),
                     page=page,
+                    char_start=start,
+                    char_end=end,
                 )
             )
         section.clear()
 
-    for block in doc.blocks:
-        text = block.text.strip()
-        if not text:
+    for block, span in zip(doc.blocks, spans, strict=True):
+        if span is None:
             continue
+        text = block.text.strip()
         if block.heading_level is not None:
             flush()
             level = block.heading_level
             heading_stack[:] = heading_stack[: level - 1] + [text]
             section_path = list(heading_stack)
             continue
-        if estimate_tokens(text) > size_tokens:
-            section.extend((unit, block.page) for unit in _split_oversized(text, size_tokens))
-        else:
-            section.append((text, block.page))
+        section.extend(_block_units(text, block.page, span[0], size_tokens))
     flush()
     return chunks

@@ -102,6 +102,34 @@ def chat(
             history.append((question, last.answer.answer or last.answer.clarifying_question or ""))
 
 
+@app.command()
+def intake(
+    brief: Path = typer.Option(..., help="brief.txt"),
+    docs: Path = typer.Option(..., help="Folder of documents"),
+    out: Path = typer.Option(..., help="Run folder to write 00_intake/ and 01_guard/ into"),
+    non_interactive: bool = typer.Option(False, "--non-interactive", help="Answer own questions, label ASSUMPTION"),
+    config_path: Path = typer.Option(Path("forgeai.yaml"), "--config", help="forgeai.yaml"),
+) -> None:
+    """Stages 1-3: ingest, intake interview (<=5 questions) and groundability guard."""
+    from forgeai.intake.orchestrate import run_intake_and_guard
+    from forgeai.intake.schema import Question
+
+    config = load_config(config_path)
+    out.mkdir(parents=True, exist_ok=True)
+    set_client(LLMClient(config, trace_path=out / "trace.jsonl"))
+
+    def ask(question: Question) -> str:
+        return typer.prompt(f"[{question.id}] {question.text}", default="", show_default=False)
+
+    req = run_intake_and_guard(
+        brief.read_text(encoding="utf-8"), docs, out, config,
+        SentenceTransformerEmbedder(config.embedding_model, config.embedding_revision),
+        ask=None if non_interactive else ask,
+    )
+    console.print(f"[green]Requirements written to {out / '00_intake' / 'requirements.yaml'}[/green]")
+    console.print(f"gaps: {[g.id for g in req.gaps] or 'none'}   assumptions: {len(req.assumptions)}")
+
+
 def _not_yet(phase: str) -> None:
     console.print(f"[yellow]Not implemented yet (arrives in phase {phase}).[/yellow]")
     raise typer.Exit(2)

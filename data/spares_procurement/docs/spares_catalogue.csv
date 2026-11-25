@@ -1,0 +1,301 @@
+part_no,description,equipment,maker,supplier_id,unit_price_usd,moq,lead_time_days,stock_port
+AC-2770,Unloader valve (standard),Air Compressor,Arkwright Compressors,S01,129.47,1,18,Busan
+AC-2770,Unloader valve (standard),Air Compressor,Arkwright Compressors,S02,129.00,1,21,Fujairah
+AC-2770,Unloader valve (standard),Air Compressor,Arkwright Compressors,S03,127.18,2,56,Dubai
+AC-3770,Intercooler gasket (standard),Air Compressor,Arkwright Compressors,S01,855.01,2,42,Houston
+AC-3770,Intercooler gasket (standard),Air Compressor,Arkwright Compressors,S02,818.50,2,21,Fujairah
+AC-3770,Intercooler gasket (standard),Air Compressor,Arkwright Compressors,S03,847.27,2,21,Dubai
+AC-4028,Piston ring kit (standard),Air Compressor,Arkwright Compressors,S01,70.64,1,7,Fujairah
+AC-4028,Piston ring kit (standard),Air Compressor,Arkwright Compressors,S02,77.58,4,7,Rotterdam
+AC-4028,Piston ring kit (standard),Air Compressor,Arkwright Compressors,S03,70.35,5,21,Fujairah
+AC-4196,Valve plate assembly (standard),Air Compressor,Arkwright Compressors,S01,1696.54,1,28,Singapore
+AC-4196,Valve plate assembly (standard),Air Compressor,Arkwright Compressors,S02,1764.42,5,35,Dubai
+AC-4196,Valve plate assembly (standard),Air Compressor,Arkwright Compressors,S03,1716.97,4,28,Fujairah
+AC-4539,Piston ring kit (heavy duty),Air Compressor,Arkwright Compressors,S01,772.66,2,56,Houston
+AC-4539,Piston ring kit (heavy duty),Air Compressor,Arkwright Compressors,S02,784.30,5,10,Houston
+AC-4539,Piston ring kit (heavy duty),Air Compressor,Arkwright Compressors,S03,820.32,1,10,Dubai
+AC-5017,Drive belt set (heavy duty),Air Compressor,Arkwright Compressors,S01,2801.36,2,42,Singapore
+AC-5017,Drive belt set (heavy duty),Air Compressor,Arkwright Compressors,S02,2864.83,1,28,Dubai
+AC-5017,Drive belt set (heavy duty),Air Compressor,Arkwright Compressors,S03,2844.57,2,42,Rotterdam
+AC-5579,Valve plate assembly (heavy duty),Air Compressor,Arkwright Compressors,S01,99.59,10,35,Rotterdam
+AC-5579,Valve plate assembly (heavy duty),Air Compressor,Arkwright Compressors,S02,101.17,4,28,Houston
+AC-5579,Valve plate assembly (heavy duty),Air Compressor,Arkwright Compressors,S03,99.43,2,18,Busan
+AC-5645,Intercooler gasket (heavy duty),Air Compressor,Arkwright Compressors,S01,253.21,4,7,Busan
+AC-5645,Intercooler gasket (heavy duty),Air Compressor,Arkwright Compressors,S02,232.38,10,35,Singapore
+AC-5645,Intercooler gasket (heavy duty),Air Compressor,Arkwright Compressors,S03,257.44,5,35,Singapore
+AC-6230,Drive belt set (standard),Air Compressor,Arkwright Compressors,S01,69.87,5,42,Fujairah
+AC-6230,Drive belt set (standard),Air Compressor,Arkwright Compressors,S02,77.41,1,7,Dubai
+AC-6230,Drive belt set (standard),Air Compressor,Arkwright Compressors,S03,68.61,10,42,Rotterdam
+AC-9320,Unloader valve (heavy duty),Air Compressor,Arkwright Compressors,S01,918.66,1,42,Busan
+AC-9320,Unloader valve (heavy duty),Air Compressor,Arkwright Compressors,S02,856.62,4,7,Houston
+AC-9320,Unloader valve (heavy duty),Air Compressor,Arkwright Compressors,S03,964.34,1,35,Houston
+BB-1380,Gauge glass set (standard),Boiler,Brennfeld Boilers,S01,612.82,4,14,Dubai
+BB-1380,Gauge glass set (standard),Boiler,Brennfeld Boilers,S02,562.35,5,56,Busan
+BB-1380,Gauge glass set (standard),Boiler,Brennfeld Boilers,S03,563.49,1,56,Dubai
+BB-2444,Safety valve spring (standard),Boiler,Brennfeld Boilers,S01,218.86,2,56,Busan
+BB-2444,Safety valve spring (standard),Boiler,Brennfeld Boilers,S02,209.41,2,7,Singapore
+BB-2444,Safety valve spring (standard),Boiler,Brennfeld Boilers,S03,211.70,5,28,Fujairah
+BB-2890,Safety valve spring (heavy duty),Boiler,Brennfeld Boilers,S01,1788.52,5,18,Singapore
+BB-2890,Safety valve spring (heavy duty),Boiler,Brennfeld Boilers,S02,1823.64,1,7,Dubai
+BB-2890,Safety valve spring (heavy duty),Boiler,Brennfeld Boilers,S03,1856.91,4,42,Rotterdam
+BB-2997,Burner nozzle (heavy duty),Boiler,Brennfeld Boilers,S01,858.82,4,42,Houston
+BB-2997,Burner nozzle (heavy duty),Boiler,Brennfeld Boilers,S02,952.92,10,35,Fujairah
+BB-2997,Burner nozzle (heavy duty),Boiler,Brennfeld Boilers,S03,868.74,2,14,Fujairah
+BB-3235,Gauge glass set (heavy duty),Boiler,Brennfeld Boilers,S01,244.28,2,14,Fujairah
+BB-3235,Gauge glass set (heavy duty),Boiler,Brennfeld Boilers,S02,243.46,1,18,Rotterdam
+BB-3235,Gauge glass set (heavy duty),Boiler,Brennfeld Boilers,S03,252.92,1,18,Rotterdam
+BB-3312,Burner nozzle (standard),Boiler,Brennfeld Boilers,S01,1300.31,1,35,Dubai
+BB-3312,Burner nozzle (standard),Boiler,Brennfeld Boilers,S02,1218.46,1,35,Singapore
+BB-3312,Burner nozzle (standard),Boiler,Brennfeld Boilers,S03,1294.12,1,56,Houston
+BB-4105,Furnace refractory kit (standard),Boiler,Brennfeld Boilers,S01,74.40,1,21,Busan
+BB-4105,Furnace refractory kit (standard),Boiler,Brennfeld Boilers,S02,73.57,1,14,Busan
+BB-4105,Furnace refractory kit (standard),Boiler,Brennfeld Boilers,S03,77.53,10,10,Fujairah
+BB-5654,Flame scanner (heavy duty),Boiler,Brennfeld Boilers,S01,534.80,2,10,Houston
+BB-5654,Flame scanner (heavy duty),Boiler,Brennfeld Boilers,S02,572.18,1,56,Dubai
+BB-5654,Flame scanner (heavy duty),Boiler,Brennfeld Boilers,S03,535.27,1,56,Houston
+BB-7404,Furnace refractory kit (heavy duty),Boiler,Brennfeld Boilers,S01,1055.87,1,28,Singapore
+BB-7404,Furnace refractory kit (heavy duty),Boiler,Brennfeld Boilers,S02,1097.61,1,18,Rotterdam
+BB-7404,Furnace refractory kit (heavy duty),Boiler,Brennfeld Boilers,S03,1063.84,2,28,Houston
+BB-8105,Flame scanner (standard),Boiler,Brennfeld Boilers,S01,791.62,2,7,Fujairah
+BB-8105,Flame scanner (standard),Boiler,Brennfeld Boilers,S02,794.04,10,7,Singapore
+BB-8105,Flame scanner (standard),Boiler,Brennfeld Boilers,S03,801.54,1,7,Busan
+CP-1440,Mechanical seal (heavy duty),Ballast Pump,Coralis Pumps,S01,2040.20,2,10,Singapore
+CP-1440,Mechanical seal (heavy duty),Ballast Pump,Coralis Pumps,S02,2243.23,1,56,Rotterdam
+CP-1440,Mechanical seal (heavy duty),Ballast Pump,Coralis Pumps,S03,2160.36,2,42,Houston
+CP-3310,Impeller kit (standard),Ballast Pump,Coralis Pumps,S01,992.16,2,21,Busan
+CP-3310,Impeller kit (standard),Ballast Pump,Coralis Pumps,S02,980.65,2,28,Busan
+CP-3310,Impeller kit (standard),Ballast Pump,Coralis Pumps,S03,960.00,1,35,Fujairah
+CP-4113,Mechanical seal (standard),Ballast Pump,Coralis Pumps,S01,250.22,1,56,Busan
+CP-4113,Mechanical seal (standard),Ballast Pump,Coralis Pumps,S02,276.53,5,7,Busan
+CP-4113,Mechanical seal (standard),Ballast Pump,Coralis Pumps,S03,245.54,2,21,Houston
+CP-5574,Bearing housing (standard),Ballast Pump,Coralis Pumps,S01,896.35,2,28,Rotterdam
+CP-5574,Bearing housing (standard),Ballast Pump,Coralis Pumps,S02,827.41,5,56,Rotterdam
+CP-5574,Bearing housing (standard),Ballast Pump,Coralis Pumps,S03,790.74,10,28,Singapore
+CP-5977,Shaft sleeve (heavy duty),Ballast Pump,Coralis Pumps,S01,1269.59,2,14,Rotterdam
+CP-5977,Shaft sleeve (heavy duty),Ballast Pump,Coralis Pumps,S02,1211.98,5,28,Fujairah
+CP-5977,Shaft sleeve (heavy duty),Ballast Pump,Coralis Pumps,S03,1305.98,2,42,Dubai
+CP-6310,Shaft sleeve (standard),Ballast Pump,Coralis Pumps,S01,64.34,4,42,Busan
+CP-6310,Shaft sleeve (standard),Ballast Pump,Coralis Pumps,S02,64.62,10,7,Singapore
+CP-6310,Shaft sleeve (standard),Ballast Pump,Coralis Pumps,S03,63.24,5,10,Busan
+CP-6801,Wear ring set (standard),Ballast Pump,Coralis Pumps,S01,136.93,1,10,Singapore
+CP-6801,Wear ring set (standard),Ballast Pump,Coralis Pumps,S02,136.04,10,18,Houston
+CP-6801,Wear ring set (standard),Ballast Pump,Coralis Pumps,S03,135.60,2,35,Rotterdam
+CP-6952,Bearing housing (heavy duty),Ballast Pump,Coralis Pumps,S01,806.33,5,28,Houston
+CP-6952,Bearing housing (heavy duty),Ballast Pump,Coralis Pumps,S02,778.89,10,14,Rotterdam
+CP-6952,Bearing housing (heavy duty),Ballast Pump,Coralis Pumps,S03,730.49,2,21,Singapore
+CP-7044,Wear ring set (heavy duty),Ballast Pump,Coralis Pumps,S01,147.64,2,21,Dubai
+CP-7044,Wear ring set (heavy duty),Ballast Pump,Coralis Pumps,S02,143.23,10,14,Houston
+CP-7044,Wear ring set (heavy duty),Ballast Pump,Coralis Pumps,S03,141.22,4,10,Houston
+CP-9696,Impeller kit (heavy duty),Ballast Pump,Coralis Pumps,S01,161.71,1,42,Singapore
+CP-9696,Impeller kit (heavy duty),Ballast Pump,Coralis Pumps,S02,156.68,2,56,Dubai
+CP-9696,Impeller kit (heavy duty),Ballast Pump,Coralis Pumps,S03,164.14,2,21,Dubai
+HD-1123,Piston ring set (standard),Main Engine,Halvorsen Diesel,S01,420.00,4,21,Singapore
+HD-1123,Piston ring set (standard),Main Engine,Halvorsen Diesel,S02,433.00,2,28,Rotterdam
+HD-1123,Piston ring set (standard),Main Engine,Halvorsen Diesel,S03,408.50,6,18,Singapore
+HD-1584,Cylinder liner (heavy duty),Main Engine,Halvorsen Diesel,S01,239.93,10,42,Fujairah
+HD-1584,Cylinder liner (heavy duty),Main Engine,Halvorsen Diesel,S02,234.71,10,18,Dubai
+HD-1584,Cylinder liner (heavy duty),Main Engine,Halvorsen Diesel,S03,227.93,2,42,Singapore
+HD-2392,Exhaust valve (standard),Main Engine,Halvorsen Diesel,S01,876.69,4,10,Busan
+HD-2392,Exhaust valve (standard),Main Engine,Halvorsen Diesel,S02,857.88,10,18,Dubai
+HD-2392,Exhaust valve (standard),Main Engine,Halvorsen Diesel,S03,862.19,1,10,Houston
+HD-2766,Exhaust valve (heavy duty),Main Engine,Halvorsen Diesel,S01,316.87,10,7,Rotterdam
+HD-2766,Exhaust valve (heavy duty),Main Engine,Halvorsen Diesel,S02,285.96,1,42,Houston
+HD-2766,Exhaust valve (heavy duty),Main Engine,Halvorsen Diesel,S03,317.79,2,35,Singapore
+HD-4086,Connecting rod bearing (heavy duty),Main Engine,Halvorsen Diesel,S01,1196.86,10,14,Houston
+HD-4086,Connecting rod bearing (heavy duty),Main Engine,Halvorsen Diesel,S02,1143.76,1,35,Houston
+HD-4086,Connecting rod bearing (heavy duty),Main Engine,Halvorsen Diesel,S03,1197.60,1,21,Dubai
+HD-4252,Connecting rod bearing (standard),Main Engine,Halvorsen Diesel,S01,209.56,1,35,Singapore
+HD-4252,Connecting rod bearing (standard),Main Engine,Halvorsen Diesel,S02,204.29,5,10,Singapore
+HD-4252,Connecting rod bearing (standard),Main Engine,Halvorsen Diesel,S03,202.06,10,42,Rotterdam
+HD-5983,Fuel pump plunger (standard),Main Engine,Halvorsen Diesel,S01,31.54,10,10,Singapore
+HD-5983,Fuel pump plunger (standard),Main Engine,Halvorsen Diesel,S02,34.18,1,42,Fujairah
+HD-5983,Fuel pump plunger (standard),Main Engine,Halvorsen Diesel,S03,29.83,4,28,Fujairah
+HD-7327,Fuel pump plunger (heavy duty),Main Engine,Halvorsen Diesel,S01,65.72,5,18,Singapore
+HD-7327,Fuel pump plunger (heavy duty),Main Engine,Halvorsen Diesel,S02,69.45,2,42,Rotterdam
+HD-7327,Fuel pump plunger (heavy duty),Main Engine,Halvorsen Diesel,S03,72.85,2,14,Houston
+HD-8316,Cylinder liner (standard),Main Engine,Halvorsen Diesel,S01,194.55,5,7,Dubai
+HD-8316,Cylinder liner (standard),Main Engine,Halvorsen Diesel,S02,206.45,2,14,Dubai
+HD-8316,Cylinder liner (standard),Main Engine,Halvorsen Diesel,S03,180.51,4,10,Singapore
+HD-8411,Piston ring set (heavy duty),Main Engine,Halvorsen Diesel,S01,2088.31,2,56,Dubai
+HD-8411,Piston ring set (heavy duty),Main Engine,Halvorsen Diesel,S02,1923.56,10,56,Houston
+HD-8411,Piston ring set (heavy duty),Main Engine,Halvorsen Diesel,S03,2046.15,10,14,Singapore
+LF-1267,Plunger and barrel set (standard),Fuel Injection System,Lindqvist Fuel Systems,S01,81.43,1,56,Houston
+LF-1267,Plunger and barrel set (standard),Fuel Injection System,Lindqvist Fuel Systems,S02,77.46,2,14,Fujairah
+LF-1267,Plunger and barrel set (standard),Fuel Injection System,Lindqvist Fuel Systems,S03,82.01,2,18,Dubai
+LF-1895,Delivery valve (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S01,368.14,5,35,Dubai
+LF-1895,Delivery valve (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S02,340.18,10,21,Dubai
+LF-1895,Delivery valve (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S03,367.02,1,10,Houston
+LF-2041,High pressure pipe (standard),Fuel Injection System,Lindqvist Fuel Systems,S01,1454.11,5,28,Dubai
+LF-2041,High pressure pipe (standard),Fuel Injection System,Lindqvist Fuel Systems,S02,1449.28,10,7,Fujairah
+LF-2041,High pressure pipe (standard),Fuel Injection System,Lindqvist Fuel Systems,S03,1563.24,2,18,Dubai
+LF-4970,Fuel rail pressure sensor (standard),Fuel Injection System,Lindqvist Fuel Systems,S01,1596.83,2,10,Dubai
+LF-4970,Fuel rail pressure sensor (standard),Fuel Injection System,Lindqvist Fuel Systems,S02,1583.83,4,21,Busan
+LF-4970,Fuel rail pressure sensor (standard),Fuel Injection System,Lindqvist Fuel Systems,S03,1476.97,1,10,Busan
+LF-6441,Plunger and barrel set (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S01,50.06,5,14,Houston
+LF-6441,Plunger and barrel set (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S02,56.90,4,10,Houston
+LF-6441,Plunger and barrel set (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S03,52.34,4,35,Fujairah
+LF-6465,Injector assembly (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S01,424.52,2,42,Singapore
+LF-6465,Injector assembly (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S02,401.01,5,14,Rotterdam
+LF-6465,Injector assembly (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S03,426.29,4,56,Dubai
+LF-6949,High pressure pipe (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S01,110.28,1,42,Singapore
+LF-6949,High pressure pipe (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S02,108.09,10,14,Fujairah
+LF-6949,High pressure pipe (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S03,113.44,10,35,Dubai
+LF-7041,Fuel rail pressure sensor (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S01,1723.68,1,35,Dubai
+LF-7041,Fuel rail pressure sensor (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S02,1567.21,1,10,Dubai
+LF-7041,Fuel rail pressure sensor (heavy duty),Fuel Injection System,Lindqvist Fuel Systems,S03,1720.72,1,56,Dubai
+LF-8959,Delivery valve (standard),Fuel Injection System,Lindqvist Fuel Systems,S01,1007.69,2,35,Singapore
+LF-8959,Delivery valve (standard),Fuel Injection System,Lindqvist Fuel Systems,S02,969.20,4,28,Dubai
+LF-8959,Delivery valve (standard),Fuel Injection System,Lindqvist Fuel Systems,S03,963.17,2,7,Fujairah
+LF-9198,Injector assembly (standard),Fuel Injection System,Lindqvist Fuel Systems,S01,1086.73,4,18,Dubai
+LF-9198,Injector assembly (standard),Fuel Injection System,Lindqvist Fuel Systems,S02,1120.59,5,18,Singapore
+LF-9198,Injector assembly (standard),Fuel Injection System,Lindqvist Fuel Systems,S03,1002.29,2,35,Busan
+MT-2474,Nozzle ring (heavy duty),Turbocharger,Marlow Turbo,S01,1362.20,4,10,Dubai
+MT-2474,Nozzle ring (heavy duty),Turbocharger,Marlow Turbo,S02,1451.13,1,21,Dubai
+MT-2474,Nozzle ring (heavy duty),Turbocharger,Marlow Turbo,S03,1326.13,10,10,Rotterdam
+MT-4624,Gasket and seal set (heavy duty),Turbocharger,Marlow Turbo,S01,2759.58,1,7,Dubai
+MT-4624,Gasket and seal set (heavy duty),Turbocharger,Marlow Turbo,S02,2833.58,1,28,Rotterdam
+MT-4624,Gasket and seal set (heavy duty),Turbocharger,Marlow Turbo,S03,2896.84,4,42,Houston
+MT-4857,Nozzle ring (standard),Turbocharger,Marlow Turbo,S01,1427.60,2,56,Singapore
+MT-4857,Nozzle ring (standard),Turbocharger,Marlow Turbo,S02,1389.44,1,21,Rotterdam
+MT-4857,Nozzle ring (standard),Turbocharger,Marlow Turbo,S03,1404.11,2,14,Busan
+MT-5671,Bearing kit (standard),Turbocharger,Marlow Turbo,S01,126.51,4,7,Rotterdam
+MT-5671,Bearing kit (standard),Turbocharger,Marlow Turbo,S02,135.75,1,7,Dubai
+MT-5671,Bearing kit (standard),Turbocharger,Marlow Turbo,S03,129.81,10,35,Singapore
+MT-6017,Cartridge assembly (heavy duty),Turbocharger,Marlow Turbo,S01,47.77,2,42,Rotterdam
+MT-6017,Cartridge assembly (heavy duty),Turbocharger,Marlow Turbo,S02,51.98,10,42,Rotterdam
+MT-6017,Cartridge assembly (heavy duty),Turbocharger,Marlow Turbo,S03,47.01,10,7,Rotterdam
+MT-6175,Compressor wheel (standard),Turbocharger,Marlow Turbo,S01,412.12,5,56,Rotterdam
+MT-6175,Compressor wheel (standard),Turbocharger,Marlow Turbo,S02,443.78,1,18,Singapore
+MT-6175,Compressor wheel (standard),Turbocharger,Marlow Turbo,S03,450.95,2,28,Fujairah
+MT-7887,Compressor wheel (heavy duty),Turbocharger,Marlow Turbo,S01,126.23,10,42,Houston
+MT-7887,Compressor wheel (heavy duty),Turbocharger,Marlow Turbo,S02,111.79,1,21,Singapore
+MT-7887,Compressor wheel (heavy duty),Turbocharger,Marlow Turbo,S03,122.18,1,21,Rotterdam
+MT-8424,Cartridge assembly (standard),Turbocharger,Marlow Turbo,S01,34.57,1,28,Rotterdam
+MT-8424,Cartridge assembly (standard),Turbocharger,Marlow Turbo,S02,31.48,2,56,Houston
+MT-8424,Cartridge assembly (standard),Turbocharger,Marlow Turbo,S03,31.85,5,18,Singapore
+MT-9190,Bearing kit (heavy duty),Turbocharger,Marlow Turbo,S01,42.80,5,28,Fujairah
+MT-9190,Bearing kit (heavy duty),Turbocharger,Marlow Turbo,S02,43.40,10,7,Dubai
+MT-9190,Bearing kit (heavy duty),Turbocharger,Marlow Turbo,S03,41.24,10,56,Busan
+MT-9711,Gasket and seal set (standard),Turbocharger,Marlow Turbo,S01,103.46,1,35,Rotterdam
+MT-9711,Gasket and seal set (standard),Turbocharger,Marlow Turbo,S02,102.04,4,21,Busan
+MT-9711,Gasket and seal set (standard),Turbocharger,Marlow Turbo,S03,103.73,1,21,Houston
+PP-1256,Bearing set (heavy duty),Purifier,Pelagic Purifiers,S01,470.00,2,56,Houston
+PP-1256,Bearing set (heavy duty),Purifier,Pelagic Purifiers,S02,520.90,2,7,Rotterdam
+PP-1256,Bearing set (heavy duty),Purifier,Pelagic Purifiers,S03,523.74,1,35,Singapore
+PP-2223,Bowl seal ring (standard),Purifier,Pelagic Purifiers,S01,33.69,5,21,Dubai
+PP-2223,Bowl seal ring (standard),Purifier,Pelagic Purifiers,S02,32.53,5,7,Busan
+PP-2223,Bowl seal ring (standard),Purifier,Pelagic Purifiers,S03,31.52,2,18,Singapore
+PP-3832,Gravity disc (standard),Purifier,Pelagic Purifiers,S01,1219.41,1,42,Rotterdam
+PP-3832,Gravity disc (standard),Purifier,Pelagic Purifiers,S02,1253.85,5,56,Busan
+PP-3832,Gravity disc (standard),Purifier,Pelagic Purifiers,S03,1203.39,2,10,Rotterdam
+PP-3927,Feed pump impeller (standard),Purifier,Pelagic Purifiers,S01,41.82,1,14,Rotterdam
+PP-3927,Feed pump impeller (standard),Purifier,Pelagic Purifiers,S02,40.31,2,56,Busan
+PP-3927,Feed pump impeller (standard),Purifier,Pelagic Purifiers,S03,44.20,4,14,Houston
+PP-4102,Disc stack (standard),Purifier,Pelagic Purifiers,S01,2750.00,1,45,Houston
+PP-4102,Disc stack (standard),Purifier,Pelagic Purifiers,S02,2637.43,2,28,Singapore
+PP-4102,Disc stack (standard),Purifier,Pelagic Purifiers,S03,2858.82,2,14,Singapore
+PP-4668,Feed pump impeller (heavy duty),Purifier,Pelagic Purifiers,S01,86.71,2,14,Houston
+PP-4668,Feed pump impeller (heavy duty),Purifier,Pelagic Purifiers,S02,81.70,5,7,Houston
+PP-4668,Feed pump impeller (heavy duty),Purifier,Pelagic Purifiers,S03,82.80,5,56,Fujairah
+PP-5364,Bowl seal ring (heavy duty),Purifier,Pelagic Purifiers,S01,236.43,5,10,Houston
+PP-5364,Bowl seal ring (heavy duty),Purifier,Pelagic Purifiers,S02,214.78,4,28,Singapore
+PP-5364,Bowl seal ring (heavy duty),Purifier,Pelagic Purifiers,S03,232.90,1,42,Fujairah
+PP-8199,Gravity disc (heavy duty),Purifier,Pelagic Purifiers,S01,1847.16,4,14,Dubai
+PP-8199,Gravity disc (heavy duty),Purifier,Pelagic Purifiers,S02,1769.57,4,21,Fujairah
+PP-8199,Gravity disc (heavy duty),Purifier,Pelagic Purifiers,S03,1808.02,10,18,Fujairah
+PP-8383,Disc stack (heavy duty),Purifier,Pelagic Purifiers,S01,957.62,2,35,Busan
+PP-8383,Disc stack (heavy duty),Purifier,Pelagic Purifiers,S02,999.90,5,28,Busan
+PP-8383,Disc stack (heavy duty),Purifier,Pelagic Purifiers,S03,1044.01,4,42,Fujairah
+PP-8597,Bearing set (standard),Purifier,Pelagic Purifiers,S01,381.64,5,10,Rotterdam
+PP-8597,Bearing set (standard),Purifier,Pelagic Purifiers,S02,383.71,2,10,Fujairah
+PP-8597,Bearing set (standard),Purifier,Pelagic Purifiers,S03,399.96,10,28,Fujairah
+SS-1252,Pressure relief valve (standard),Steering Gear,Stenhamn Steering,S01,566.47,10,18,Busan
+SS-1252,Pressure relief valve (standard),Steering Gear,Stenhamn Steering,S02,620.27,4,7,Fujairah
+SS-1252,Pressure relief valve (standard),Steering Gear,Stenhamn Steering,S03,567.54,2,21,Busan
+SS-1609,Rudder carrier bearing (standard),Steering Gear,Stenhamn Steering,S01,1218.99,10,21,Fujairah
+SS-1609,Rudder carrier bearing (standard),Steering Gear,Stenhamn Steering,S02,1187.97,1,56,Fujairah
+SS-1609,Rudder carrier bearing (standard),Steering Gear,Stenhamn Steering,S03,1304.06,5,10,Fujairah
+SS-2218,Rudder carrier bearing (heavy duty),Steering Gear,Stenhamn Steering,S01,103.13,2,10,Busan
+SS-2218,Rudder carrier bearing (heavy duty),Steering Gear,Stenhamn Steering,S02,103.87,10,35,Busan
+SS-2218,Rudder carrier bearing (heavy duty),Steering Gear,Stenhamn Steering,S03,107.71,1,21,Dubai
+SS-2424,Servo valve (heavy duty),Steering Gear,Stenhamn Steering,S01,263.68,1,28,Fujairah
+SS-2424,Servo valve (heavy duty),Steering Gear,Stenhamn Steering,S02,284.81,4,42,Busan
+SS-2424,Servo valve (heavy duty),Steering Gear,Stenhamn Steering,S03,273.48,2,35,Singapore
+SS-2668,Pump shaft seal (standard),Steering Gear,Stenhamn Steering,S01,95.82,5,14,Rotterdam
+SS-2668,Pump shaft seal (standard),Steering Gear,Stenhamn Steering,S02,96.68,1,42,Dubai
+SS-2668,Pump shaft seal (standard),Steering Gear,Stenhamn Steering,S03,103.83,1,18,Singapore
+SS-2856,Servo valve (standard),Steering Gear,Stenhamn Steering,S01,980.37,10,18,Dubai
+SS-2856,Servo valve (standard),Steering Gear,Stenhamn Steering,S02,889.21,5,35,Dubai
+SS-2856,Servo valve (standard),Steering Gear,Stenhamn Steering,S03,966.60,2,35,Dubai
+SS-3573,Pump shaft seal (heavy duty),Steering Gear,Stenhamn Steering,S01,86.31,2,35,Dubai
+SS-3573,Pump shaft seal (heavy duty),Steering Gear,Stenhamn Steering,S02,79.02,1,14,Busan
+SS-3573,Pump shaft seal (heavy duty),Steering Gear,Stenhamn Steering,S03,81.87,2,35,Dubai
+SS-5366,Hydraulic ram seal kit (standard),Steering Gear,Stenhamn Steering,S01,1230.92,10,14,Singapore
+SS-5366,Hydraulic ram seal kit (standard),Steering Gear,Stenhamn Steering,S02,1240.54,10,14,Rotterdam
+SS-5366,Hydraulic ram seal kit (standard),Steering Gear,Stenhamn Steering,S03,1218.68,2,56,Singapore
+SS-8229,Pressure relief valve (heavy duty),Steering Gear,Stenhamn Steering,S01,84.63,2,21,Singapore
+SS-8229,Pressure relief valve (heavy duty),Steering Gear,Stenhamn Steering,S02,89.61,1,21,Dubai
+SS-8229,Pressure relief valve (heavy duty),Steering Gear,Stenhamn Steering,S03,93.17,4,18,Fujairah
+SS-8865,Hydraulic ram seal kit (heavy duty),Steering Gear,Stenhamn Steering,S01,925.72,4,56,Fujairah
+SS-8865,Hydraulic ram seal kit (heavy duty),Steering Gear,Stenhamn Steering,S02,835.22,1,35,Rotterdam
+SS-8865,Hydraulic ram seal kit (heavy duty),Steering Gear,Stenhamn Steering,S03,946.58,1,42,Rotterdam
+TE-1365,Crankshaft bearing shell (standard),Auxiliary Engine,Tenmark Engines,S01,171.11,10,42,Fujairah
+TE-1365,Crankshaft bearing shell (standard),Auxiliary Engine,Tenmark Engines,S02,190.75,2,21,Rotterdam
+TE-1365,Crankshaft bearing shell (standard),Auxiliary Engine,Tenmark Engines,S03,185.27,1,56,Rotterdam
+TE-2207,Fuel injector nozzle (standard),Auxiliary Engine,Tenmark Engines,S01,179.12,1,21,Rotterdam
+TE-2207,Fuel injector nozzle (standard),Auxiliary Engine,Tenmark Engines,S02,185.50,2,14,Rotterdam
+TE-2207,Fuel injector nozzle (standard),Auxiliary Engine,Tenmark Engines,S03,195.61,1,18,Rotterdam
+TE-4220,Fuel injector nozzle (heavy duty),Auxiliary Engine,Tenmark Engines,S01,892.59,2,7,Singapore
+TE-4220,Fuel injector nozzle (heavy duty),Auxiliary Engine,Tenmark Engines,S02,832.28,4,21,Rotterdam
+TE-4220,Fuel injector nozzle (heavy duty),Auxiliary Engine,Tenmark Engines,S03,909.22,2,21,Houston
+TE-5410,Cylinder head gasket set (heavy duty),Auxiliary Engine,Tenmark Engines,S01,681.03,1,21,Fujairah
+TE-5410,Cylinder head gasket set (heavy duty),Auxiliary Engine,Tenmark Engines,S02,728.34,1,10,Fujairah
+TE-5410,Cylinder head gasket set (heavy duty),Auxiliary Engine,Tenmark Engines,S03,688.87,2,28,Busan
+TE-6096,Lube oil filter element (heavy duty),Auxiliary Engine,Tenmark Engines,S01,389.82,2,56,Fujairah
+TE-6096,Lube oil filter element (heavy duty),Auxiliary Engine,Tenmark Engines,S02,428.00,5,14,Fujairah
+TE-6096,Lube oil filter element (heavy duty),Auxiliary Engine,Tenmark Engines,S03,405.87,5,42,Singapore
+TE-6409,Water pump seal kit (heavy duty),Auxiliary Engine,Tenmark Engines,S01,922.60,2,42,Houston
+TE-6409,Water pump seal kit (heavy duty),Auxiliary Engine,Tenmark Engines,S02,940.56,1,56,Dubai
+TE-6409,Water pump seal kit (heavy duty),Auxiliary Engine,Tenmark Engines,S03,839.87,4,10,Houston
+TE-6611,Crankshaft bearing shell (heavy duty),Auxiliary Engine,Tenmark Engines,S01,1075.82,2,21,Rotterdam
+TE-6611,Crankshaft bearing shell (heavy duty),Auxiliary Engine,Tenmark Engines,S02,1136.56,10,18,Rotterdam
+TE-6611,Crankshaft bearing shell (heavy duty),Auxiliary Engine,Tenmark Engines,S03,1097.93,4,28,Rotterdam
+TE-7834,Water pump seal kit (standard),Auxiliary Engine,Tenmark Engines,S01,43.98,4,35,Houston
+TE-7834,Water pump seal kit (standard),Auxiliary Engine,Tenmark Engines,S02,44.04,4,10,Singapore
+TE-7834,Water pump seal kit (standard),Auxiliary Engine,Tenmark Engines,S03,41.07,1,21,Houston
+TE-9044,Cylinder head gasket set (standard),Auxiliary Engine,Tenmark Engines,S01,249.56,1,14,Rotterdam
+TE-9044,Cylinder head gasket set (standard),Auxiliary Engine,Tenmark Engines,S02,234.87,5,10,Fujairah
+TE-9044,Cylinder head gasket set (standard),Auxiliary Engine,Tenmark Engines,S03,226.15,1,7,Singapore
+TE-9551,Lube oil filter element (standard),Auxiliary Engine,Tenmark Engines,S01,2474.15,1,42,Fujairah
+TE-9551,Lube oil filter element (standard),Auxiliary Engine,Tenmark Engines,S02,2511.78,1,7,Dubai
+TE-9551,Lube oil filter element (standard),Auxiliary Engine,Tenmark Engines,S03,2489.84,2,10,Busan
+VC-2187,Casing wear plate (heavy duty),Cargo Pump,Vantor Cargo Pumps,S01,3217.35,10,28,Singapore
+VC-2187,Casing wear plate (heavy duty),Cargo Pump,Vantor Cargo Pumps,S02,3395.85,10,10,Houston
+VC-2187,Casing wear plate (heavy duty),Cargo Pump,Vantor Cargo Pumps,S03,3464.43,5,7,Dubai
+VC-4611,Casing wear plate (standard),Cargo Pump,Vantor Cargo Pumps,S01,934.50,10,42,Houston
+VC-4611,Casing wear plate (standard),Cargo Pump,Vantor Cargo Pumps,S02,912.40,10,28,Busan
+VC-4611,Casing wear plate (standard),Cargo Pump,Vantor Cargo Pumps,S03,884.80,2,56,Busan
+VC-4624,Impeller (standard),Cargo Pump,Vantor Cargo Pumps,S01,957.06,2,7,Busan
+VC-4624,Impeller (standard),Cargo Pump,Vantor Cargo Pumps,S02,1052.17,2,10,Dubai
+VC-4624,Impeller (standard),Cargo Pump,Vantor Cargo Pumps,S03,1011.11,10,56,Singapore
+VC-6480,Impeller (heavy duty),Cargo Pump,Vantor Cargo Pumps,S01,72.45,2,10,Singapore
+VC-6480,Impeller (heavy duty),Cargo Pump,Vantor Cargo Pumps,S02,78.06,1,10,Busan
+VC-6480,Impeller (heavy duty),Cargo Pump,Vantor Cargo Pumps,S03,80.00,2,18,Busan
+VC-6931,Gland packing set (standard),Cargo Pump,Vantor Cargo Pumps,S01,42.00,2,14,Rotterdam
+VC-6931,Gland packing set (standard),Cargo Pump,Vantor Cargo Pumps,S02,43.88,5,35,Busan
+VC-6931,Gland packing set (standard),Cargo Pump,Vantor Cargo Pumps,S03,40.50,1,35,Houston
+VC-7087,Suction strainer (heavy duty),Cargo Pump,Vantor Cargo Pumps,S01,1312.20,4,14,Houston
+VC-7087,Suction strainer (heavy duty),Cargo Pump,Vantor Cargo Pumps,S02,1213.91,2,14,Fujairah
+VC-7087,Suction strainer (heavy duty),Cargo Pump,Vantor Cargo Pumps,S03,1346.62,10,56,Rotterdam
+VC-7594,Coupling insert (heavy duty),Cargo Pump,Vantor Cargo Pumps,S01,163.38,5,56,Dubai
+VC-7594,Coupling insert (heavy duty),Cargo Pump,Vantor Cargo Pumps,S02,153.61,2,42,Houston
+VC-7594,Coupling insert (heavy duty),Cargo Pump,Vantor Cargo Pumps,S03,162.89,2,56,Singapore
+VC-8881,Coupling insert (standard),Cargo Pump,Vantor Cargo Pumps,S01,32.39,2,18,Dubai
+VC-8881,Coupling insert (standard),Cargo Pump,Vantor Cargo Pumps,S02,32.56,5,42,Dubai
+VC-8881,Coupling insert (standard),Cargo Pump,Vantor Cargo Pumps,S03,33.85,2,14,Fujairah
+VC-8907,Suction strainer (standard),Cargo Pump,Vantor Cargo Pumps,S01,135.82,1,35,Dubai
+VC-8907,Suction strainer (standard),Cargo Pump,Vantor Cargo Pumps,S02,147.13,10,21,Singapore
+VC-8907,Suction strainer (standard),Cargo Pump,Vantor Cargo Pumps,S03,144.45,1,7,Houston
+VC-9668,Gland packing set (heavy duty),Cargo Pump,Vantor Cargo Pumps,S01,296.12,2,21,Busan
+VC-9668,Gland packing set (heavy duty),Cargo Pump,Vantor Cargo Pumps,S02,266.07,5,14,Rotterdam
+VC-9668,Gland packing set (heavy duty),Cargo Pump,Vantor Cargo Pumps,S03,297.13,10,42,Singapore

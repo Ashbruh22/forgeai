@@ -23,7 +23,7 @@ class LoadError(Exception):
 
 
 def _clean(text: str) -> str:
-    return re.sub(r"[ \t]+", " ", text.replace("\xa0", " ")).strip()
+    return re.sub(r"\s+", " ", text.replace("\xa0", " ")).strip()
 
 
 def _looks_like_heading(line: str) -> bool:

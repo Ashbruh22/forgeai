@@ -1,0 +1,194 @@
+{
+  "topics": [
+    {
+      "topic_id": "T1",
+      "topic": "What spares are in stock at each port?",
+      "verdict": "UNSUPPORTED",
+      "probes": [
+        {
+          "question": "Which ship spares are currently in stock at the port of Calder Bay according to the supplier terms?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.8081490993499756,
+          "reason": "model found no supporting span"
+        },
+        {
+          "question": "What is the list of spares available at each port, as provided by the suppliers S02 and S03?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.7099670767784119,
+          "reason": "model found no supporting span"
+        },
+        {
+          "question": "Which specific spares are available at the ports mentioned in the supplier terms for Calder Bay Ship Management Ltd?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.8198134899139404,
+          "reason": "model found no supporting span"
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "topic_id": "T2",
+      "topic": "Which suppliers offer the best price for a given part?",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "Which supplier offers the lowest unit price for the burner nozzle (part_no: BB-3312)?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c46",
+          "span": "unit_price_usd: 1300.31",
+          "max_dense": 0.8074095249176025,
+          "reason": "verified"
+        },
+        {
+          "question": "What is the unit price for the cartridge assembly (part_no: MT-8424), and which supplier provides it?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c173",
+          "span": "part_no: MT-8424 | description: Cartridge assembly (standard) | equipment: Turbocharger | maker: Marlow Turbo | supplier_id: S02 | unit_price_usd: 31.48 | moq: 2 | lead_time_days: 56 | stock_port: Houston",
+          "max_dense": 0.801785945892334,
+          "reason": "verified"
+        },
+        {
+          "question": "Which supplier has the best price for the furnace refractory kit (part_no: BB-4105), and what is the MOQ?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c50",
+          "span": "supplier_id: S02 | unit_price_usd: 73.57 | moq: 1",
+          "max_dense": 0.7981763482093811,
+          "reason": "verified"
+        }
+      ],
+      "evidence": [
+        "spares_catalogue.csv#c46",
+        "spares_catalogue.csv#c173",
+        "spares_catalogue.csv#c50"
+      ]
+    },
+    {
+      "topic_id": "T3",
+      "topic": "What is the estimated cost of an order with discounts?",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What is the estimated cost of an order valued at USD 15,000 before discounts are applied?",
+          "supported": true,
+          "chunk_id": "terms_norvik_marine_supply.pdf#c3",
+          "span": "An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "max_dense": 0.7048333883285522,
+          "reason": "verified"
+        },
+        {
+          "question": "If an order has a total value of USD 25,000, what is the estimated cost after applying the discount?",
+          "supported": true,
+          "chunk_id": "terms_kestrel_marine_spares.pdf#c3",
+          "span": "A discount of 10% is applicable for orders valued at USD 30,000 or more.",
+          "max_dense": 0.7046837210655212,
+          "reason": "verified"
+        },
+        {
+          "question": "What is the estimated cost of an order with a total value of USD 35,000 before discounts are applied?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.7001215219497681,
+          "reason": "model found no supporting span"
+        }
+      ],
+      "evidence": [
+        "terms_norvik_marine_supply.pdf#c3",
+        "terms_kestrel_marine_spares.pdf#c3"
+      ]
+    },
+    {
+      "topic_id": "T4",
+      "topic": "When will a part arrive after ordering?",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What is the lead time in days for the part with part number MT-8424?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c173",
+          "span": "lead_time_days: 56",
+          "max_dense": 0.7140321135520935,
+          "reason": "verified"
+        },
+        {
+          "question": "If I order the part MT-8424 today, when will it arrive assuming the lead time is accurate?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c173",
+          "span": "lead_time_days: 56",
+          "max_dense": 0.7229197025299072,
+          "reason": "verified"
+        },
+        {
+          "question": "Does the lead time for part MT-8424 include any expedite surcharge if I request a faster delivery?",
+          "supported": false,
+          "chunk_id": "terms_aurelian_engineering_parts.pdf#c6",
+          "span": "The expedite surcharge for S03 orders is calculated as 18% of the order value for any delivery completed faster than the catalogue lead time.",
+          "max_dense": 0.7974493503570557,
+          "reason": "span shares no content term with the topic"
+        }
+      ],
+      "evidence": [
+        "spares_catalogue.csv#c173"
+      ]
+    }
+  ],
+  "calibration": {
+    "min_score": 0.6548,
+    "min_score_bounds": [
+      0.5548,
+      0.7548
+    ],
+    "separable": false,
+    "calibrated": true,
+    "note": "LOW CONFIDENCE: distributions overlap (in-scope p10=0.705, near-miss p90=0.842); threshold set 0.05 below the in-scope p10 to preserve recall; unanswerable near-misses rely on the refusal policy",
+    "in_scope_probe_max_similarity": [
+      0.8074,
+      0.8018,
+      0.7982,
+      0.7048,
+      0.7047,
+      0.714,
+      0.7229
+    ],
+    "near_miss_probe_max_similarity": [
+      0.8081,
+      0.71,
+      0.8198,
+      0.6926,
+      0.72,
+      0.8638
+    ]
+  },
+  "gaps": [
+    {
+      "id": "G-T1",
+      "kind": "unsupported_topic",
+      "description": "The brief asks for 'What spares are in stock at each port?', but none of the 3 probe questions could be answered from the documents.",
+      "recommended_action": "refuse_with_redirect",
+      "topic_id": "T1",
+      "evidence": [
+        "probe: Which ship spares are currently in stock at the port of Calder Bay according to the supplier terms? (model found no supporting span)",
+        "probe: What is the list of spares available at each port, as provided by the suppliers S02 and S03? (model found no supporting span)",
+        "probe: Which specific spares are available at the ports mentioned in the supplier terms for Calder Bay Ship Management Ltd? (model found no supporting span)"
+      ],
+      "redirect": "I do not have information on this. Please contact the relevant team directly."
+    },
+    {
+      "id": "G-LIVE-1",
+      "kind": "live_data",
+      "description": "The brief asks for current or real-time information, but the documents are a static snapshot and no tool provides it: \"It should also tell them what's in stock right now at each port.\"",
+      "recommended_action": "refuse_with_redirect",
+      "topic_id": null,
+      "evidence": [
+        "It should also tell them what's in stock right now at each port."
+      ],
+      "redirect": ""
+    }
+  ]
+}

@@ -75,3 +75,33 @@ def test_smoke_corpus_chunk_ids_are_stable() -> None:
     assert [c.chunk_id for c in first] == [c.chunk_id for c in second]
     assert any(c.chunk_id.startswith("library_rules.md#") for c in first)
     assert np.all([c.text for c in first])
+
+
+class RecordingEmbedder(FakeEmbedder):
+    def __init__(self) -> None:
+        self.batches: list[list[str]] = []
+
+    def encode(self, texts):
+        self.batches.append(list(texts))
+        return super().encode(texts)
+
+
+def test_query_prefix_is_applied_to_queries_only() -> None:
+    """bge: instruction prefix on queries, never on passages (DECISIONS.md)."""
+    prefix = "Represent this sentence for searching relevant passages: "
+    embedder = RecordingEmbedder()
+    chunks = chunks_of("passage one text", "passage two text")
+    index = HybridIndex.build(chunks, embedder, "fake", query_prefix=prefix)
+    index.search("what is in passage one", 2, 0.6, 0.4, 0.0)
+    index.max_dense("another query")
+
+    passage_batch, *query_batches = embedder.batches
+    assert passage_batch == [c.retrieval_text for c in chunks]
+    assert not any(text.startswith(prefix) for text in passage_batch)
+    assert query_batches == [[prefix + "what is in passage one"], [prefix + "another query"]]
+
+
+def test_max_dense_is_highest_similarity() -> None:
+    index = HybridIndex.build(chunks_of("alpha beta gamma", "delta epsilon"), FakeEmbedder(), "fake")
+    assert index.max_dense("alpha beta gamma") > index.max_dense("zeta eta theta")
+    assert HybridIndex.build([], FakeEmbedder(), "fake").max_dense("q") == 0.0

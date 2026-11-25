@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import platform
 import subprocess
 from datetime import datetime, timezone
@@ -49,6 +50,7 @@ def build_manifest(config: ForgeConfig, digests: dict[str, str | None] | None = 
             "agent": {**config.agent_model.model_dump(), "digest": digests.get(config.agent_model.name)},
             "judge": {**config.judge_model.model_dump(), "digest": digests.get(config.judge_model.name)},
         },
+        "llm": {"think": config.think, "num_ctx": config.num_ctx, "ollama_max_loaded_models": os.environ.get("OLLAMA_MAX_LOADED_MODELS")},
         "embedding": {"name": config.embedding_model, "revision": config.embedding_revision},
         "thresholds": config.thresholds.model_dump(),
         "limits": config.limits.model_dump(),

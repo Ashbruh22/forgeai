@@ -1,6 +1,7 @@
 # ForgeAI configuration. Exact model tags/digests are recorded in every run's manifest.json.
 ollama_host: http://localhost:11434
 num_ctx: 8192
+think: false            # reasoning/thinking mode off for all roles (agent, generator, judge)
 
 agent_model:            # agent + generator model
   name: qwen3:8b

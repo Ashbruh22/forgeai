@@ -190,6 +190,9 @@ The point is to catch "the brief asks for X, but the documents can't support X" 
 - In unattended mode the default is `refuse_with_redirect`, labeled as an assumption.
 - **Closing the loop:** every gap automatically (a) gets an explicit refusal rule in the agent prompt and (b) becomes refusal cases in the eval set. If the agent ends up answering a gap question, the factory has proven its own guard failed, and the report says so.
 
+### 4.4 Calibrating the retrieval threshold (`min_score`)
+The guard already holds two kinds of probe: **in-scope probes** (3 per supported must-answer topic) and **near-miss probes** (adjacent questions the corpus does not cover, kept only if their extractive support check returns `NONE`). For each probe the guard records the **maximum dense cosine similarity** to any chunk (query prefix applied to the query only). `min_score` is placed between the two distributions: the midpoint between the low end (10th percentile) of the in-scope maxima and the high end (90th percentile) of the near-miss maxima. If the distributions overlap (same-subject questions the corpus cannot answer look like answerable ones to a dense embedder), no threshold separates them: the threshold is set 0.05 below the in-scope 10th percentile so answerable questions keep their best chunk, the report flags it as *low confidence*, and unanswerable near-misses are left to the refusal policy. (A first version used the midpoint of the medians; the first live run showed that would gate out relevant chunks, see `docs/DECISIONS.md`.) Probes are grounded: the model sees a few real excerpts so it uses the corpus's own names and codes, and probes that share no content term with the topic are dropped. The result, the separation margin and the optimizer's allowed range (`min_score_bounds`, ±0.10 around the threshold, clamped to [0.05, 0.95]) go in `coverage.json` and into `agent.yaml`. **Only guard probes are used. Eval cases are never used**, because that would leak the test set into the build. The optimizer may move `min_score` only inside the bounds.
+
 **Acceptance:** demo briefs contain deliberately planted gaps (§11). Both must be flagged in `gaps.md`, refused by the final agent, and tested in the eval set.
 
 ---
@@ -237,6 +240,8 @@ provenance:
 
 ### 5.2 Initial retrieval parameters
 These are set by **rules** from the document profile, not guessed by an LLM: short policy clauses get smaller chunks, long technical prose gets larger chunks, CSVs use row-as-record chunks plus a header schema chunk. Rules are more reliable than a small model on numeric choices, and the optimizer tunes the values later anyway.
+
+**`min_score` is the exception: it is calibrated per corpus at build time** (§4.4), not set by a rule. Only guard probes are used for calibration, never eval cases. The bge query-instruction prefix is applied to queries only, never to passages. *(Updated 2026-11-25, see `docs/DECISIONS.md`.)*
 
 ### 5.3 Tool selection (attach only what the brief needs)
 
@@ -286,7 +291,7 @@ Few-shot examples demonstrate format only. They are rejected if their embedding 
 
 | Type | Target | How it's generated | How it's validated before acceptance |
 |---|---|---|---|
-| Answerable, single-doc | 12 | Stratified chunk sampling across docs and must-answer topics → Q + key facts + expected source | **Fact anchoring:** each key fact must match the seed chunk (normalized string / numeric / date match). **Paraphrase check:** the question can't be a lexical copy of the chunk (n-gram overlap < 0.5). **Independent answerability:** the judge model answers from the chunk alone and must recover the facts. |
+| Answerable, single-doc | 12 | Stratified chunk sampling across docs and must-answer topics → Q + key facts + expected source | **Fact anchoring:** each key fact must match the seed span (normalized string / numeric / date match). **Paraphrase check:** the question can't be a lexical copy of the chunk (n-gram overlap < 0.5). **Independent answerability:** the judge model answers from the chunk alone and must recover the facts. |
 | Edge: multi-doc | 5 | Pair semantically related chunks from *different* docs → a question that needs both | Each document must contribute ≥1 anchored key fact |
 | Edge: ambiguous | 4 | Under-specified questions with two valid readings | Each case lists its interpretations; accepted statuses are `needs_clarification`, or `answered` covering all readings |
 | Out-of-scope (must refuse) | 7 | Must-refuse topics + guard **gaps** + **near-miss** hard negatives (adjacent topics the corpus doesn't cover) | Max retrieval score across the corpus is below threshold **and** the guard's extractive probe fails |
@@ -298,6 +303,8 @@ If no tools are attached, the tool-required slots go to answerable and multi-doc
 **Split:** stratified by type, about **70% dev / 30% test**. The optimizer only ever sees dev. The test split is reported, never optimized on.
 **Committed artifacts:** `eval_set.jsonl`, `rejected_cases.jsonl` (with rejection reason), `split.json`, and copies of the exact generation prompts and versions used.
 
+**Seed spans, not chunk ids.** An eval case records where its facts live as `{doc, char_start, char_end, span_text}`, in character offsets of the document's *canonical text* (the loader's blocks joined by blank lines; it does not depend on chunking parameters). `span_text` must equal the text at those offsets (verified). A **gold-chunk hit** is any retrieved chunk whose character range overlaps the seed range. Chunk ids and exact-text matching are never used for this, because the optimizer changes chunk size and a smaller chunk can split the span across two chunks. *(Updated 2026-11-25, see `docs/DECISIONS.md`.)*
+
 **Eval case schema:**
 ```json
 {
@@ -306,7 +313,7 @@ If no tools are attached, the tool-required slots go to answerable and multi-doc
   "expected_status": "answered",
   "expected_sources": ["leave_policy.pdf"],
   "key_facts": [{"text": "pro-rata", "kind": "phrase"}, {"text": "1.75 days per month", "kind": "number"}],
-  "seed_chunks": ["leave_policy.pdf#c14"],
+  "seed_spans": [{"doc": "leave_policy.pdf", "char_start": 4120, "char_end": 4388, "span_text": "verbatim text at those offsets"}],
   "provenance": {"prompt_id": "evals/answerable", "prompt_version": 3},
   "validation": {"fact_anchoring": true, "paraphrase_overlap": 0.31, "independent_answerable": true}
 }
@@ -326,7 +333,7 @@ If no tools are attached, the tool-required slots go to answerable and multi-doc
 | Source correct | ≥1 citation from `expected_sources` (multi-doc: all of them) |
 | Key-fact recall | numbers / dates / currency normalized and compared exactly; phrases via rapidfuzz token-set ≥ 85 |
 | Tool correctness | required tool called; args valid; final numeric value within tolerance of the code-computed answer |
-| Retrieval hit | did any gold seed chunk appear in the retrieved top-k (logged for failure diagnosis) |
+| Retrieval hit | did any retrieved chunk's character range overlap a seed span (logged for failure diagnosis) |
 
 **Layer 2: LLM judge (only where layer 1 can't decide)**
 - **Claim support:** decompose the answer into atomic claims, then rate each claim `supported / unsupported` against *retrieved context only*. Any unsupported claim means ungrounded.
@@ -380,7 +387,7 @@ The classifier is code. An LLM critic is used **only** to draft the *text* of a 
 
 ### 6.6 Optimizer: targeted patches with an acceptance gate
 
-**Patch library** (each one is a JSON-Patch on `agent.yaml`, with bounds):
+**Patch library** (each one is a JSON-Patch on `agent.yaml`, with bounds; `min_score` may only move inside `retrieval.min_score_bounds`, §4.4):
 
 | Category | Allowed patches |
 |---|---|
@@ -483,6 +490,8 @@ forgeai/
 │   ├── optimizer/             # classifier, patch library, acceptance gate
 │   ├── runner/                # generic chat runner (shared with evals)
 │   ├── tools/                 # csv_lookup, calculator, current_date, weather
+│   ├── audit/                 # eval-set audit vs hidden fact sheets (the ONLY reader of fact_sheet.json;
+│   │                          #   forgeai/evals/ never reads fact sheets; enforced by a test)
 │   ├── report/                # scorecard + report renderers
 │   └── prompts/               # every prompt, versioned, committed
 ├── contracts/answer_v1.json

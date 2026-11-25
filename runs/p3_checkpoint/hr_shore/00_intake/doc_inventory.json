@@ -1,0 +1,59 @@
+[
+  {
+    "file": "code_of_conduct_it_policy.pdf",
+    "status": "ok",
+    "reason": "",
+    "file_type": "pdf",
+    "page_count": 5,
+    "row_count": null,
+    "title": "Code of Conduct and IT Acceptable Use Policy",
+    "summary": "This document outlines the standards of behavior and acceptable use of company systems for all users, including employees, contractors, and visitors. It emphasizes professionalism, confidentiality, and compliance with laws and company policies. The policy also covers gifts, conflicts of interest, and the responsibilities of users in maintaining a secure and ethical work environment.",
+    "structure": {
+      "kind": "prose",
+      "total_words": 1821,
+      "n_blocks": 75,
+      "n_headings": 11,
+      "max_heading_depth": 2,
+      "avg_section_words": 161.1
+    },
+    "n_chunks": 12
+  },
+  {
+    "file": "leave_policy.pdf",
+    "status": "ok",
+    "reason": "",
+    "file_type": "pdf",
+    "page_count": 4,
+    "row_count": null,
+    "title": "Calder Bay Ship Management Ltd Leave and Holiday Policy",
+    "summary": "This document outlines the leave and holiday entitlements for shore-based employees at Calder Bay Ship Management Ltd, effective from 1 April 2026. It details annual leave accrual, carry-over rules, and procedures for requesting leave. The policy applies to full-time shore employees and excludes seafarers and those on temporary contracts.",
+    "structure": {
+      "kind": "prose",
+      "total_words": 1443,
+      "n_blocks": 64,
+      "n_headings": 10,
+      "max_heading_depth": 2,
+      "avg_section_words": 140.8
+    },
+    "n_chunks": 11
+  },
+  {
+    "file": "travel_expense_policy.pdf",
+    "status": "ok",
+    "reason": "",
+    "file_type": "pdf",
+    "page_count": 4,
+    "row_count": null,
+    "title": "Calder Bay Ship Management Ltd Travel and Expense Policy",
+    "summary": "This document outlines the procedures for reimbursing travel and expense costs for shore-based employees. It covers approval processes, booking requirements, and guidelines for air travel and accommodation. Employees must maintain accurate records and ensure expenses are job-related and properly documented.",
+    "structure": {
+      "kind": "prose",
+      "total_words": 1267,
+      "n_blocks": 60,
+      "n_headings": 10,
+      "max_heading_depth": 2,
+      "avg_section_words": 122.5
+    },
+    "n_chunks": 11
+  }
+]

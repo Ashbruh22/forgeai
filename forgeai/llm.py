@@ -69,6 +69,7 @@ class Transport(Protocol):
         messages: list[dict[str, str]],
         schema: dict[str, Any],
         options: dict[str, Any],
+        think: bool = False,
     ) -> ChatResult: ...
 
 
@@ -86,6 +87,7 @@ class OllamaHttpTransport:
         messages: list[dict[str, str]],
         schema: dict[str, Any],
         options: dict[str, Any],
+        think: bool = False,
     ) -> ChatResult:
         payload: dict[str, Any] = {
             "model": model,
@@ -95,7 +97,7 @@ class OllamaHttpTransport:
             "options": options,
         }
         if model not in self._no_think:
-            payload["think"] = False  # constrained JSON and hidden reasoning don't mix
+            payload["think"] = think  # explicit: Qwen3 thinks by default when this is omitted
         try:
             response = self._client.post("/api/chat", json=payload)
             if response.status_code == 400 and "think" in response.text and "think" in payload:
@@ -165,11 +167,12 @@ class LLMClient:
         *,
         seed: int | None = None,
         fallback: Fallback = None,
+        prompts_dir: Path | None = None,
     ) -> T:
         retries_allowed = (
             self.config.limits.max_llm_retries if max_retries is None else max_retries
         )
-        template = load_prompt(prompt_id)
+        template = load_prompt(prompt_id, prompts_dir) if prompts_dir else load_prompt(prompt_id)
         system, user = template.render(variables)
         schema_json = schema.model_json_schema()
         key = _hash(
@@ -177,6 +180,7 @@ class LLMClient:
                 "model": model,
                 "prompt_id": prompt_id,
                 "prompt_version": template.version,
+                "prompts_dir": str(prompts_dir) if prompts_dir else None,
                 "variables": variables,
                 "temperature": temperature,
                 "seed": seed,
@@ -215,7 +219,8 @@ class LLMClient:
         repair = load_prompt("_repair")
         for attempt in range(retries_allowed + 1):
             reply = self.transport.chat(
-                model=model, messages=messages, schema=schema_json, options=options
+                model=model, messages=messages, schema=schema_json, options=options,
+                think=self.config.think,
             )
             tokens_in += reply.tokens_in
             tokens_out += reply.tokens_out
@@ -358,9 +363,10 @@ def call_structured(
     *,
     seed: int | None = None,
     fallback: Fallback = None,
+    prompts_dir: Path | None = None,
 ) -> T:
     """Module-level entry point: delegates to the configured ``LLMClient``."""
     return get_client().call_structured(
         role, prompt_id, variables, schema, model, temperature, max_retries,
-        seed=seed, fallback=fallback,
+        seed=seed, fallback=fallback, prompts_dir=prompts_dir,
     )

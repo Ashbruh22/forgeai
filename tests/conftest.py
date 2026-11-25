@@ -29,9 +29,10 @@ class FakeTransport:
         messages: list[dict[str, str]],
         schema: dict[str, Any],
         options: dict[str, Any],
+        think: bool = False,
     ) -> ChatResult:
         self.calls.append(
-            {"model": model, "messages": [dict(m) for m in messages], "options": options}
+            {"model": model, "messages": [dict(m) for m in messages], "options": options, "think": think}
         )
         reply = self._replies.pop(0)
         return reply if isinstance(reply, ChatResult) else ChatResult(content=reply)

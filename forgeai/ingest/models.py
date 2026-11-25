@@ -6,6 +6,8 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
+SEPARATOR = "\n\n"  # joins blocks in a document's canonical text
+
 
 class Block(BaseModel):
     """One structural unit from a loaded file: a heading, a paragraph or a table row."""
@@ -24,6 +26,32 @@ class LoadedDoc(BaseModel):
     page_count: int | None = None
     row_count: int | None = None
 
+    def layout(self) -> tuple[str, list[tuple[int, int] | None]]:
+        """Canonical text and each block's ``(start, end)`` character range in it.
+
+        The canonical text is every non-empty block joined by a blank line. It depends only on
+        the loader, never on chunking parameters, so offsets into it stay valid when the
+        optimizer changes chunk size (spec 6.1 seed spans). Empty blocks map to ``None``.
+        """
+        parts: list[str] = []
+        spans: list[tuple[int, int] | None] = []
+        position = 0
+        for block in self.blocks:
+            text = block.text.strip()
+            if not text:
+                spans.append(None)
+                continue
+            if parts:
+                position += len(SEPARATOR)
+            spans.append((position, position + len(text)))
+            parts.append(text)
+            position += len(text)
+        return SEPARATOR.join(parts), spans
+
+    @property
+    def canonical_text(self) -> str:
+        return self.layout()[0]
+
 
 class Chunk(BaseModel):
     """A retrievable, citable span. Citations are verified against ``text`` verbatim."""
@@ -36,6 +64,10 @@ class Chunk(BaseModel):
     page: int | None = None
     row: int | None = None
     kind: Literal["prose", "row", "schema"] = "prose"
+    # Character range in the document's canonical text (LoadedDoc.canonical_text);
+    # None for synthetic chunks such as a table's schema chunk.
+    char_start: int | None = None
+    char_end: int | None = None
 
     @property
     def retrieval_text(self) -> str:

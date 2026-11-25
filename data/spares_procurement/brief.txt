@@ -1,0 +1,1 @@
+Our technical superintendents need help finding ship spares, comparing suppliers, estimating order cost with discounts, and knowing when parts will arrive. It should also tell them what's in stock right now at each port.

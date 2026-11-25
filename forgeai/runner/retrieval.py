@@ -92,6 +92,17 @@ class HybridIndex:
                 np.save(cache_file, vectors)
         return cls(chunks, vectors, embedder, query_prefix)
 
+    def dense_scores(self, query: str) -> np.ndarray:
+        """Cosine similarity of ``query`` (embedded WITH the query prefix) to every chunk."""
+        if not self.chunks:
+            return np.zeros(0)
+        return self._vectors @ self._embedder.encode([self._query_prefix + query])[0]
+
+    def max_dense(self, query: str) -> float:
+        """Highest dense similarity of ``query`` to any chunk (0.0 for an empty index)."""
+        scores = self.dense_scores(query)
+        return float(scores.max()) if len(scores) else 0.0
+
     def search(
         self, query: str, top_k: int, dense_weight: float, bm25_weight: float, min_score: float
     ) -> list[Hit]:

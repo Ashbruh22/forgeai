@@ -1,0 +1,23 @@
+# Deterministic defaults used when the model's output stays invalid, and for fields left
+# unresolved once the question budget is spent. Every use is recorded as an ASSUMPTION.
+fields:
+  agent_name: "Document Assistant"
+  audience: "People who work with the source documents; mixed experience, no specialist knowledge assumed."
+  tone: "Professional, concise and plain language."
+  scope_in: []
+  scope_out: []
+  must_refuse: []
+question_templates:
+  scope_out: "Is there anything the assistant should NOT answer or help with, even if related to these documents?"
+  scope_in: "Which topics should the assistant cover? Please list the main areas."
+  must_refuse: "Which kinds of question must the assistant always refuse (for example personal data or legal advice)?"
+  audience: "Who will be asking the assistant questions, and how much do they already know?"
+  tone: "What tone should the assistant use when it answers?"
+probe_templates:
+  - "What do the documents say about {topic}?"
+  - "What are the rules or limits for {topic}?"
+  - "How does {topic} work in practice?"
+gap_redirect: "I do not have information on this. Please contact the relevant team directly."
+refuse_reason: "Excluded by the requester."
+gap_question_options: "Reply 'refuse' to have the assistant refuse and redirect, or 'documents' if you will add documents."
+gap_question: "The documents and tools cannot support these requests: {items}. Should the assistant refuse them with a redirect, or will you add documents? {options}"

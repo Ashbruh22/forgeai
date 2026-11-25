@@ -37,8 +37,9 @@ forgeai = "forgeai.cli:app"
 include = ["forgeai*"]
 
 [tool.setuptools.package-data]
-forgeai = ["prompts/**/*.md"]
+forgeai = ["prompts/**/*.md", "intake/defaults.yaml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "-m \"not live\""  # plain `pytest` stays offline; run live tests with: pytest -m live
 markers = ["live: needs a running Ollama with the configured models (skipped otherwise)"]

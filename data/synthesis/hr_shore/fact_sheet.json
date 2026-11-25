@@ -1,0 +1,320 @@
+{
+  "demo": "hr_shore",
+  "company": "Calder Bay Ship Management Ltd (a fictional ship-management company)",
+  "expected_tools": [],
+  "not_expected_tools": [],
+  "facts": [
+    {
+      "id": "F-L00",
+      "kind": "planted_fact",
+      "doc": "leave_policy.pdf",
+      "section": "Purpose and Scope",
+      "statement": "Policy applies to shore-based employees only",
+      "must_contain": [
+        "shore-based employees"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-L01",
+      "kind": "planted_fact",
+      "doc": "leave_policy.pdf",
+      "section": "Annual Leave Entitlement",
+      "statement": "Full-time shore employees get 24 working days of annual leave per calendar year accruing at 2 working days per month",
+      "must_contain": [
+        "24 working days",
+        "2 working days per month"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-L02",
+      "kind": "planted_fact",
+      "doc": "leave_policy.pdf",
+      "section": "Carrying Leave Over",
+      "statement": "Up to 5 working days of unused annual leave can be carried over and expire on 31 March",
+      "must_contain": [
+        "5 working days",
+        "31 March"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-L03",
+      "kind": "planted_fact",
+      "doc": "leave_policy.pdf",
+      "section": "Requesting Leave",
+      "statement": "Annual leave requests need at least 10 working days notice and managers respond within 3 working days",
+      "must_contain": [
+        "10 working days",
+        "3 working days"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-L04",
+      "kind": "planted_fact",
+      "doc": "leave_policy.pdf",
+      "section": "Sick Leave",
+      "statement": "12 working days of paid sick leave per calendar year and a medical certificate after 2 consecutive working days",
+      "must_contain": [
+        "12 working days",
+        "2 consecutive working days"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-L05",
+      "kind": "planted_fact",
+      "doc": "leave_policy.pdf",
+      "section": "Sick Leave",
+      "statement": "Sick leave is reported to the manager before the start of the working day",
+      "must_contain": [
+        "before the start of the working day"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-L06",
+      "kind": "planted_fact",
+      "doc": "leave_policy.pdf",
+      "section": "Public Holidays",
+      "statement": "The office observes 12 public holidays per year and public holidays inside a period of annual leave are not counted as leave days",
+      "must_contain": [
+        "12 public holidays",
+        "not counted as leave days"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-X01",
+      "kind": "planted_fact",
+      "doc": "leave_policy.pdf",
+      "section": "Public Holidays",
+      "statement": "Cross-document rule on the leave side. Travel on a public holiday is covered by the Travel and Expense Policy",
+      "must_contain": [
+        "Travel and Expense Policy",
+        "time off in lieu"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-L07",
+      "kind": "planted_fact",
+      "doc": "leave_policy.pdf",
+      "section": "Parental Leave",
+      "statement": "16 weeks of paid maternity leave and 2 weeks of paternity leave",
+      "must_contain": [
+        "16 weeks",
+        "2 weeks"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-L08",
+      "kind": "planted_fact",
+      "doc": "leave_policy.pdf",
+      "section": "Compassionate Leave",
+      "statement": "Compassionate leave is 5 working days",
+      "must_contain": [
+        "compassionate leave",
+        "5 working days"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "A-01",
+      "kind": "ambiguity",
+      "doc": "leave_policy.pdf",
+      "statement": "The bare word \"leave\" is used for both annual leave (10 working days notice) and sick leave (report before the start of the working day). A question like \"how much notice do I give for leave?\" is ambiguous.",
+      "refs": [
+        "F-L03",
+        "F-L05"
+      ]
+    },
+    {
+      "id": "F-T01",
+      "kind": "planted_fact",
+      "doc": "travel_expense_policy.pdf",
+      "section": "Approval and Booking",
+      "statement": "All business travel needs prior written approval from the line manager",
+      "must_contain": [
+        "prior written approval"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-T02",
+      "kind": "planted_fact",
+      "doc": "travel_expense_policy.pdf",
+      "section": "Air Travel",
+      "statement": "Economy class for flights under 8 hours and business class allowed for 8 hours or more",
+      "must_contain": [
+        "economy class",
+        "8 hours"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-T03",
+      "kind": "planted_fact",
+      "doc": "travel_expense_policy.pdf",
+      "section": "Accommodation",
+      "statement": "Hotel cap USD 180 per night and USD 240 per night in major cities",
+      "must_contain": [
+        "USD 180 per night",
+        "USD 240 per night"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-T04",
+      "kind": "planted_fact",
+      "doc": "travel_expense_policy.pdf",
+      "section": "Meals and Daily Allowance",
+      "statement": "Meal allowance USD 60 per day and alcohol is not reimbursed",
+      "must_contain": [
+        "USD 60 per day",
+        "alcohol"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-X02",
+      "kind": "planted_fact",
+      "doc": "travel_expense_policy.pdf",
+      "section": "Travel on Public Holidays and Weekends",
+      "statement": "Cross-document rule on the travel side. One day of time off in lieu for each public holiday or weekend day travelled",
+      "must_contain": [
+        "one day of time off in lieu",
+        "within 60 days",
+        "not deducted from annual leave",
+        "Leave and Holiday Policy"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-T05",
+      "kind": "planted_fact",
+      "doc": "travel_expense_policy.pdf",
+      "section": "Expense Claims",
+      "statement": "Claims within 30 days of return",
+      "must_contain": [
+        "within 30 days",
+        "USD 25",
+        "14 days"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-T06",
+      "kind": "planted_fact",
+      "doc": "travel_expense_policy.pdf",
+      "section": "Items That Are Not Reimbursed",
+      "statement": "Traffic fines and personal entertainment are not reimbursed",
+      "must_contain": [
+        "traffic fines",
+        "personal entertainment"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-T07",
+      "kind": "planted_fact",
+      "doc": "travel_expense_policy.pdf",
+      "section": "Travel Advances",
+      "statement": "Advances up to 80% of estimated costs",
+      "must_contain": [
+        "80%"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-C02",
+      "kind": "planted_fact",
+      "doc": "code_of_conduct_it_policy.pdf",
+      "section": "Gifts and Conflicts of Interest",
+      "statement": "Gifts above USD 50 must be declared to Compliance and cash gifts are never accepted",
+      "must_contain": [
+        "USD 50",
+        "cash gifts"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-C03",
+      "kind": "planted_fact",
+      "doc": "code_of_conduct_it_policy.pdf",
+      "section": "Confidentiality",
+      "statement": "Confidentiality continues for 2 years after employment ends",
+      "must_contain": [
+        "2 years"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-C04",
+      "kind": "planted_fact",
+      "doc": "code_of_conduct_it_policy.pdf",
+      "section": "Reporting Concerns",
+      "statement": "Reports go to the Ethics Hotline and are acknowledged within 5 working days",
+      "must_contain": [
+        "Ethics Hotline",
+        "5 working days"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-C05",
+      "kind": "planted_fact",
+      "doc": "code_of_conduct_it_policy.pdf",
+      "section": "Passwords and Accounts",
+      "statement": "Passwords at least 12 characters and changed every 90 days",
+      "must_contain": [
+        "12 characters",
+        "90 days"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-C06",
+      "kind": "planted_fact",
+      "doc": "code_of_conduct_it_policy.pdf",
+      "section": "Devices and Software",
+      "statement": "Personal devices must be registered with IT and unlicensed software must never be installed",
+      "must_contain": [
+        "registered with IT",
+        "unlicensed software"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-C08",
+      "kind": "planted_fact",
+      "doc": "code_of_conduct_it_policy.pdf",
+      "section": "Working While on Leave",
+      "statement": "Employees on leave are not expected to monitor email",
+      "must_contain": [
+        "on leave"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "F-C09",
+      "kind": "planted_fact",
+      "doc": "code_of_conduct_it_policy.pdf",
+      "section": "Breaches and Disciplinary Process",
+      "statement": "Employee may respond within 5 working days and outcomes range from written warning to dismissal",
+      "must_contain": [
+        "5 working days",
+        "written warning"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "G-PAYROLL",
+      "kind": "planted_gap",
+      "statement": "Salary slips / payroll. No payroll document exists; the agent must refuse with a redirect."
+    }
+  ]
+}

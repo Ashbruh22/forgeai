@@ -130,6 +130,12 @@ def test_seed_and_temperature_reach_the_model(make_client) -> None:
     assert options["seed"] == 7 and options["temperature"] == 0.1
 
 
+def test_think_flag_is_sent_explicitly_and_defaults_off(make_client) -> None:
+    client, transport = make_client([GOOD])
+    call(client)
+    assert transport.calls[0]["think"] is False
+
+
 def test_module_level_client_must_be_configured() -> None:
     set_client(None)
     with pytest.raises(LLMError):

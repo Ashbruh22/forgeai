@@ -1,0 +1,186 @@
+{
+  "topics": [
+    {
+      "topic_id": "T1",
+      "topic": "Annual leave entitlements",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "How many annual leave days does a full-time shore employee accrue each month?",
+          "supported": true,
+          "chunk_id": "leave_policy.pdf#c3",
+          "span": "This entitlement accrues at a rate of 2 working days per month.",
+          "max_dense": 0.8749951124191284,
+          "reason": "verified"
+        },
+        {
+          "question": "What is the maximum number of unused annual leave days that can be carried over to the next year?",
+          "supported": true,
+          "chunk_id": "leave_policy.pdf#c4",
+          "span": "Up to 5 working days of unused annual leave can be carried over and expire on 31 March.",
+          "max_dense": 0.8270350694656372,
+          "reason": "verified"
+        },
+        {
+          "question": "By what date must an employee submit a written request to carry over unused annual leave?",
+          "supported": true,
+          "chunk_id": "leave_policy.pdf#c4",
+          "span": "Employees must submit a written request to their line manager by 31 January to carry over unused annual leave.",
+          "max_dense": 0.8096879720687866,
+          "reason": "verified"
+        }
+      ],
+      "evidence": [
+        "leave_policy.pdf#c3",
+        "leave_policy.pdf#c4"
+      ]
+    },
+    {
+      "topic_id": "T2",
+      "topic": "Travel expense reimbursement procedures",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What is the maximum percentage of estimated costs that can be covered by a travel advance according to the policy?",
+          "supported": true,
+          "chunk_id": "travel_expense_policy.pdf#c10",
+          "span": "The advance amount is set at 80% of the estimated costs for the trip.",
+          "max_dense": 0.7419701814651489,
+          "reason": "verified"
+        },
+        {
+          "question": "How many days does an employee have to submit an expense claim after returning from a business trip?",
+          "supported": true,
+          "chunk_id": "travel_expense_policy.pdf#c8",
+          "span": "All expense claims must be submitted within 30 days of returning from the business trip.",
+          "max_dense": 0.8330376148223877,
+          "reason": "verified"
+        },
+        {
+          "question": "What documents must an employee submit prior to departure to ensure an accurate travel advance calculation?",
+          "supported": true,
+          "chunk_id": "travel_expense_policy.pdf#c10",
+          "span": "Employees must submit a detailed travel itinerary and expense forecast prior to departure to ensure accurate advance calculation.",
+          "max_dense": 0.7693804502487183,
+          "reason": "verified"
+        }
+      ],
+      "evidence": [
+        "travel_expense_policy.pdf#c10",
+        "travel_expense_policy.pdf#c8"
+      ]
+    },
+    {
+      "topic_id": "T3",
+      "topic": "Code of conduct rules",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What are the expectations for professional behavior outlined in the Code of Conduct?",
+          "supported": true,
+          "chunk_id": "code_of_conduct_it_policy.pdf#c3",
+          "span": "All employees are expected to conduct themselves with professionalism, integrity, and respect in all interactions with colleagues, clients, and third parties at all times.",
+          "max_dense": 0.7409782409667969,
+          "reason": "verified"
+        },
+        {
+          "question": "What is the designated internal channel for reporting misconduct according to the Code of Conduct?",
+          "supported": true,
+          "chunk_id": "code_of_conduct_it_policy.pdf#c6",
+          "span": "5.1 All reports of misconduct must be submitted through the Ethics Hotline, which is the designated internal channel for such concerns.",
+          "max_dense": 0.7105785608291626,
+          "reason": "verified"
+        },
+        {
+          "question": "What do the documents say about Code of conduct rules?",
+          "supported": true,
+          "chunk_id": "code_of_conduct_it_policy.pdf#c3",
+          "span": "All employees are expected to conduct themselves with professionalism, integrity, and respect in all interactions with colleagues, clients, and third parties at all times.",
+          "max_dense": 0.693025529384613,
+          "reason": "verified"
+        }
+      ],
+      "evidence": [
+        "code_of_conduct_it_policy.pdf#c3",
+        "code_of_conduct_it_policy.pdf#c6"
+      ]
+    },
+    {
+      "topic_id": "T4",
+      "topic": "Salary slip interpretation",
+      "verdict": "UNSUPPORTED",
+      "probes": [
+        {
+          "question": "How many annual leave days does a full-time shore employee accrue per month according to the salary slip?",
+          "supported": false,
+          "chunk_id": "leave_policy.pdf#c3",
+          "span": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year. This entitlement accrues at a rate of 2 working days per month.",
+          "max_dense": 0.8573830723762512,
+          "reason": "span shares no content term with the topic"
+        },
+        {
+          "question": "Where is the information about an employee's leave accrual recorded, as mentioned in the salary slip policy?",
+          "supported": false,
+          "chunk_id": "leave_policy.pdf#c3",
+          "span": "Leave accrual is automatically tracked by the human resources department and recorded in the employee's personal leave account.",
+          "max_dense": 0.6932311654090881,
+          "reason": "span shares no content term with the topic"
+        },
+        {
+          "question": "What do the documents say about Salary slip interpretation?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.5973042249679565,
+          "reason": "model found no supporting span"
+        }
+      ],
+      "evidence": []
+    }
+  ],
+  "calibration": {
+    "min_score": 0.6571,
+    "min_score_bounds": [
+      0.5571,
+      0.7571
+    ],
+    "separable": false,
+    "calibrated": true,
+    "note": "LOW CONFIDENCE: distributions overlap (in-scope p10=0.707, near-miss p90=0.817); threshold set 0.05 below the in-scope p10 to preserve recall; unanswerable near-misses rely on the refusal policy",
+    "in_scope_probe_max_similarity": [
+      0.875,
+      0.827,
+      0.8097,
+      0.742,
+      0.833,
+      0.7694,
+      0.741,
+      0.7106,
+      0.693
+    ],
+    "near_miss_probe_max_similarity": [
+      0.7485,
+      0.7752,
+      0.7709,
+      0.7895,
+      0.8574,
+      0.6932,
+      0.5973
+    ]
+  },
+  "gaps": [
+    {
+      "id": "G-T4",
+      "kind": "unsupported_topic",
+      "description": "The brief asks for 'Salary slip interpretation', but none of the 3 probe questions could be answered from the documents.",
+      "recommended_action": "refuse_with_redirect",
+      "topic_id": "T4",
+      "evidence": [
+        "probe: How many annual leave days does a full-time shore employee accrue per month according to the salary slip? (span shares no content term with the topic)",
+        "probe: Where is the information about an employee's leave accrual recorded, as mentioned in the salary slip policy? (span shares no content term with the topic)",
+        "probe: What do the documents say about Salary slip interpretation? (model found no supporting span)"
+      ],
+      "redirect": "I do not have information on this. Please contact the relevant team directly."
+    }
+  ]
+}

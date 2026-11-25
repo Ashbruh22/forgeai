@@ -1,0 +1,26 @@
+[
+  {
+    "id": "Q1",
+    "field": "scope_out",
+    "text": "Should the assistant avoid any topics related to shipping regulations, compliance, or contractual negotiations, even if connected to the spare parts process?",
+    "kind": "interview"
+  },
+  {
+    "id": "Q2",
+    "field": "must_refuse",
+    "text": "What specific types of questions should the assistant always refuse to answer, such as personal data or legal advice?",
+    "kind": "interview"
+  },
+  {
+    "id": "Q3",
+    "field": "tone",
+    "text": "Should the assistant's responses be formal, friendly, or neutral when providing information about ship spares and supplier details?",
+    "kind": "interview"
+  },
+  {
+    "id": "Q4",
+    "field": "gaps",
+    "text": "The documents and tools cannot support these requests: What spares are in stock at each port?; It should also tell them what's in stock right now at each port.. Should the assistant refuse them with a redirect, or will you add documents? Reply 'refuse' to have the assistant refuse and redirect, or 'documents' if you will add documents.",
+    "kind": "gap"
+  }
+]

@@ -1,0 +1,137 @@
+# Plan for Demo A. Facts are PLANTED: each must_contain string must appear verbatim in the generated text.
+demo: hr_shore
+company: Calder Bay Ship Management Ltd (a fictional ship-management company)
+brief: >-
+  I need an assistant that answers HR policy questions for our shore staff: leave, travel claims,
+  conduct rules. Also help people with salary slip questions.
+forbidden: [salary, salaries, payslip, payslips, payroll, wages, pay slip, remuneration]
+expected_tools: []
+planted_gaps:
+  - id: G-PAYROLL
+    description: Salary slips / payroll. No payroll document exists; the agent must refuse with a redirect.
+documents:
+  - file: leave_policy.pdf
+    title: Leave and Holiday Policy
+    effective: 1 April 2026
+    ambiguity:
+      id: A-01
+      statement: 'The bare word "leave" is used for both annual leave (10 working days notice) and sick leave (report before the start of the working day). A question like "how much notice do I give for leave?" is ambiguous.'
+      refs: [F-L03, F-L05]
+    sections:
+      - title: Purpose and Scope
+        brief: Explains that the policy applies to shore-based employees of the company. Seafarers are covered by separate crew agreements and are outside this policy.
+        facts:
+          - {id: F-L00, statement: Policy applies to shore-based employees only, must_contain: ["shore-based employees"]}
+      - title: Annual Leave Entitlement
+        brief: How much annual leave full-time shore employees earn and how it accrues.
+        facts:
+          - {id: F-L01, statement: Full-time shore employees get 24 working days of annual leave per calendar year accruing at 2 working days per month, must_contain: ["24 working days", "2 working days per month"]}
+      - title: Carrying Leave Over
+        brief: Whether unused annual leave can be carried into the next year and when it expires.
+        facts:
+          - {id: F-L02, statement: Up to 5 working days of unused annual leave can be carried over and expire on 31 March, must_contain: ["5 working days", "31 March"]}
+      - title: Requesting Leave
+        brief: How employees request leave. Use the bare word "leave" for requests in general, without saying annual or sick, in at least two clauses. Requests are made through the HR portal and managers respond promptly.
+        facts:
+          - {id: F-L03, statement: Annual leave requests need at least 10 working days notice and managers respond within 3 working days, must_contain: ["10 working days", "3 working days"]}
+      - title: Sick Leave
+        brief: Paid sick leave entitlement, medical certificates and how to report illness. Use the bare word "leave" in at least one clause here too.
+        facts:
+          - {id: F-L04, statement: 12 working days of paid sick leave per calendar year and a medical certificate after 2 consecutive working days, must_contain: ["12 working days", "2 consecutive working days"]}
+          - {id: F-L05, statement: Sick leave is reported to the manager before the start of the working day, must_contain: ["before the start of the working day"]}
+      - title: Public Holidays
+        brief: Public holidays observed by the shore office, and how they interact with annual leave and with work travel.
+        facts:
+          - {id: F-L06, statement: The office observes 12 public holidays per year and public holidays inside a period of annual leave are not counted as leave days, must_contain: ["12 public holidays", "not counted as leave days"]}
+          - {id: F-X01, statement: Cross-document rule on the leave side. Travel on a public holiday is covered by the Travel and Expense Policy, must_contain: ["Travel and Expense Policy", "time off in lieu"]}
+      - title: Parental Leave
+        brief: Paid maternity and paternity leave.
+        facts:
+          - {id: F-L07, statement: 16 weeks of paid maternity leave and 2 weeks of paternity leave, must_contain: ["16 weeks", "2 weeks"]}
+      - title: Compassionate Leave
+        brief: Leave after the death of an immediate family member.
+        facts:
+          - {id: F-L08, statement: Compassionate leave is 5 working days, must_contain: ["compassionate leave", "5 working days"]}
+      - title: Records and Queries
+        brief: Leave balances are visible in the HR portal; questions go to the HR team through the portal.
+        facts: []
+  - file: travel_expense_policy.pdf
+    title: Travel and Expense Reimbursement Policy
+    effective: 1 April 2026
+    sections:
+      - title: Purpose and Scope
+        brief: Applies to all business travel by shore-based employees and to the expenses they incur.
+        facts: []
+      - title: Approval and Booking
+        brief: Business travel needs approval before booking, and bookings go through the company travel desk.
+        facts:
+          - {id: F-T01, statement: All business travel needs prior written approval from the line manager, must_contain: ["prior written approval"]}
+      - title: Air Travel
+        brief: Class of travel for flights depends on flight duration.
+        facts:
+          - {id: F-T02, statement: Economy class for flights under 8 hours and business class allowed for 8 hours or more, must_contain: ["economy class", "8 hours"]}
+      - title: Accommodation
+        brief: Hotel spending limits per night, with a higher limit for designated major cities.
+        facts:
+          - {id: F-T03, statement: Hotel cap USD 180 per night and USD 240 per night in major cities, must_contain: ["USD 180 per night", "USD 240 per night"]}
+      - title: Meals and Daily Allowance
+        brief: Daily meal allowance while travelling, and what it excludes.
+        facts:
+          - {id: F-T04, statement: Meal allowance USD 60 per day and alcohol is not reimbursed, must_contain: ["USD 60 per day", "alcohol"]}
+      - title: Travel on Public Holidays and Weekends
+        brief: What an employee receives when they must travel on a public holiday or a weekend. The public holiday is the one in the employee's home location. Refer to the Leave and Holiday Policy by name.
+        facts:
+          - {id: F-X02, statement: Cross-document rule on the travel side. One day of time off in lieu for each public holiday or weekend day travelled, taken within 60 days and not deducted from annual leave, must_contain: ["one day of time off in lieu", "within 60 days", "not deducted from annual leave", "Leave and Holiday Policy"]}
+      - title: Expense Claims
+        brief: Deadlines and evidence for expense claims, and how quickly approved claims are reimbursed.
+        facts:
+          - {id: F-T05, statement: Claims within 30 days of return, original receipts for items above USD 25 and reimbursement within 14 days of approval, must_contain: ["within 30 days", "USD 25", "14 days"]}
+      - title: Items That Are Not Reimbursed
+        brief: Expenses the company will not reimburse.
+        facts:
+          - {id: F-T06, statement: Traffic fines and personal entertainment are not reimbursed, must_contain: ["traffic fines", "personal entertainment"]}
+      - title: Travel Advances
+        brief: Cash advances for large trips.
+        facts:
+          - {id: F-T07, statement: Advances up to 80% of estimated costs, must_contain: ["80%"]}
+  - file: code_of_conduct_it_policy.pdf
+    title: Code of Conduct and IT Acceptable Use Policy
+    effective: 1 April 2026
+    sections:
+      - title: Purpose and Scope
+        brief: Applies to all shore-based employees, contractors and visitors using company systems.
+        facts: []
+      - title: Professional Behaviour
+        brief: Expected behaviour, respect and zero tolerance of harassment and discrimination.
+        facts: []
+      - title: Gifts and Conflicts of Interest
+        brief: Declaring gifts and avoiding conflicts of interest.
+        facts:
+          - {id: F-C02, statement: Gifts above USD 50 must be declared to Compliance and cash gifts are never accepted, must_contain: ["USD 50", "cash gifts"]}
+      - title: Confidentiality
+        brief: Protecting confidential company and client information, including after employment ends.
+        facts:
+          - {id: F-C03, statement: Confidentiality continues for 2 years after employment ends, must_contain: ["2 years"]}
+      - title: Reporting Concerns
+        brief: How to report misconduct, protection against retaliation and how fast reports are acknowledged.
+        facts:
+          - {id: F-C04, statement: Reports go to the Ethics Hotline and are acknowledged within 5 working days, must_contain: ["Ethics Hotline", "5 working days"]}
+      - title: Passwords and Accounts
+        brief: Password rules for company accounts.
+        facts:
+          - {id: F-C05, statement: Passwords at least 12 characters and changed every 90 days, must_contain: ["12 characters", "90 days"]}
+      - title: Devices and Software
+        brief: Use of company and personal devices and software.
+        facts:
+          - {id: F-C06, statement: Personal devices must be registered with IT and unlicensed software must never be installed, must_contain: ["registered with IT", "unlicensed software"]}
+      - title: Email and Social Media
+        brief: Rules for email use and for talking about the company on social media. Only approved spokespeople speak for the company.
+        facts: []
+      - title: Working While on Leave
+        brief: Employees who are on leave are not expected to read email or use company systems. Use the bare word "leave" without saying annual or sick.
+        facts:
+          - {id: F-C08, statement: Employees on leave are not expected to monitor email, must_contain: ["on leave"]}
+      - title: Breaches and Disciplinary Process
+        brief: What happens after a breach of this policy and the employee's right to respond.
+        facts:
+          - {id: F-C09, statement: Employee may respond within 5 working days and outcomes range from written warning to dismissal, must_contain: ["5 working days", "written warning"]}

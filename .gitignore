@@ -28,3 +28,6 @@ __pycache__/
 # Hugging Face model cache must live outside the repo; belt and braces:
 hf_cache/
 huggingface/
+
+# Logs
+*.log

@@ -1,0 +1,323 @@
+{
+  "demo": "spares_procurement",
+  "company": "Calder Bay Ship Management Ltd (a fictional ship-management company)",
+  "expected_tools": [
+    "csv_lookup",
+    "calculator",
+    "current_date"
+  ],
+  "not_expected_tools": [
+    "weather"
+  ],
+  "facts": [
+    {
+      "id": "B-S01-00",
+      "kind": "planted_fact",
+      "doc": "terms_norvik_marine_supply.pdf",
+      "section": "Scope and Pricing",
+      "statement": "Supplier S01 is Norvik Marine Supply",
+      "must_contain": [
+        "Norvik Marine Supply",
+        "S01"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S01-01",
+      "kind": "planted_fact",
+      "doc": "terms_norvik_marine_supply.pdf",
+      "section": "Volume Discounts",
+      "statement": "S01 discount tiers: 5% for orders from USD 5,000 to USD 14,999; 8% from USD 15,000 to USD 49,999; 12% from USD 50,000",
+      "must_contain": [
+        "5%",
+        "USD 5,000",
+        "USD 14,999",
+        "8%",
+        "USD 15,000",
+        "USD 49,999",
+        "12%",
+        "USD 50,000"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S01-02",
+      "kind": "planted_fact",
+      "doc": "terms_norvik_marine_supply.pdf",
+      "section": "Delivery and Incoterms",
+      "statement": "S01 delivers on Incoterms DAP to the port of call named in the order",
+      "must_contain": [
+        "DAP"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S01-03",
+      "kind": "planted_fact",
+      "doc": "terms_norvik_marine_supply.pdf",
+      "section": "Warranty",
+      "statement": "S01 warranty is 12 months from delivery",
+      "must_contain": [
+        "12 months"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S01-04",
+      "kind": "planted_fact",
+      "doc": "terms_norvik_marine_supply.pdf",
+      "section": "Expedited Orders",
+      "statement": "S01 expedite surcharge 15% of order value for delivery within 7 days and 25% within 48 hours",
+      "must_contain": [
+        "15%",
+        "7 days",
+        "25%",
+        "48 hours"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S01-05",
+      "kind": "planted_fact",
+      "doc": "terms_norvik_marine_supply.pdf",
+      "section": "Payment and Cancellation",
+      "statement": "S01 payment terms net 45 days; orders cannot be cancelled after dispatch",
+      "must_contain": [
+        "net 45 days"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S02-00",
+      "kind": "planted_fact",
+      "doc": "terms_kestrel_marine_spares.pdf",
+      "section": "Scope and Pricing",
+      "statement": "Supplier S02 is Kestrel Marine Spares",
+      "must_contain": [
+        "Kestrel Marine Spares",
+        "S02"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S02-01",
+      "kind": "planted_fact",
+      "doc": "terms_kestrel_marine_spares.pdf",
+      "section": "Volume Discounts",
+      "statement": "S02 discount tiers: 3% for orders from USD 2,000 to USD 9,999; 6% from USD 10,000 to USD 29,999; 10% from USD 30,000",
+      "must_contain": [
+        "3%",
+        "USD 2,000",
+        "USD 9,999",
+        "6%",
+        "USD 10,000",
+        "USD 29,999",
+        "10%",
+        "USD 30,000"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S02-02",
+      "kind": "planted_fact",
+      "doc": "terms_kestrel_marine_spares.pdf",
+      "section": "Delivery and Incoterms",
+      "statement": "S02 sells on Incoterms CIF to the destination port",
+      "must_contain": [
+        "CIF"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S02-03",
+      "kind": "planted_fact",
+      "doc": "terms_kestrel_marine_spares.pdf",
+      "section": "Warranty",
+      "statement": "S02 warranty is 18 months from delivery",
+      "must_contain": [
+        "18 months"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S02-04",
+      "kind": "planted_fact",
+      "doc": "terms_kestrel_marine_spares.pdf",
+      "section": "Expedited Orders",
+      "statement": "S02 expedite surcharge 10% of order value for delivery within 10 days and 20% within 72 hours",
+      "must_contain": [
+        "10%",
+        "10 days",
+        "20%",
+        "72 hours"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S02-05",
+      "kind": "planted_fact",
+      "doc": "terms_kestrel_marine_spares.pdf",
+      "section": "Payment and Cancellation",
+      "statement": "S02 payment terms net 30 days",
+      "must_contain": [
+        "net 30 days"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S03-00",
+      "kind": "planted_fact",
+      "doc": "terms_aurelian_engineering_parts.pdf",
+      "section": "Scope and Pricing",
+      "statement": "Supplier S03 is Aurelian Engineering Parts",
+      "must_contain": [
+        "Aurelian Engineering Parts",
+        "S03"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S03-01",
+      "kind": "planted_fact",
+      "doc": "terms_aurelian_engineering_parts.pdf",
+      "section": "Volume Discounts",
+      "statement": "S03 discount tiers: 4% for orders from USD 3,000 to USD 11,999; 9% from USD 12,000 to USD 39,999; 15% from USD 40,000",
+      "must_contain": [
+        "4%",
+        "USD 3,000",
+        "USD 11,999",
+        "9%",
+        "USD 12,000",
+        "USD 39,999",
+        "15%",
+        "USD 40,000"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S03-02",
+      "kind": "planted_fact",
+      "doc": "terms_aurelian_engineering_parts.pdf",
+      "section": "Delivery and Incoterms",
+      "statement": "S03 sells on Incoterms EXW from its Singapore warehouse and the buyer arranges freight",
+      "must_contain": [
+        "EXW",
+        "Singapore"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S03-03",
+      "kind": "planted_fact",
+      "doc": "terms_aurelian_engineering_parts.pdf",
+      "section": "Warranty",
+      "statement": "S03 warranty is 24 months for new parts and 6 months for reconditioned parts",
+      "must_contain": [
+        "24 months",
+        "6 months"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S03-04",
+      "kind": "planted_fact",
+      "doc": "terms_aurelian_engineering_parts.pdf",
+      "section": "Expedited Orders",
+      "statement": "S03 expedite surcharge 18% of order value for any delivery faster than catalogue lead time",
+      "must_contain": [
+        "18%"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "B-S03-05",
+      "kind": "planted_fact",
+      "doc": "terms_aurelian_engineering_parts.pdf",
+      "section": "Payment and Cancellation",
+      "statement": "S03 payment terms net 60 days",
+      "must_contain": [
+        "net 60 days"
+      ],
+      "verified_in_pdf": true
+    },
+    {
+      "id": "CSV-HD-1123-S01",
+      "kind": "csv_row",
+      "doc": "spares_catalogue.csv",
+      "statement": "HD-1123 from S01: unit_price_usd 420.00, moq 4, lead_time_days 21, stock_port Singapore",
+      "must_contain": [
+        "HD-1123",
+        "420.00"
+      ]
+    },
+    {
+      "id": "CSV-HD-1123-S02",
+      "kind": "csv_row",
+      "doc": "spares_catalogue.csv",
+      "statement": "HD-1123 from S02: unit_price_usd 433.00, moq 2, lead_time_days 28, stock_port Rotterdam",
+      "must_contain": [
+        "HD-1123",
+        "433.00"
+      ]
+    },
+    {
+      "id": "CSV-HD-1123-S03",
+      "kind": "csv_row",
+      "doc": "spares_catalogue.csv",
+      "statement": "HD-1123 from S03: unit_price_usd 408.50, moq 6, lead_time_days 18, stock_port Singapore",
+      "must_contain": [
+        "HD-1123",
+        "408.50"
+      ]
+    },
+    {
+      "id": "CSV-TE-2207-S02",
+      "kind": "csv_row",
+      "doc": "spares_catalogue.csv",
+      "statement": "TE-2207 from S02: unit_price_usd 185.50, moq 2, lead_time_days 14, stock_port Rotterdam",
+      "must_contain": [
+        "TE-2207",
+        "185.50"
+      ]
+    },
+    {
+      "id": "CSV-CP-3310-S03",
+      "kind": "csv_row",
+      "doc": "spares_catalogue.csv",
+      "statement": "CP-3310 from S03: unit_price_usd 960.00, moq 1, lead_time_days 35, stock_port Fujairah",
+      "must_contain": [
+        "CP-3310",
+        "960.00"
+      ]
+    },
+    {
+      "id": "CSV-PP-4102-S01",
+      "kind": "csv_row",
+      "doc": "spares_catalogue.csv",
+      "statement": "PP-4102 from S01: unit_price_usd 2750.00, moq 1, lead_time_days 45, stock_port Houston",
+      "must_contain": [
+        "PP-4102",
+        "2750.00"
+      ]
+    },
+    {
+      "id": "DERIVED-1",
+      "kind": "derived",
+      "doc": "spares_catalogue.csv + terms_norvik_marine_supply.pdf",
+      "statement": "12 x HD-1123 from S01 = USD 5,040.00, which falls in the S01 5% tier, so USD 4,788.00 after discount",
+      "must_contain": []
+    },
+    {
+      "id": "DERIVED-2",
+      "kind": "derived",
+      "doc": "spares_catalogue.csv + terms_norvik_marine_supply.pdf",
+      "statement": "6 x PP-4102 from S01 = USD 16,500.00, which falls in the S01 8% tier, so USD 15,180.00 after discount",
+      "must_contain": []
+    },
+    {
+      "id": "G-LIVE-STOCK",
+      "kind": "planted_gap",
+      "statement": "\"In stock right now at each port\". The catalogue stock_port column is a static snapshot, so live stock is a live-data gap."
+    }
+  ]
+}
