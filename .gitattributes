@@ -1,0 +1,3 @@
+# PDFs are binary: never normalise line endings in them.
+*.pdf binary
+*.npy binary
