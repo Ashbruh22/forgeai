@@ -1,0 +1,32 @@
+{
+  "attached": [
+    {
+      "tool": "csv_lookup",
+      "attached": true,
+      "reason": "needed and verified",
+      "requirement_id": "T1",
+      "justification": "Current stock levels at ports require looking up data from the CSV file.",
+      "necessity_quote": "Current stock levels at ports"
+    },
+    {
+      "tool": "calculator",
+      "attached": true,
+      "reason": "needed and verified",
+      "requirement_id": "T3",
+      "justification": "Order cost estimates with discounts require arithmetic calculations.",
+      "necessity_quote": "Order cost estimates with discounts"
+    },
+    {
+      "tool": "current_date",
+      "attached": true,
+      "reason": "needed and verified",
+      "requirement_id": "T4",
+      "justification": "Estimated arrival times for parts require knowing today's date to calculate delivery timelines.",
+      "necessity_quote": "Estimated arrival times for parts"
+    }
+  ],
+  "rejected": [],
+  "unattached_tools": [
+    "weather"
+  ]
+}

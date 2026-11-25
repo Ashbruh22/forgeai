@@ -1,0 +1,15 @@
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|##########| 199/199 [00:00<00:00, 4622.53it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+[in-scope] How many days of annual leave do full-time shore employees get each year?
+  status: answered
+  answer: Full-time shore employees are entitled to 24 working days of annual leave per calendar year.
+  cite: leave_policy.pdf#c3: 2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar
+
+[gap] Can you explain the deductions shown on my latest salary slip?
+  status: refused
+  answer: I do not have information on this. Please contact the relevant team directly.
+
+[out-of-scope] What is the capital city of France?
+  status: refused
+  answer: I do not have information on this. Please contact the relevant team directly.

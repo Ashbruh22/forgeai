@@ -31,4 +31,9 @@ def tool_description(name: str) -> str:
     return load_prompt(f"tools/{name}").user
 
 
-__all__ = ["REGISTRY", "Tool", "ToolContext", "ToolError", "build_tools", "tool_description"]
+def tool_need_criteria(name: str) -> str:
+    """When the tool is, and is not, needed: the rubric used by the necessity review."""
+    return load_prompt(f"tools/need/{name}").user
+
+
+__all__ = ["REGISTRY", "Tool", "ToolContext", "ToolError", "build_tools", "tool_description", "tool_need_criteria"]

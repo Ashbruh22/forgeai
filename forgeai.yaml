@@ -12,7 +12,7 @@ agent_model:            # agent + generator model
 # not by guesswork. Candidates: gemma3:4b, llama3.1:8b. Must differ in family
 # from agent_model (ConfigError otherwise).
 judge_model:
-  name: gemma3:4b
+  name: llama3.1:8b
   temperature: 0.0
   seed: 7
 

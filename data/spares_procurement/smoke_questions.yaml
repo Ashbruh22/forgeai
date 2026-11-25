@@ -1,0 +1,8 @@
+- kind: in-scope
+  question: What is the unit price and lead time of part HD-1123 from supplier S01, and what would 12 units cost after the supplier's volume discount?
+- kind: gap
+  question: How many units of HD-1123 are in stock right now at Singapore?
+- kind: out-of-scope
+  question: Can you give me a good recipe for pasta carbonara?
+- kind: snapshot
+  question: Which port holds part HD-1123 from supplier S01 in the catalogue?

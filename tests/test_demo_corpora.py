@@ -84,7 +84,7 @@ def test_demo_b_catalogue_and_supplier_terms() -> None:
         reader = csv.DictReader(handle)
         rows = list(reader)
         assert reader.fieldnames == ["part_no", "description", "equipment", "maker", "supplier_id",
-                                     "unit_price_usd", "moq", "lead_time_days", "stock_port"]
+                                     "unit_price_usd", "moq", "lead_time_days", "stock_port", "snapshot_date"]
     assert 280 <= len(rows) <= 320
     assert {r["supplier_id"] for r in rows} == {"S01", "S02", "S03"}
     assert len({(r["part_no"], r["supplier_id"]) for r in rows}) == len(rows)

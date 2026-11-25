@@ -1,0 +1,56 @@
+[
+  {
+    "kind": "in-scope",
+    "question": "How many days of annual leave do full-time shore employees get each year?",
+    "answer": {
+      "status": "answered",
+      "answer": "Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+      "citations": [
+        {
+          "doc": "leave_policy.pdf",
+          "chunk_id": "leave_policy.pdf#c3",
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year."
+        }
+      ],
+      "tool_calls": [],
+      "clarifying_question": null
+    },
+    "contract_issues": [],
+    "retrieved": [
+      "leave_policy.pdf#c3",
+      "leave_policy.pdf#c7",
+      "leave_policy.pdf#c4",
+      "leave_policy.pdf#c2",
+      "leave_policy.pdf#c6"
+    ],
+    "latency_ms": 16021
+  },
+  {
+    "kind": "gap",
+    "question": "Can you explain the deductions shown on my latest salary slip?",
+    "answer": {
+      "status": "refused",
+      "answer": "I do not have information on this. Please contact the relevant team directly.",
+      "citations": [],
+      "tool_calls": [],
+      "clarifying_question": null
+    },
+    "contract_issues": [],
+    "retrieved": [],
+    "latency_ms": 1333
+  },
+  {
+    "kind": "out-of-scope",
+    "question": "What is the capital city of France?",
+    "answer": {
+      "status": "refused",
+      "answer": "I do not have information on this. Please contact the relevant team directly.",
+      "citations": [],
+      "tool_calls": [],
+      "clarifying_question": null
+    },
+    "contract_issues": [],
+    "retrieved": [],
+    "latency_ms": 1341
+  }
+]

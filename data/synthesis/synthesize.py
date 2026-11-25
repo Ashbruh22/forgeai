@@ -171,6 +171,7 @@ EQUIPMENT: dict[str, tuple[str, str, list[str]]] = {
     "Turbocharger": ("MT", "Marlow Turbo", ["Cartridge assembly", "Compressor wheel", "Nozzle ring", "Bearing kit", "Gasket and seal set"]),
 }
 VARIANTS = ["standard", "heavy duty"]
+SNAPSHOT_DATE = "2026-11-01"  # the catalogue is a static export taken on this date (stock_port included)
 PORTS = ["Singapore", "Rotterdam", "Fujairah", "Houston", "Dubai", "Busan"]
 SUPPLIERS = ["S01", "S02", "S03"]
 PLANTED_PARTS = {  # (equipment, part, variant) -> (part_no, base price)
@@ -218,6 +219,7 @@ def make_catalogue(path: Path, seed: int = 11) -> list[dict[str, Any]]:
                         "part_no": part_no, "description": f"{part} ({variant})", "equipment": equipment,
                         "maker": maker, "supplier_id": supplier, "unit_price_usd": f"{price:.2f}",
                         "moq": moq, "lead_time_days": lead, "stock_port": port,
+                        "snapshot_date": SNAPSHOT_DATE,
                     })
     rows.sort(key=lambda r: (r["part_no"], r["supplier_id"]))
     path.parent.mkdir(parents=True, exist_ok=True)

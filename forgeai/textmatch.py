@@ -32,11 +32,21 @@ STOPWORDS = frozenset(
 
 
 def content_terms(text: str) -> set[str]:
-    """Lowercase content words (4+ letters, not stopwords), reduced to a 6-letter stem.
+    """Lowercase content words (4+ letters, not stopwords), reduced to a short stem.
 
-    Six letters keeps "entitled"/"entitlements" together but not "interpretation"/"internal".
+    A plural "s" is dropped, then the word is cut to 6 letters. That keeps "book"/"books" and
+    "entitled"/"entitlements" together but not "interpretation"/"internal".
     """
-    return {w[:6] for w in re.findall(r"[a-z]{4,}", text.lower()) if w not in STOPWORDS}
+    terms = set()
+    for word in re.findall(r"[a-z]{4,}", text.lower()):
+        if word in STOPWORDS:
+            continue
+        if word.endswith("ies") and len(word) > 5:
+            word = word[:-3] + "y"
+        elif word.endswith("s") and not word.endswith("ss"):
+            word = word[:-1]
+        terms.add(word[:6])
+    return terms
 
 
 def shares_content_term(a: str, b: str) -> bool:

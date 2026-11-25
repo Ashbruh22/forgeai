@@ -1,0 +1,96 @@
+[
+  {
+    "kind": "in-scope",
+    "question": "How many days can I borrow a book for, and what is the fine if I return it late?",
+    "answer": {
+      "status": "answered",
+      "answer": "You can borrow a book for 21 days. If you return it late, a fine of $0.25 per day will be applied, capped at a maximum of $10 per item.",
+      "citations": [
+        {
+          "doc": "library_rules.md",
+          "chunk_id": "library_rules.md#c0",
+          "quote": "Books may be borrowed for 21 days."
+        },
+        {
+          "doc": "library_rules.md",
+          "chunk_id": "library_rules.md#c1",
+          "quote": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item."
+        }
+      ],
+      "tool_calls": [],
+      "clarifying_question": null
+    },
+    "contract_issues": [],
+    "retrieved": [
+      "library_rules.md#c0",
+      "library_rules.md#c1"
+    ],
+    "latency_ms": 18660
+  },
+  {
+    "kind": "gap",
+    "question": "Is Moby Dick on the shelf right now?",
+    "answer": {
+      "status": "refused",
+      "answer": "I do not have information on this. Please contact the relevant team directly.",
+      "citations": [],
+      "tool_calls": [
+        {
+          "tool": "csv_lookup",
+          "args": {
+            "file": "book_availability.csv",
+            "filters": {
+              "title": "Moby Dick"
+            },
+            "columns": [
+              "title",
+              "shelf_location",
+              "copy_count"
+            ]
+          },
+          "result": "ERROR: no such CSV file: book_availability.csv"
+        }
+      ],
+      "clarifying_question": null
+    },
+    "contract_issues": [],
+    "retrieved": [],
+    "latency_ms": 4532
+  },
+  {
+    "kind": "out-of-scope",
+    "question": "Who won the football world cup in 2018?",
+    "answer": {
+      "status": "refused",
+      "answer": "I do not have information on this. Please contact the relevant team directly.",
+      "citations": [],
+      "tool_calls": [],
+      "clarifying_question": null
+    },
+    "contract_issues": [],
+    "retrieved": [],
+    "latency_ms": 1341
+  },
+  {
+    "kind": "snapshot",
+    "question": "Which shelf is Moby Dick listed on in the catalogue?",
+    "answer": {
+      "status": "answered",
+      "answer": "Moby Dick is listed on shelf F-12 in the catalogue.",
+      "citations": [
+        {
+          "doc": "books.csv",
+          "chunk_id": "books.csv#c1",
+          "quote": "title: Moby Dick | author: Herman Melville | shelf: F-12 | copies: 2 | snapshot_date: 2026-11-20"
+        }
+      ],
+      "tool_calls": [],
+      "clarifying_question": null
+    },
+    "contract_issues": [],
+    "retrieved": [
+      "books.csv#c1"
+    ],
+    "latency_ms": 2927
+  }
+]

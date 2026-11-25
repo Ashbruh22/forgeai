@@ -1,0 +1,84 @@
+# The tool-selection suite (spec section 5.3): 8 mini-briefs with the exact expected tool set.
+# Briefs 4 to 6 are KEYWORD TRAPS: a tempting word appears, but no must-answer topic needs the tool.
+# Each entry gives what the requirements stage would hand to the selector: the brief, the
+# must-answer topics and whether the corpus contains a table.
+- id: 1-hr-policies
+  brief: Answer HR policy questions for shore staff about leave, travel claims and conduct rules.
+  has_table: false
+  topics:
+    T1: annual leave and sick leave entitlements
+    T2: travel expense reimbursement rules
+    T3: code of conduct rules
+  expected: []
+
+- id: 2-procurement
+  brief: >-
+    Technical superintendents need help finding ship spares, comparing suppliers, estimating order
+    cost with discounts, and knowing when parts will arrive.
+  has_table: true
+  topics:
+    T1: find spare parts in the catalogue by equipment or part number
+    T2: compare suppliers by unit price and lead time for a part
+    T3: estimate the total cost of an order including volume discounts
+    T4: work out the expected arrival date of an order from the lead time and today's date
+  expected: [csv_lookup, calculator, current_date]
+
+- id: 3-port-call-planner
+  brief: >-
+    Help port agents plan a vessel's port call: tell them the weather forecast at the port on the
+    arrival date and how many days remain until arrival.
+  has_table: false
+  topics:
+    T1: weather forecast at the port on the vessel's arrival date
+    T2: number of days remaining until the arrival date
+  expected: [weather, current_date]
+
+- id: 4-TRAP-travel-to-ports
+  brief: >-
+    HR assistant for shore staff who often travel to ports and ships: answer questions about travel
+    allowances, hotel limits and claim deadlines for trips to ports.
+  has_table: false
+  topics:
+    T1: travel allowances for trips to ports
+    T2: hotel spending limits when travelling
+    T3: deadlines for submitting travel claims
+  expected: []
+
+- id: 5-TRAP-weather-delays-in-passing
+  brief: >-
+    Help with ship spares procurement: find parts, compare suppliers and estimate costs. The supplier
+    terms also mention weather-related delivery delays.
+  has_table: true
+  topics:
+    T1: find spare parts in the catalogue by equipment or part number
+    T2: compare supplier prices for a part
+    T3: estimate the total cost of an order including volume discounts
+    T4: what the supplier terms say about weather-related delivery delays
+  expected: [csv_lookup, calculator]
+
+- id: 6-TRAP-dates-in-a-policy-sense
+  brief: >-
+    Answer questions about the leave policy: the effective dates, renewal dates, notice periods and
+    cut-off dates that the policy states.
+  has_table: false
+  topics:
+    T1: the effective date and renewal dates stated in the policy
+    T2: notice periods stated in the policy
+    T3: cut-off dates for applications as stated in the policy
+  expected: []
+
+- id: 7-lookup-only
+  brief: Warehouse staff need to find which equipment a part belongs to and who makes it, from the parts list.
+  has_table: true
+  topics:
+    T1: find the equipment and maker for a part number
+    T2: list the parts that belong to a given piece of equipment
+  expected: [csv_lookup]
+
+- id: 8-calculator-only
+  brief: Answer questions about the fee schedule and work out the total fee for a given amount.
+  has_table: false
+  topics:
+    T1: the rates in the fee schedule
+    T2: calculate the total fee for a given transaction amount including percentage fees
+  expected: [calculator]

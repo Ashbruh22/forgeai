@@ -46,6 +46,18 @@ def split_sentences(text: str) -> list[str]:
     return [s.strip() for s in re.split(r"(?<=[.!?])\s+|\n+", text) if s.strip()]
 
 
+_CLAUSE_SPLIT = re.compile(r",\s+(?:and|but)\s+|;\s+|\s+and also\s+", re.IGNORECASE)
+
+
+def clause_with(sentence: str, pattern: re.Pattern[str]) -> str:
+    """The clause of ``sentence`` that contains ``pattern`` (so a second request in the same
+    sentence is not mistaken for part of the first)."""
+    for clause in _CLAUSE_SPLIT.split(sentence):
+        if pattern.search(clause):
+            return clause.strip()
+    return sentence
+
+
 def detect_live_data_gaps(brief: str) -> list[Gap]:
     gaps: list[Gap] = []
     for sentence in split_sentences(brief):
@@ -55,10 +67,11 @@ def detect_live_data_gaps(brief: str) -> list[Gap]:
                   and any(spec.capability == cap for spec in REGISTRY.values())]
         if served:
             continue  # a registered tool provides this kind of live value
+        clause = clause_with(sentence, LIVE_CUES)
         gaps.append(Gap(
             id=f"G-LIVE-{len(gaps) + 1}", kind="live_data",
-            description=f"The brief asks for current or real-time information, but the documents are a static snapshot and no tool provides it: {sentence!r}",
-            recommended_action="refuse_with_redirect", evidence=[sentence],
+            description=f"The brief asks for current or real-time information, but the documents are a static snapshot and no tool provides it: {clause!r}",
+            recommended_action="refuse_with_redirect", evidence=[clause],
         ))
     return gaps
 

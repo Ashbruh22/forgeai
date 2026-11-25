@@ -1,0 +1,320 @@
+{
+  "topics": [
+    {
+      "topic_id": "T1",
+      "topic": "book loan periods",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "How long can I borrow a book from Brightwater Library?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c0",
+          "span": "Books may be borrowed for 21 days.",
+          "max_dense": 0.8662829399108887,
+          "evidence_dense": 0.8662829399108887,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Books may be borrowed for 21 days.",
+          "context": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may renew an item twice unless another member has reserved it."
+        },
+        {
+          "question": "Can I renew a book, and if so, how many times?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c0",
+          "span": "Members may renew an item twice unless another member has reserved it.",
+          "max_dense": 0.6682596206665039,
+          "evidence_dense": 0.6682596206665039,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Members may renew an item twice unless another member has reserved it.",
+          "context": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may renew an item twice unless another member has reserved it."
+        },
+        {
+          "question": "What happens if another member has reserved the book I want to renew?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c0",
+          "span": "Members may renew an item twice unless another member has reserved it.",
+          "max_dense": 0.6589198708534241,
+          "evidence_dense": 0.6589198708534241,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "another member has reserved it",
+          "context": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may renew an item twice unless another member has reserved it."
+        }
+      ],
+      "evidence": [
+        "library_rules.md#c0"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    },
+    {
+      "topic_id": "T2",
+      "topic": "DVD loan periods",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What do the documents say about DVD loan periods?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c0",
+          "span": "DVDs may be borrowed for 7 days.",
+          "max_dense": 0.7218901515007019,
+          "evidence_dense": 0.7218901515007019,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "DVDs may be borrowed for 7 days.",
+          "context": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may renew an item twice unless another member has reserved it."
+        },
+        {
+          "question": "What are the rules or limits for DVD loan periods?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c0",
+          "span": "DVDs may be borrowed for 7 days.",
+          "max_dense": 0.7678356170654297,
+          "evidence_dense": 0.7678356170654297,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "DVDs may be borrowed for 7 days.",
+          "context": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may renew an item twice unless another member has reserved it."
+        },
+        {
+          "question": "How does DVD loan periods work in practice?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c0",
+          "span": "DVDs may be borrowed for 7 days.",
+          "max_dense": 0.7290803790092468,
+          "evidence_dense": 0.7290803790092468,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "DVDs may be borrowed for 7 days.",
+          "context": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may renew an item twice unless another member has reserved it."
+        }
+      ],
+      "evidence": [
+        "library_rules.md#c0"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    },
+    {
+      "topic_id": "T3",
+      "topic": "overdue fines",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "How much is the fine for returning an overdue book after 21 days?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c1",
+          "span": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item.",
+          "max_dense": 0.7908073663711548,
+          "evidence_dense": 0.7908073663711548,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item.",
+          "context": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item. Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item."
+        },
+        {
+          "question": "What is the maximum fine for returning a DVD that is overdue by more than 7 days?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c1",
+          "span": "Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item.",
+          "max_dense": 0.7412202954292297,
+          "evidence_dense": 0.7412202954292297,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "capped at 15 dollars per item",
+          "context": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item. Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item."
+        },
+        {
+          "question": "If I return a book 30 days late, how much will the fine be?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c1",
+          "span": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item.",
+          "max_dense": 0.7468459010124207,
+          "evidence_dense": 0.7468459010124207,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "0.25 dollars per day, capped at 10 dollars per item",
+          "context": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item. Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item."
+        }
+      ],
+      "evidence": [
+        "library_rules.md#c1"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    },
+    {
+      "topic_id": "T4",
+      "topic": "library card membership",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What is the annual fee for a non-resident library card at Brightwater Library?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c2",
+          "span": "Non-residents pay an annual fee of 30 dollars.",
+          "max_dense": 0.8766826391220093,
+          "evidence_dense": 0.8766826391220093,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Non-residents pay an annual fee of 30 dollars.",
+          "context": "Library cards are free for residents of Brightwater. Non-residents pay an annual fee of 30 dollars. Children under 12 need a parent or guardian to sign the application form."
+        },
+        {
+          "question": "Can a child under 12 years old get a library card, and if so, what is required?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c2",
+          "span": "Children under 12 need a parent or guardian to sign the application form.",
+          "max_dense": 0.7089141607284546,
+          "evidence_dense": 0.7089141607284546,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Children under 12 need a parent or guardian to sign the application form.",
+          "context": "Library cards are free for residents of Brightwater. Non-residents pay an annual fee of 30 dollars. Children under 12 need a parent or guardian to sign the application form."
+        },
+        {
+          "question": "How much does it cost for a non-resident to get a library card at Brightwater?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c2",
+          "span": "Non-residents pay an annual fee of 30 dollars.",
+          "max_dense": 0.8846496343612671,
+          "evidence_dense": 0.8846496343612671,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Non-residents pay an annual fee of 30 dollars.",
+          "context": "Library cards are free for residents of Brightwater. Non-residents pay an annual fee of 30 dollars. Children under 12 need a parent or guardian to sign the application form."
+        }
+      ],
+      "evidence": [
+        "library_rules.md#c2"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    },
+    {
+      "topic_id": "T5",
+      "topic": "opening hours",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What are the opening hours of Brightwater Library on weekdays?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c3",
+          "span": "The library is open Monday to Friday from 9 am to 8 pm",
+          "max_dense": 0.8896604776382446,
+          "evidence_dense": 0.8896604776382446,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Monday to Friday from 9 am to 8 pm",
+          "context": "The library is open Monday to Friday from 9 am to 8 pm and on Saturday from 10 am to 4 pm. It is closed on Sundays and on public holidays."
+        },
+        {
+          "question": "Is the library open on Saturdays, and if so, what are the hours?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c3",
+          "span": "The library is open Monday to Friday from 9 am to 8 pm and on Saturday from 10 am to 4 pm.",
+          "max_dense": 0.780500054359436,
+          "evidence_dense": 0.780500054359436,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "on Saturday from 10 am to 4 pm",
+          "context": "The library is open Monday to Friday from 9 am to 8 pm and on Saturday from 10 am to 4 pm. It is closed on Sundays and on public holidays."
+        },
+        {
+          "question": "What do the documents say about opening hours?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c3",
+          "span": "The library is open Monday to Friday from 9 am to 8 pm and on Saturday from 10 am to 4 pm.",
+          "max_dense": 0.6449531316757202,
+          "evidence_dense": 0.6449531316757202,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Monday to Friday from 9 am to 8 pm and on Saturday from 10 am to 4 pm.",
+          "context": "The library is open Monday to Friday from 9 am to 8 pm and on Saturday from 10 am to 4 pm. It is closed on Sundays and on public holidays."
+        }
+      ],
+      "evidence": [
+        "library_rules.md#c3"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    }
+  ],
+  "calibration": {
+    "min_score": 0.6127,
+    "min_score_bounds": [
+      0.5127,
+      0.7127
+    ],
+    "separable": false,
+    "calibrated": true,
+    "note": "LOW CONFIDENCE: distributions overlap (in-scope p10=0.663, near-miss p90=0.836); threshold set 0.05 below the in-scope p10 to preserve recall; unanswerable near-misses rely on the refusal policy",
+    "in_scope_probe_max_similarity": [
+      0.8663,
+      0.6683,
+      0.6589,
+      0.7219,
+      0.7678,
+      0.7291,
+      0.7908,
+      0.7412,
+      0.7468,
+      0.8767,
+      0.7089,
+      0.8846,
+      0.8897,
+      0.7805,
+      0.645
+    ],
+    "near_miss_probe_max_similarity": [
+      0.7985,
+      0.7768,
+      0.8108,
+      0.7656,
+      0.7926,
+      0.8727,
+      0.7816
+    ]
+  },
+  "check_agreement": {
+    "probes_total": 25,
+    "probes_with_verbatim_span": 20,
+    "both_pass": 18,
+    "code_check_only": 2,
+    "judge_only": 0,
+    "neither": 0,
+    "disagreement_rate": 0.1
+  },
+  "gaps": []
+}

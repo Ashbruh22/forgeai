@@ -1,0 +1,612 @@
+{
+  "topics": [
+    {
+      "topic_id": "T1",
+      "topic": "Are there any fines for overdue books?",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "How much is the fine for overdue books at Brightwater Library?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c1",
+          "span": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item.",
+          "max_dense": 0.8660358190536499,
+          "evidence_dense": 0.8660358190536499,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "0.25 dollars per day, capped at 10 dollars per item",
+          "context": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item. Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item."
+        },
+        {
+          "question": "What is the maximum fine for overdue books at Brightwater Library?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c1",
+          "span": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item.",
+          "max_dense": 0.8548492193222046,
+          "evidence_dense": 0.8548492193222046,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "capped at 10 dollars per item",
+          "context": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item. Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item."
+        },
+        {
+          "question": "Are there different fines for overdue books and DVDs at Brightwater Library?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c1",
+          "span": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item. Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item.",
+          "max_dense": 0.8632887601852417,
+          "evidence_dense": 0.8632887601852417,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item. Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item.",
+          "context": "Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item. Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item."
+        }
+      ],
+      "evidence": [
+        "library_rules.md#c1"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    },
+    {
+      "topic_id": "T2",
+      "topic": "What is the loan period for books?",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "How long can I borrow a book from Brightwater Library?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c0",
+          "span": "Books may be borrowed for 21 days.",
+          "max_dense": 0.8662829399108887,
+          "evidence_dense": 0.8662829399108887,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Books may be borrowed for 21 days.",
+          "context": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may renew an item twice unless another member has reserved it."
+        },
+        {
+          "question": "What is the maximum loan period for books at Brightwater Library?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c0",
+          "span": "Books may be borrowed for 21 days.",
+          "max_dense": 0.824888288974762,
+          "evidence_dense": 0.824888288974762,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Books may be borrowed for 21 days.",
+          "context": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may renew an item twice unless another member has reserved it."
+        },
+        {
+          "question": "Can I renew a book after the initial 21-day loan period?",
+          "supported": false,
+          "chunk_id": "library_rules.md#c0",
+          "span": "Members may renew an item twice unless another member has reserved it.",
+          "max_dense": 0.7251091003417969,
+          "evidence_dense": 0.7251091003417969,
+          "reason": "judge says the span does not answer the question",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": false,
+          "judge_quote": "Members may renew an item twice unless another member has reserved it.",
+          "context": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may renew an item twice unless another member has reserved it."
+        }
+      ],
+      "evidence": [
+        "library_rules.md#c0"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    },
+    {
+      "topic_id": "T3",
+      "topic": "Can I renew my library card?",
+      "verdict": "PARTIAL",
+      "probes": [
+        {
+          "question": "Can I renew my library card if I'm a non-resident?",
+          "supported": false,
+          "chunk_id": "library_rules.md#c0",
+          "span": "Members may renew an item twice unless another member has reserved it.",
+          "max_dense": 0.682974100112915,
+          "evidence_dense": 0.5787155628204346,
+          "reason": "judge says the span does not answer the question",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": false,
+          "judge_quote": "",
+          "context": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may renew an item twice unless another member has reserved it."
+        },
+        {
+          "question": "How many times can I renew a book I borrowed from Brightwater Library?",
+          "supported": true,
+          "chunk_id": "library_rules.md#c0",
+          "span": "Members may renew an item twice unless another member has reserved it.",
+          "max_dense": 0.8398391008377075,
+          "evidence_dense": 0.8398391008377075,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Members may renew an item twice unless another member has reserved it.",
+          "context": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may renew an item twice unless another member has reserved it."
+        },
+        {
+          "question": "Is there a fee to renew a library card?",
+          "supported": false,
+          "chunk_id": "library_rules.md#c2",
+          "span": "Non-residents pay an annual fee of 30 dollars.",
+          "max_dense": 0.7261545658111572,
+          "evidence_dense": 0.7261545658111572,
+          "reason": "judge says the span does not answer the question",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": false,
+          "judge_quote": "",
+          "context": "Library cards are free for residents of Brightwater. Non-residents pay an annual fee of 30 dollars. Children under 12 need a parent or guardian to sign the application form."
+        }
+      ],
+      "evidence": [
+        "library_rules.md#c0"
+      ],
+      "aspects": [
+        {
+          "aspect": "Renewal eligibility for library card members",
+          "verdict": "SUPPORTED",
+          "needs_live_values": false,
+          "probes": [
+            {
+              "question": "Can library card members renew books that are overdue?",
+              "supported": true,
+              "chunk_id": "library_rules.md#c0",
+              "span": "Members may renew an item twice unless another member has reserved it.",
+              "max_dense": 0.6734893321990967,
+              "evidence_dense": 0.6734893321990967,
+              "reason": "verified by both checks",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "Members may renew an item twice unless another member has reserved it.",
+              "context": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may renew an item twice unless another member has reserved it."
+            },
+            {
+              "question": "How many times can a member renew a book before it becomes overdue?",
+              "supported": true,
+              "chunk_id": "library_rules.md#c0",
+              "span": "Members may renew an item twice unless another member has reserved it.",
+              "max_dense": 0.6973742842674255,
+              "evidence_dense": 0.6973742842674255,
+              "reason": "verified by both checks",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "Members may renew an item twice unless another member has reserved it.",
+              "context": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may renew an item twice unless another member has reserved it."
+            },
+            {
+              "question": "Are there any restrictions on renewing items that have been reserved by other members?",
+              "supported": true,
+              "chunk_id": "library_rules.md#c0",
+              "span": "Members may renew an item twice unless another member has reserved it.",
+              "max_dense": 0.6191271543502808,
+              "evidence_dense": 0.6191271543502808,
+              "reason": "verified by both checks",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "unless another member has reserved it",
+              "context": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may renew an item twice unless another member has reserved it."
+            }
+          ],
+          "evidence": [
+            "library_rules.md#c0"
+          ]
+        }
+      ],
+      "effective_verdict": "PARTIAL"
+    },
+    {
+      "topic_id": "T4",
+      "topic": "Is the book 'Pride and Prejudice' available?",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "How many copies of 'Pride and Prejudice' are currently available for loan?",
+          "supported": true,
+          "chunk_id": "books.csv#c2",
+          "span": "copies: 3",
+          "max_dense": 0.7334824800491333,
+          "evidence_dense": 0.7334824800491333,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "copies: 3",
+          "context": "title: Pride and Prejudice | author: Jane Austen | shelf: F-03 | copies: 3 | snapshot_date: 2026-11-20"
+        },
+        {
+          "question": "Is there at least one copy of 'Pride and Prejudice' available on the shelves?",
+          "supported": true,
+          "chunk_id": "books.csv#c2",
+          "span": "copies: 3",
+          "max_dense": 0.7970404624938965,
+          "evidence_dense": 0.7970404624938965,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "copies: 3",
+          "context": "title: Pride and Prejudice | author: Jane Austen | shelf: F-03 | copies: 3 | snapshot_date: 2026-11-20"
+        },
+        {
+          "question": "Where is the book 'Pride and Prejudice' located on the library shelves?",
+          "supported": true,
+          "chunk_id": "books.csv#c2",
+          "span": "shelf: F-03",
+          "max_dense": 0.7559510469436646,
+          "evidence_dense": 0.7559510469436646,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "shelf: F-03",
+          "context": "title: Pride and Prejudice | author: Jane Austen | shelf: F-03 | copies: 3 | snapshot_date: 2026-11-20"
+        }
+      ],
+      "evidence": [
+        "books.csv#c2"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    },
+    {
+      "topic_id": "T5",
+      "topic": "What are the cafe menu options?",
+      "verdict": "UNSUPPORTED",
+      "probes": [
+        {
+          "question": "What are the current menu options available at the Brightwater Library cafe?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.6844480037689209,
+          "evidence_dense": 0.0,
+          "reason": "model found no supporting span",
+          "code_ok": false,
+          "substring_ok": false,
+          "judge_ok": null,
+          "judge_quote": "",
+          "context": ""
+        },
+        {
+          "question": "Can you list the different items served on the Brightwater Library cafe menu?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.6703599691390991,
+          "evidence_dense": 0.0,
+          "reason": "model found no supporting span",
+          "code_ok": false,
+          "substring_ok": false,
+          "judge_ok": null,
+          "judge_quote": "",
+          "context": ""
+        },
+        {
+          "question": "What food and drink options are available at the Brightwater Library cafe?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.6789228916168213,
+          "evidence_dense": 0.0,
+          "reason": "model found no supporting span",
+          "code_ok": false,
+          "substring_ok": false,
+          "judge_ok": null,
+          "judge_quote": "",
+          "context": ""
+        }
+      ],
+      "evidence": [],
+      "aspects": [
+        {
+          "aspect": "What are the current cafe menu items available?",
+          "verdict": "UNSUPPORTED",
+          "needs_live_values": false,
+          "probes": [
+            {
+              "question": "What are the current menu items available at the Brightwater Library cafe?",
+              "supported": false,
+              "chunk_id": "",
+              "span": "",
+              "max_dense": 0.6882503628730774,
+              "evidence_dense": 0.0,
+              "reason": "model found no supporting span",
+              "code_ok": false,
+              "substring_ok": false,
+              "judge_ok": null,
+              "judge_quote": "",
+              "context": ""
+            },
+            {
+              "question": "Can you list the cafe menu items that are currently available for purchase?",
+              "supported": false,
+              "chunk_id": "",
+              "span": "",
+              "max_dense": 0.5944069623947144,
+              "evidence_dense": 0.0,
+              "reason": "model found no supporting span",
+              "code_ok": false,
+              "substring_ok": false,
+              "judge_ok": null,
+              "judge_quote": "",
+              "context": ""
+            },
+            {
+              "question": "What menu items are currently offered at the Brightwater Library cafe?",
+              "supported": false,
+              "chunk_id": "",
+              "span": "",
+              "max_dense": 0.6818910837173462,
+              "evidence_dense": 0.0,
+              "reason": "model found no supporting span",
+              "code_ok": false,
+              "substring_ok": false,
+              "judge_ok": null,
+              "judge_quote": "",
+              "context": ""
+            }
+          ],
+          "evidence": []
+        },
+        {
+          "aspect": "Are there any restrictions or special notes about cafe menu items?",
+          "verdict": "UNSUPPORTED",
+          "needs_live_values": false,
+          "probes": [
+            {
+              "question": "Are there any restrictions on ordering cafe menu items for children under 12?",
+              "supported": false,
+              "chunk_id": "",
+              "span": "",
+              "max_dense": 0.5033208131790161,
+              "evidence_dense": 0.0,
+              "reason": "model found no supporting span",
+              "code_ok": false,
+              "substring_ok": false,
+              "judge_ok": null,
+              "judge_quote": "",
+              "context": ""
+            },
+            {
+              "question": "Can non-residents of Brightwater access the cafe menu items, and are there any special notes?",
+              "supported": false,
+              "chunk_id": "",
+              "span": "",
+              "max_dense": 0.6912505626678467,
+              "evidence_dense": 0.0,
+              "reason": "model found no supporting span",
+              "code_ok": false,
+              "substring_ok": false,
+              "judge_ok": null,
+              "judge_quote": "",
+              "context": ""
+            },
+            {
+              "question": "Are there any special notes or restrictions about cafe menu items for library cardholders?",
+              "supported": false,
+              "chunk_id": "",
+              "span": "",
+              "max_dense": 0.6148379445075989,
+              "evidence_dense": 0.0,
+              "reason": "model found no supporting span",
+              "code_ok": false,
+              "substring_ok": false,
+              "judge_ok": null,
+              "judge_quote": "",
+              "context": ""
+            }
+          ],
+          "evidence": []
+        }
+      ],
+      "effective_verdict": "UNSUPPORTED"
+    },
+    {
+      "topic_id": "T6",
+      "topic": "tell visitors whether a specific book is on the shelf right now",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "Is 'The Art of War' by Sun Tzu currently available on the shelf?",
+          "supported": true,
+          "chunk_id": "books.csv#c7",
+          "span": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "max_dense": 0.824511706829071,
+          "evidence_dense": 0.824511706829071,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "shelf: H-02",
+          "context": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20"
+        },
+        {
+          "question": "How many copies of 'The Origin of Species' by Charles Darwin are on the shelf right now?",
+          "supported": true,
+          "chunk_id": "books.csv#c4",
+          "span": "copies: 2",
+          "max_dense": 0.8413946032524109,
+          "evidence_dense": 0.8413946032524109,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "copies: 2",
+          "context": "title: The Origin of Species | author: Charles Darwin | shelf: N-21 | copies: 2 | snapshot_date: 2026-11-20"
+        },
+        {
+          "question": "What do the documents say about tell visitors whether a specific book is on the shelf right now?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.6821887493133545,
+          "evidence_dense": 0.0,
+          "reason": "model found no supporting span",
+          "code_ok": false,
+          "substring_ok": false,
+          "judge_ok": null,
+          "judge_quote": "",
+          "context": ""
+        }
+      ],
+      "evidence": [
+        "books.csv#c7",
+        "books.csv#c4"
+      ],
+      "aspects": [
+        {
+          "aspect": "Recorded shelf location and copy count",
+          "verdict": "SUPPORTED",
+          "needs_live_values": false,
+          "probes": [
+            {
+              "question": "How many copies of 'Pride and Prejudice' are available on the F-03 shelf?",
+              "supported": true,
+              "chunk_id": "books.csv#c2",
+              "span": "copies: 3",
+              "max_dense": 0.7679527401924133,
+              "evidence_dense": 0.7679527401924133,
+              "reason": "verified by both checks",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "copies: 3",
+              "context": "title: Pride and Prejudice | author: Jane Austen | shelf: F-03 | copies: 3 | snapshot_date: 2026-11-20"
+            },
+            {
+              "question": "What is the shelf location and copy count for 'Walden' in the library's catalog?",
+              "supported": true,
+              "chunk_id": "books.csv#c8",
+              "span": "shelf: N-05 | copies: 1",
+              "max_dense": 0.7652940154075623,
+              "evidence_dense": 0.7652940154075623,
+              "reason": "verified by both checks",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "shelf: N-05 | copies: 1",
+              "context": "title: Walden | author: Henry David Thoreau | shelf: N-05 | copies: 1 | snapshot_date: 2026-11-20"
+            },
+            {
+              "question": "Are there any copies of 'Pride and Prejudice' available on the F-03 shelf as of November 20, 2026?",
+              "supported": false,
+              "chunk_id": "books.csv#c2",
+              "span": "shelf: F-03",
+              "max_dense": 0.796049952507019,
+              "evidence_dense": 0.796049952507019,
+              "reason": "judge's supporting quote is not a verbatim part of the span",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": false,
+              "judge_quote": "copies: 3 | snapshot_date: 2026-11-20",
+              "context": "title: Pride and Prejudice | author: Jane Austen | shelf: F-03 | copies: 3 | snapshot_date: 2026-11-20"
+            }
+          ],
+          "evidence": [
+            "books.csv#c2",
+            "books.csv#c8"
+          ]
+        },
+        {
+          "aspect": "Current availability of the book on the shelf",
+          "verdict": null,
+          "needs_live_values": true,
+          "probes": [],
+          "evidence": []
+        }
+      ],
+      "effective_verdict": "PARTIAL"
+    }
+  ],
+  "calibration": {
+    "min_score": 0.706,
+    "min_score_bounds": [
+      0.606,
+      0.806
+    ],
+    "separable": false,
+    "calibrated": true,
+    "note": "LOW CONFIDENCE: distributions overlap (in-scope p10=0.756, near-miss p90=0.807); threshold set 0.05 below the in-scope p10 to preserve recall; unanswerable near-misses rely on the refusal policy",
+    "in_scope_probe_max_similarity": [
+      0.866,
+      0.8548,
+      0.8633,
+      0.8663,
+      0.8249,
+      0.8398,
+      0.7335,
+      0.797,
+      0.756,
+      0.8245,
+      0.8414
+    ],
+    "near_miss_probe_max_similarity": [
+      0.6972,
+      0.7639,
+      0.8006,
+      0.6947,
+      0.6844,
+      0.6704,
+      0.6789,
+      0.8208
+    ]
+  },
+  "check_agreement": {
+    "probes_total": 42,
+    "probes_with_verbatim_span": 27,
+    "both_pass": 21,
+    "code_check_only": 5,
+    "judge_only": 0,
+    "neither": 1,
+    "disagreement_rate": 0.185
+  },
+  "gaps": [
+    {
+      "id": "G-T5",
+      "kind": "unsupported_topic",
+      "description": "The brief asks for 'What are the cafe menu options?', but none of the 3 probe questions could be answered from the documents.",
+      "recommended_action": "refuse_with_redirect",
+      "topic_id": "T5",
+      "aspect": null,
+      "evidence": [
+        "probe: What are the current menu options available at the Brightwater Library cafe? (model found no supporting span)",
+        "probe: Can you list the different items served on the Brightwater Library cafe menu? (model found no supporting span)",
+        "probe: What food and drink options are available at the Brightwater Library cafe? (model found no supporting span)"
+      ],
+      "redirect": "I do not have information on this. Please contact the relevant team directly."
+    },
+    {
+      "id": "G-LIVE-1",
+      "kind": "live_data",
+      "description": "The brief asks for current or real-time information, but the documents are a static snapshot and no tool provides it: 'It should also tell visitors whether a specific book is on the shelf right now' The recorded version (Recorded shelf location and copy count) IS answerable from the documents as of 2026-11-20; only the live value is refused.",
+      "recommended_action": "refuse_with_redirect",
+      "topic_id": "T6",
+      "aspect": "Current availability of the book on the shelf",
+      "evidence": [
+        "It should also tell visitors whether a specific book is on the shelf right now"
+      ],
+      "redirect": "I do not have information on this. Please contact the relevant team directly."
+    }
+  ]
+}

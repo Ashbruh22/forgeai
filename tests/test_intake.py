@@ -20,7 +20,7 @@ from forgeai.intake.structural import (
 )
 from forgeai.llm import LLMClient, set_client
 from tests.helpers import FakeEmbedder, SchemaRouter
-from tests.test_guard import honest_support, probes_for
+from tests.test_guard import agreeable_judge, honest_support, probes_for
 
 SMOKE_DOCS = Path(__file__).parents[1] / "data" / "_smoke" / "docs"
 BRIEF = "Help library visitors with lending rules, fines and room hire."
@@ -53,6 +53,8 @@ def handlers(draft: RequirementsDraft) -> dict:
         "AnswerItems": lambda u: {"values": ["item one", "item two"]},
         "Probes": probes_for,
         "Support": honest_support,
+        "JudgeSupport": agreeable_judge,
+        "TopicSplit": lambda u: {"aspects": []},
     }
 
 
@@ -228,3 +230,12 @@ def test_sentences_and_inverted_rules_are_not_accepted_as_topic_items() -> None:
         "one two three four five six seven eight nine ten eleven twelve thirteen",
     ])
     assert cleaned == ["legal advice", "personal data"]
+
+
+def test_live_gap_evidence_is_the_clause_not_the_whole_sentence() -> None:
+    """Regression: a second request in the same sentence (the cafe) got tied to the live gap."""
+    brief = ("It should also tell visitors whether a specific book is on the shelf right now, "
+             "and answer questions about the cafe menu.")
+    [gap] = detect_live_data_gaps(brief)
+    assert gap.evidence == ["It should also tell visitors whether a specific book is on the shelf right now"]
+    assert "cafe" not in gap.evidence[0]

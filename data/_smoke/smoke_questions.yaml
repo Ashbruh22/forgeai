@@ -1,0 +1,8 @@
+- kind: in-scope
+  question: How many days can I borrow a book for, and what is the fine if I return it late?
+- kind: gap
+  question: Is Moby Dick on the shelf right now?
+- kind: out-of-scope
+  question: Who won the football world cup in 2018?
+- kind: snapshot
+  question: Which shelf is Moby Dick listed on in the catalogue?

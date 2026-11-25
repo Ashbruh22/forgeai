@@ -1,0 +1,136 @@
+[
+  {
+    "kind": "in-scope",
+    "question": "What is the unit price and lead time of part HD-1123 from supplier S01, and what would 12 units cost after the supplier's volume discount?",
+    "answer": {
+      "status": "answered",
+      "answer": "The unit price of part HD-1123 from supplier S01 is $420.00, and the lead time is 21 days. For 12 units, the total cost after applying the volume discount would be $4,536.00.",
+      "citations": [
+        {
+          "doc": "spares_catalogue.csv",
+          "chunk_id": "spares_catalogue.csv#c91",
+          "quote": "part_no: HD-1123 | description: Piston ring set (standard) | equipment: Main Engine | maker: Halvorsen Diesel | supplier_id: S01 | unit_price_usd: 420.00 | moq: 4 | lead_time_days: 21 | stock_port: Singapore | snapshot_date: 2026-11-01"
+        }
+      ],
+      "tool_calls": [
+        {
+          "tool": "csv_lookup",
+          "args": {
+            "file": "spares_catalogue.csv",
+            "filters": {
+              "part_no": "HD-1123",
+              "supplier_id": "S01"
+            },
+            "columns": [
+              "unit_price_usd",
+              "lead_time_days"
+            ]
+          },
+          "result": "1 matching rows\nunit_price_usd: 420.00 | lead_time_days: 21"
+        }
+      ],
+      "clarifying_question": null
+    },
+    "contract_issues": [],
+    "retrieved": [
+      "spares_catalogue.csv#c91",
+      "spares_catalogue.csv#c93",
+      "spares_catalogue.csv#c92",
+      "spares_catalogue.csv#c97",
+      "spares_catalogue.csv#c99",
+      "spares_catalogue.csv#c102"
+    ],
+    "latency_ms": 17550
+  },
+  {
+    "kind": "gap",
+    "question": "How many units of HD-1123 are in stock right now at Singapore?",
+    "answer": {
+      "status": "refused",
+      "answer": "I do not have information on this. Please contact the relevant team directly.",
+      "citations": [],
+      "tool_calls": [
+        {
+          "tool": "csv_lookup",
+          "args": {
+            "file": "spares_catalogue.csv",
+            "filters": {
+              "part_no": "HD-1123",
+              "stock_port": "Singapore"
+            },
+            "columns": [
+              "part_no",
+              "stock_port"
+            ]
+          },
+          "result": "2 matching rows\npart_no: HD-1123 | stock_port: Singapore\npart_no: HD-1123 | stock_port: Singapore"
+        }
+      ],
+      "clarifying_question": null
+    },
+    "contract_issues": [],
+    "retrieved": [
+      "spares_catalogue.csv#c91",
+      "spares_catalogue.csv#c93",
+      "spares_catalogue.csv#c102",
+      "spares_catalogue.csv#c195"
+    ],
+    "latency_ms": 5056
+  },
+  {
+    "kind": "out-of-scope",
+    "question": "Can you give me a good recipe for pasta carbonara?",
+    "answer": {
+      "status": "refused",
+      "answer": "I do not have information on this. Please contact the relevant team directly.",
+      "citations": [],
+      "tool_calls": [],
+      "clarifying_question": null
+    },
+    "contract_issues": [],
+    "retrieved": [],
+    "latency_ms": 1311
+  },
+  {
+    "kind": "snapshot",
+    "question": "Which port holds part HD-1123 from supplier S01 in the catalogue?",
+    "answer": {
+      "status": "answered",
+      "answer": "The port that holds part HD-1123 from supplier S01 in the catalogue is Singapore.",
+      "citations": [
+        {
+          "doc": "spares_catalogue.csv",
+          "chunk_id": "spares_catalogue.csv#c91",
+          "quote": "part_no: HD-1123 | description: Piston ring set (standard) | equipment: Main Engine | maker: Halvorsen Diesel | supplier_id: S01 | unit_price_usd: 420.00 | moq: 4 | lead_time_days: 21 | stock_port: Singapore | snapshot_date: 2026-11-01"
+        }
+      ],
+      "tool_calls": [
+        {
+          "tool": "csv_lookup",
+          "args": {
+            "file": "spares_catalogue.csv",
+            "filters": {
+              "part_no": "HD-1123",
+              "supplier_id": "S01"
+            },
+            "columns": [
+              "stock_port"
+            ]
+          },
+          "result": "1 matching rows\nstock_port: Singapore"
+        }
+      ],
+      "clarifying_question": null
+    },
+    "contract_issues": [],
+    "retrieved": [
+      "spares_catalogue.csv#c91",
+      "spares_catalogue.csv#c93",
+      "spares_catalogue.csv#c92",
+      "spares_catalogue.csv#c102",
+      "spares_catalogue.csv#c109",
+      "spares_catalogue.csv#c111"
+    ],
+    "latency_ms": 6509
+  }
+]

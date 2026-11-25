@@ -1,0 +1,26 @@
+[
+  {
+    "id": "Q1",
+    "field": "scope_out",
+    "text": "What topics related to ship spares or port inventory should the assistant avoid, even if they seem connected to the documents?",
+    "kind": "interview"
+  },
+  {
+    "id": "Q2",
+    "field": "must_refuse",
+    "text": "What kinds of questions must the assistant always refuse to answer regarding ship spares and supplier information?",
+    "kind": "interview"
+  },
+  {
+    "id": "Q3",
+    "field": "tone",
+    "text": "What tone should the assistant use when providing information about ship spares, supplier comparisons, and port inventory?",
+    "kind": "interview"
+  },
+  {
+    "id": "Q4",
+    "field": "gaps",
+    "text": "The documents and tools cannot support these requests: Current stock availability at port. Should the assistant refuse them with a redirect, or will you add documents? Reply 'refuse' to have the assistant refuse and redirect, or 'documents' if you will add documents.",
+    "kind": "gap"
+  }
+]

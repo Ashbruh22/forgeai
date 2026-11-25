@@ -115,3 +115,39 @@ def test_zero_questions_when_the_brief_settles_everything(setup) -> None:
     asked = questions(out)
     assert asked == [], f"asked {len(asked)} question(s): {[q['text'] for q in asked]}"
     assert not any(a.source.startswith("ASSUMPTION (non-interactive") for a in req.assumptions)
+
+
+# ---- P3 corrections (precedence, split, second check), added after the P3 review --------------
+
+def test_demo_a_keeps_misconduct_reporting_in_scope(demo_a) -> None:
+    """Assumption precedence: a self-answered exclusion may not remove what the corpus supports."""
+    req, _ = demo_a
+    excluded = [i.lower() for i in req.scope.out] + [t.topic.lower() for t in req.must_refuse_topics]
+    assert not any("misconduct" in item for item in excluded), excluded
+    assert any(r.item.lower() == "misconduct reporting" and r.conflict_with == "corpus"
+               for r in req.assumptions_rejected) or not any("misconduct" in a.value.lower() for a in req.assumptions)
+
+
+def test_demo_b_splits_stock_into_a_snapshot_part_and_a_live_gap(demo_b) -> None:
+    req, _ = demo_b
+    live = next(g for g in req.gaps if g.kind == "live_data")
+    topic = next(t for t in req.must_answer_topics if t.id == live.topic_id)
+    assert topic.supported_aspects, "the recorded (snapshot) part must stay answerable"
+    assert topic.snapshot_as_of == "2026-11-01"
+    assert "IS answerable" in live.description and live.redirect
+
+
+def test_library_fixture_splits_shelf_location_from_live_availability(setup) -> None:
+    run, _ = setup
+    req, _ = run("library_split", DATA / "_smoke" / "brief_gap.txt", DATA / "_smoke" / "docs")
+    live = next(g for g in req.gaps if g.kind == "live_data")
+    topic = next(t for t in req.must_answer_topics if t.id == live.topic_id)
+    assert topic.supported_aspects and topic.snapshot_as_of == "2026-11-20", topic
+    assert "on the shelf right now" in live.evidence[0]
+
+
+def test_both_support_checks_are_reported(demo_a) -> None:
+    _, out = demo_a
+    agreement = json.loads((out / "01_guard" / "coverage.json").read_text(encoding="utf-8"))["check_agreement"]
+    assert {"both_pass", "code_check_only", "judge_only", "neither", "disagreement_rate"} <= set(agreement)
+    assert agreement["probes_with_verbatim_span"] > 0

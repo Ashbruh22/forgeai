@@ -1,0 +1,429 @@
+{
+  "topics": [
+    {
+      "topic_id": "T1",
+      "topic": "Annual leave entitlements",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "How many annual leave days does a full-time shore employee accrue each month?",
+          "supported": true,
+          "chunk_id": "leave_policy.pdf#c3",
+          "span": "This entitlement accrues at a rate of 2 working days per month.",
+          "max_dense": 0.8749951124191284,
+          "evidence_dense": 0.8749951124191284,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "2 working days per month.",
+          "context": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year. This entitlement accrues at a rate of 2 working days per month. 2.2 Leave accrual is automatically tracked by the human resources department and recorded in the employee's personal leave account. This account is updated monthly in accordance with the accrual rate. 2.3 Leave may be taken in one continuous block or in multiple blocks, provided that the total number of working days does not exceed the annual entitlement. Any unused leave may be carried forward to the next calendar year. 2.4 The annual leave entitlement is subject to the terms of the employee's employment contract and any applicable company policies."
+        },
+        {
+          "question": "What is the maximum number of unused annual leave days that can be carried over to the next year?",
+          "supported": true,
+          "chunk_id": "leave_policy.pdf#c4",
+          "span": "Up to 5 working days of unused annual leave can be carried over and expire on 31 March.",
+          "max_dense": 0.8270350694656372,
+          "evidence_dense": 0.8270350694656372,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Up to 5 working days of unused annual leave can be carried over and expire on 31 March.",
+          "context": "3.1 Unused annual leave may be carried over to the next year, subject to the limits outlined in this section. Up to 5 working days of unused annual leave can be carried over and expire on 31 March. 3.2 Employees must submit a written request to their line manager by 31 January to carry over unused annual leave. The request should include the number of days they wish to carry over and the reason for the carry-over. 3.3 If approved, the carried-over leave will be added to the employee\u2019s annual leave entitlement for the following year. The leave must be taken within the period specified in the leave schedule. Calder Bay Ship Management Ltd: Leave and Holiday Policy Page 2 3.4 Any unused carry-over leave not taken by 31 March will be forfeited and cannot be reclaimed in subsequent years. This applies to all employees regardless of tenure or position. 3.5 Employees are advised to consult their line manager early to ensure compliance with this policy and to avoid the loss of accrued leave."
+        },
+        {
+          "question": "By what date must an employee submit a written request to carry over unused annual leave?",
+          "supported": true,
+          "chunk_id": "leave_policy.pdf#c4",
+          "span": "Employees must submit a written request to their line manager by 31 January to carry over unused annual leave.",
+          "max_dense": 0.8096879720687866,
+          "evidence_dense": 0.8096879720687866,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "by 31 January",
+          "context": "3.1 Unused annual leave may be carried over to the next year, subject to the limits outlined in this section. Up to 5 working days of unused annual leave can be carried over and expire on 31 March. 3.2 Employees must submit a written request to their line manager by 31 January to carry over unused annual leave. The request should include the number of days they wish to carry over and the reason for the carry-over. 3.3 If approved, the carried-over leave will be added to the employee\u2019s annual leave entitlement for the following year. The leave must be taken within the period specified in the leave schedule. Calder Bay Ship Management Ltd: Leave and Holiday Policy Page 2 3.4 Any unused carry-over leave not taken by 31 March will be forfeited and cannot be reclaimed in subsequent years. This applies to all employees regardless of tenure or position. 3.5 Employees are advised to consult their line manager early to ensure compliance with this policy and to avoid the loss of accrued leave."
+        }
+      ],
+      "evidence": [
+        "leave_policy.pdf#c3",
+        "leave_policy.pdf#c4"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    },
+    {
+      "topic_id": "T2",
+      "topic": "Travel expense reimbursement procedures",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What is the maximum percentage of estimated costs that can be covered by a travel advance according to the policy?",
+          "supported": true,
+          "chunk_id": "travel_expense_policy.pdf#c10",
+          "span": "The advance amount is set at 80% of the estimated costs for the trip.",
+          "max_dense": 0.7419701814651489,
+          "evidence_dense": 0.7419701814651489,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "80%",
+          "context": "9.1 Travel advances are provided to employees for anticipated expenses incurred during business travel. 9.2 The advance amount is set at 80% of the estimated costs for the trip. 9.3 Employees must submit a detailed travel itinerary and expense forecast prior to departure to ensure accurate advance calculation. 9.4 Once approved, the advance is issued via a company-issued credit card or direct deposit to the employee\u2019s personal account. 9.5 Employees are responsible for maintaining receipts and documentation for all expenses incurred during the trip. Calder Bay Ship Management Ltd: Travel and Expense Reimbursement Policy Page 4 9.6 Reimbursement is processed after the trip concludes, based on actual expenses not exceeding the approved advance amount."
+        },
+        {
+          "question": "How many days does an employee have to submit an expense claim after returning from a business trip?",
+          "supported": true,
+          "chunk_id": "travel_expense_policy.pdf#c8",
+          "span": "All expense claims must be submitted within 30 days of returning from the business trip.",
+          "max_dense": 0.8330376148223877,
+          "evidence_dense": 0.8330376148223877,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "within 30 days of returning from the business trip.",
+          "context": "7.1 All expense claims must be submitted within 30 days of returning from the business trip. Claims submitted after this period will not be eligible for reimbursement unless exceptional circumstances are Calder Bay Ship Management Ltd: Travel and Expense Reimbursement Policy Page 3 documented and approved by the Head of Finance. 7.2 Employees are required to provide original receipts or digital equivalents for all expenses, with a minimum value of USD 25, to support their claims. Receipts must include the date, location, and description of the expense. 7.3 Expense claims must be submitted through the company\u2019s internal reimbursement portal within 14 days of the trip\u2019s conclusion. Late submissions may result in delays or denial of reimbursement. 7.4 Reimbursements for approved claims will be issued via the company\u2019s internal payment system. Employees must ensure their contact details are up to date in the system to receive payments promptly."
+        },
+        {
+          "question": "What documents must an employee submit prior to departure to ensure an accurate travel advance calculation?",
+          "supported": true,
+          "chunk_id": "travel_expense_policy.pdf#c10",
+          "span": "Employees must submit a detailed travel itinerary and expense forecast prior to departure to ensure accurate advance calculation.",
+          "max_dense": 0.7693804502487183,
+          "evidence_dense": 0.7693804502487183,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "a detailed travel itinerary and expense forecast",
+          "context": "9.1 Travel advances are provided to employees for anticipated expenses incurred during business travel. 9.2 The advance amount is set at 80% of the estimated costs for the trip. 9.3 Employees must submit a detailed travel itinerary and expense forecast prior to departure to ensure accurate advance calculation. 9.4 Once approved, the advance is issued via a company-issued credit card or direct deposit to the employee\u2019s personal account. 9.5 Employees are responsible for maintaining receipts and documentation for all expenses incurred during the trip. Calder Bay Ship Management Ltd: Travel and Expense Reimbursement Policy Page 4 9.6 Reimbursement is processed after the trip concludes, based on actual expenses not exceeding the approved advance amount."
+        }
+      ],
+      "evidence": [
+        "travel_expense_policy.pdf#c10",
+        "travel_expense_policy.pdf#c8"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    },
+    {
+      "topic_id": "T3",
+      "topic": "Code of conduct rules",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What are the expectations for professional behavior outlined in the Code of Conduct?",
+          "supported": true,
+          "chunk_id": "code_of_conduct_it_policy.pdf#c3",
+          "span": "All employees are expected to conduct themselves with professionalism, integrity, and respect in all interactions with colleagues, clients, and third parties at all times.",
+          "max_dense": 0.7409782409667969,
+          "evidence_dense": 0.7409782409667969,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "All employees are expected to conduct themselves with professionalism, integrity, and respect in all interactions with colleagues, clients, and third parties at all times.",
+          "context": "2.1 All employees are expected to conduct themselves with professionalism, integrity, and respect in all interactions with colleagues, clients, and third parties at all times. 2.2 Employees must treat all individuals with dignity and fairness, regardless of their position, background, or personal circumstances, and must not engage in any form of harassment, bullying, or discriminatory behaviour. 2.3 In the workplace, employees are required to maintain a safe and respectful environment by adhering to company policies, reporting any incidents of misconduct, and cooperating fully with investigations. 2.4 All employees must respect the confidentiality of company information and the privacy of colleagues, and must not engage in any activity that could compromise trust or create a hostile work environment. 2.5 Supervisors and managers are responsible for setting a positive example of professional behaviour, addressing any concerns promptly, and ensuring that all employees understand and comply with the expectations outlined in this policy. Calder Bay Ship Management Ltd: Code of Conduct and IT Acceptable Use Policy Page 2 2.6 Employees are required to report any incidents of harassment, discrimination, or unethical behaviour to their immediate supervisor or the designated compliance officer without fear of retaliation or reprisal."
+        },
+        {
+          "question": "What is the designated internal channel for reporting misconduct according to the Code of Conduct?",
+          "supported": true,
+          "chunk_id": "code_of_conduct_it_policy.pdf#c6",
+          "span": "5.1 All reports of misconduct must be submitted through the Ethics Hotline, which is the designated internal channel for such concerns.",
+          "max_dense": 0.7105785608291626,
+          "evidence_dense": 0.7105785608291626,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "the Ethics Hotline, which is the designated internal channel for such concerns.",
+          "context": "5.1 All reports of misconduct must be submitted through the Ethics Hotline, which is the designated internal channel for such concerns. 5.2 The Ethics Hotline will acknowledge receipt of all reports within 5 working days, regardless of the nature or severity of the concern. 5.3 Employees are encouraged to report any observed or suspected misconduct, including but not limited to unethical behavior, safety violations, or policy breaches. 5.4 All reports submitted through the Ethics Hotline are treated with strict confidentiality and are investigated promptly by the designated compliance officers. Calder Bay Ship Management Ltd: Code of Conduct and IT Acceptable Use Policy Page 3 5.5 Employees who report misconduct in good faith are protected from retaliation and may request a formal review of their case through the compliance officers. 5.6 The compliance officers are responsible for ensuring that all reports are acknowledged, documented, and addressed in accordance with the company's policies and procedures."
+        },
+        {
+          "question": "What do the documents say about Code of conduct rules?",
+          "supported": true,
+          "chunk_id": "code_of_conduct_it_policy.pdf#c3",
+          "span": "All employees are expected to conduct themselves with professionalism, integrity, and respect in all interactions with colleagues, clients, and third parties at all times.",
+          "max_dense": 0.693025529384613,
+          "evidence_dense": 0.6886342167854309,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "All employees are expected to conduct themselves with professionalism, integrity, and respect in all interactions with colleagues, clients, and third parties at all times.",
+          "context": "2.1 All employees are expected to conduct themselves with professionalism, integrity, and respect in all interactions with colleagues, clients, and third parties at all times. 2.2 Employees must treat all individuals with dignity and fairness, regardless of their position, background, or personal circumstances, and must not engage in any form of harassment, bullying, or discriminatory behaviour. 2.3 In the workplace, employees are required to maintain a safe and respectful environment by adhering to company policies, reporting any incidents of misconduct, and cooperating fully with investigations. 2.4 All employees must respect the confidentiality of company information and the privacy of colleagues, and must not engage in any activity that could compromise trust or create a hostile work environment. 2.5 Supervisors and managers are responsible for setting a positive example of professional behaviour, addressing any concerns promptly, and ensuring that all employees understand and comply with the expectations outlined in this policy. Calder Bay Ship Management Ltd: Code of Conduct and IT Acceptable Use Policy Page 2 2.6 Employees are required to report any incidents of harassment, discrimination, or unethical behaviour to their immediate supervisor or the designated compliance officer without fear of retaliation or reprisal."
+        }
+      ],
+      "evidence": [
+        "code_of_conduct_it_policy.pdf#c3",
+        "code_of_conduct_it_policy.pdf#c6"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    },
+    {
+      "topic_id": "T4",
+      "topic": "Salary slip interpretation",
+      "verdict": "UNSUPPORTED",
+      "probes": [
+        {
+          "question": "How many annual leave days does a full-time shore employee accrue per month according to the salary slip?",
+          "supported": false,
+          "chunk_id": "leave_policy.pdf#c3",
+          "span": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year. This entitlement accrues at a rate of 2 working days per month.",
+          "max_dense": 0.8573830723762512,
+          "evidence_dense": 0.8573830723762512,
+          "reason": "span shares no content term with the topic",
+          "code_ok": false,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "This entitlement accrues at a rate of 2 working days per month.",
+          "context": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year. This entitlement accrues at a rate of 2 working days per month. 2.2 Leave accrual is automatically tracked by the human resources department and recorded in the employee's personal leave account. This account is updated monthly in accordance with the accrual rate. 2.3 Leave may be taken in one continuous block or in multiple blocks, provided that the total number of working days does not exceed the annual entitlement. Any unused leave may be carried forward to the next calendar year. 2.4 The annual leave entitlement is subject to the terms of the employee's employment contract and any applicable company policies."
+        },
+        {
+          "question": "Where is the information about an employee's leave accrual recorded, as mentioned in the salary slip policy?",
+          "supported": false,
+          "chunk_id": "leave_policy.pdf#c3",
+          "span": "Leave accrual is automatically tracked by the human resources department and recorded in the employee's personal leave account.",
+          "max_dense": 0.6932311654090881,
+          "evidence_dense": 0.6932311654090881,
+          "reason": "span shares no content term with the topic",
+          "code_ok": false,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Leave accrual is automatically tracked by the human resources department and recorded in the employee's personal leave account.",
+          "context": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year. This entitlement accrues at a rate of 2 working days per month. 2.2 Leave accrual is automatically tracked by the human resources department and recorded in the employee's personal leave account. This account is updated monthly in accordance with the accrual rate. 2.3 Leave may be taken in one continuous block or in multiple blocks, provided that the total number of working days does not exceed the annual entitlement. Any unused leave may be carried forward to the next calendar year. 2.4 The annual leave entitlement is subject to the terms of the employee's employment contract and any applicable company policies."
+        },
+        {
+          "question": "What do the documents say about Salary slip interpretation?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.5973042249679565,
+          "evidence_dense": 0.0,
+          "reason": "model found no supporting span",
+          "code_ok": false,
+          "substring_ok": false,
+          "judge_ok": null,
+          "judge_quote": "",
+          "context": ""
+        }
+      ],
+      "evidence": [],
+      "aspects": [
+        {
+          "aspect": "Understanding annual leave accrual rates on salary slips",
+          "verdict": "UNSUPPORTED",
+          "needs_live_values": false,
+          "probes": [
+            {
+              "question": "How many annual leave days does a full-time shore employee accrue each month according to their salary slip?",
+              "supported": false,
+              "chunk_id": "leave_policy.pdf#c3",
+              "span": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year. This entitlement accrues at a rate of 2 working days per month.",
+              "max_dense": 0.8576726317405701,
+              "evidence_dense": 0.8576726317405701,
+              "reason": "span shares no content term with the topic",
+              "code_ok": false,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "This entitlement accrues at a rate of 2 working days per month.",
+              "context": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year. This entitlement accrues at a rate of 2 working days per month. 2.2 Leave accrual is automatically tracked by the human resources department and recorded in the employee's personal leave account. This account is updated monthly in accordance with the accrual rate. 2.3 Leave may be taken in one continuous block or in multiple blocks, provided that the total number of working days does not exceed the annual entitlement. Any unused leave may be carried forward to the next calendar year. 2.4 The annual leave entitlement is subject to the terms of the employee's employment contract and any applicable company policies."
+            },
+            {
+              "question": "What is the maximum number of unused annual leave days that can be carried over to the next year?",
+              "supported": false,
+              "chunk_id": "leave_policy.pdf#c4",
+              "span": "Up to 5 working days of unused annual leave can be carried over and expire on 31 March.",
+              "max_dense": 0.8270350694656372,
+              "evidence_dense": 0.8270350694656372,
+              "reason": "span shares no content term with the topic",
+              "code_ok": false,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "Up to 5 working days of unused annual leave can be carried over and expire on 31 March.",
+              "context": "3.1 Unused annual leave may be carried over to the next year, subject to the limits outlined in this section. Up to 5 working days of unused annual leave can be carried over and expire on 31 March. 3.2 Employees must submit a written request to their line manager by 31 January to carry over unused annual leave. The request should include the number of days they wish to carry over and the reason for the carry-over. 3.3 If approved, the carried-over leave will be added to the employee\u2019s annual leave entitlement for the following year. The leave must be taken within the period specified in the leave schedule. Calder Bay Ship Management Ltd: Leave and Holiday Policy Page 2 3.4 Any unused carry-over leave not taken by 31 March will be forfeited and cannot be reclaimed in subsequent years. This applies to all employees regardless of tenure or position. 3.5 Employees are advised to consult their line manager early to ensure compliance with this policy and to avoid the loss of accrued leave."
+            },
+            {
+              "question": "At what rate does annual leave accrue for full-time shore employees as shown on their salary slips?",
+              "supported": false,
+              "chunk_id": "leave_policy.pdf#c3",
+              "span": "This entitlement accrues at a rate of 2 working days per month.",
+              "max_dense": 0.8274556994438171,
+              "evidence_dense": 0.8274556994438171,
+              "reason": "span shares no content term with the topic",
+              "code_ok": false,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "This entitlement accrues at a rate of 2 working days per month.",
+              "context": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year. This entitlement accrues at a rate of 2 working days per month. 2.2 Leave accrual is automatically tracked by the human resources department and recorded in the employee's personal leave account. This account is updated monthly in accordance with the accrual rate. 2.3 Leave may be taken in one continuous block or in multiple blocks, provided that the total number of working days does not exceed the annual entitlement. Any unused leave may be carried forward to the next calendar year. 2.4 The annual leave entitlement is subject to the terms of the employee's employment contract and any applicable company policies."
+            }
+          ],
+          "evidence": []
+        },
+        {
+          "aspect": "Identifying compliance-related disclosures on salary slips",
+          "verdict": "UNSUPPORTED",
+          "needs_live_values": false,
+          "probes": [
+            {
+              "question": "What is the minimum value of a gift that requires detailed disclosure to the Compliance department on a salary slip?",
+              "supported": false,
+              "chunk_id": "code_of_conduct_it_policy.pdf#c4",
+              "span": "Employees must provide detailed information about the source, value, and nature of any gift exceeding USD 50, including any associated documentation or correspondence.",
+              "max_dense": 0.7161411046981812,
+              "evidence_dense": 0.7161411046981812,
+              "reason": "span shares no content term with the topic",
+              "code_ok": false,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "exceeding USD 50",
+              "context": "3.1 Cash gifts are never accepted under any circumstances, and employees must refuse any offer to provide cash gifts directly or indirectly. 3.2 Employees must provide detailed information about the source, value, and nature of any gift exceeding USD 50, including any associated documentation or correspondence. 3.3 The Compliance department will review all declared gifts and determine if they pose a conflict of interest or violate company policy. 3.4 Employees must avoid any situation where personal interests could interfere with their professional duties, including but not limited to accepting gifts that may influence business decisions. 3.5 In cases where a gift is accepted in good faith and below USD 50, the employee must still disclose it to their immediate supervisor for record-keeping purposes."
+            },
+            {
+              "question": "Are employees required to report any cash gifts received on their salary slips, and if so, what information must be provided?",
+              "supported": false,
+              "chunk_id": "code_of_conduct_it_policy.pdf#c4",
+              "span": "Employees must provide detailed information about the source, value, and nature of any gift exceeding USD 50, including any associated documentation or correspondence.",
+              "max_dense": 0.7414228320121765,
+              "evidence_dense": 0.7414228320121765,
+              "reason": "span shares no content term with the topic",
+              "code_ok": false,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "Employees must provide detailed information about the source, value, and nature of any gift exceeding USD 50, including any associated documentation or correspondence.",
+              "context": "3.1 Cash gifts are never accepted under any circumstances, and employees must refuse any offer to provide cash gifts directly or indirectly. 3.2 Employees must provide detailed information about the source, value, and nature of any gift exceeding USD 50, including any associated documentation or correspondence. 3.3 The Compliance department will review all declared gifts and determine if they pose a conflict of interest or violate company policy. 3.4 Employees must avoid any situation where personal interests could interfere with their professional duties, including but not limited to accepting gifts that may influence business decisions. 3.5 In cases where a gift is accepted in good faith and below USD 50, the employee must still disclose it to their immediate supervisor for record-keeping purposes."
+            },
+            {
+              "question": "What is the designated internal channel for reporting misconduct, and how is it related to compliance disclosures on salary slips?",
+              "supported": false,
+              "chunk_id": "code_of_conduct_it_policy.pdf#c6",
+              "span": "5.1 All reports of misconduct must be submitted through the Ethics Hotline, which is the designated internal channel for such concerns.",
+              "max_dense": 0.6742244958877563,
+              "evidence_dense": 0.6742244958877563,
+              "reason": "span shares no content term with the topic",
+              "code_ok": false,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "5.1 All reports of misconduct must be submitted through the Ethics Hotline, which is the designated internal channel for such concerns.",
+              "context": "5.1 All reports of misconduct must be submitted through the Ethics Hotline, which is the designated internal channel for such concerns. 5.2 The Ethics Hotline will acknowledge receipt of all reports within 5 working days, regardless of the nature or severity of the concern. 5.3 Employees are encouraged to report any observed or suspected misconduct, including but not limited to unethical behavior, safety violations, or policy breaches. 5.4 All reports submitted through the Ethics Hotline are treated with strict confidentiality and are investigated promptly by the designated compliance officers. Calder Bay Ship Management Ltd: Code of Conduct and IT Acceptable Use Policy Page 3 5.5 Employees who report misconduct in good faith are protected from retaliation and may request a formal review of their case through the compliance officers. 5.6 The compliance officers are responsible for ensuring that all reports are acknowledged, documented, and addressed in accordance with the company's policies and procedures."
+            }
+          ],
+          "evidence": []
+        },
+        {
+          "aspect": "Determining current leave balance availability from salary slip data",
+          "verdict": "UNSUPPORTED",
+          "needs_live_values": false,
+          "probes": [
+            {
+              "question": "How many annual leave days are accrued per month for full-time shore employees according to the company policy?",
+              "supported": false,
+              "chunk_id": "leave_policy.pdf#c3",
+              "span": "Full-time shore employees are entitled to 24 working days of annual leave per calendar year. This entitlement accrues at a rate of 2 working days per month.",
+              "max_dense": 0.8727936148643494,
+              "evidence_dense": 0.8727936148643494,
+              "reason": "span shares no content term with the topic",
+              "code_ok": false,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "This entitlement accrues at a rate of 2 working days per month.",
+              "context": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year. This entitlement accrues at a rate of 2 working days per month. 2.2 Leave accrual is automatically tracked by the human resources department and recorded in the employee's personal leave account. This account is updated monthly in accordance with the accrual rate. 2.3 Leave may be taken in one continuous block or in multiple blocks, provided that the total number of working days does not exceed the annual entitlement. Any unused leave may be carried forward to the next calendar year. 2.4 The annual leave entitlement is subject to the terms of the employee's employment contract and any applicable company policies."
+            },
+            {
+              "question": "Where can an employee access their current leave balance and remaining days from their salary slip data?",
+              "supported": false,
+              "chunk_id": "leave_policy.pdf#c10",
+              "span": "Leave balances are accessible through the HR portal for all employees, providing real-time visibility of accrued and remaining leave days.",
+              "max_dense": 0.7567440867424011,
+              "evidence_dense": 0.7567440867424011,
+              "reason": "span shares no content term with the topic",
+              "code_ok": false,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "Leave balances are accessible through the HR portal for all employees, providing real-time visibility of accrued and remaining leave days.",
+              "context": "9.1 Leave balances are accessible through the HR portal for all employees, providing real-time visibility of accrued and remaining leave days. Calder Bay Ship Management Ltd: Leave and Holiday Policy Page 4 9.2 Employees may submit leave-related queries via the HR portal, ensuring all requests are documented and tracked within the system. 9.3 All leave-related data, including balances and query responses, is stored securely within the HR portal and is accessible only to authorized personnel. 9.4 Employees are required to log in to the HR portal using their assigned credentials to view leave balances and submit queries. 9.5 The HR team will provide clarification or resolution to any leave-related questions raised through the portal, ensuring timely and accurate support."
+            },
+            {
+              "question": "What is the rate at which annual leave accrues for full-time shore employees as stated in the policy?",
+              "supported": false,
+              "chunk_id": "leave_policy.pdf#c3",
+              "span": "This entitlement accrues at a rate of 2 working days per month.",
+              "max_dense": 0.8417772054672241,
+              "evidence_dense": 0.8417772054672241,
+              "reason": "span shares no content term with the topic",
+              "code_ok": false,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "This entitlement accrues at a rate of 2 working days per month.",
+              "context": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year. This entitlement accrues at a rate of 2 working days per month. 2.2 Leave accrual is automatically tracked by the human resources department and recorded in the employee's personal leave account. This account is updated monthly in accordance with the accrual rate. 2.3 Leave may be taken in one continuous block or in multiple blocks, provided that the total number of working days does not exceed the annual entitlement. Any unused leave may be carried forward to the next calendar year. 2.4 The annual leave entitlement is subject to the terms of the employee's employment contract and any applicable company policies."
+            }
+          ],
+          "evidence": []
+        }
+      ],
+      "effective_verdict": "UNSUPPORTED"
+    }
+  ],
+  "calibration": {
+    "min_score": 0.6562,
+    "min_score_bounds": [
+      0.5562,
+      0.7562
+    ],
+    "separable": false,
+    "calibrated": true,
+    "note": "LOW CONFIDENCE: distributions overlap (in-scope p10=0.706, near-miss p90=0.844); threshold set 0.05 below the in-scope p10 to preserve recall; unanswerable near-misses rely on the refusal policy",
+    "in_scope_probe_max_similarity": [
+      0.875,
+      0.827,
+      0.8097,
+      0.742,
+      0.833,
+      0.7694,
+      0.741,
+      0.7106,
+      0.6886
+    ],
+    "near_miss_probe_max_similarity": [
+      0.7485,
+      0.8406,
+      0.7752,
+      0.7709,
+      0.7895,
+      0.6908,
+      0.8574,
+      0.6932,
+      0.5973
+    ]
+  },
+  "check_agreement": {
+    "probes_total": 29,
+    "probes_with_verbatim_span": 22,
+    "both_pass": 9,
+    "code_check_only": 2,
+    "judge_only": 11,
+    "neither": 0,
+    "disagreement_rate": 0.591
+  },
+  "gaps": [
+    {
+      "id": "G-T4",
+      "kind": "unsupported_topic",
+      "description": "The brief asks for 'Salary slip interpretation', but none of the 3 probe questions could be answered from the documents.",
+      "recommended_action": "refuse_with_redirect",
+      "topic_id": "T4",
+      "aspect": null,
+      "evidence": [
+        "probe: How many annual leave days does a full-time shore employee accrue per month according to the salary slip? (span shares no content term with the topic)",
+        "probe: Where is the information about an employee's leave accrual recorded, as mentioned in the salary slip policy? (span shares no content term with the topic)",
+        "probe: What do the documents say about Salary slip interpretation? (model found no supporting span)"
+      ],
+      "redirect": "I do not have information on this. Please contact the relevant team directly."
+    }
+  ]
+}

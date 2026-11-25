@@ -1,0 +1,6 @@
+- kind: in-scope
+  question: How many days of annual leave do full-time shore employees get each year?
+- kind: gap
+  question: Can you explain the deductions shown on my latest salary slip?
+- kind: out-of-scope
+  question: What is the capital city of France?

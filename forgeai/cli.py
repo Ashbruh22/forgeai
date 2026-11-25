@@ -130,6 +130,22 @@ def intake(
     console.print(f"gaps: {[g.id for g in req.gaps] or 'none'}   assumptions: {len(req.assumptions)}")
 
 
+@app.command()
+def generate(
+    run: Path = typer.Option(..., help="Run folder that already holds 00_intake/ and 01_guard/"),
+    docs: Path = typer.Option(..., help="Folder of documents the agent will answer from"),
+    config_path: Path = typer.Option(Path("forgeai.yaml"), "--config", help="forgeai.yaml"),
+) -> None:
+    """Stage 4: write 02_agent/agent.v0.yaml and tool_selection.json from the requirements."""
+    from forgeai.generator.generate import generate_agent
+
+    config = load_config(config_path)
+    set_client(LLMClient(config, trace_path=run / "trace.jsonl"))
+    agent = generate_agent(run, docs, config)
+    console.print(f"[green]Wrote {run / '02_agent' / 'agent.v0.yaml'}[/green]")
+    console.print(f"tools: {agent.tools or 'none'}   min_score: {agent.retrieval.min_score} {agent.retrieval.min_score_bounds}")
+
+
 def _not_yet(phase: str) -> None:
     console.print(f"[yellow]Not implemented yet (arrives in phase {phase}).[/yellow]")
     raise typer.Exit(2)

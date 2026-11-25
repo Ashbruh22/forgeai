@@ -47,3 +47,12 @@ def test_no_prompt_text_hardcoded_in_python() -> None:
 def test_every_prompt_file_declares_a_version() -> None:
     for path in (PACKAGE / "prompts").rglob("*.md"):
         assert re.match(r"\A---\s*\nversion:\s*\d+\s*\n---", path.read_text(encoding="utf-8")), path
+
+
+def test_content_terms_handle_plurals_but_not_lookalike_words() -> None:
+    from forgeai.textmatch import content_terms
+
+    assert content_terms("books") == content_terms("book")
+    assert content_terms("entitlements") & content_terms("entitled")
+    assert not content_terms("interpretation") & content_terms("internal")
+    assert content_terms("policies and fines") == {"fines".rstrip("s")}

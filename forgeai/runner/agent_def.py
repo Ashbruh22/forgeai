@@ -62,6 +62,7 @@ class Retrieval(BaseModel):
     hybrid: Hybrid = Field(default_factory=Hybrid)
     top_k: int = 5
     min_score: float = 0.25  # minimum dense cosine similarity for a chunk to count as evidence
+    min_score_bounds: tuple[float, float] = (0.0, 1.0)  # the optimizer may move min_score only inside this
     query_rewrite: bool = False
 
 

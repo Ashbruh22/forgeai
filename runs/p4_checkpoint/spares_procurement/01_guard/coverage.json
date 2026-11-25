@@ -1,0 +1,504 @@
+{
+  "topics": [
+    {
+      "topic_id": "T1",
+      "topic": "Current stock levels at ports",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "Which port currently has stock for the Bearing set (standard) part number PP-8597?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c208",
+          "span": "stock_port: Rotterdam",
+          "max_dense": 0.7983945608139038,
+          "evidence_dense": 0.7976059913635254,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "stock_port: Rotterdam",
+          "context": "part_no: PP-8597 | description: Bearing set (standard) | equipment: Purifier | maker: Pelagic Purifiers | supplier_id: S01 | unit_price_usd: 381.64 | moq: 5 | lead_time_days: 10 | stock_port: Rotterdam | snapshot_date: 2026-11-01"
+        },
+        {
+          "question": "What is the stock port for the Bearing set (standard) with supplier ID S02?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c209",
+          "span": "stock_port: Fujairah",
+          "max_dense": 0.7719151973724365,
+          "evidence_dense": 0.7709870338439941,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Fujairah",
+          "context": "part_no: PP-8597 | description: Bearing set (standard) | equipment: Purifier | maker: Pelagic Purifiers | supplier_id: S02 | unit_price_usd: 383.71 | moq: 2 | lead_time_days: 10 | stock_port: Fujairah | snapshot_date: 2026-11-01"
+        },
+        {
+          "question": "Are there any differences in the stock ports for the Bearing set (standard) part number PP-8597 across different suppliers?",
+          "supported": false,
+          "chunk_id": "spares_catalogue.csv#c208",
+          "span": "stock_port: Rotterdam",
+          "max_dense": 0.8014715313911438,
+          "evidence_dense": 0.8014715313911438,
+          "reason": "judge says the span does not answer the question",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": false,
+          "judge_quote": "stock_port: Rotterdam",
+          "context": "part_no: PP-8597 | description: Bearing set (standard) | equipment: Purifier | maker: Pelagic Purifiers | supplier_id: S01 | unit_price_usd: 381.64 | moq: 5 | lead_time_days: 10 | stock_port: Rotterdam | snapshot_date: 2026-11-01"
+        }
+      ],
+      "evidence": [
+        "spares_catalogue.csv#c208",
+        "spares_catalogue.csv#c209"
+      ],
+      "aspects": [
+        {
+          "aspect": "Recorded stock port location",
+          "verdict": "SUPPORTED",
+          "needs_live_values": false,
+          "probes": [
+            {
+              "question": "What is the recorded stock port location for part number SS-2218?",
+              "supported": true,
+              "chunk_id": "spares_catalogue.csv#c217",
+              "span": "stock_port: Busan",
+              "max_dense": 0.7465050220489502,
+              "evidence_dense": 0.7465050220489502,
+              "reason": "verified by both checks",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "Busan",
+              "context": "part_no: SS-2218 | description: Rudder carrier bearing (heavy duty) | equipment: Steering Gear | maker: Stenhamn Steering | supplier_id: S01 | unit_price_usd: 103.13 | moq: 2 | lead_time_days: 10 | stock_port: Busan | snapshot_date: 2026-11-01"
+            },
+            {
+              "question": "Which stock port location is associated with the high pressure pipe (heavy duty) part number LF-6949?",
+              "supported": true,
+              "chunk_id": "spares_catalogue.csv#c139",
+              "span": "stock_port: Singapore",
+              "max_dense": 0.7810362577438354,
+              "evidence_dense": 0.7810362577438354,
+              "reason": "verified by both checks",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "Singapore",
+              "context": "part_no: LF-6949 | description: High pressure pipe (heavy duty) | equipment: Fuel Injection System | maker: Lindqvist Fuel Systems | supplier_id: S01 | unit_price_usd: 110.28 | moq: 1 | lead_time_days: 42 | stock_port: Singapore | snapshot_date: 2026-11-01"
+            },
+            {
+              "question": "What is the stock port location for the part with supplier ID S02 and part number LF-6949?",
+              "supported": true,
+              "chunk_id": "spares_catalogue.csv#c140",
+              "span": "stock_port: Fujairah",
+              "max_dense": 0.7509243488311768,
+              "evidence_dense": 0.7490497827529907,
+              "reason": "verified by both checks",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "Fujairah",
+              "context": "part_no: LF-6949 | description: High pressure pipe (heavy duty) | equipment: Fuel Injection System | maker: Lindqvist Fuel Systems | supplier_id: S02 | unit_price_usd: 108.09 | moq: 10 | lead_time_days: 14 | stock_port: Fujairah | snapshot_date: 2026-11-01"
+            }
+          ],
+          "evidence": [
+            "spares_catalogue.csv#c217",
+            "spares_catalogue.csv#c139",
+            "spares_catalogue.csv#c140"
+          ]
+        },
+        {
+          "aspect": "Current stock availability at port",
+          "verdict": null,
+          "needs_live_values": true,
+          "probes": [],
+          "evidence": []
+        }
+      ],
+      "effective_verdict": "PARTIAL"
+    },
+    {
+      "topic_id": "T2",
+      "topic": "Supplier comparisons for spares",
+      "verdict": "PARTIAL",
+      "probes": [
+        {
+          "question": "What is the pricing basis for spares supplied by Kestrel Marine Spares (S02)?",
+          "supported": true,
+          "chunk_id": "terms_kestrel_marine_spares.pdf#c2",
+          "span": "All pricing for spares supplied by Kestrel Marine Spares is based on the unit prices listed in the current spares catalogue.",
+          "max_dense": 0.8589702248573303,
+          "evidence_dense": 0.8589702248573303,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "All pricing for spares supplied by Kestrel Marine Spares is based on the unit prices listed in the current spares catalogue.",
+          "context": "1.1 Kestrel Marine Spares, designated as supplier S02, provides ship spares to Calder Bay Ship Management Ltd in accordance with these terms and conditions. 1.2 All pricing for spares supplied by Kestrel Marine Spares is based on the unit prices listed in the current spares catalogue. 1.3 Prices are quoted in US dollars and are exclusive of any discounts, unless otherwise agreed in writing between the parties. 1.4 Calder Bay Ship Management Ltd is responsible for confirming the availability of spares and placing orders through the designated procurement channel. 1.5 Kestrel Marine Spares is responsible for ensuring that all spares supplied meet the required specifications and quality standards. 1.6 All orders must reference the supplier code S02 to ensure accurate processing and invoicing. 1.7 Kestrel Marine Spares retains the right to adjust pricing in line with changes to the spares catalogue, provided such changes are communicated in writing prior to any order placement."
+        },
+        {
+          "question": "Which supplier, S02 or S03, quotes prices based on the current spares catalogue?",
+          "supported": false,
+          "chunk_id": "terms_kestrel_marine_spares.pdf#c2",
+          "span": "All pricing for spares supplied by Kestrel Marine Spares is based on the unit prices listed in the current spares catalogue.",
+          "max_dense": 0.6580076217651367,
+          "evidence_dense": 0.6284321546554565,
+          "reason": "judge's supporting quote is not a verbatim part of the span",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": false,
+          "judge_quote": "Kestrel Marine Spares, designated as supplier S02",
+          "context": "1.1 Kestrel Marine Spares, designated as supplier S02, provides ship spares to Calder Bay Ship Management Ltd in accordance with these terms and conditions. 1.2 All pricing for spares supplied by Kestrel Marine Spares is based on the unit prices listed in the current spares catalogue. 1.3 Prices are quoted in US dollars and are exclusive of any discounts, unless otherwise agreed in writing between the parties. 1.4 Calder Bay Ship Management Ltd is responsible for confirming the availability of spares and placing orders through the designated procurement channel. 1.5 Kestrel Marine Spares is responsible for ensuring that all spares supplied meet the required specifications and quality standards. 1.6 All orders must reference the supplier code S02 to ensure accurate processing and invoicing. 1.7 Kestrel Marine Spares retains the right to adjust pricing in line with changes to the spares catalogue, provided such changes are communicated in writing prior to any order placement."
+        },
+        {
+          "question": "What do the documents say about Supplier comparisons for spares?",
+          "supported": false,
+          "chunk_id": "",
+          "span": "",
+          "max_dense": 0.7028070092201233,
+          "evidence_dense": 0.0,
+          "reason": "model found no supporting span",
+          "code_ok": false,
+          "substring_ok": false,
+          "judge_ok": null,
+          "judge_quote": "",
+          "context": ""
+        }
+      ],
+      "evidence": [
+        "terms_kestrel_marine_spares.pdf#c2"
+      ],
+      "aspects": [
+        {
+          "aspect": "Supplier pricing structure for ship spares",
+          "verdict": "UNSUPPORTED",
+          "needs_live_values": false,
+          "probes": [
+            {
+              "question": "What is the pricing structure used by Kestrel Marine Spares for ship spares, and are the prices inclusive of any discounts?",
+              "supported": false,
+              "chunk_id": "terms_kestrel_marine_spares.pdf#c3",
+              "span": "Prices are quoted in US dollars and are exclusive of any discounts, unless otherwise agreed in writing between the parties.",
+              "max_dense": 0.8401981592178345,
+              "evidence_dense": 0.0,
+              "reason": "span is not a verbatim quote of a retrieved chunk",
+              "code_ok": false,
+              "substring_ok": false,
+              "judge_ok": null,
+              "judge_quote": "",
+              "context": ""
+            },
+            {
+              "question": "How does Aurelian Engineering Parts determine the prices for ship spares, and are the prices exclusive of any additional charges?",
+              "supported": false,
+              "chunk_id": "terms_aurelian_engineering_parts.pdf#c2",
+              "span": "All prices quoted by Aurelian Engineering Parts for ship spares are unit prices as listed in the spares catalogue. The prices for all items supplied by Aurelian Engineering Parts are expressed in US dollars and are exclusive of any discounts.",
+              "max_dense": 0.8526918888092041,
+              "evidence_dense": 0.0,
+              "reason": "span is not a verbatim quote of a retrieved chunk",
+              "code_ok": false,
+              "substring_ok": false,
+              "judge_ok": null,
+              "judge_quote": "",
+              "context": ""
+            },
+            {
+              "question": "What is the pricing basis for items supplied by Norvik Marine Supply, and does the company offer any discounts on the quoted prices?",
+              "supported": false,
+              "chunk_id": "terms_norvik_marine_supply.pdf#c3",
+              "span": "The applicable discount tier for an order is determined by the total value of the order before any discount is applied.",
+              "max_dense": 0.823864221572876,
+              "evidence_dense": 0.784357488155365,
+              "reason": "judge says the span does not answer the question",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": false,
+              "judge_quote": "The applicable discount tier for an order is determined by the total value of the order before any discount is applied.",
+              "context": "2.1 The applicable discount tier for an order is determined by the total value of the order before any discount is applied. 5% discount applies to orders with a total value between USD 5,000 and USD 14,999. 2.2 An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999. The discount is calculated on the total value of the order before discount. 2.3 A 12% discount is applicable to orders with a total value of USD 50,000 or more. The discount is calculated on the total value of the order before discount. 2.4 The discount is applied to the entire order and is not cumulative with any other discounts or promotions. The discount is calculated based on the total value of the order before discount. 2.5 The supplier shall confirm the applicable discount tier in writing upon receipt of the order. The confirmation shall include the total value of the order and the applicable discount rate. 2.6 The discount is valid for the order as originally submitted and cannot be adjusted or modified after the order has been confirmed. The discount is not transferable or applicable to subsequent orders. 2.7 The supplier shall ensure that all orders are processed in accordance with the applicable discount tier. The discount is applied automatically upon confirmation of the order."
+            }
+          ],
+          "evidence": []
+        },
+        {
+          "aspect": "Currency and tax exclusions in supplier pricing",
+          "verdict": "UNSUPPORTED",
+          "needs_live_values": false,
+          "probes": [
+            {
+              "question": "Does the discount rate apply to the total value of the order before or after tax and currency exclusions?",
+              "supported": false,
+              "chunk_id": "terms_aurelian_engineering_parts.pdf#c3",
+              "span": "The discount rate is applied to the total value of the order and is reflected in the invoice issued by Aurelian Engineering Parts.",
+              "max_dense": 0.75130295753479,
+              "evidence_dense": 0.75130295753479,
+              "reason": "judge's supporting quote is not a verbatim part of the span",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": false,
+              "judge_quote": "The discount is calculated on the total value of the order before discount.",
+              "context": "2.1 The applicable discount rate for an order is determined by the total value of the order before any discount is applied. 4% applies to orders with a total value between USD 3,000 and USD 11,999. 2.2 A discount of 9% is applicable to orders with a total value between USD 12,000 and USD 39,999. The discount is calculated on the total value of the order before discount. 2.3 A discount of 15% applies to orders with a total value of USD 40,000 or more. The discount is calculated on the total value of the order before discount. 2.4 The discount rate is applied to the total value of the order and is reflected in the invoice issued by Aurelian Engineering Parts. The discount is not cumulative and applies only to the order in question. 2.5 No additional discounts are available for multiple orders placed within the same calendar month. The discount is valid for the calendar month in which the order is placed and is subject to the terms and conditions of the purchase order. 2.6 The discount is not applicable to any order that includes items not covered by the applicable discount tier or to any order that is subject to a separate agreement."
+            },
+            {
+              "question": "What do the documents say about Currency and tax exclusions in supplier pricing?",
+              "supported": false,
+              "chunk_id": "",
+              "span": "",
+              "max_dense": 0.652119517326355,
+              "evidence_dense": 0.0,
+              "reason": "model found no supporting span",
+              "code_ok": false,
+              "substring_ok": false,
+              "judge_ok": null,
+              "judge_quote": "",
+              "context": ""
+            },
+            {
+              "question": "What are the rules or limits for Currency and tax exclusions in supplier pricing?",
+              "supported": false,
+              "chunk_id": "",
+              "span": "",
+              "max_dense": 0.6532199382781982,
+              "evidence_dense": 0.0,
+              "reason": "model found no supporting span",
+              "code_ok": false,
+              "substring_ok": false,
+              "judge_ok": null,
+              "judge_quote": "",
+              "context": ""
+            }
+          ],
+          "evidence": []
+        },
+        {
+          "aspect": "Availability status of ship spares from suppliers",
+          "verdict": "PARTIAL",
+          "needs_live_values": false,
+          "probes": [
+            {
+              "question": "What is the availability status of ship spares supplied by Kestrel Marine Spares (S02) to Calder Bay Ship Management Ltd?",
+              "supported": false,
+              "chunk_id": "terms_kestrel_marine_spares.pdf#c2",
+              "span": "Calder Bay Ship Management Ltd is responsible for confirming the availability of spares and placing orders through the designated procurement channel.",
+              "max_dense": 0.887965202331543,
+              "evidence_dense": 0.8770464658737183,
+              "reason": "judge says the span does not answer the question",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": false,
+              "judge_quote": "Calder Bay Ship Management Ltd is responsible for confirming the availability of spares and placing orders through the designated procurement channel.",
+              "context": "1.1 Kestrel Marine Spares, designated as supplier S02, provides ship spares to Calder Bay Ship Management Ltd in accordance with these terms and conditions. 1.2 All pricing for spares supplied by Kestrel Marine Spares is based on the unit prices listed in the current spares catalogue. 1.3 Prices are quoted in US dollars and are exclusive of any discounts, unless otherwise agreed in writing between the parties. 1.4 Calder Bay Ship Management Ltd is responsible for confirming the availability of spares and placing orders through the designated procurement channel. 1.5 Kestrel Marine Spares is responsible for ensuring that all spares supplied meet the required specifications and quality standards. 1.6 All orders must reference the supplier code S02 to ensure accurate processing and invoicing. 1.7 Kestrel Marine Spares retains the right to adjust pricing in line with changes to the spares catalogue, provided such changes are communicated in writing prior to any order placement."
+            },
+            {
+              "question": "Does Aurelian Engineering Parts (S03) provide real-time availability updates for the ship spares they supply to Calder Bay Ship Management Ltd?",
+              "supported": false,
+              "chunk_id": "",
+              "span": "",
+              "max_dense": 0.874392032623291,
+              "evidence_dense": 0.0,
+              "reason": "model found no supporting span",
+              "code_ok": false,
+              "substring_ok": false,
+              "judge_ok": null,
+              "judge_quote": "",
+              "context": ""
+            },
+            {
+              "question": "What are the terms and conditions related to the availability status of ship spares from Kestrel Marine Spares (S02) as outlined in their supplier agreement?",
+              "supported": true,
+              "chunk_id": "terms_kestrel_marine_spares.pdf#c4",
+              "span": "Calder Bay Ship Management Ltd: Supplier Terms and Conditions, Kestrel Marine Spares (S02) Page 2 3.3 The buyer is responsible for unloading the goods at the destination port and for all costs and risks involved after the goods arrive there.",
+              "max_dense": 0.8987526893615723,
+              "evidence_dense": 0.8425033092498779,
+              "reason": "verified by both checks",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "The buyer is responsible for unloading the goods at the destination port and for all costs and risks involved after the goods arrive there.",
+              "context": "3.1 S02 sells all parts on Incoterms CIF to the destination port. 3.2 The seller is responsible for arranging and paying for the transportation of goods to the named port of destination. Calder Bay Ship Management Ltd: Supplier Terms and Conditions, Kestrel Marine Spares (S02) Page 2 3.3 The buyer is responsible for unloading the goods at the destination port and for all costs and risks involved after the goods arrive there. 3.4 S02 will provide the buyer with a commercial invoice and shipping documents upon shipment of the goods. 3.5 The buyer must ensure that the destination port is correctly specified in the order to avoid any delays or additional charges. 3.6 S02 will not be liable for any delays or damages occurring after the goods arrive at the destination port. 3.7 The buyer is responsible for arranging and paying for any customs clearance and import duties at the destination port. 3.8 CIF terms apply to all parts ordered from S02 unless otherwise agreed in writing."
+            }
+          ],
+          "evidence": [
+            "terms_kestrel_marine_spares.pdf#c4"
+          ]
+        }
+      ],
+      "effective_verdict": "PARTIAL"
+    },
+    {
+      "topic_id": "T3",
+      "topic": "Order cost estimates with discounts",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What discount rate applies to an order with a total value of USD 15,000 before any discount?",
+          "supported": true,
+          "chunk_id": "terms_norvik_marine_supply.pdf#c3",
+          "span": "An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "max_dense": 0.7492282390594482,
+          "evidence_dense": 0.7083389163017273,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "context": "2.1 The applicable discount tier for an order is determined by the total value of the order before any discount is applied. 5% discount applies to orders with a total value between USD 5,000 and USD 14,999. 2.2 An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999. The discount is calculated on the total value of the order before discount. 2.3 A 12% discount is applicable to orders with a total value of USD 50,000 or more. The discount is calculated on the total value of the order before discount. 2.4 The discount is applied to the entire order and is not cumulative with any other discounts or promotions. The discount is calculated based on the total value of the order before discount. 2.5 The supplier shall confirm the applicable discount tier in writing upon receipt of the order. The confirmation shall include the total value of the order and the applicable discount rate. 2.6 The discount is valid for the order as originally submitted and cannot be adjusted or modified after the order has been confirmed. The discount is not transferable or applicable to subsequent orders. 2.7 The supplier shall ensure that all orders are processed in accordance with the applicable discount tier. The discount is applied automatically upon confirmation of the order."
+        },
+        {
+          "question": "What is the discount percentage for an order valued between USD 10,000 and USD 29,999 before any discount is applied?",
+          "supported": true,
+          "chunk_id": "terms_kestrel_marine_spares.pdf#c3",
+          "span": "A discount of 6% is applicable for orders valued between USD 10,000 and USD 29,999.",
+          "max_dense": 0.7355164289474487,
+          "evidence_dense": 0.7033606767654419,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "A discount of 6% is applicable for orders valued between USD 10,000 and USD 29,999.",
+          "context": "2.1 Discount tiers apply to the total value of one order before discount. 2.2 3% applies to orders with a total value between USD 2,000 and USD 9,999. 2.3 A discount of 6% is applicable for orders valued between USD 10,000 and USD 29,999. 2.4 A discount of 10% is applicable for orders valued at USD 30,000 or more. 2.5 The discount is calculated and applied at the time of order processing by the purchasing department. 2.6 The purchasing department is responsible for verifying the order value before applying the discount. 2.7 Discounts are not cumulative and are based solely on the total order value as stated in the purchase order. 2.8 The supplier is required to confirm the applicable discount rate in writing upon receipt of the order."
+        },
+        {
+          "question": "What discount rate is applicable for an order with a total value of USD 30,000 or more before any discount?",
+          "supported": true,
+          "chunk_id": "terms_kestrel_marine_spares.pdf#c3",
+          "span": "A discount of 10% is applicable for orders valued at USD 30,000 or more.",
+          "max_dense": 0.753536581993103,
+          "evidence_dense": 0.7250347137451172,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "A discount of 10% is applicable for orders valued at USD 30,000 or more.",
+          "context": "2.1 Discount tiers apply to the total value of one order before discount. 2.2 3% applies to orders with a total value between USD 2,000 and USD 9,999. 2.3 A discount of 6% is applicable for orders valued between USD 10,000 and USD 29,999. 2.4 A discount of 10% is applicable for orders valued at USD 30,000 or more. 2.5 The discount is calculated and applied at the time of order processing by the purchasing department. 2.6 The purchasing department is responsible for verifying the order value before applying the discount. 2.7 Discounts are not cumulative and are based solely on the total order value as stated in the purchase order. 2.8 The supplier is required to confirm the applicable discount rate in writing upon receipt of the order."
+        }
+      ],
+      "evidence": [
+        "terms_norvik_marine_supply.pdf#c3",
+        "terms_kestrel_marine_spares.pdf#c3"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    },
+    {
+      "topic_id": "T4",
+      "topic": "Estimated arrival times for parts",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What is the lead time in days for the Delivery valve (heavy duty) part_no LF-1895 from supplier S02?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c125",
+          "span": "lead_time_days: 21",
+          "max_dense": 0.8289840221405029,
+          "evidence_dense": 0.8289840221405029,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "lead_time_days: 21",
+          "context": "part_no: LF-1895 | description: Delivery valve (heavy duty) | equipment: Fuel Injection System | maker: Lindqvist Fuel Systems | supplier_id: S02 | unit_price_usd: 340.18 | moq: 10 | lead_time_days: 21 | stock_port: Dubai | snapshot_date: 2026-11-01"
+        },
+        {
+          "question": "Which supplier provides the Injector assembly (heavy duty) part_no LF-6465 with the shortest lead time, and how many days is it?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c137",
+          "span": "lead_time_days: 14",
+          "max_dense": 0.7533512115478516,
+          "evidence_dense": 0.7533512115478516,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "lead_time_days: 14",
+          "context": "part_no: LF-6465 | description: Injector assembly (heavy duty) | equipment: Fuel Injection System | maker: Lindqvist Fuel Systems | supplier_id: S02 | unit_price_usd: 401.01 | moq: 5 | lead_time_days: 14 | stock_port: Rotterdam | snapshot_date: 2026-11-01"
+        },
+        {
+          "question": "What is the lead time for the part_no LF-1895 from supplier S01, and how does it compare to the lead time from supplier S02?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c124",
+          "span": "lead_time_days: 35",
+          "max_dense": 0.7632501721382141,
+          "evidence_dense": 0.7628152966499329,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "lead_time_days: 35",
+          "context": "part_no: LF-1895 | description: Delivery valve (heavy duty) | equipment: Fuel Injection System | maker: Lindqvist Fuel Systems | supplier_id: S01 | unit_price_usd: 368.14 | moq: 5 | lead_time_days: 35 | stock_port: Dubai | snapshot_date: 2026-11-01"
+        }
+      ],
+      "evidence": [
+        "spares_catalogue.csv#c125",
+        "spares_catalogue.csv#c137",
+        "spares_catalogue.csv#c124"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    }
+  ],
+  "calibration": {
+    "min_score": 0.6573,
+    "min_score_bounds": [
+      0.5573,
+      0.7573
+    ],
+    "separable": false,
+    "calibrated": true,
+    "note": "LOW CONFIDENCE: distributions overlap (in-scope p10=0.707, near-miss p90=0.805); threshold set 0.05 below the in-scope p10 to preserve recall; unanswerable near-misses rely on the refusal policy",
+    "in_scope_probe_max_similarity": [
+      0.7976,
+      0.771,
+      0.859,
+      0.7083,
+      0.7034,
+      0.725,
+      0.829,
+      0.7534,
+      0.7628
+    ],
+    "near_miss_probe_max_similarity": [
+      0.7663,
+      0.7464,
+      0.8095,
+      0.8012,
+      0.7388,
+      0.742,
+      0.7455
+    ]
+  },
+  "check_agreement": {
+    "probes_total": 32,
+    "probes_with_verbatim_span": 21,
+    "both_pass": 14,
+    "code_check_only": 7,
+    "judge_only": 0,
+    "neither": 0,
+    "disagreement_rate": 0.333
+  },
+  "gaps": [
+    {
+      "id": "G-T2",
+      "kind": "partial_coverage",
+      "description": "Only part of 'Supplier comparisons for spares' is supported by the documents (1 of 3 probes verified).",
+      "recommended_action": "warn",
+      "topic_id": "T2",
+      "aspect": null,
+      "evidence": [
+        "terms_kestrel_marine_spares.pdf#c2"
+      ],
+      "redirect": ""
+    },
+    {
+      "id": "G-LIVE-1",
+      "kind": "live_data",
+      "description": "The brief asks for current or real-time information, but the documents are a static snapshot and no tool provides it: \"It should also tell them what's in stock right now at each port.\" The recorded version (Recorded stock port location) IS answerable from the documents as of 2026-11-01; only the live value is refused.",
+      "recommended_action": "refuse_with_redirect",
+      "topic_id": "T1",
+      "aspect": "Current stock availability at port",
+      "evidence": [
+        "It should also tell them what's in stock right now at each port."
+      ],
+      "redirect": "I do not have information on this. Please contact the relevant team directly."
+    }
+  ]
+}

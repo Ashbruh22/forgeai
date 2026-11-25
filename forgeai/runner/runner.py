@@ -38,6 +38,12 @@ class AgentStep(BaseModel):
     clarifying_question: str | None = None
 
 
+class FinalStep(AgentStep):
+    """Used once tool calls are used up or repeated: the model can only answer, not call again."""
+
+    action: Literal["final"] = "final"
+
+
 class RewrittenQuery(BaseModel):
     query: str
 
@@ -126,9 +132,10 @@ class AgentRunner:
         repaired = False
         max_tools = self.config.limits.max_tool_calls_per_turn
 
-        step_budget = max_tools + 3
+        must_finish = False  # set when tool calls are used up or repeated: only a final answer is allowed
+        step_budget = max_tools + 4
         for _ in range(step_budget):
-            step, fell_back = self._step(question, history, context, records, feedback)
+            step, fell_back = self._step(question, history, context, records, feedback, must_finish)
             trace.append({"step": step.model_dump(mode="json"), "model_output_invalid": fell_back})
             if fell_back:
                 return self._finish(question, query, hits, step, records, trace, started,
@@ -136,6 +143,11 @@ class AgentRunner:
             if step.action == "tool_call":
                 if len(records) >= max_tools:
                     feedback = f"Tool call limit ({max_tools}) reached. Give your final answer now."
+                    must_finish = True
+                    continue
+                if any((r.tool, r.args) == (step.tool, step.args) for r in records):
+                    feedback = "You already called this tool with these arguments; its result is above. Give your final answer now."
+                    must_finish = True
                     continue
                 records.append(self._run_tool(step))
                 feedback = EMPTY
@@ -155,7 +167,7 @@ class AgentRunner:
 
     def _step(
         self, question: str, history: History, context: str,
-        records: list[ToolCallRecord], feedback: str,
+        records: list[ToolCallRecord], feedback: str, final_only: bool = False,
     ) -> tuple[AgentStep, bool]:
         model = self.agent.model
         tool_results = (
@@ -170,7 +182,8 @@ class AgentRunner:
                 "context": context, "tool_results": tool_results,
                 "feedback": feedback, "question": question,
             },
-            AgentStep, model.name, model.temperature, seed=model.seed, fallback=sentinel,
+            FinalStep if final_only else AgentStep, model.name, model.temperature, seed=model.seed,
+            fallback=sentinel,
         )
         return step, step is sentinel
 

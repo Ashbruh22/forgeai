@@ -111,16 +111,36 @@ def test_unattached_tool_and_tool_errors_are_reported_to_the_model(runner_for) -
     assert result.answer.status == "refused" and result.contract_valid
 
 
-def test_tool_call_limit_is_enforced(runner_for) -> None:
+def test_tool_call_limit_is_enforced_and_forces_a_final_answer(runner_for) -> None:
     runner, transport = runner_for([])
-    call = json.dumps({"action": "tool_call", "tool": "calculator", "args": {"expression": "1+1"}})
-    # Distinct args so each call is a cache miss; the 4th call attempt must not execute.
+    # Distinct args so each call is a cache miss; after 3 calls the model may only answer.
     calls = [json.dumps({"action": "tool_call", "tool": "calculator", "args": {"expression": f"{i}+1"}}) for i in range(4)]
-    transport._replies = calls + [final(status="refused", answer="Done.", citations=[])]
+    transport._replies = calls[:3] + [calls[3], final(status="refused", answer="Done.", citations=[])]
     result = runner.ask("Loop please")
     assert len(result.answer.tool_calls) == runner.config.limits.max_tool_calls_per_turn == 3
     assert "limit" in transport.calls[4]["messages"][1]["content"]
-    assert call
+    assert result.answer.answer == "Done."
+
+
+def test_a_repeated_identical_tool_call_is_not_executed_again(runner_for) -> None:
+    """Regression from the Demo B smoke test: the model called the same lookup three times and never answered."""
+    runner, transport = runner_for([])
+    same = json.dumps({"action": "tool_call", "tool": "calculator", "args": {"expression": "21 * 2"}})
+    transport._replies = [same, same, final(status="refused", answer="42.", citations=[])]
+    result = runner.ask("What is 21 times 2?")
+    assert [c.result for c in result.answer.tool_calls] == ["42"]  # executed once
+    assert "already called this tool" in transport.calls[2]["messages"][1]["content"]
+    assert result.answer.answer == "42."
+
+
+def test_after_the_limit_only_final_steps_are_valid_so_a_tool_call_cannot_stall_the_loop(runner_for) -> None:
+    runner, transport = runner_for([])
+    call = lambda n: json.dumps({"action": "tool_call", "tool": "calculator", "args": {"expression": f"{n}+1"}})
+    # After three calls the model keeps trying to call; the final-only schema rejects that, so the
+    # wrapper retries with the error, and the next valid reply is a final answer.
+    transport._replies = [call(1), call(2), call(3), call(4), final(status="refused", answer="ok", citations=[])]
+    result = runner.ask("Loop")
+    assert result.contract_valid and len(result.answer.tool_calls) == 3
 
 
 def test_invalid_model_output_is_flagged_not_hidden(runner_for) -> None:

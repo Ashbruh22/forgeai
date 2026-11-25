@@ -18,6 +18,10 @@ class Topic(BaseModel):
     priority: Literal["high", "medium", "low"] = "medium"
     coverage: Coverage | None = None  # filled by the groundability guard
     evidence: list[str] = Field(default_factory=list)  # chunk ids with a verified supporting span
+    # Set when the topic was split: only these aspects are supported; the rest became gaps.
+    supported_aspects: list[str] = Field(default_factory=list)
+    # ISO date of the static snapshot the answer comes from, if the evidence carries one.
+    snapshot_as_of: str | None = None
 
 
 class RefuseTopic(BaseModel):
@@ -46,8 +50,19 @@ class Gap(BaseModel):
     description: str
     recommended_action: GapAction
     topic_id: str | None = None
+    aspect: str | None = None  # the unsupported part of a split topic
     evidence: list[str] = Field(default_factory=list)  # chunk ids, or the brief sentence that triggered it
     redirect: str = ""
+
+
+class RejectedAssumption(BaseModel):
+    """A self-answered assumption dropped because the brief or the corpus contradicts it."""
+
+    field: str
+    item: str
+    conflict_with: Literal["brief", "corpus"]
+    detail: str
+    evidence: list[str] = Field(default_factory=list)
 
 
 class Requirements(BaseModel):
@@ -63,6 +78,7 @@ class Requirements(BaseModel):
     capabilities_needed: list[str] = Field(default_factory=list)
     gaps: list[Gap] = Field(default_factory=list)
     assumptions: list[Assumption] = Field(default_factory=list)
+    assumptions_rejected: list[RejectedAssumption] = Field(default_factory=list)
     interview_log: str = "questions.json"
 
 

@@ -1,0 +1,78 @@
+[
+  {
+    "file": "spares_catalogue.csv",
+    "status": "ok",
+    "reason": "",
+    "file_type": "csv",
+    "page_count": null,
+    "row_count": 300,
+    "title": "Spares Catalogue for Air Compressors",
+    "summary": "The document is a CSV file containing spare parts information for air compressors. It includes details such as part numbers, descriptions, suppliers, prices, and stock locations. The data includes multiple entries for the same part number with varying supplier details and pricing.",
+    "structure": {
+      "kind": "tabular",
+      "total_words": 10248,
+      "n_blocks": 300,
+      "n_headings": 0,
+      "max_heading_depth": 0,
+      "avg_section_words": 10248.0
+    },
+    "n_chunks": 301
+  },
+  {
+    "file": "terms_aurelian_engineering_parts.pdf",
+    "status": "ok",
+    "reason": "",
+    "file_type": "pdf",
+    "page_count": 3,
+    "row_count": null,
+    "title": "Supplier Terms and Conditions for Aurelian Engineering Parts (S03)",
+    "summary": "This document outlines the terms and conditions between Calder Bay Ship Management Ltd and Aurelian Engineering Parts (S03) for the supply of ship spares. It covers pricing, volume discounts, delivery terms, and warranty periods. The agreement specifies that prices are in USD, discounts vary based on order value, and the buyer is responsible for freight and documentation.",
+    "structure": {
+      "kind": "prose",
+      "total_words": 898,
+      "n_blocks": 46,
+      "n_headings": 7,
+      "max_heading_depth": 2,
+      "avg_section_words": 124.3
+    },
+    "n_chunks": 8
+  },
+  {
+    "file": "terms_kestrel_marine_spares.pdf",
+    "status": "ok",
+    "reason": "",
+    "file_type": "pdf",
+    "page_count": 3,
+    "row_count": null,
+    "title": "Supplier Terms and Conditions for Kestrel Marine Spares (S02)",
+    "summary": "This document outlines the terms and conditions between Calder Bay Ship Management Ltd and Kestrel Marine Spares (S02) for the supply of ship spares. It covers pricing, volume discounts, delivery terms, and warranty provisions. Key points include pricing based on the current catalogue, discount tiers for orders, and CIF delivery terms with the buyer responsible for unloading and customs clearance.",
+    "structure": {
+      "kind": "prose",
+      "total_words": 997,
+      "n_blocks": 52,
+      "n_headings": 7,
+      "max_heading_depth": 2,
+      "avg_section_words": 138.4
+    },
+    "n_chunks": 9
+  },
+  {
+    "file": "terms_norvik_marine_supply.pdf",
+    "status": "ok",
+    "reason": "",
+    "file_type": "pdf",
+    "page_count": 3,
+    "row_count": null,
+    "title": "Supplier Terms and Conditions for Norvik Marine Supply (S01)",
+    "summary": "The document outlines the terms and conditions between Norvik Marine Supply (S01) and Calder Bay Ship Management Ltd. It covers pricing, volume discounts, and delivery terms under Incoterms DAP. Norvik Marine Supply is responsible for delivering goods to the specified port of call and handling customs formalities.",
+    "structure": {
+      "kind": "prose",
+      "total_words": 1211,
+      "n_blocks": 49,
+      "n_headings": 7,
+      "max_heading_depth": 2,
+      "avg_section_words": 169.0
+    },
+    "n_chunks": 9
+  }
+]

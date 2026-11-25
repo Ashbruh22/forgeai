@@ -103,6 +103,11 @@ class HybridIndex:
         scores = self.dense_scores(query)
         return float(scores.max()) if len(scores) else 0.0
 
+    def dense_of(self, scores: np.ndarray, chunk_id: str) -> float:
+        """The similarity (from ``dense_scores``) of one chunk, by id."""
+        position = next((i for i, c in enumerate(self.chunks) if c.chunk_id == chunk_id), None)
+        return float(scores[position]) if position is not None and len(scores) else 0.0
+
     def search(
         self, query: str, top_k: int, dense_weight: float, bm25_weight: float, min_score: float
     ) -> list[Hit]:

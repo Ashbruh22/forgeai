@@ -30,9 +30,9 @@ Do ONE phase at a time. When a phase's exit test passes: commit, push, show the 
   until submission. Commit at the end of each phase and push.
 - Hardware: RTX 4060 Laptop 8 GB VRAM, 15.7 GB RAM. `OLLAMA_MAX_LOADED_MODELS=1` is set (user env)
   so two models never half-load and spill to CPU.
-- Models: agent/generator `qwen3:8b`. Judge is a config value chosen **by measured canary
-  accuracy** (spec §6.2) between `gemma3:4b` and `llama3.1:8b`; record the comparison for the
-  final report. Both are pulled locally.
+- Models: agent/generator `qwen3:8b`. Judge is a config value chosen **by measurement**. It is
+  currently `llama3.1:8b` (tool-necessity suite 8/8 vs 6/8 for `gemma3:4b`; guard role equal or
+  better), PROVISIONAL until the P6 canary comparison. All three models are pulled locally.
 - **Batch by stage** to limit model swaps on 8 GB VRAM: generate all agent answers for an
   iteration first, then judge them all. `trace.jsonl` logs `swap` and `load_ms` per call.
 - `call_structured` sends `think: false` (Qwen3 reasoning conflicts with constrained JSON). Ollama
@@ -50,3 +50,14 @@ Do ONE phase at a time. When a phase's exit test passes: commit, push, show the 
 - Test-split scores are computed in a separate step the optimizer cannot read (spec §6.6 vs §6.1).
 - Failure tree implemented exactly as spec §6.5; "expected answered, got refused, gold chunk not in
   top-k" is a RETRIEVAL MISS.
+
+- **docs/DECISIONS.md** is the dated log of every deviation from the spec and every test changed
+  after it was first written. Add to it whenever either happens. Tests may only be relaxed when the
+  spec does not require the stricter behaviour.
+- **Read the artifacts, not just the test results.** Each phase's green tests hid real defects that
+  only reading `runs/p*_checkpoint/` outputs and the agents' actual answers revealed.
+- `pytest` is offline by default (`-m "not live"`); live tests (real Ollama, real models) run with
+  `pytest -m live`. Fakes (`tests/helpers.py`) are for unit tests of logic and failure handling only.
+- Precedence when sources disagree: brief > corpus evidence > assumptions.
+- Pipeline so far: `forgeai intake` (P3) then `forgeai generate` (P4). `scripts/smoke_questions.py`
+  asks a generated agent real questions. P3/P4 evidence is in `runs/p4_checkpoint/`.
