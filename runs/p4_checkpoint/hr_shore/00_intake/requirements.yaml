@@ -9,8 +9,7 @@ scope:
   - Travel claims
   - Conduct rules
   - Salary slip questions
-  out:
-  - ethical dilemmas
+  out: []
 must_answer_topics:
 - id: T1
   topic: Annual leave entitlements
@@ -39,11 +38,7 @@ must_answer_topics:
   - code_of_conduct_it_policy.pdf#c6
   supported_aspects: []
   snapshot_as_of: null
-must_refuse_topics:
-- id: R1
-  topic: ethical dilemmas
-  reason: Excluded by the requester.
-  redirect: I do not have information on this. Please contact the relevant team directly.
+must_refuse_topics: []
 capabilities_needed:
 - document_qa
 gaps:
@@ -84,57 +79,61 @@ assumptions:
 assumptions_rejected:
 - field: scope_out
   item: sensitive personal data
-  conflict_with: corpus
-  detail: the documents answer questions about it (SUPPORTED); excluding it would refuse something the
-    corpus supports
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''Travel claims'' (The refused subject is a needed
+    input for the asked task.)'
   evidence:
-  - 'code_of_conduct_it_policy.pdf#c5: All employees are required to maintain the confidentiality of all
-    company and client information, including but not limited to operational data, financial records,
-    and communication logs, throughout their employment and for 2 years after employment ends.'
-  - 'code_of_conduct_it_policy.pdf#c8: 7.1 All personal devices used for company business must be registered
-    with IT prior to use, and must remain registered throughout their active use period.'
-- field: scope_out
-  item: legal advice
-  conflict_with: corpus
-  detail: the documents answer questions about it (PARTIAL); excluding it would refuse something the corpus
-    supports
-  evidence:
-  - 'code_of_conduct_it_policy.pdf#c5: Any breach of confidentiality, regardless of intent, will result
-    in disciplinary action, up to and including termination of employment and legal prosecution under
-    applicable laws.'
+  - Travel claims
 - field: scope_out
   item: confidential information
-  conflict_with: corpus
-  detail: the documents answer questions about it (SUPPORTED); excluding it would refuse something the
-    corpus supports
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''Conduct rules'' (The refused subject is a part of
+    the asked task.)'
   evidence:
-  - 'code_of_conduct_it_policy.pdf#c5: All employees are required to maintain the confidentiality of all
-    company and client information, including but not limited to operational data, financial records,
-    and communication logs, throughout their employment and for 2 years after employment ends.'
-  - 'code_of_conduct_it_policy.pdf#c5: Employees must not disclose any confidential information to third
-    parties, including but not limited to former colleagues, contractors, or external auditors, without
-    prior written authorization from the Chief Compliance Officer.'
+  - Conduct rules
+- field: scope_out
+  item: ethical dilemmas
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''Also help people with salary slip questions.'' (The
+    refused subject ''ethical dilemmas'' is a part of the asked task ''help people with salary slip questions''.)'
+  evidence:
+  - help people with salary slip questions
 - field: scope_out
   item: misconduct reporting
-  conflict_with: corpus
-  detail: the documents answer questions about it (SUPPORTED); excluding it would refuse something the
-    corpus supports
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''Conduct rules'' (The refused subject is a part of
+    the asked task.)'
   evidence:
-  - 'code_of_conduct_it_policy.pdf#c6: The Ethics Hotline will acknowledge receipt of all reports within
-    5 working days, regardless of the nature or severity of the concern.'
-  - 'code_of_conduct_it_policy.pdf#c6: All reports of misconduct must be submitted through the Ethics
-    Hotline, which is the designated internal channel for such concerns.'
+  - Conduct rules
 - field: must_refuse
   item: personal data requests
-  conflict_with: corpus
-  detail: the documents answer questions about it (SUPPORTED); excluding it would refuse something the
-    corpus supports
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''Travel claims'' (The refused subject is a part of
+    the asked task.)'
   evidence:
-  - 'leave_policy.pdf#c5: Annual leave requests need 10 working days notice to allow adequate planning.'
-  - 'code_of_conduct_it_policy.pdf#c9: Employees are prohibited from using personal email accounts to
-    conduct company business or to communicate with clients, suppliers, or colleagues unless explicitly
-    authorized by a manager.'
+  - Travel claims
 - field: must_refuse
+  item: HR policies
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''Leave policy'' (the refused subject is a part of
+    the asked task)'
+  evidence:
+  - Leave policy
+- field: must_refuse
+  item: ethical dilemmas
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''Also help people with salary slip questions.'' (The
+    refused subject ''ethical dilemmas'' is a part of the asked task ''help people with salary slip questions''.)'
+  evidence:
+  - help people with salary slip questions
+- field: must_refuse
+  item: misconduct reporting
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''Conduct rules'' (The refused subject is a part of
+    the asked task.)'
+  evidence:
+  - Conduct rules
+- field: scope_out
   item: legal advice
   conflict_with: corpus
   detail: the documents answer questions about it (PARTIAL); excluding it would refuse something the corpus
@@ -144,22 +143,12 @@ assumptions_rejected:
     in disciplinary action, up to and including termination of employment and legal prosecution under
     applicable laws.'
 - field: must_refuse
-  item: HR policies
+  item: legal advice
   conflict_with: corpus
-  detail: the documents answer questions about it (SUPPORTED); excluding it would refuse something the
-    corpus supports
+  detail: the documents answer questions about it (PARTIAL); excluding it would refuse something the corpus
+    supports
   evidence:
-  - 'leave_policy.pdf#c5: Annual leave requests need 10 working days notice to allow adequate planning.'
-  - 'code_of_conduct_it_policy.pdf#c3: All employees are expected to conduct themselves with professionalism,
-    integrity, and respect in all interactions with colleagues, clients, and third parties at all times.'
-- field: must_refuse
-  item: misconduct reporting
-  conflict_with: corpus
-  detail: the documents answer questions about it (SUPPORTED); excluding it would refuse something the
-    corpus supports
-  evidence:
-  - 'code_of_conduct_it_policy.pdf#c6: The Ethics Hotline will acknowledge receipt of all reports within
-    5 working days, regardless of the nature or severity of the concern.'
-  - 'code_of_conduct_it_policy.pdf#c6: All reports of misconduct must be submitted through the Ethics
-    Hotline, which is the designated internal channel for such concerns.'
+  - 'code_of_conduct_it_policy.pdf#c5: Any breach of confidentiality, regardless of intent, will result
+    in disciplinary action, up to and including termination of employment and legal prosecution under
+    applicable laws.'
 interview_log: questions.json

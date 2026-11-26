@@ -1,0 +1,27 @@
+{
+  "dev": [
+    "proc-A01",
+    "proc-A04",
+    "proc-A05",
+    "proc-A06",
+    "proc-A07",
+    "proc-A08",
+    "proc-M01",
+    "proc-X01",
+    "proc-X02",
+    "proc-O01",
+    "proc-O02",
+    "proc-O04",
+    "proc-T02",
+    "proc-T03",
+    "proc-T04"
+  ],
+  "test": [
+    "proc-A02",
+    "proc-A03",
+    "proc-A09",
+    "proc-O03",
+    "proc-O05",
+    "proc-T01"
+  ]
+}

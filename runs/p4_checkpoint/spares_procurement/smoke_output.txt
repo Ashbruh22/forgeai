@@ -1,4 +1,4 @@
-Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|##########| 199/199 [00:00<00:00, 4019.53it/s]
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|##########| 199/199 [00:00<00:00, 4229.63it/s]
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 
 [in-scope] What is the unit price and lead time of part HD-1123 from supplier S01, and what would 12 units cost after the supplier's volume discount?
@@ -10,14 +10,14 @@ unit_price_usd: 420.00 | lead_time_days: 21
 
 [gap] How many units of HD-1123 are in stock right now at Singapore?
   status: refused
-  answer: I do not have information on this. Please contact the relevant team directly.
+  answer: I do not have information on current stock availability at ports. Please contact the relevant team directly.
   tool: csv_lookup({'file': 'spares_catalogue.csv', 'filters': {'part_no': 'HD-1123', 'stock_port': 'Singapore'}, 'columns': ['part_no', 'stock_port']}) -> 2 matching rows
 part_no: HD-1123 | stock_port: Singapore
 part_no: HD-1123 | stoc
 
 [out-of-scope] Can you give me a good recipe for pasta carbonara?
   status: refused
-  answer: I do not have information on this. Please contact the relevant team directly.
+  answer: I cannot help with recipes as it is outside my scope. Please consult a cooking resource or website for a pasta carbonara recipe.
 
 [snapshot] Which port holds part HD-1123 from supplier S01 in the catalogue?
   status: answered

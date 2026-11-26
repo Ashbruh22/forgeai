@@ -40,14 +40,14 @@
       "spares_catalogue.csv#c99",
       "spares_catalogue.csv#c102"
     ],
-    "latency_ms": 17550
+    "latency_ms": 23354
   },
   {
     "kind": "gap",
     "question": "How many units of HD-1123 are in stock right now at Singapore?",
     "answer": {
       "status": "refused",
-      "answer": "I do not have information on this. Please contact the relevant team directly.",
+      "answer": "I do not have information on current stock availability at ports. Please contact the relevant team directly.",
       "citations": [],
       "tool_calls": [
         {
@@ -75,21 +75,21 @@
       "spares_catalogue.csv#c102",
       "spares_catalogue.csv#c195"
     ],
-    "latency_ms": 5056
+    "latency_ms": 6338
   },
   {
     "kind": "out-of-scope",
     "question": "Can you give me a good recipe for pasta carbonara?",
     "answer": {
       "status": "refused",
-      "answer": "I do not have information on this. Please contact the relevant team directly.",
+      "answer": "I cannot help with recipes as it is outside my scope. Please consult a cooking resource or website for a pasta carbonara recipe.",
       "citations": [],
       "tool_calls": [],
       "clarifying_question": null
     },
     "contract_issues": [],
     "retrieved": [],
-    "latency_ms": 1311
+    "latency_ms": 1536
   },
   {
     "kind": "snapshot",
@@ -131,6 +131,6 @@
       "spares_catalogue.csv#c109",
       "spares_catalogue.csv#c111"
     ],
-    "latency_ms": 6509
+    "latency_ms": 6431
   }
 ]

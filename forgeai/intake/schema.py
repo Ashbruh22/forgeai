@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -124,3 +125,10 @@ class Answer(BaseModel):
     field: str
     text: str
     answered_by: Literal["user", "ASSUMPTION"]
+
+
+def load_requirements(path: "Path") -> Requirements:
+    """Read a ``requirements.yaml`` written by the intake stage."""
+    import yaml
+
+    return Requirements.model_validate(yaml.safe_load(path.read_text(encoding="utf-8")))

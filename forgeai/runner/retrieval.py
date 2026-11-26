@@ -92,6 +92,11 @@ class HybridIndex:
                 np.save(cache_file, vectors)
         return cls(chunks, vectors, embedder, query_prefix)
 
+    @property
+    def vectors(self) -> np.ndarray:
+        """Chunk embeddings (passage side, no query prefix), aligned with ``chunks``."""
+        return self._vectors
+
     def dense_scores(self, query: str) -> np.ndarray:
         """Cosine similarity of ``query`` (embedded WITH the query prefix) to every chunk."""
         if not self.chunks:

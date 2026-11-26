@@ -1,0 +1,62 @@
+{
+  "target_total": 32,
+  "floor": 20,
+  "valid_cases": 21,
+  "floor_met": true,
+  "generation_rounds": 6,
+  "targets": {
+    "answerable": 12,
+    "multidoc": 5,
+    "ambiguous": 4,
+    "out_of_scope": 7,
+    "tool_required": 4
+  },
+  "generated_candidates": {
+    "answerable": 39,
+    "multidoc": 21,
+    "ambiguous": 3,
+    "out_of_scope": 60,
+    "tool_required": 4
+  },
+  "validated_after_filters": {
+    "answerable": 9,
+    "multidoc": 1,
+    "ambiguous": 2,
+    "out_of_scope": 5,
+    "tool_required": 4
+  },
+  "selected": {
+    "answerable": 9,
+    "multidoc": 1,
+    "ambiguous": 2,
+    "out_of_scope": 5,
+    "tool_required": 4
+  },
+  "split": {
+    "dev": 15,
+    "test": 6
+  },
+  "rejections_by_reason": {
+    "contradicts the requirements": 36,
+    "question copies the passage": 3,
+    "question does not identify one table row": 11,
+    "answer_span is not a verbatim quote of the seed": 2,
+    "fact anchoring failed": 21,
+    "the question contains a discriminator ['total value']": 2,
+    "a reading's span is not a verbatim quote or has no key facts": 14,
+    "computed case failed verification": 12,
+    "independent answerability failed": 28,
+    "duplicate (embedding similarity)": 42,
+    "the question contains a discriminator ['USD 15,000']": 1,
+    "fact anchoring failed for a reading": 1,
+    "the question contains a discriminator ['total', 'value']": 1
+  },
+  "candidates_attempted": 195,
+  "rejection_rate": 0.892,
+  "shortfall": {
+    "answerable": 3,
+    "multidoc": 4,
+    "ambiguous": 2,
+    "out_of_scope": 2
+  }
+}

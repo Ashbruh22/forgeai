@@ -40,13 +40,7 @@ prompt_sections:
 
     Out of scope (always refuse these):
 
-    - general maritime law
-
-    - unrelated equipment maintenance
-
-    - legal advice
-
-    - financial planning guidance'
+    - legal advice'
   refusal_policy: 'Refuse, with status "refused" and a short polite message, whenever the question is
     outside the scope above, is about something listed below, or the retrieved context does not contain
     the answer. Never answer a refused topic from general knowledge, even partly. Always include the redirect
@@ -54,15 +48,6 @@ prompt_sections:
 
 
     Refusals:
-
-    - pricing details (Excluded by the requester). Redirect: I do not have information on this. Please
-    contact the relevant team directly.
-
-    - financial details (Excluded by the requester). Redirect: I do not have information on this. Please
-    contact the relevant team directly.
-
-    - contractual details (Excluded by the requester). Redirect: I do not have information on this. Please
-    contact the relevant team directly.
 
     - Current stock availability at port (this needs a live value and the documents are a static snapshot).
     You cannot say whether it is true right now, so never answer yes or no about the current state. You
@@ -174,4 +159,4 @@ provenance:
       near-miss p90=0.805); threshold set 0.05 below the in-scope p10 to preserve recall; unanswerable
       near-misses rely on the refusal policy'
     query_rewrite: off by default; the optimizer may enable it for retrieval misses
-  fewshot_leakage_check: 'pending: needs the eval set (P5); see forgeai/generator/fewshot.py'
+  fewshot_leakage_check: 'passed: 0 examples checked against 21 eval questions'

@@ -1,0 +1,7 @@
+{
+  "eval_questions": 21,
+  "few_shot_examples_checked": 0,
+  "kept": 0,
+  "threshold": 0.8,
+  "rejected": []
+}

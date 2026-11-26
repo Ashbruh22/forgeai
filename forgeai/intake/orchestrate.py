@@ -27,6 +27,7 @@ from forgeai.guard.snapshot import find_snapshot_date
 from forgeai.ingest.models import Chunk
 from forgeai.ingest.pipeline import IngestResult, ingest_folder
 from forgeai.intake import interviewer as iv
+from forgeai.intake.consistency import assert_consistent, find_conflicts
 from forgeai.intake.render import render_gaps, render_requirements
 from forgeai.intake.schema import (
     Answer, Assumption, Gap, GapAction, Question, RefuseTopic, RejectedAssumption, Requirements,
@@ -133,30 +134,22 @@ def _assemble(draft: RequirementsDraft, assumptions: list[Assumption]) -> Requir
 
 def reject_conflicting_assumptions(
     req: Requirements, assumed_items: dict[str, list[str]], index: HybridIndex, config: ForgeConfig,
+    brief: str = "", embedder: Embedder | None = None,
 ) -> None:
     """Drop self-answered exclusions that contradict the brief or the corpus, and log why.
 
-    The brief's own topics (must-answer topics and scope) always win. For the rest, an
-    assumed exclusion is probed like a topic: if the corpus can answer questions about it, the
-    corpus wins and the assumption is rejected. Exclusions about things the corpus does not
-    cover are exactly what assumptions are allowed to add.
+    Precedence is brief > corpus evidence > assumptions. An assumed exclusion is checked against
+    (1) the brief's topics and asks, by words and by embedding plus a judge yes/no with a verified
+    quote, (2) tables in the corpus, where column names and cell values are evidence, and
+    (3) probes: if the documents can answer questions about it, the corpus wins. Exclusions about
+    things neither covers are exactly what assumptions are allowed to add.
     """
-    brief_topics = [t.topic for t in req.must_answer_topics]
-    if "scope_in" not in assumed_items:
-        brief_topics += req.scope.in_
     candidates = [(field, item) for field in ("scope_out", "must_refuse") for item in assumed_items.get(field, [])]
     if not candidates:
         return
-    rejected: list[RejectedAssumption] = []
-    to_probe: list[tuple[str, str]] = []
-    for field, item in candidates:
-        clash = next((t for t in brief_topics if shares_content_term(item, t)), None)
-        if clash:
-            rejected.append(RejectedAssumption(
-                field=field, item=item, conflict_with="brief", evidence=[],
-                detail=f"overlaps the topic the brief asks for: {clash!r}"))
-        else:
-            to_probe.append((field, item))
+    rejected = find_conflicts(candidates, req, brief, index.chunks, embedder, config) if embedder else []
+    already = {(r.field, r.item) for r in rejected}
+    to_probe = [c for c in candidates if c not in already]
     if to_probe:
         coverage, _, _, _ = probe_topics(
             [(f"X{i}", item) for i, (_, item) in enumerate(to_probe)], req.purpose, index, config,
@@ -309,7 +302,7 @@ def run_intake_and_guard(
         chunks, embedder, config.embedding_model,
         cache_dir=config.index_cache_dir, query_prefix=config.embedding_query_prefix,
     )
-    reject_conflicting_assumptions(req, assumed_items, index, config)
+    reject_conflicting_assumptions(req, assumed_items, index, config, brief, embedder)
 
     # Stage 3: groundability guard.
     documents = {r.file: " ".join(c.text for c in chunks if c.doc == r.file)[:3000] for r in ingest.records if r.status == "ok"}
@@ -334,6 +327,7 @@ def run_intake_and_guard(
                 source=f"{NON_INTERACTIVE}: {gap_question.id} {gap_question.text}"))
     assert len(budget.asked) <= config.limits.max_clarifying_questions  # hard cap, enforced in code
 
+    assert_consistent(req)  # nothing may be both asked for and refused (evals are built from this)
     _write_outputs(req, budget.asked, answers, guard, intake_dir, guard_dir)
     return req
 

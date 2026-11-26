@@ -11,8 +11,7 @@ scope:
   - library card membership
   - book availability
   - cafe menu
-  out:
-  - personal account inquiries
+  out: []
 must_answer_topics:
 - id: T1
   topic: Are there any fines for overdue books?
@@ -62,10 +61,6 @@ must_answer_topics:
 must_refuse_topics:
 - id: R1
   topic: personal data
-  reason: Excluded by the requester.
-  redirect: I do not have information on this. Please contact the relevant team directly.
-- id: R2
-  topic: legal advice
   reason: Excluded by the requester.
   redirect: I do not have information on this. Please contact the relevant team directly.
 capabilities_needed:
@@ -124,6 +119,11 @@ assumptions:
     and redirect, or ''documents'' if you will add documents.'
 assumptions_rejected:
 - field: scope_out
+  item: room booking procedures
+  conflict_with: brief
+  detail: 'overlaps the topic the brief asks for: ''Are there any fines for overdue books?'''
+  evidence: []
+- field: scope_out
   item: cafe policies
   conflict_with: brief
   detail: 'overlaps the topic the brief asks for: ''What are the cafe menu options?'''
@@ -154,11 +154,18 @@ assumptions_rejected:
   detail: 'overlaps the topic the brief asks for: ''What are the cafe menu options?'''
   evidence: []
 - field: scope_out
-  item: room booking procedures
-  conflict_with: corpus
-  detail: the documents answer questions about it (SUPPORTED); excluding it would refuse something the
-    corpus supports
+  item: personal account inquiries
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''Build an assistant for Brightwater Library visitors
+    that answers questions about loan periods'' (The refused subject is a part of the asked task, as the
+    assistant is building an assistant for Brightwater Library visitors.)'
   evidence:
-  - 'rooms.csv#c4: hourly_fee_usd: 60'
-  - 'rooms.csv#c1: room: Reading Room | capacity: 40 | hourly_fee_usd: 0 | projector: no'
+  - Brightwater Library visitors
+- field: must_refuse
+  item: legal advice
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''fines'' (The refused subject ''legal advice'' is
+    needed for the asked task ''fines''.)'
+  evidence:
+  - fines
 interview_log: questions.json

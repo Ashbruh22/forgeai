@@ -136,6 +136,12 @@ def test_think_flag_is_sent_explicitly_and_defaults_off(make_client) -> None:
     assert transport.calls[0]["think"] is False
 
 
+def test_output_length_is_capped(make_client) -> None:
+    client, transport = make_client([GOOD])
+    call(client)
+    assert transport.calls[0]["options"]["num_predict"] == client.config.max_output_tokens == 1536
+
+
 def test_module_level_client_must_be_configured() -> None:
     set_client(None)
     with pytest.raises(LLMError):

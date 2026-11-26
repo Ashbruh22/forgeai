@@ -1,0 +1,57 @@
+{
+  "target_total": 32,
+  "floor": 20,
+  "valid_cases": 24,
+  "floor_met": true,
+  "generation_rounds": 6,
+  "targets": {
+    "answerable": 14,
+    "multidoc": 7,
+    "ambiguous": 4,
+    "out_of_scope": 7,
+    "tool_required": 0
+  },
+  "generated_candidates": {
+    "answerable": 30,
+    "multidoc": 20,
+    "ambiguous": 6,
+    "out_of_scope": 24
+  },
+  "validated_after_filters": {
+    "answerable": 14,
+    "multidoc": 1,
+    "ambiguous": 1,
+    "out_of_scope": 8
+  },
+  "selected": {
+    "answerable": 14,
+    "multidoc": 1,
+    "ambiguous": 1,
+    "out_of_scope": 8
+  },
+  "split": {
+    "dev": 18,
+    "test": 6
+  },
+  "rejections_by_reason": {
+    "contradicts the requirements": 12,
+    "answer_span is not a verbatim quote of the seed": 4,
+    "fact anchoring failed": 13,
+    "question copies the passage": 8,
+    "each document must contribute at least one key fact": 4,
+    "span is not a verbatim quote of its passage": 11,
+    "a reading's span is not a verbatim quote or has no key facts": 26,
+    "the question contains a discriminator ['personal', 'company']": 1,
+    "independent answerability failed": 28,
+    "duplicate (embedding similarity)": 16,
+    "the question contains a discriminator ['personal', 'work-related']": 2,
+    "the question contains a discriminator ['personal', 'business']": 2,
+    "the question contains a discriminator ['personal']": 1
+  },
+  "candidates_attempted": 152,
+  "rejection_rate": 0.842,
+  "shortfall": {
+    "multidoc": 6,
+    "ambiguous": 3
+  }
+}

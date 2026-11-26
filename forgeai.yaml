@@ -1,6 +1,7 @@
 # ForgeAI configuration. Exact model tags/digests are recorded in every run's manifest.json.
 ollama_host: http://localhost:11434
 num_ctx: 8192
+max_output_tokens: 1536   # hard cap per reply; a runaway generation timed out at 600 s once
 think: false            # reasoning/thinking mode off for all roles (agent, generator, judge)
 
 agent_model:            # agent + generator model

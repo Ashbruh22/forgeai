@@ -76,6 +76,7 @@ class ForgeConfig(BaseModel):
     ollama_host: str = "http://localhost:11434"
     ollama_timeout_s: float = 600.0
     num_ctx: int = 8192
+    max_output_tokens: int = 1536  # cap so a degenerate generation cannot run for minutes
     think: bool = False  # Qwen3 reasoning mode; off for every role (agent, generator, judge)
     agent_model: ModelSpec
     judge_model: ModelSpec

@@ -1,0 +1,36 @@
+{
+  "planted_facts_file": "spares_procurement",
+  "coverage": {
+    "planted_facts": 24,
+    "fully_covered": 5,
+    "partly_covered": 5,
+    "not_reached": 14,
+    "fraction_fully_covered": 0.208,
+    "fraction_reached": 0.417,
+    "not_reached_ids": [
+      "B-S01-02",
+      "B-S01-04",
+      "B-S02-02",
+      "B-S02-04",
+      "B-S03-01",
+      "B-S03-02",
+      "B-S03-04",
+      "B-S03-05",
+      "CSV-HD-1123-S01",
+      "CSV-HD-1123-S02",
+      "CSV-HD-1123-S03",
+      "CSV-TE-2207-S02",
+      "CSV-CP-3310-S03",
+      "CSV-PP-4102-S01"
+    ]
+  },
+  "key_fact_agreement": {
+    "checked": 7,
+    "agree": 7,
+    "conflicts": 0,
+    "fraction": 1.0,
+    "unplanted_detail_in_a_planted_span": 12,
+    "not_checkable_no_planted_fact_in_span": 12,
+    "disagreements": []
+  }
+}

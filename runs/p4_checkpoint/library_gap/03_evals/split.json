@@ -1,0 +1,26 @@
+{
+  "dev": [
+    "lib-A01",
+    "lib-A02",
+    "lib-A03",
+    "lib-A04",
+    "lib-A05",
+    "lib-A06",
+    "lib-A08",
+    "lib-A09",
+    "lib-O02",
+    "lib-O03",
+    "lib-O04",
+    "lib-O06",
+    "lib-O07",
+    "lib-O09"
+  ],
+  "test": [
+    "lib-A07",
+    "lib-A10",
+    "lib-A11",
+    "lib-O01",
+    "lib-O05",
+    "lib-O08"
+  ]
+}

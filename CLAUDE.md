@@ -61,3 +61,12 @@ Do ONE phase at a time. When a phase's exit test passes: commit, push, show the 
 - Precedence when sources disagree: brief > corpus evidence > assumptions.
 - Pipeline so far: `forgeai intake` (P3) then `forgeai generate` (P4). `scripts/smoke_questions.py`
   asks a generated agent real questions. P3/P4 evidence is in `runs/p4_checkpoint/`.
+- Pipeline: `forgeai intake` (P3), `forgeai generate` (P4), `forgeai evals` and `forgeai audit` (P5).
+  `forgeai/evals/` never imports the generator or the agent definition and never reads planted facts;
+  only `forgeai/audit/` reads them (tests enforce both).
+- A requirement must never be both asked for and refused: `forgeai/intake/consistency.py` (check at
+  intake, invariant over every committed `requirements.yaml`), `forgeai/evals/consistency.py` (evals).
+- Eval expected values come from code: table cells, or `forgeai/evals/compute.py` plans whose every
+  fact is verified against the documents and whose answer the safe calculator computes.
+- Windows shell lesson: avoid Python heredocs full of backslashes (they get mangled); use the Edit and
+  Write tools for escape-heavy text, and never run several multi-minute background jobs at once.

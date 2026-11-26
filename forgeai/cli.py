@@ -146,6 +146,49 @@ def generate(
     console.print(f"tools: {agent.tools or 'none'}   min_score: {agent.retrieval.min_score} {agent.retrieval.min_score_bounds}")
 
 
+@app.command()
+def evals(
+    run: Path = typer.Option(..., help="Run folder holding 00_intake/ (and 02_agent/ for the few-shot check)"),
+    docs: Path = typer.Option(..., help="Folder of documents"),
+    prefix: str = typer.Option("ev", help="Prefix for case ids"),
+    config_path: Path = typer.Option(Path("forgeai.yaml"), "--config", help="forgeai.yaml"),
+) -> None:
+    """Stage 5: generate and validate the eval set into 03_evals/. Never reads the agent definition."""
+    from forgeai.evals.build import build_eval_set, write_eval_set
+    from forgeai.evals.corpus import EvalCorpus
+    from forgeai.generator.fewshot import run_fewshot_check
+    from forgeai.intake.schema import load_requirements
+
+    config = load_config(config_path)
+    set_client(LLMClient(config, trace_path=run / "trace.jsonl"))
+    embedder = SentenceTransformerEmbedder(config.embedding_model, config.embedding_revision)
+    req = load_requirements(run / "00_intake" / "requirements.yaml")
+    result = build_eval_set(req, EvalCorpus.load(docs, config, embedder), config, embedder, prefix)
+    write_eval_set(result, run / "03_evals")
+    stats = result.stats
+    console.print(f"[green]{stats['valid_cases']} valid cases[/green] (floor {stats['floor']}, met: {stats['floor_met']}) "
+                  f"selected {stats['selected']} split {stats['split']}")
+    if (run / "02_agent" / "agent.v0.yaml").is_file():  # the build, not the eval generator, checks the few-shot examples
+        check = run_fewshot_check(run, embedder, config.thresholds.fewshot_leakage_similarity,
+                                  [c.question for c in result.cases])
+        console.print(f"few-shot leakage check: {check['few_shot_examples_checked']} examples, {len(check['rejected'])} rejected")
+
+
+@app.command()
+def audit(
+    run: Path = typer.Option(..., help="Run folder holding 03_evals/eval_set.jsonl"),
+    facts: Path = typer.Option(..., help="Hidden planted-facts file of a synthesized demo corpus"),
+) -> None:
+    """Audit the eval set against a hidden fact sheet (coverage and key-fact agreement)."""
+    from forgeai.audit.audit import audit_eval_set
+    from forgeai.evals.build import load_eval_set
+
+    result = audit_eval_set(load_eval_set(run / "03_evals" / "eval_set.jsonl"), facts)
+    (run / "03_evals" / "audit.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
+    console.print(f"coverage {result['coverage']['fully_covered']}/{result['coverage']['planted_facts']}  "
+                  f"key-fact agreement {result['key_fact_agreement']['agree']}/{result['key_fact_agreement']['checked']}")
+
+
 def _not_yet(phase: str) -> None:
     console.print(f"[yellow]Not implemented yet (arrives in phase {phase}).[/yellow]")
     raise typer.Exit(2)

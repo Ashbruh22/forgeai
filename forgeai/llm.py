@@ -202,7 +202,8 @@ class LLMClient:
         if system:
             messages.append({"role": "system", "content": system})
         messages.append({"role": "user", "content": user})
-        options: dict[str, Any] = {"temperature": temperature, "num_ctx": self.config.num_ctx}
+        options: dict[str, Any] = {"temperature": temperature, "num_ctx": self.config.num_ctx,
+                                  "num_predict": self.config.max_output_tokens}
         if seed is not None:
             options["seed"] = seed
 

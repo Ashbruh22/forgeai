@@ -13,7 +13,7 @@
 - in: library card membership
 - in: book availability
 - in: cafe menu
-- out: personal account inquiries
+- out: (nothing excluded)
 
 ## Must answer
 
@@ -29,7 +29,6 @@
 ## Must refuse
 
 - **R1** personal data: Excluded by the requester. Redirect: I do not have information on this. Please contact the relevant team directly.
-- **R2** legal advice: Excluded by the requester. Redirect: I do not have information on this. Please contact the relevant team directly.
 
 **Capabilities needed.** document_qa
 
@@ -47,10 +46,12 @@
 
 ## Assumptions rejected (brief > corpus > assumptions)
 
+- **scope_out**: 'room booking procedures' conflicts with the brief: overlaps the topic the brief asks for: 'Are there any fines for overdue books?'
 - **scope_out**: 'cafe policies' conflicts with the brief: overlaps the topic the brief asks for: 'What are the cafe menu options?'
 - **must_refuse**: 'loan periods' conflicts with the brief: overlaps the topic the brief asks for: 'What is the loan period for books?'
 - **must_refuse**: 'fines' conflicts with the brief: overlaps the topic the brief asks for: 'Are there any fines for overdue books?'
 - **must_refuse**: 'library card membership' conflicts with the brief: overlaps the topic the brief asks for: 'Can I renew my library card?'
 - **must_refuse**: 'book availability' conflicts with the brief: overlaps the topic the brief asks for: 'Are there any fines for overdue books?'
 - **must_refuse**: 'cafe menu details' conflicts with the brief: overlaps the topic the brief asks for: 'What are the cafe menu options?'
-- **scope_out**: 'room booking procedures' conflicts with the corpus: the documents answer questions about it (SUPPORTED); excluding it would refuse something the corpus supports Evidence: rooms.csv#c4: hourly_fee_usd: 60 | rooms.csv#c1: room: Reading Room | capacity: 40 | hourly_fee_usd: 0 | projector: no
+- **scope_out**: 'personal account inquiries' conflicts with the brief: refusing it would block what was asked: 'Build an assistant for Brightwater Library visitors that answers questions about loan periods' (The refused subject is a part of the asked task, as the assistant is building an assistant for Brightwater Library visitors.) Evidence: Brightwater Library visitors
+- **must_refuse**: 'legal advice' conflicts with the brief: refusing it would block what was asked: 'fines' (The refused subject 'legal advice' is needed for the asked task 'fines'.) Evidence: fines

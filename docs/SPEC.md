@@ -308,6 +308,8 @@ If no tools are attached, the tool-required slots go to answerable and multi-doc
 
 **Seed spans, not chunk ids.** An eval case records where its facts live as `{doc, char_start, char_end, span_text}`, in character offsets of the document's *canonical text* (the loader's blocks joined by blank lines; it does not depend on chunking parameters). `span_text` must equal the text at those offsets (verified). A **gold-chunk hit** is any retrieved chunk whose character range overlaps the seed range. Chunk ids and exact-text matching are never used for this, because the optimizer changes chunk size and a smaller chunk can split the span across two chunks. *(Updated 2026-11-25, see `docs/DECISIONS.md`.)*
 
+**Implementation notes (2026-11-26, see `docs/DECISIONS.md` section G).** Negative tool cases are derived from the requirements' capabilities (the eval generator never sees the agent). A refusal case must make the guard's probe fail; the retrieval-score condition is logged, not gated. Key facts are atomic (at most 2, at most 10 words). Computed values come from a verified plan evaluated by the safe calculator. Generation tops up short types in extra rounds; shortfalls are reported, never padded.
+
 **Eval case schema:**
 ```json
 {

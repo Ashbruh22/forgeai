@@ -19,13 +19,9 @@ from forgeai.generator.retrieval_rules import retrieval_from_profile
 from forgeai.generator.sections import build_sections
 from forgeai.generator.tool_selector import ToolSelection, select_tools
 from forgeai.ingest.models import DocRecord
-from forgeai.intake.schema import Requirements
+from forgeai.intake.schema import load_requirements
 from forgeai.manifest import prompt_versions
 from forgeai.runner.agent_def import AgentDef, AgentModel, Corpus, save_agent
-
-
-def load_requirements(path: Path) -> Requirements:
-    return Requirements.model_validate(yaml.safe_load(path.read_text(encoding="utf-8")))
 
 
 def generate_agent(run_dir: Path, docs_dir: Path, config: ForgeConfig) -> AgentDef:

@@ -1,0 +1,47 @@
+{
+  "target_total": 32,
+  "floor": 20,
+  "valid_cases": 20,
+  "floor_met": true,
+  "generation_rounds": 6,
+  "targets": {
+    "answerable": 14,
+    "multidoc": 7,
+    "ambiguous": 4,
+    "out_of_scope": 7,
+    "tool_required": 0
+  },
+  "generated_candidates": {
+    "answerable": 67,
+    "multidoc": 5,
+    "out_of_scope": 16
+  },
+  "validated_after_filters": {
+    "answerable": 11,
+    "out_of_scope": 9
+  },
+  "selected": {
+    "answerable": 11,
+    "out_of_scope": 9
+  },
+  "split": {
+    "dev": 14,
+    "test": 6
+  },
+  "rejections_by_reason": {
+    "contradicts the requirements": 3,
+    "fact anchoring failed": 13,
+    "a reading's span is not a verbatim quote or has no key facts": 12,
+    "independent answerability failed": 12,
+    "the corpus can answer it": 3,
+    "duplicate (embedding similarity)": 50,
+    "question does not identify one table row": 2
+  },
+  "candidates_attempted": 115,
+  "rejection_rate": 0.826,
+  "shortfall": {
+    "answerable": 3,
+    "multidoc": 7,
+    "ambiguous": 4
+  }
+}

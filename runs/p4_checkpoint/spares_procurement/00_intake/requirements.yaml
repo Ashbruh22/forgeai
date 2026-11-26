@@ -12,10 +12,7 @@ scope:
   - Knowing when parts will arrive
   - What's in stock at each port
   out:
-  - general maritime law
-  - unrelated equipment maintenance
   - legal advice
-  - financial planning guidance
 must_answer_topics:
 - id: T1
   topic: Current stock levels at ports
@@ -57,19 +54,7 @@ must_answer_topics:
   - spares_catalogue.csv#c124
   supported_aspects: []
   snapshot_as_of: '2026-11-01'
-must_refuse_topics:
-- id: R1
-  topic: pricing details
-  reason: Excluded by the requester.
-  redirect: I do not have information on this. Please contact the relevant team directly.
-- id: R2
-  topic: financial details
-  reason: Excluded by the requester.
-  redirect: I do not have information on this. Please contact the relevant team directly.
-- id: R3
-  topic: contractual details
-  reason: Excluded by the requester.
-  redirect: I do not have information on this. Please contact the relevant team directly.
+must_refuse_topics: []
 capabilities_needed:
 - document_qa
 - structured_lookup
@@ -129,17 +114,58 @@ assumptions_rejected:
   conflict_with: brief
   detail: 'overlaps the topic the brief asks for: ''Current stock levels at ports'''
   evidence: []
+- field: scope_out
+  item: unrelated equipment maintenance
+  conflict_with: corpus
+  detail: a table in the documents holds this information (column names and cell values are evidence)
+  evidence:
+  - 'column of spares_catalogue.csv: part_no, description, equipment, maker, supplier_id, unit_price_usd,
+    moq, lead_time_days, stock_port, snapshot_date.'
 - field: must_refuse
   item: confidential supplier information
   conflict_with: brief
   detail: 'overlaps the topic the brief asks for: ''Supplier comparisons for spares'''
   evidence: []
 - field: must_refuse
-  item: terms and conditions
+  item: pricing details
   conflict_with: corpus
-  detail: the documents answer questions about it (PARTIAL); excluding it would refuse something the corpus
-    supports
+  detail: a table in the documents holds this information (column names and cell values are evidence)
   evidence:
-  - 'terms_norvik_marine_supply.pdf#c8: All payments for goods supplied by Norvik Marine Supply under
-    this agreement shall be made within net 45 days from the date of invoice.'
+  - 'column of spares_catalogue.csv: part_no, description, equipment, maker, supplier_id, unit_price_usd,
+    moq, lead_time_days, stock_port, snapshot_date.'
+- field: scope_out
+  item: general maritime law
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''Current stock levels at ports'' (The refused subject
+    is a part of the asked task.)'
+  evidence:
+  - ports
+- field: scope_out
+  item: financial planning guidance
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''Order cost estimates with discounts'' (The refused
+    subject ''financial planning guidance'' is a part of the asked task ''Order cost estimates with discounts''.)'
+  evidence:
+  - Order cost estimates with discounts
+- field: must_refuse
+  item: terms and conditions
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''Order cost estimates with discounts'' (The refused
+    subject ''terms and conditions'' is a part of the asked task ''Order cost estimates with discounts''.)'
+  evidence:
+  - Order cost estimates with discounts
+- field: must_refuse
+  item: financial details
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''Order cost estimates with discounts'' (The refused
+    subject ''financial details'' is a needed input for the asked task ''Order cost estimates with discounts''.)'
+  evidence:
+  - Order cost estimates with discounts
+- field: must_refuse
+  item: contractual details
+  conflict_with: brief
+  detail: 'refusing it would block what was asked: ''Order cost estimates with discounts'' (The refused
+    subject ''contractual details'' is a part of the asked task ''Order cost estimates with discounts''.)'
+  evidence:
+  - Order cost estimates with discounts
 interview_log: questions.json

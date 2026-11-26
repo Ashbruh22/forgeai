@@ -1,9 +1,9 @@
-Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|##########| 199/199 [00:00<00:00, 3894.43it/s]
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|##########| 199/199 [00:00<00:00, 4603.10it/s]
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 
 [in-scope] How many days can I borrow a book for, and what is the fine if I return it late?
   status: answered
-  answer: You can borrow a book for 21 days. If you return it late, a fine of $0.25 per day will be applied, capped at a maximum of $10 per item.
+  answer: You can borrow a book for 21 days. If you return it late, a fine of 0.25 dollars per day will be applied, capped at 10 dollars per item.
   cite: library_rules.md#c0: Books may be borrowed for 21 days.
   cite: library_rules.md#c1: Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item.
 

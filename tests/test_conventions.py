@@ -55,4 +55,5 @@ def test_content_terms_handle_plurals_but_not_lookalike_words() -> None:
     assert content_terms("books") == content_terms("book")
     assert content_terms("entitlements") & content_terms("entitled")
     assert not content_terms("interpretation") & content_terms("internal")
-    assert content_terms("policies and fines") == {"fines".rstrip("s")}
+    assert content_terms("policies and fines") == content_terms("fine")
+    assert content_terms("pricing") == content_terms("unit_price_usd") - {"unit", "usd"}

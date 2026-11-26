@@ -12,7 +12,7 @@
 - in: Travel claims
 - in: Conduct rules
 - in: Salary slip questions
-- out: ethical dilemmas
+- out: (nothing excluded)
 
 ## Must answer
 
@@ -22,7 +22,7 @@
 
 ## Must refuse
 
-- **R1** ethical dilemmas: Excluded by the requester. Redirect: I do not have information on this. Please contact the relevant team directly.
+- (none)
 
 **Capabilities needed.** document_qa
 
@@ -38,11 +38,13 @@
 
 ## Assumptions rejected (brief > corpus > assumptions)
 
-- **scope_out**: 'sensitive personal data' conflicts with the corpus: the documents answer questions about it (SUPPORTED); excluding it would refuse something the corpus supports Evidence: code_of_conduct_it_policy.pdf#c5: All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends. | code_of_conduct_it_policy.pdf#c8: 7.1 All personal devices used for company business must be registered with IT prior to use, and must remain registered throughout their active use period.
+- **scope_out**: 'sensitive personal data' conflicts with the brief: refusing it would block what was asked: 'Travel claims' (The refused subject is a needed input for the asked task.) Evidence: Travel claims
+- **scope_out**: 'confidential information' conflicts with the brief: refusing it would block what was asked: 'Conduct rules' (The refused subject is a part of the asked task.) Evidence: Conduct rules
+- **scope_out**: 'ethical dilemmas' conflicts with the brief: refusing it would block what was asked: 'Also help people with salary slip questions.' (The refused subject 'ethical dilemmas' is a part of the asked task 'help people with salary slip questions'.) Evidence: help people with salary slip questions
+- **scope_out**: 'misconduct reporting' conflicts with the brief: refusing it would block what was asked: 'Conduct rules' (The refused subject is a part of the asked task.) Evidence: Conduct rules
+- **must_refuse**: 'personal data requests' conflicts with the brief: refusing it would block what was asked: 'Travel claims' (The refused subject is a part of the asked task.) Evidence: Travel claims
+- **must_refuse**: 'HR policies' conflicts with the brief: refusing it would block what was asked: 'Leave policy' (the refused subject is a part of the asked task) Evidence: Leave policy
+- **must_refuse**: 'ethical dilemmas' conflicts with the brief: refusing it would block what was asked: 'Also help people with salary slip questions.' (The refused subject 'ethical dilemmas' is a part of the asked task 'help people with salary slip questions'.) Evidence: help people with salary slip questions
+- **must_refuse**: 'misconduct reporting' conflicts with the brief: refusing it would block what was asked: 'Conduct rules' (The refused subject is a part of the asked task.) Evidence: Conduct rules
 - **scope_out**: 'legal advice' conflicts with the corpus: the documents answer questions about it (PARTIAL); excluding it would refuse something the corpus supports Evidence: code_of_conduct_it_policy.pdf#c5: Any breach of confidentiality, regardless of intent, will result in disciplinary action, up to and including termination of employment and legal prosecution under applicable laws.
-- **scope_out**: 'confidential information' conflicts with the corpus: the documents answer questions about it (SUPPORTED); excluding it would refuse something the corpus supports Evidence: code_of_conduct_it_policy.pdf#c5: All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends. | code_of_conduct_it_policy.pdf#c5: Employees must not disclose any confidential information to third parties, including but not limited to former colleagues, contractors, or external auditors, without prior written authorization from the Chief Compliance Officer.
-- **scope_out**: 'misconduct reporting' conflicts with the corpus: the documents answer questions about it (SUPPORTED); excluding it would refuse something the corpus supports Evidence: code_of_conduct_it_policy.pdf#c6: The Ethics Hotline will acknowledge receipt of all reports within 5 working days, regardless of the nature or severity of the concern. | code_of_conduct_it_policy.pdf#c6: All reports of misconduct must be submitted through the Ethics Hotline, which is the designated internal channel for such concerns.
-- **must_refuse**: 'personal data requests' conflicts with the corpus: the documents answer questions about it (SUPPORTED); excluding it would refuse something the corpus supports Evidence: leave_policy.pdf#c5: Annual leave requests need 10 working days notice to allow adequate planning. | code_of_conduct_it_policy.pdf#c9: Employees are prohibited from using personal email accounts to conduct company business or to communicate with clients, suppliers, or colleagues unless explicitly authorized by a manager.
 - **must_refuse**: 'legal advice' conflicts with the corpus: the documents answer questions about it (PARTIAL); excluding it would refuse something the corpus supports Evidence: code_of_conduct_it_policy.pdf#c5: Any breach of confidentiality, regardless of intent, will result in disciplinary action, up to and including termination of employment and legal prosecution under applicable laws.
-- **must_refuse**: 'HR policies' conflicts with the corpus: the documents answer questions about it (SUPPORTED); excluding it would refuse something the corpus supports Evidence: leave_policy.pdf#c5: Annual leave requests need 10 working days notice to allow adequate planning. | code_of_conduct_it_policy.pdf#c3: All employees are expected to conduct themselves with professionalism, integrity, and respect in all interactions with colleagues, clients, and third parties at all times.
-- **must_refuse**: 'misconduct reporting' conflicts with the corpus: the documents answer questions about it (SUPPORTED); excluding it would refuse something the corpus supports Evidence: code_of_conduct_it_policy.pdf#c6: The Ethics Hotline will acknowledge receipt of all reports within 5 working days, regardless of the nature or severity of the concern. | code_of_conduct_it_policy.pdf#c6: All reports of misconduct must be submitted through the Ethics Hotline, which is the designated internal channel for such concerns.

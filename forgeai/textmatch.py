@@ -31,22 +31,26 @@ STOPWORDS = frozenset(
 )
 
 
+def _stem(word: str) -> str:
+    """Light suffix stripping so that "price", "prices" and "pricing" meet; then a 6-letter cut."""
+    if word.endswith("ies") and len(word) > 5:
+        word = word[:-3] + "y"
+    elif word.endswith("ing") and len(word) > 6:
+        word = word[:-3]
+    elif word.endswith("s") and not word.endswith("ss"):
+        word = word[:-1]
+    if word.endswith("e") and len(word) > 4:
+        word = word[:-1]
+    return word[:6]
+
+
 def content_terms(text: str) -> set[str]:
     """Lowercase content words (4+ letters, not stopwords), reduced to a short stem.
 
-    A plural "s" is dropped, then the word is cut to 6 letters. That keeps "book"/"books" and
-    "entitled"/"entitlements" together but not "interpretation"/"internal".
+    "book"/"books", "price"/"pricing" and "entitled"/"entitlements" meet; the 6-letter cut
+    keeps "interpretation" and "internal" apart.
     """
-    terms = set()
-    for word in re.findall(r"[a-z]{4,}", text.lower()):
-        if word in STOPWORDS:
-            continue
-        if word.endswith("ies") and len(word) > 5:
-            word = word[:-3] + "y"
-        elif word.endswith("s") and not word.endswith("ss"):
-            word = word[:-1]
-        terms.add(word[:6])
-    return terms
+    return {_stem(w) for w in re.findall(r"[a-z]{4,}", text.lower()) if w not in STOPWORDS}
 
 
 def shares_content_term(a: str, b: str) -> bool:

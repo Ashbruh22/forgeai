@@ -13,6 +13,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from pathlib import Path
+
 import numpy as np
 
 from forgeai.embeddings import Embedder
@@ -57,3 +59,26 @@ def validate_few_shots(
     report = check_few_shot_leakage(agent.prompt_sections.few_shot, eval_questions, embedder, threshold)
     sections = agent.prompt_sections.model_copy(update={"few_shot": report.kept})
     return agent.model_copy(update={"prompt_sections": sections}), report
+
+
+def run_fewshot_check(run_dir: Path, embedder: Embedder, threshold: float, eval_questions: list[str]) -> dict:
+    """Run the leakage check for a run now that its eval set exists (called by the build, not by evals)."""
+    import json
+
+    from forgeai.runner.agent_def import load_agent, save_agent
+
+    path = run_dir / "02_agent" / "agent.v0.yaml"
+    agent = load_agent(path)
+    checked, report = validate_few_shots(agent, eval_questions, embedder, threshold)
+    result = {
+        "eval_questions": len(eval_questions), "few_shot_examples_checked": len(agent.prompt_sections.few_shot),
+        "kept": len(checked.prompt_sections.few_shot), "threshold": threshold,
+        "rejected": [{"example": s.question, "similar_eval_question": q, "similarity": round(sim, 3)}
+                     for s, q, sim in (report.rejected if report else [])],
+    }
+    note = (f"passed: {result['few_shot_examples_checked']} examples checked against {len(eval_questions)} eval questions"
+            if not result["rejected"] else f"FAILED: {len(result['rejected'])} examples removed")
+    checked.provenance["fewshot_leakage_check"] = note
+    save_agent(checked, path)
+    (run_dir / "02_agent" / "fewshot_leakage.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
+    return result

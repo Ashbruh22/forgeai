@@ -55,6 +55,7 @@ def handlers(draft: RequirementsDraft) -> dict:
         "Support": honest_support,
         "JudgeSupport": agreeable_judge,
         "TopicSplit": lambda u: {"aspects": []},
+        "ConflictCheck": lambda u: {"reason": "different things", "quote": "", "contradicts": False},
     }
 
 
