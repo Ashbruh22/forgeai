@@ -2,10 +2,11 @@ evals/ambiguous_question: 1
 evals/answer_bearing: 1
 evals/answer_from_context: 1
 evals/answerable: 5
-evals/compute_template: 1
+evals/compute_template: 2
 evals/focus: 1
 evals/lookup_question: 1
 evals/merge_questions: 1
 evals/negative_tool: 1
 evals/refusal_question: 1
+evals/row_identity: 1
 guard/near_miss: 2

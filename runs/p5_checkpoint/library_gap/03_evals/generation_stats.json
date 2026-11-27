@@ -1,7 +1,7 @@
 {
   "target_total": 32,
   "floor": 20,
-  "valid_cases": 22,
+  "valid_cases": 27,
   "floor_met": true,
   "generation_rounds": 6,
   "targets": {
@@ -12,52 +12,50 @@
     "tool_required": 0
   },
   "generated_candidates": {
-    "answerable": 97,
+    "answerable": 50,
     "out_of_scope": 20,
-    "multidoc": 3
+    "multidoc": 6
   },
   "validated_after_filters": {
-    "answerable": 8,
-    "multidoc": 2,
+    "answerable": 11,
+    "multidoc": 4,
     "out_of_scope": 12
   },
   "selected": {
-    "answerable": 8,
-    "multidoc": 2,
+    "answerable": 11,
+    "multidoc": 4,
     "out_of_scope": 12
   },
   "split": {
-    "dev": 16,
-    "test": 6
+    "dev": 19,
+    "test": 8
   },
   "rejections_by_reason": {
     "contradicts the requirements": 4,
-    "question does not identify one table row": 24,
-    "independent answerability failed": 54,
+    "question does not identify one table row": 11,
     "the corpus can answer it": 3,
-    "duplicate (embedding similarity)": 37,
-    "the merged question dropped one of the two questions": 1
+    "the merged question dropped one of the two questions": 1,
+    "duplicate (embedding similarity)": 41,
+    "independent answerability failed": 1
   },
-  "candidates_attempted": 145,
-  "rejection_rate": 0.848,
+  "candidates_attempted": 88,
+  "rejection_rate": 0.693,
   "shortfall": {
-    "answerable": 6,
-    "multidoc": 5,
+    "answerable": 3,
+    "multidoc": 3,
     "ambiguous": 4
   },
   "coverage": {
     "items": 16,
-    "covered": 14,
-    "uncovered": [
-      "topic:T4",
-      "aspect:T6/Recorded shelf location and copy count"
-    ],
-    "cases": 22,
+    "covered": 16,
+    "uncovered": [],
+    "cases": 27,
     "uncovered_in_dev": []
   },
   "key_facts_per_case": {
-    "1": 8,
-    "2": 2,
+    "1": 9,
+    "2": 5,
+    "3": 1,
     "0": 12
   }
 }

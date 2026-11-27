@@ -15,18 +15,19 @@
       "status": "COVERED",
       "cases": [
         "hr-A01",
-        "hr-A05",
-        "hr-M03",
-        "hr-M05"
+        "hr-A08",
+        "hr-M04",
+        "hr-M06"
       ],
       "note": "",
       "dev_cases": [
         "hr-A01",
-        "hr-A05",
-        "hr-M03",
-        "hr-M05"
+        "hr-M04",
+        "hr-M06"
       ],
-      "test_cases": []
+      "test_cases": [
+        "hr-A08"
+      ]
     },
     {
       "id": "topic:T2",
@@ -36,11 +37,13 @@
       "status": "COVERED",
       "cases": [
         "hr-A02",
+        "hr-A06",
         "hr-M02"
       ],
       "note": "",
       "dev_cases": [
-        "hr-A02"
+        "hr-A02",
+        "hr-A06"
       ],
       "test_cases": [
         "hr-M02"
@@ -53,18 +56,13 @@
       "expects": "answered",
       "status": "COVERED",
       "cases": [
-        "hr-A03",
-        "hr-A07",
-        "hr-M04"
+        "hr-A03"
       ],
       "note": "",
       "dev_cases": [
-        "hr-A03",
-        "hr-M04"
+        "hr-A03"
       ],
-      "test_cases": [
-        "hr-A07"
-      ]
+      "test_cases": []
     },
     {
       "id": "gap:G-T4",
@@ -124,16 +122,13 @@
       "expects": "refused",
       "status": "COVERED",
       "cases": [
-        "hr-O04",
-        "hr-O11"
+        "hr-O04"
       ],
       "note": "",
       "dev_cases": [
-        "hr-O11"
-      ],
-      "test_cases": [
         "hr-O04"
-      ]
+      ],
+      "test_cases": []
     },
     {
       "id": "negtool:csv_lookup",
@@ -203,20 +198,21 @@
       "status": "COVERED",
       "cases": [
         "hr-A01",
-        "hr-A05",
-        "hr-M03",
-        "hr-M05",
+        "hr-A08",
+        "hr-M04",
+        "hr-M06",
         "hr-O01"
       ],
       "note": "maps to ['gap:G-T4', 'topic:T1']",
       "dev_cases": [
         "hr-A01",
-        "hr-A05",
-        "hr-M03",
-        "hr-M05",
+        "hr-M04",
+        "hr-M06",
         "hr-O01"
       ],
-      "test_cases": []
+      "test_cases": [
+        "hr-A08"
+      ]
     },
     {
       "id": "ask:A2",
@@ -226,11 +222,13 @@
       "status": "COVERED",
       "cases": [
         "hr-A02",
+        "hr-A06",
         "hr-M02"
       ],
       "note": "maps to ['topic:T2']",
       "dev_cases": [
-        "hr-A02"
+        "hr-A02",
+        "hr-A06"
       ],
       "test_cases": [
         "hr-M02"
@@ -243,18 +241,13 @@
       "expects": "answered",
       "status": "COVERED",
       "cases": [
-        "hr-A03",
-        "hr-A07",
-        "hr-M04"
+        "hr-A03"
       ],
       "note": "maps to ['topic:T3']",
       "dev_cases": [
-        "hr-A03",
-        "hr-M04"
+        "hr-A03"
       ],
-      "test_cases": [
-        "hr-A07"
-      ]
+      "test_cases": []
     },
     {
       "id": "ask:A4",

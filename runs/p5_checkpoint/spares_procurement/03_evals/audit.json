@@ -26,12 +26,12 @@
     ]
   },
   "key_fact_agreement": {
-    "checked": 6,
-    "agree": 6,
+    "checked": 10,
+    "agree": 10,
     "conflicts": 0,
     "fraction": 1.0,
     "unplanted_detail_in_a_planted_span": 0,
-    "not_checkable_no_planted_fact_in_span": 15,
+    "not_checkable_no_planted_fact_in_span": 16,
     "disagreements": []
   }
 }

@@ -49,6 +49,14 @@ def preflight(config, run: Path) -> None:  # noqa: ANN001
         raise typer.Exit(5) from exc
     total, free = system_memory()
     report["ram_gb"] = {"total": round(total, 1), "free_at_start": round(free, 1)}
+    try:
+        import torch
+
+        cuda_visible = bool(torch.cuda.is_available())
+    except ImportError:
+        cuda_visible = False
+    # the embedder is pinned to the CPU in forgeai/embeddings.py so it never shares the GPU with Ollama
+    report["embedding"] = {"model": config.embedding_model, "device": "cpu", "torch_sees_cuda": cuda_visible}
     run.mkdir(parents=True, exist_ok=True)
     (run / "resources.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     for m in report["models"]:

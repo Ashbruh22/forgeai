@@ -1,12 +1,9 @@
 {
   "summary": {
     "items": 16,
-    "covered": 14,
-    "uncovered": [
-      "topic:T4",
-      "aspect:T6/Recorded shelf location and copy count"
-    ],
-    "cases": 22,
+    "covered": 16,
+    "uncovered": [],
+    "cases": 27,
     "uncovered_in_dev": []
   },
   "items": [
@@ -17,16 +14,15 @@
       "expects": "answered",
       "status": "COVERED",
       "cases": [
-        "lib-A01",
-        "lib-M02"
+        "lg-A01",
+        "lg-M04"
       ],
       "note": "",
       "dev_cases": [
-        "lib-M02"
+        "lg-A01",
+        "lg-M04"
       ],
-      "test_cases": [
-        "lib-A01"
-      ]
+      "test_cases": []
     },
     {
       "id": "topic:T2",
@@ -35,11 +31,11 @@
       "expects": "answered",
       "status": "COVERED",
       "cases": [
-        "lib-A02"
+        "lg-A02"
       ],
       "note": "",
       "dev_cases": [
-        "lib-A02"
+        "lg-A02"
       ],
       "test_cases": []
     },
@@ -50,11 +46,11 @@
       "expects": "answered",
       "status": "COVERED",
       "cases": [
-        "lib-A02"
+        "lg-A02"
       ],
       "note": "",
       "dev_cases": [
-        "lib-A02"
+        "lg-A02"
       ],
       "test_cases": []
     },
@@ -63,12 +59,18 @@
       "kind": "topic",
       "requirement": "Is the book 'Pride and Prejudice' available?",
       "expects": "answered",
-      "status": "UNCOVERED",
-      "cases": [],
+      "status": "COVERED",
+      "cases": [
+        "lg-A03",
+        "lg-M03"
+      ],
       "note": "",
-      "explanation": "25 candidates were written for this item and all were rejected: independent answerability failed x25",
-      "dev_cases": [],
-      "test_cases": []
+      "dev_cases": [
+        "lg-M03"
+      ],
+      "test_cases": [
+        "lg-A03"
+      ]
     },
     {
       "id": "topic:T6",
@@ -77,15 +79,21 @@
       "expects": "answered",
       "status": "COVERED",
       "cases": [
-        "lib-A03",
-        "lib-A07"
+        "lg-A03",
+        "lg-A04",
+        "lg-A05",
+        "lg-A10",
+        "lg-M03"
       ],
       "note": "",
       "dev_cases": [
-        "lib-A03"
+        "lg-A04",
+        "lg-A05",
+        "lg-A10",
+        "lg-M03"
       ],
       "test_cases": [
-        "lib-A07"
+        "lg-A03"
       ]
     },
     {
@@ -93,11 +101,14 @@
       "kind": "aspect",
       "requirement": "Recorded shelf location and copy count (as of 2026-11-20)",
       "expects": "answered",
-      "status": "UNCOVERED",
-      "cases": [],
+      "status": "COVERED",
+      "cases": [
+        "lg-A04"
+      ],
       "note": "",
-      "explanation": "6 candidates were written for this item and all were rejected: duplicate (embedding similarity) x6",
-      "dev_cases": [],
+      "dev_cases": [
+        "lg-A04"
+      ],
       "test_cases": []
     },
     {
@@ -107,15 +118,15 @@
       "expects": "refused",
       "status": "COVERED",
       "cases": [
-        "lib-O01",
-        "lib-O09"
+        "lg-O01",
+        "lg-O09"
       ],
       "note": "",
       "dev_cases": [
-        "lib-O09"
+        "lg-O01"
       ],
       "test_cases": [
-        "lib-O01"
+        "lg-O09"
       ]
     },
     {
@@ -125,16 +136,15 @@
       "expects": "refused",
       "status": "COVERED",
       "cases": [
-        "lib-O02",
-        "lib-O10"
+        "lg-O02",
+        "lg-O10"
       ],
       "note": "",
       "dev_cases": [
-        "lib-O10"
+        "lg-O02",
+        "lg-O10"
       ],
-      "test_cases": [
-        "lib-O02"
-      ]
+      "test_cases": []
     },
     {
       "id": "refuse:R1",
@@ -143,15 +153,15 @@
       "expects": "refused",
       "status": "COVERED",
       "cases": [
-        "lib-O03",
-        "lib-O08"
+        "lg-O03",
+        "lg-O08"
       ],
       "note": "",
       "dev_cases": [
-        "lib-O03"
+        "lg-O08"
       ],
       "test_cases": [
-        "lib-O08"
+        "lg-O03"
       ]
     },
     {
@@ -161,15 +171,16 @@
       "expects": "refused",
       "status": "COVERED",
       "cases": [
-        "lib-O04",
-        "lib-O11"
+        "lg-O04",
+        "lg-O11"
       ],
       "note": "",
       "dev_cases": [
-        "lib-O04",
-        "lib-O11"
+        "lg-O11"
       ],
-      "test_cases": []
+      "test_cases": [
+        "lg-O04"
+      ]
     },
     {
       "id": "negtool:calculator",
@@ -178,15 +189,15 @@
       "expects": "refused",
       "status": "COVERED",
       "cases": [
-        "lib-O05",
-        "lib-O12"
+        "lg-O05",
+        "lg-O12"
       ],
       "note": "",
       "dev_cases": [
-        "lib-O05"
+        "lg-O12"
       ],
       "test_cases": [
-        "lib-O12"
+        "lg-O05"
       ]
     },
     {
@@ -196,11 +207,11 @@
       "expects": "refused",
       "status": "COVERED",
       "cases": [
-        "lib-O06"
+        "lg-O06"
       ],
       "note": "",
       "dev_cases": [
-        "lib-O06"
+        "lg-O06"
       ],
       "test_cases": []
     },
@@ -211,11 +222,11 @@
       "expects": "refused",
       "status": "COVERED",
       "cases": [
-        "lib-O07"
+        "lg-O07"
       ],
       "note": "",
       "dev_cases": [
-        "lib-O07"
+        "lg-O07"
       ],
       "test_cases": []
     },
@@ -226,18 +237,17 @@
       "expects": "answered",
       "status": "COVERED",
       "cases": [
-        "lib-A01",
-        "lib-A02",
-        "lib-M02"
+        "lg-A01",
+        "lg-A02",
+        "lg-M04"
       ],
       "note": "maps to ['topic:T1', 'topic:T3']",
       "dev_cases": [
-        "lib-A02",
-        "lib-M02"
+        "lg-A01",
+        "lg-A02",
+        "lg-M04"
       ],
-      "test_cases": [
-        "lib-A01"
-      ]
+      "test_cases": []
     },
     {
       "id": "ask:A2",
@@ -246,19 +256,25 @@
       "expects": "answered",
       "status": "COVERED",
       "cases": [
-        "lib-A03",
-        "lib-A07",
-        "lib-O02",
-        "lib-O10"
+        "lg-A03",
+        "lg-A04",
+        "lg-A05",
+        "lg-A10",
+        "lg-M03",
+        "lg-O02",
+        "lg-O10"
       ],
       "note": "maps to ['gap:G-LIVE-1', 'topic:T6']",
       "dev_cases": [
-        "lib-A03",
-        "lib-O10"
+        "lg-A04",
+        "lg-A05",
+        "lg-A10",
+        "lg-M03",
+        "lg-O02",
+        "lg-O10"
       ],
       "test_cases": [
-        "lib-A07",
-        "lib-O02"
+        "lg-A03"
       ]
     },
     {
@@ -268,15 +284,15 @@
       "expects": "answered",
       "status": "COVERED",
       "cases": [
-        "lib-O01",
-        "lib-O09"
+        "lg-O01",
+        "lg-O09"
       ],
       "note": "maps to ['gap:G-T5']",
       "dev_cases": [
-        "lib-O09"
+        "lg-O01"
       ],
       "test_cases": [
-        "lib-O01"
+        "lg-O09"
       ]
     }
   ]

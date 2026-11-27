@@ -1,9 +1,9 @@
 {
   "target_total": 32,
   "floor": 20,
-  "valid_cases": 27,
+  "valid_cases": 29,
   "floor_met": true,
-  "generation_rounds": 5,
+  "generation_rounds": 3,
   "targets": {
     "answerable": 12,
     "multidoc": 5,
@@ -12,60 +12,60 @@
     "tool_required": 4
   },
   "generated_candidates": {
-    "answerable": 22,
-    "ambiguous": 10,
+    "answerable": 26,
+    "ambiguous": 6,
     "out_of_scope": 16,
     "tool_required": 7,
-    "multidoc": 3
+    "multidoc": 4
   },
   "validated_after_filters": {
-    "answerable": 11,
-    "multidoc": 1,
+    "answerable": 10,
+    "multidoc": 4,
     "ambiguous": 1,
     "out_of_scope": 10,
     "tool_required": 6
   },
   "selected": {
-    "answerable": 11,
-    "multidoc": 1,
+    "answerable": 10,
+    "multidoc": 4,
     "ambiguous": 1,
     "out_of_scope": 10,
     "tool_required": 4
   },
   "split": {
-    "dev": 20,
-    "test": 7
+    "dev": 21,
+    "test": 8
   },
   "rejections_by_reason": {
-    "contradicts the requirements": 5,
-    "question does not identify one table row": 30,
-    "no key facts": 1,
-    "question copies the passage": 7,
-    "computed case failed verification": 46,
-    "no answer-bearing key fact": 1,
-    "independent answerability failed": 9,
-    "the corpus can answer it": 1,
-    "the merged question dropped one of the two questions": 2,
-    "duplicate (embedding similarity)": 13,
-    "template is not one of the offered templates": 4
+    "contradicts the requirements": 4,
+    "question does not identify one table row": 18,
+    "no key facts": 2,
+    "question copies the passage": 8,
+    "computed case failed verification": 47,
+    "no answer-bearing key fact": 2,
+    "independent answerability failed": 11,
+    "the corpus can answer it": 2,
+    "the merged question dropped one of the two questions": 1,
+    "duplicate (embedding similarity)": 9,
+    "template is not one of the offered templates": 3
   },
-  "candidates_attempted": 148,
-  "rejection_rate": 0.804,
+  "candidates_attempted": 138,
+  "rejection_rate": 0.775,
   "shortfall": {
-    "answerable": 1,
-    "multidoc": 4,
+    "answerable": 2,
+    "multidoc": 1,
     "ambiguous": 3
   },
   "coverage": {
     "items": 18,
     "covered": 18,
     "uncovered": [],
-    "cases": 27,
+    "cases": 29,
     "uncovered_in_dev": []
   },
   "key_facts_per_case": {
-    "2": 2,
-    "1": 13,
+    "2": 5,
+    "1": 12,
     "3": 1,
     "0": 11
   }

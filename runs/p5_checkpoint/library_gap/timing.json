@@ -44,25 +44,25 @@
     "finished": "2026-11-27T17:54:22"
   },
   "evals": {
-    "wall_seconds": 392.8,
-    "llm_calls": 279,
-    "cache_hits": 109,
-    "live_llm_seconds": 366.0,
-    "model_load_seconds": 156.9,
-    "model_swaps": 18,
+    "wall_seconds": 247.9,
+    "llm_calls": 167,
+    "cache_hits": 73,
+    "live_llm_seconds": 214.8,
+    "model_load_seconds": 97.7,
+    "model_swaps": 9,
     "fallbacks": 0,
     "by_model": {
-      "llama3.1:8b": 28,
-      "qwen3:8b": 142
+      "llama3.1:8b": 19,
+      "qwen3:8b": 75
     },
     "ram": {
       "system_ram_total_gb": 15.7,
-      "peak_system_ram_used_gb": 13.0,
-      "min_free_ram_gb": 2.7,
-      "min_free_ram_pct": 17.0,
-      "low_memory_warnings": 0,
+      "peak_system_ram_used_gb": 13.8,
+      "min_free_ram_gb": 2.0,
+      "min_free_ram_pct": 12.4,
+      "low_memory_warnings": 35,
       "forgeai_process_peak_gb": 0.0
     },
-    "finished": "2026-11-27T18:01:14"
+    "finished": "2026-11-27T19:29:26"
   }
 }

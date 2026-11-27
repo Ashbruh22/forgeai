@@ -1,5 +1,5 @@
 ---
-version: 1
+version: 2
 ---
 # system
 You write calculation questions for a document-based assistant. You do NOT compute anything. You pick
@@ -17,6 +17,11 @@ Menu (facts found in the documents):
 {{menu}}
 
 Focus of the question: {{focus}}
+
+Slot rules: a `quantity` slot (a number of units the user orders) is ALWAYS given as `question_number`, the
+number written in your question, never as a menu fact. `price` and `rate` slots take menu facts whose unit
+matches. Example for discounted_product: bindings = [{"slot": "quantity", "question_number": "12"},
+{"slot": "price", "fact_id": "F1"}, {"slot": "rate", "fact_id": "S2.1"}].
 
 Return:
 - `template`: one of the template names above.

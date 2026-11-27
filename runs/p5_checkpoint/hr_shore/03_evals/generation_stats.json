@@ -15,36 +15,34 @@
     "answerable": 23,
     "ambiguous": 2,
     "out_of_scope": 22,
-    "multidoc": 6
+    "multidoc": 7
   },
   "validated_after_filters": {
-    "answerable": 14,
+    "answerable": 15,
     "multidoc": 6,
     "ambiguous": 1,
-    "out_of_scope": 16
+    "out_of_scope": 15
   },
   "selected": {
-    "answerable": 14,
+    "answerable": 15,
     "multidoc": 6,
     "ambiguous": 1,
-    "out_of_scope": 11
+    "out_of_scope": 10
   },
   "split": {
-    "dev": 23,
-    "test": 9
+    "dev": 24,
+    "test": 8
   },
   "rejections_by_reason": {
-    "contradicts the requirements": 6,
-    "no key facts": 1,
+    "contradicts the requirements": 7,
+    "question copies the passage": 2,
     "answer_span is not a verbatim quote of the seed": 2,
-    "fact anchoring failed": 1,
-    "question copies the passage": 1,
-    "no answer-bearing key fact": 1,
-    "independent answerability failed": 8,
+    "no key facts": 1,
+    "independent answerability failed": 9,
     "duplicate (embedding similarity)": 1
   },
-  "candidates_attempted": 58,
-  "rejection_rate": 0.362,
+  "candidates_attempted": 59,
+  "rejection_rate": 0.373,
   "shortfall": {
     "multidoc": 1,
     "ambiguous": 3
@@ -57,9 +55,9 @@
     "uncovered_in_dev": []
   },
   "key_facts_per_case": {
-    "1": 12,
-    "2": 7,
-    "3": 1,
-    "0": 12
+    "2": 6,
+    "1": 11,
+    "3": 4,
+    "0": 11
   }
 }
