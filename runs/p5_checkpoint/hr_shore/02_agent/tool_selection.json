@@ -1,0 +1,43 @@
+{
+  "attached": [],
+  "rejected": [
+    {
+      "tool": "csv_lookup",
+      "attached": false,
+      "reason": "the corpus has no table (CSV) to look up",
+      "requirement_id": "T1",
+      "justification": "Annual leave entitlements require looking up specific data from a table, which is provided in the CSV format.",
+      "necessity_quote": ""
+    },
+    {
+      "tool": "current_date",
+      "attached": false,
+      "reason": "veto: the topic does not itself ask for a time-dependent value (a date, a forecast)",
+      "requirement_id": "T3",
+      "justification": "Code of conduct rules may include deadlines or time-based conditions that require knowing the current date.",
+      "necessity_quote": ""
+    },
+    {
+      "tool": "weather",
+      "attached": false,
+      "reason": "the proposer found no topic that needs it",
+      "requirement_id": "",
+      "justification": "",
+      "necessity_quote": ""
+    },
+    {
+      "tool": "calculator",
+      "attached": false,
+      "reason": "necessity check: the reviewer's supporting quote is not in the topic text",
+      "requirement_id": "T2",
+      "justification": "Travel expense reimbursement procedures may involve calculating totals, discounts, or conversions, which require an arithmetic tool.",
+      "necessity_quote": "calculating totals, discounts, or conversions"
+    }
+  ],
+  "unattached_tools": [
+    "csv_lookup",
+    "calculator",
+    "current_date",
+    "weather"
+  ]
+}

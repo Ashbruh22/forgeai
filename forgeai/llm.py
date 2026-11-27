@@ -47,6 +47,15 @@ class LLMUnavailableError(LLMError):
     """Ollama could not be reached or returned a server error."""
 
 
+class LLMTransientError(LLMError):
+    """A failure that may not repeat: Ollama answered 5xx (for example a CUDA out-of-memory that made it unload its
+    models) or the call timed out. Retryable; after the retries the candidate is skipped (fallback)."""
+
+
+class LLMTimeoutError(LLMTransientError):
+    """A call exceeded the per-call timeout."""
+
+
 class StructuredCallError(LLMError):
     """Retries were exhausted and no deterministic fallback could be built."""
 
@@ -57,6 +66,7 @@ class ChatResult:
     tokens_in: int = 0
     tokens_out: int = 0
     load_ms: float = 0.0
+    done_reason: str = ""  # "length" means the output hit the token cap without finishing
 
 
 class Transport(Protocol):
@@ -105,6 +115,12 @@ class OllamaHttpTransport:
                 payload.pop("think")
                 response = self._client.post("/api/chat", json=payload)
             response.raise_for_status()
+        except httpx.TimeoutException as exc:
+            raise LLMTimeoutError(f"Ollama call for {model!r} timed out: {exc!r}") from exc
+        except httpx.HTTPStatusError as exc:
+            if exc.response.status_code >= 500:
+                raise LLMTransientError(f"Ollama server error {exc.response.status_code} for {model!r}: {exc.response.text[:120]}") from exc
+            raise LLMUnavailableError(f"Ollama request failed for {model!r}: {exc}") from exc
         except httpx.HTTPError as exc:
             raise LLMUnavailableError(f"Ollama request failed for {model!r}: {exc}") from exc
         body = response.json()
@@ -113,7 +129,14 @@ class OllamaHttpTransport:
             tokens_in=int(body.get("prompt_eval_count", 0)),
             tokens_out=int(body.get("eval_count", 0)),
             load_ms=float(body.get("load_duration", 0)) / 1e6,
+            done_reason=str(body.get("done_reason", "")),
         )
+
+
+def warm_model(host: str, name: str, num_ctx: int, timeout_s: float = 180.0) -> None:
+    """Load ``name`` into Ollama with the context window it will be used with (one token of output)."""
+    httpx.post(f"{host}/api/generate", timeout=timeout_s, json={
+        "model": name, "prompt": "ok", "stream": False, "options": {"num_ctx": num_ctx, "num_predict": 1}}).raise_for_status()
 
 
 def fetch_model_digests(host: str, names: list[str], timeout_s: float = 10.0) -> dict[str, str | None]:
@@ -202,7 +225,7 @@ class LLMClient:
         if system:
             messages.append({"role": "system", "content": system})
         messages.append({"role": "user", "content": user})
-        options: dict[str, Any] = {"temperature": temperature, "num_ctx": self.config.num_ctx,
+        options: dict[str, Any] = {"temperature": temperature, "num_ctx": self.config.num_ctx_for(model),
                                   "num_predict": self.config.max_output_tokens}
         if seed is not None:
             options["seed"] = seed
@@ -216,17 +239,31 @@ class LLMClient:
         load_ms = 0.0
         error = ""
         retries = 0
+        timeouts = 0
         result: BaseModel | None = None
         repair = load_prompt("_repair")
         for attempt in range(retries_allowed + 1):
-            reply = self.transport.chat(
-                model=model, messages=messages, schema=schema_json, options=options,
-                think=self.config.think,
-            )
+            try:
+                reply = self.transport.chat(
+                    model=model, messages=messages, schema=schema_json, options=options,
+                    think=self.config.think,
+                )
+            except LLMTransientError as exc:
+                timeouts += 1
+                error = f"{'timeout' if isinstance(exc, LLMTimeoutError) else 'server error'}: {exc}"[:200]
+                log.warning("LLM call role=%s prompt=%s failed transiently (%d): %s", role, prompt_id, timeouts, error)
+                if timeouts > MAX_TIMEOUT_RETRIES or attempt == retries_allowed:
+                    break
+                retries += 1
+                if not isinstance(exc, LLMTimeoutError):
+                    time.sleep(RECOVERY_PAUSE_S)  # Ollama reloads its models after an out-of-memory
+                continue
             tokens_in += reply.tokens_in
             tokens_out += reply.tokens_out
             load_ms += reply.load_ms
             try:
+                if is_degenerate(reply.content, reply.done_reason):
+                    raise ValueError("degenerate generation: the output repeats itself or never closed its JSON")
                 result = schema.model_validate_json(reply.content)
                 break
             except (ValidationError, ValueError) as exc:
@@ -234,7 +271,7 @@ class LLMClient:
                 if attempt == retries_allowed:
                     break
                 retries += 1
-                messages.append({"role": "assistant", "content": reply.content})
+                messages.append({"role": "assistant", "content": reply.content[:300]})
                 messages.append(
                     {"role": "user", "content": repair.render({"error": error})[1]}
                 )
@@ -329,6 +366,24 @@ class LLMClient:
         self.trace_path.parent.mkdir(parents=True, exist_ok=True)
         with self.trace_path.open("a", encoding="utf-8") as handle:
             handle.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+
+RECOVERY_PAUSE_S = 5.0
+MAX_TIMEOUT_RETRIES = 1  # a call that times out twice is skipped: each timeout costs the full per-call limit
+
+
+def is_degenerate(content: str, done_reason: str = "") -> bool:
+    """Output that ran into the token cap, or in which one chunk of text repeats over and over."""
+    if done_reason == "length":
+        return True
+    text = content.strip()
+    if len(text) < 200:
+        return False
+    for size in (6, 12, 24):  # a short unit repeated back to back for a large share of the output
+        unit = text[len(text) // 2 : len(text) // 2 + size]
+        if unit.strip() and text.count(unit) * size > 0.5 * len(text):
+            return True
+    return False
 
 
 def _short_error(exc: Exception) -> str:

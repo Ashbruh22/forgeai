@@ -14,21 +14,18 @@ produce contradictory evals. Self-answered exclusions are therefore checked, in 
 
 from __future__ import annotations
 
-import re
-
 import numpy as np
 from pydantic import BaseModel
 
 from forgeai.config import ForgeConfig
 from forgeai.embeddings import Embedder
 from forgeai.ingest.models import Chunk
+from forgeai.intake.asks import is_task, specific_asks
 from forgeai.intake.schema import RejectedAssumption, Requirements
-from forgeai.intake.structural import split_sentences
 from forgeai.llm import call_structured
 from forgeai.textmatch import content_terms, is_verbatim, shares_content_term
 
 ASKS_PER_ITEM = 2  # the judge reviews the two closest asks for each refusal
-_CLAUSES = re.compile(r",\s+(?:and|but)\s+|;\s+|\s+and also\s+|,\s+", re.IGNORECASE)
 
 
 class ConsistencyError(Exception):
@@ -43,9 +40,13 @@ class ConflictCheck(BaseModel):
 
 
 def brief_asks(brief: str, topics: list[str]) -> list[str]:
-    """Everything the requester asked for: the must-answer topics and each clause of the brief."""
-    clauses = [c.strip() for s in split_sentences(brief) for c in _CLAUSES.split(s) if len(c.split()) >= 3]
-    return list(dict.fromkeys([*topics, *clauses]))
+    """Everything the requester asked for: the must-answer topics and each SPECIFIC ask of the brief.
+
+    The brief's generic role sentence ("I need an assistant that answers HR policy questions ...") is
+    left out: it overlaps nearly every refusal, so matching against it rejected "personal data" and
+    "legal advice" in Demo A (P5.1 correction 4; see ``forgeai.intake.asks``).
+    """
+    return list(dict.fromkeys([*topics, *specific_asks(brief)]))
 
 
 def table_vocabulary(chunks: list[Chunk]) -> dict[str, str]:
@@ -84,8 +85,12 @@ def find_conflicts(
                 detail="a table in the documents holds this information (column names and cell values are evidence)"))
         else:
             screened.append((field, item))
-    if screened and asks:
-        rejected += _judge_against_asks(screened, asks, embedder, config)
+    # Only the brief's described TASKS go to the judge. Topics and category labels ("travel claims") are noun
+    # phrases that stand for a whole area; a judge finds nearly anything "part of" those, so they only
+    # take part in the lexical check above.
+    task_asks = [a for a in specific_asks(brief) if is_task(a)]
+    if screened and task_asks:
+        rejected += _judge_against_asks(screened, task_asks, embedder, config)
     return rejected
 
 

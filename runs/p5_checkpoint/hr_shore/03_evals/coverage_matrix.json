@@ -1,0 +1,268 @@
+{
+  "summary": {
+    "items": 15,
+    "covered": 15,
+    "uncovered": [],
+    "cases": 32,
+    "uncovered_in_dev": []
+  },
+  "items": [
+    {
+      "id": "topic:T1",
+      "kind": "topic",
+      "requirement": "Annual leave entitlements",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "hr-A01",
+        "hr-A08",
+        "hr-M04",
+        "hr-M06"
+      ],
+      "note": "",
+      "dev_cases": [
+        "hr-A01",
+        "hr-M04",
+        "hr-M06"
+      ],
+      "test_cases": [
+        "hr-A08"
+      ]
+    },
+    {
+      "id": "topic:T2",
+      "kind": "topic",
+      "requirement": "Travel expense reimbursement procedures",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "hr-A02",
+        "hr-A06",
+        "hr-M02"
+      ],
+      "note": "",
+      "dev_cases": [
+        "hr-A02",
+        "hr-A06"
+      ],
+      "test_cases": [
+        "hr-M02"
+      ]
+    },
+    {
+      "id": "topic:T3",
+      "kind": "topic",
+      "requirement": "Code of conduct rules",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "hr-A03"
+      ],
+      "note": "",
+      "dev_cases": [
+        "hr-A03"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "gap:G-T4",
+      "kind": "gap",
+      "requirement": "Salary slip interpretation",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "hr-O01"
+      ],
+      "note": "",
+      "dev_cases": [
+        "hr-O01"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "refuse:R1",
+      "kind": "refuse",
+      "requirement": "personal data requests",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "hr-O02",
+        "hr-O09"
+      ],
+      "note": "",
+      "dev_cases": [
+        "hr-O09"
+      ],
+      "test_cases": [
+        "hr-O02"
+      ]
+    },
+    {
+      "id": "refuse:R2",
+      "kind": "refuse",
+      "requirement": "legal advice",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "hr-O03",
+        "hr-O10"
+      ],
+      "note": "",
+      "dev_cases": [
+        "hr-O10"
+      ],
+      "test_cases": [
+        "hr-O03"
+      ]
+    },
+    {
+      "id": "refuse:R3",
+      "kind": "refuse",
+      "requirement": "ethical dilemmas",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "hr-O04"
+      ],
+      "note": "",
+      "dev_cases": [
+        "hr-O04"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "negtool:csv_lookup",
+      "kind": "negtool",
+      "requirement": "csv_lookup is not needed, so the assistant must decline it",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "hr-O05"
+      ],
+      "note": "",
+      "dev_cases": [
+        "hr-O05"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "negtool:calculator",
+      "kind": "negtool",
+      "requirement": "calculator is not needed, so the assistant must decline it",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "hr-O06"
+      ],
+      "note": "",
+      "dev_cases": [
+        "hr-O06"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "negtool:current_date",
+      "kind": "negtool",
+      "requirement": "current_date is not needed, so the assistant must decline it",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "hr-O07"
+      ],
+      "note": "",
+      "dev_cases": [
+        "hr-O07"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "negtool:weather",
+      "kind": "negtool",
+      "requirement": "weather is not needed, so the assistant must decline it",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "hr-O08"
+      ],
+      "note": "",
+      "dev_cases": [
+        "hr-O08"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "ask:A1",
+      "kind": "ask",
+      "requirement": "leave",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "hr-A01",
+        "hr-A08",
+        "hr-M04",
+        "hr-M06",
+        "hr-O01"
+      ],
+      "note": "maps to ['gap:G-T4', 'topic:T1']",
+      "dev_cases": [
+        "hr-A01",
+        "hr-M04",
+        "hr-M06",
+        "hr-O01"
+      ],
+      "test_cases": [
+        "hr-A08"
+      ]
+    },
+    {
+      "id": "ask:A2",
+      "kind": "ask",
+      "requirement": "travel claims",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "hr-A02",
+        "hr-A06",
+        "hr-M02"
+      ],
+      "note": "maps to ['topic:T2']",
+      "dev_cases": [
+        "hr-A02",
+        "hr-A06"
+      ],
+      "test_cases": [
+        "hr-M02"
+      ]
+    },
+    {
+      "id": "ask:A3",
+      "kind": "ask",
+      "requirement": "conduct rules",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "hr-A03"
+      ],
+      "note": "maps to ['topic:T3']",
+      "dev_cases": [
+        "hr-A03"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "ask:A4",
+      "kind": "ask",
+      "requirement": "salary slip questions",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "hr-O01"
+      ],
+      "note": "maps to ['gap:G-T4']",
+      "dev_cases": [
+        "hr-O01"
+      ],
+      "test_cases": []
+    }
+  ]
+}

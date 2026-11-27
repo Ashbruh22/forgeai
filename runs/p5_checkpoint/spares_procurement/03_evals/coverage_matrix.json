@@ -1,0 +1,336 @@
+{
+  "summary": {
+    "items": 18,
+    "covered": 18,
+    "uncovered": [],
+    "cases": 29,
+    "uncovered_in_dev": []
+  },
+  "items": [
+    {
+      "id": "topic:T1",
+      "kind": "topic",
+      "requirement": "What is in stock at each port?",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "sp-A01",
+        "sp-A05",
+        "sp-M02",
+        "sp-M04"
+      ],
+      "note": "",
+      "dev_cases": [
+        "sp-A01",
+        "sp-A05",
+        "sp-M02"
+      ],
+      "test_cases": [
+        "sp-M04"
+      ]
+    },
+    {
+      "id": "aspect:T1/Where is the item listed as being held (stock port) according to the documents?",
+      "kind": "aspect",
+      "requirement": "Where is the item listed as being held (stock port) according to the documents? (as of 2026-11-01)",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "sp-A01"
+      ],
+      "note": "",
+      "dev_cases": [
+        "sp-A01"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "topic:T2",
+      "kind": "topic",
+      "requirement": "Which suppliers offer the part?",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "sp-A02"
+      ],
+      "note": "",
+      "dev_cases": [
+        "sp-A02"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "topic:T3",
+      "kind": "topic",
+      "requirement": "What is the cost with discounts?",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "sp-A09",
+        "sp-M01"
+      ],
+      "note": "",
+      "dev_cases": [
+        "sp-A09",
+        "sp-M01"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "topic:T4",
+      "kind": "topic",
+      "requirement": "When will the parts arrive?",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "sp-A08",
+        "sp-M01"
+      ],
+      "note": "",
+      "dev_cases": [
+        "sp-M01"
+      ],
+      "test_cases": [
+        "sp-A08"
+      ]
+    },
+    {
+      "id": "gap:G-LIVE-1",
+      "kind": "gap",
+      "requirement": "What is the current availability status of the item at each port?",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "sp-O01",
+        "sp-O08"
+      ],
+      "note": "",
+      "dev_cases": [
+        "sp-O08"
+      ],
+      "test_cases": [
+        "sp-O01"
+      ]
+    },
+    {
+      "id": "refuse:R1",
+      "kind": "refuse",
+      "requirement": "legal advice",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "sp-O02",
+        "sp-O06"
+      ],
+      "note": "",
+      "dev_cases": [
+        "sp-O06"
+      ],
+      "test_cases": [
+        "sp-O02"
+      ]
+    },
+    {
+      "id": "refuse:R2",
+      "kind": "refuse",
+      "requirement": "compliance",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "sp-O03",
+        "sp-O07"
+      ],
+      "note": "",
+      "dev_cases": [
+        "sp-O03",
+        "sp-O07"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "negtool:current_date",
+      "kind": "negtool",
+      "requirement": "current_date is not needed, so the assistant must decline it",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "sp-O04",
+        "sp-O09"
+      ],
+      "note": "",
+      "dev_cases": [
+        "sp-O04"
+      ],
+      "test_cases": [
+        "sp-O09"
+      ]
+    },
+    {
+      "id": "negtool:weather",
+      "kind": "negtool",
+      "requirement": "weather is not needed, so the assistant must decline it",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "sp-O05",
+        "sp-O10"
+      ],
+      "note": "",
+      "dev_cases": [
+        "sp-O05",
+        "sp-O10"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "ask:A1",
+      "kind": "ask",
+      "requirement": "finding ship spares",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "sp-A01",
+        "sp-A05",
+        "sp-M02",
+        "sp-M04"
+      ],
+      "note": "maps to ['topic:T1']",
+      "dev_cases": [
+        "sp-A01",
+        "sp-A05",
+        "sp-M02"
+      ],
+      "test_cases": [
+        "sp-M04"
+      ]
+    },
+    {
+      "id": "ask:A1/structured_lookup",
+      "kind": "ask_capability",
+      "requirement": "finding ship spares [needs structured_lookup]",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "sp-T01",
+        "sp-T03"
+      ],
+      "note": "",
+      "dev_cases": [
+        "sp-T01",
+        "sp-T03"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "ask:A2",
+      "kind": "ask",
+      "requirement": "comparing suppliers",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "sp-A02"
+      ],
+      "note": "maps to ['topic:T2']",
+      "dev_cases": [
+        "sp-A02"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "ask:A2/structured_lookup",
+      "kind": "ask_capability",
+      "requirement": "comparing suppliers [needs structured_lookup]",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "sp-T01",
+        "sp-T03"
+      ],
+      "note": "",
+      "dev_cases": [
+        "sp-T01",
+        "sp-T03"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "ask:A3",
+      "kind": "ask",
+      "requirement": "estimating order cost with discounts",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "sp-A09",
+        "sp-M01"
+      ],
+      "note": "maps to ['topic:T3']",
+      "dev_cases": [
+        "sp-A09",
+        "sp-M01"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "ask:A3/arithmetic",
+      "kind": "ask_capability",
+      "requirement": "estimating order cost with discounts [needs arithmetic]",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "sp-T02",
+        "sp-T04"
+      ],
+      "note": "",
+      "dev_cases": [
+        "sp-T04"
+      ],
+      "test_cases": [
+        "sp-T02"
+      ]
+    },
+    {
+      "id": "ask:A4",
+      "kind": "ask",
+      "requirement": "knowing when parts will arrive",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "sp-A08",
+        "sp-M01"
+      ],
+      "note": "maps to ['topic:T4']",
+      "dev_cases": [
+        "sp-M01"
+      ],
+      "test_cases": [
+        "sp-A08"
+      ]
+    },
+    {
+      "id": "ask:A5",
+      "kind": "ask",
+      "requirement": "tell them what's in stock right now at each port",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "sp-A01",
+        "sp-A05",
+        "sp-M02",
+        "sp-M04",
+        "sp-O01",
+        "sp-O08"
+      ],
+      "note": "maps to ['aspect:T1/Where is the item listed as being held (stock port) according to the documents?', 'gap:G-LIVE-1', 'topic:T1']",
+      "dev_cases": [
+        "sp-A01",
+        "sp-A05",
+        "sp-M02",
+        "sp-O08"
+      ],
+      "test_cases": [
+        "sp-M04",
+        "sp-O01"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "ollama_env": {
+    "expected": {
+      "OLLAMA_NUM_PARALLEL": "1",
+      "OLLAMA_FLASH_ATTENTION": "1",
+      "OLLAMA_KV_CACHE_TYPE": "q8_0",
+      "OLLAMA_MAX_LOADED_MODELS": "1"
+    },
+    "server_log": {
+      "OLLAMA_NUM_PARALLEL": "1",
+      "OLLAMA_FLASH_ATTENTION": "true",
+      "OLLAMA_KV_CACHE_TYPE": "q8_0",
+      "OLLAMA_MAX_LOADED_MODELS": "1"
+    },
+    "took_effect": {
+      "OLLAMA_NUM_PARALLEL": true,
+      "OLLAMA_FLASH_ATTENTION": true,
+      "OLLAMA_KV_CACHE_TYPE": true,
+      "OLLAMA_MAX_LOADED_MODELS": true
+    },
+    "log_file": "C:\\Users\\ashri\\AppData\\Local\\Ollama\\server.log",
+    "log_found": true
+  },
+  "models": [
+    {
+      "name": "qwen3:8b",
+      "size_gb": 5.09,
+      "gpu_pct": 100,
+      "context": 6144,
+      "fully_on_gpu": true
+    },
+    {
+      "name": "llama3.1:8b",
+      "size_gb": 4.69,
+      "gpu_pct": 100,
+      "context": 4096,
+      "fully_on_gpu": true
+    }
+  ],
+  "ram_gb": {
+    "total": 15.7,
+    "free_at_start": 3.4
+  },
+  "embedding": {
+    "model": "BAAI/bge-small-en-v1.5",
+    "device": "cpu",
+    "torch_sees_cuda": false
+  }
+}

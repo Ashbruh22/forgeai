@@ -44,6 +44,7 @@ class ModelSpec(BaseModel):
     temperature: float = 0.1
     seed: int = 7
     digest: str | None = None
+    num_ctx: int | None = None  # context window for this role; None uses ForgeConfig.num_ctx
 
     @property
     def family(self) -> str:
@@ -60,6 +61,12 @@ class Thresholds(BaseModel):
     dedup_similarity: float = 0.90
     fewshot_leakage_similarity: float = 0.80
     fact_fuzzy_score: int = 85
+    # Compositional eval cases (P5.1): two single-document questions are merged only if their embeddings
+    # fall in this band (related, but not near-duplicates); two statements are an ambiguity candidate
+    # only if their number-masked sentences are at least this similar.
+    compose_similarity_min: float = 0.5
+    compose_similarity_max: float = 0.9
+    ambiguity_similarity_min: float = 0.80
 
 
 class Limits(BaseModel):
@@ -74,7 +81,9 @@ class Limits(BaseModel):
 
 class ForgeConfig(BaseModel):
     ollama_host: str = "http://localhost:11434"
-    ollama_timeout_s: float = 600.0
+    ollama_timeout_s: float = 180.0  # per call; a timeout is a logged, retryable failure, not a crash
+    ollama_env: dict[str, str] = Field(default_factory=dict)  # server settings we rely on; verified and recorded
+    min_free_ram_pct: float = 15.0  # a stage logs a warning when free RAM drops below this
     num_ctx: int = 8192
     max_output_tokens: int = 1536  # cap so a degenerate generation cannot run for minutes
     think: bool = False  # Qwen3 reasoning mode; off for every role (agent, generator, judge)
@@ -97,6 +106,13 @@ class ForgeConfig(BaseModel):
                 f"agent={self.agent_model.name!r}, judge={self.judge_model.name!r})."
             )
         return self
+
+    def num_ctx_for(self, model_name: str) -> int:
+        """Context window for a model: its own role setting, else the global one."""
+        for spec in (self.agent_model, self.judge_model):
+            if spec.name == model_name and spec.num_ctx:
+                return spec.num_ctx
+        return self.num_ctx
 
     @property
     def llm_cache_dir(self) -> Path:

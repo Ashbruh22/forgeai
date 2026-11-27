@@ -73,10 +73,11 @@ def test_pricing_is_rejected_because_a_column_holds_prices(config, tmp_path) -> 
 
 
 def test_the_judge_with_a_verified_quote_rejects_a_refusal_that_blocks_an_ask(config, tmp_path) -> None:
-    out = run_conflicts(config, tmp_path, judge(True, "Order cost estimates"),
-                        [("must_refuse", "outlay figures")], ["Order cost estimates with discounts"], brief="x")
+    out = run_conflicts(config, tmp_path, judge(True, "order cost with discounts"),
+                        [("must_refuse", "outlay figures")], ["Order cost estimates with discounts"],
+                        brief="Our team needs help estimating order cost with discounts.")
     assert [(r.item, r.conflict_with) for r in out] == [("outlay figures", "brief")]
-    assert out[0].evidence == ["Order cost estimates"]
+    assert out[0].evidence == ["order cost with discounts"]
 
 
 def test_a_judge_yes_without_a_real_quote_does_not_reject(config, tmp_path) -> None:

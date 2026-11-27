@@ -151,3 +151,19 @@ def test_both_support_checks_are_reported(demo_a) -> None:
     agreement = json.loads((out / "01_guard" / "coverage.json").read_text(encoding="utf-8"))["check_agreement"]
     assert {"both_pass", "code_check_only", "judge_only", "neither", "disagreement_rate"} <= set(agreement)
     assert agreement["probes_with_verbatim_span"] > 0
+
+
+# ---- P5.1 correction 4: the refusal check must not over-reject, and must still reject real conflicts -----------
+
+def test_demo_a_keeps_personal_data_and_legal_advice_as_refusals(demo_a) -> None:
+    """Rejecting them as 'part of' the generic purpose sentence lost both in the first P5 build."""
+    req, _ = demo_a
+    refused = " | ".join([*(i.lower() for i in req.scope.out), *(t.topic.lower() for t in req.must_refuse_topics)])
+    assert "personal data" in refused and "legal advice" in refused, (refused, [(r.item, r.detail) for r in req.assumptions_rejected])
+
+
+def test_demo_b_still_rejects_pricing_details(demo_b) -> None:
+    req, _ = demo_b
+    assert not any("pricing" in t.topic.lower() for t in req.must_refuse_topics)
+    assert any(r.item.lower() == "pricing details" and r.conflict_with == "corpus" for r in req.assumptions_rejected) or \
+        not any("pricing" in a.value.lower() for a in req.assumptions)

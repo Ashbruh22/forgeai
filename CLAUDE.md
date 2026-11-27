@@ -66,7 +66,15 @@ Do ONE phase at a time. When a phase's exit test passes: commit, push, show the 
   only `forgeai/audit/` reads them (tests enforce both).
 - A requirement must never be both asked for and refused: `forgeai/intake/consistency.py` (check at
   intake, invariant over every committed `requirements.yaml`), `forgeai/evals/consistency.py` (evals).
-- Eval expected values come from code: table cells, or `forgeai/evals/compute.py` plans whose every
-  fact is verified against the documents and whose answer the safe calculator computes.
+- Eval expected values come from code: table cells, or `forgeai/evals/templates.py` instances whose
+  every slot is bound to an anchored fact and whose answer the safe calculator computes.
 - Windows shell lesson: avoid Python heredocs full of backslashes (they get mangled); use the Edit and
   Write tools for escape-heavy text, and never run several multi-minute background jobs at once.
+- **One folder per phase** under `runs/` (`p4_checkpoint`, `p5_checkpoint`, ...). The full live suite
+  (`pytest -m live`) runs now and at the end of every phase; report the pass counts. Builds take a run
+  lock (`.forgeai.lock`) and write `timing.json` (wall seconds per stage). A phase's report includes
+  the wall-clock table.
+- P5.1: `forgeai evals` also writes `03_evals/coverage_matrix.json` and exits non-zero while any
+  requirement item is UNCOVERED. Computed eval cases come from templates (`forgeai/evals/templates.py`),
+  multi-document and ambiguous cases from `forgeai/evals/compose.py`. `relative_date` key facts
+  ("today + 18 days") must be resolved with `templates.resolve_relative_fact` when scoring (P6).

@@ -10,7 +10,7 @@ from forgeai.ingest.spans import SeedSpan
 
 CaseType = Literal["answerable", "multidoc", "ambiguous", "out_of_scope", "tool_required"]
 Status = Literal["answered", "refused", "needs_clarification"]
-FactKind = Literal["number", "phrase", "date", "snapshot_date"]
+FactKind = Literal["number", "phrase", "date", "snapshot_date", "relative_date"]
 
 
 class KeyFact(BaseModel):
@@ -41,6 +41,8 @@ class EvalCase(BaseModel):
     # Where a refusal / answer expectation comes from, for the consistency check.
     origin: str = ""  # must_refuse | gap | near_miss | negative_tool | topic | snapshot | computed | lookup
     topic_ref: str = ""
+    aspect: str = ""  # a snapshot case: the supported aspect of its topic the question is about
+    covers: list[str] = Field(default_factory=list)  # requirement items this case was written to cover (coverage matrix)
     tags: list[str] = Field(default_factory=list)
     provenance: dict[str, Any] = Field(default_factory=dict)
     validation: dict[str, Any] = Field(default_factory=dict)
@@ -51,3 +53,4 @@ class RejectedCase(BaseModel):
     question: str
     reason: str
     detail: str = ""
+    ref: str = ""  # the requirement item (coverage matrix id) the candidate was written for, if any

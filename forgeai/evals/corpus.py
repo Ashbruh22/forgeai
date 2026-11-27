@@ -38,6 +38,7 @@ class EvalCorpus:
     chunks: list[Chunk]
     index: HybridIndex
     tables: dict[str, Table] = field(default_factory=dict)
+    embedder: Embedder | None = None
 
     @classmethod
     def load(cls, docs_dir: Path, config: ForgeConfig, embedder: Embedder) -> EvalCorpus:
@@ -63,7 +64,7 @@ class EvalCorpus:
         index = HybridIndex.build(
             chunks, embedder, config.embedding_model, cache_dir=config.index_cache_dir,
             query_prefix=config.embedding_query_prefix)
-        return cls(docs, chunks, index, tables)
+        return cls(docs, chunks, index, tables, embedder)
 
     # -- spans ------------------------------------------------------------------------------
 
@@ -98,8 +99,12 @@ class EvalCorpus:
     def seed_chunks(self, kind: str = "prose") -> list[Chunk]:
         """Chunks worth writing a question about (not headings-only, not schema)."""
         enough = MIN_SEED_WORDS if kind == "prose" else 4
-        return [c for c in self.chunks if c.kind == kind and len(c.text.split()) >= enough
-                and not (kind == "prose" and re.search(r"\bPage \d+\b", c.text))]  # page footers are not content
+        return [c for c in self.chunks if c.kind == kind and len(self._content(c, kind).split()) >= enough]
+
+    @staticmethod
+    def _content(chunk: Chunk, kind: str) -> str:
+        """The chunk without its page-footer line (a footer is not content, but a long chunk may contain one)."""
+        return re.sub(r".{0,120}?(?<!\w)Page \d+(?!\w)", "", chunk.text) if kind == "prose" else chunk.text
 
     def text_of(self, chunk: Chunk) -> str:
         return normalize(chunk.text)

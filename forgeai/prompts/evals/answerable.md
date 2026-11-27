@@ -1,5 +1,5 @@
 ---
-version: 4
+version: 5
 ---
 # system
 You write test questions for a document-based assistant. The question must be answerable from the
@@ -16,4 +16,4 @@ Passage:
 Write:
 - `question`: one question answered by the passage.
 - `answer_span`: the shortest exact quote from the passage that contains the answer (copy it character for character).
-- `key_facts`: a list of ONE or TWO short strings: only the facts the question itself asks for, which a correct answer must contain, copied exactly as it appears in `answer_span`, each at most 8 words (for example "24 working days" or "31 March"). Never put a whole sentence in a key fact.
+- `key_facts`: a list of ONE to THREE short strings, copied exactly as they appear in `answer_span`, each at most 8 words (for example "24 working days" or "31 March"). Include a fact ONLY if an answer that left it out would be wrong or incomplete. Leave out details the question does not ask for, and anything the question itself already says. Never put a whole sentence in a key fact.

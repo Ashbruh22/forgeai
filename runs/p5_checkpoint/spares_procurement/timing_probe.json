@@ -1,0 +1,32 @@
+{
+  "sampled_cases": 8,
+  "types": [
+    "ambiguous",
+    "answerable",
+    "multidoc",
+    "out_of_scope"
+  ],
+  "agent_seconds_per_answer": {
+    "mean": 8.7,
+    "median": 5.1,
+    "max": 26.2
+  },
+  "judge_seconds_per_call": {
+    "mean": 1.61,
+    "max": 9.57
+  },
+  "model_load_seconds_when_swapping": 10.4,
+  "llm_calls": {
+    "llm_calls": 24,
+    "cache_hits": 0,
+    "live_llm_seconds": 72.7,
+    "model_load_seconds": 21.0,
+    "model_swaps": 1,
+    "fallbacks": 0,
+    "by_model": {
+      "llama3.1:8b": 8,
+      "qwen3:8b": 16
+    }
+  },
+  "note": "cache hits excluded from latency; a repeated question would be answered from the response cache"
+}
