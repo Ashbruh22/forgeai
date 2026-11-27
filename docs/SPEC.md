@@ -310,6 +310,12 @@ If no tools are attached, the tool-required slots go to answerable and multi-doc
 
 **Implementation notes (2026-11-26, see `docs/DECISIONS.md` section G).** Negative tool cases are derived from the requirements' capabilities (the eval generator never sees the agent). A refusal case must make the guard's probe fail; the retrieval-score condition is logged, not gated. Key facts are atomic (at most 2, at most 10 words). Computed values come from a verified plan evaluated by the safe calculator. Generation tops up short types in extra rounds; shortfalls are reported, never padded.
 
+**P5.1 additions (2026-11-26, see `docs/DECISIONS.md` section H).**
+- **Requirement coverage matrix** (`03_evals/coverage_matrix.json`). Every must-answer topic, supported aspect of a split topic (a snapshot aspect needs a case that expects the "as of" date), refused gap, must-refuse topic, unneeded tool and distinct ask in the brief must have at least one valid case, or the matrix says `UNCOVERED` with an explanation and the CLI exits non-zero. An ask that needs a tool (a cost needs arithmetic, an arrival date needs the date) also needs a case that uses that tool, so a topic covered only by rate lookups cannot hide an untested cost estimate. Every covered item also keeps a case in the dev split, because the optimizer never sees test.
+- **Computed cases come from six templates** (product, discounted product, sum, difference, date plus days, extreme across rows). The model picks a template and binds each slot to a fact from a menu that code built from the documents; code checks units, tiers and that the table row and the prose rule belong together, then computes the answer with the safe calculator.
+- **Multi-document cases merge two validated single-document cases** from different documents whose questions are related but not near-duplicates; the key facts are the union (at most three). **Ambiguous cases are found by code** (the same statement with different values in different documents or sections); the model only writes the under-specified question, and the two readings must have distinct, anchored key facts.
+- **Key facts: at most three per case, each answer-bearing** (an answer without it would be wrong or incomplete); detail facts are dropped at generation time, the answerability threshold is not relaxed.
+
 **Eval case schema:**
 ```json
 {

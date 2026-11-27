@@ -13,7 +13,6 @@ from forgeai.config import ForgeConfig, ModelSpec
 from forgeai.evals.build import (
     TARGET_TOTAL, assign_split, build_eval_set, dedupe, select, targets_for, write_eval_set,
 )
-from forgeai.evals.compute import ComputePlan, PlanRejected, PlanVar, KV, verify_plan
 from forgeai.evals.consistency import EvalConsistencyError, assert_cases_consistent, violation
 from forgeai.evals.corpus import EvalCorpus
 from forgeai.evals.generators import Candidate, Generator
@@ -91,74 +90,6 @@ def test_paraphrase_overlap() -> None:
     assert ngram_overlap("How long can I stay off when ill?", source) < 0.2
 
 
-# ---- computed cases: the expected value comes from code -----------------------------------------
-
-def plan(**kwargs) -> ComputePlan:
-    base = ComputePlan(
-        question="What do 12 units of HD-1 from S01 cost after the volume discount?",
-        variables=[
-            PlanVar(name="price", source="csv", doc="parts.csv", column="unit_price_usd",
-                    row_key=[KV(column="part_no", value="HD-1"), KV(column="supplier", value="S01")]),
-            PlanVar(name="pct", source="prose", doc="terms.md", span_text="Orders from USD 5,000 to USD 14,999 receive a 5% discount",
-                    number_text="5%"),
-            PlanVar(name="qty", source="question", number_text="12"),
-        ],
-        formula="price * qty * (1 - pct / 100)", conditions=["price * qty >= 5000 and price * qty <= 14999"])
-    return base.model_copy(update=kwargs)
-
-
-def test_a_cross_source_plan_is_computed_by_code(corpus) -> None:
-    verified = verify_plan(plan(), corpus)
-    assert verified.answer == 4788.0 and verified.answer_text == "4788"  # 12 x 420 x 0.95
-    assert verified.values == {"price": 420.0, "pct": 5.0, "qty": 12.0}
-    assert verified.uses_table and sorted(verified.docs) == ["parts.csv", "terms.md"]
-    assert {s.doc for s in verified.spans} == {"parts.csv", "terms.md"}
-
-
-@pytest.mark.parametrize(("change", "why"), [
-    ({"conditions": ["price * qty >= 15000"]}, "condition does not hold"),
-    ({"formula": "price * qty * (1 - discount / 100)"}, "not variables"),
-    ({"formula": ""}, "formula is empty"),
-    ({"question": "What do those units cost?"}, "not a number in the question"),
-])
-def test_bad_plans_are_rejected(corpus, change, why) -> None:
-    with pytest.raises(PlanRejected, match=why):
-        verify_plan(plan(**change), corpus)
-
-
-def test_row_must_be_identified_exactly_and_spans_must_be_verbatim(corpus) -> None:
-    ambiguous = plan()
-    ambiguous.variables[0] = ambiguous.variables[0].model_copy(update={"row_key": [KV(column="part_no", value="HD-1")]})
-    with pytest.raises(PlanRejected, match="matches 2 rows"):
-        verify_plan(ambiguous, corpus)
-    invented = plan()
-    invented.variables[1] = invented.variables[1].model_copy(update={"span_text": "Orders receive a 50% discount", "number_text": "50%"})
-    with pytest.raises(PlanRejected, match="not a verbatim quote"):
-        verify_plan(invented, corpus)
-    wrong_number = plan()
-    wrong_number.variables[1] = wrong_number.variables[1].model_copy(update={"number_text": "8%"})
-    with pytest.raises(PlanRejected, match="not in its span"):
-        verify_plan(wrong_number, corpus)
-
-
-def test_a_plan_needs_two_facts_from_the_documents(corpus) -> None:
-    thin = plan(variables=[plan().variables[0], plan().variables[2]], formula="price * qty", conditions=[])
-    with pytest.raises(PlanRejected, match="at least two facts"):
-        verify_plan(thin, corpus)
-
-
-def test_prose_only_plans_work_without_a_table(corpus) -> None:
-    prose_only = ComputePlan(
-        question="How many working days of sick leave do 3 employees get in total?",
-        variables=[PlanVar(name="days", source="prose", doc="policy.md",
-                           span_text="Employees receive 12 working days of paid sick leave per calendar year", number_text="12"),
-                   PlanVar(name="limit", source="prose", doc="policy.md",
-                           span_text="Full-time employees receive 24 working days of annual leave per calendar year", number_text="24"),
-                   PlanVar(name="n", source="question", number_text="3")],
-        formula="days * n", conditions=["days < limit"])
-    assert verify_plan(prose_only, corpus).answer == 36.0
-
-
 # ---- generators with a scripted model --------------------------------------------------------------
 
 def passage_of(user: str, label: str = "Passage") -> str:
@@ -224,52 +155,6 @@ def test_snapshot_cases_expect_the_snapshot_date_as_a_key_fact(corpus, config, t
     case = gen.out.candidates[0].case
     assert KeyFact(text="2026-11-20", kind="snapshot_date") in case.key_facts and "snapshot" in case.tags
     assert "2026-11-20" in case.seed_spans[0].span_text  # the date is anchored in the seed row itself
-
-
-def test_multidoc_needs_a_verified_fact_from_each_document(corpus, config, tmp_path) -> None:
-    def multi(user: str) -> dict:
-        a, b = passage_of(user, "Passage A"), passage_of(user, "Passage B")
-        return {"question": "Considering both, what applies?", "span_a": first_sentence(a), "span_b": first_sentence(b),
-                "facts_a": [(re.search(r"\d[\d,]*", a) or re.search(r"\w+", a)).group(0)],
-                "facts_b": [(re.search(r"\d[\d,]*", b) or re.search(r"\w+", b)).group(0)]}
-
-    install(config, tmp_path, MultiDraft=multi)
-    gen = generator(requirements(), corpus, config)
-    gen.multidoc(3)
-    assert gen.out.candidates, gen.out.rejected
-    case = gen.out.candidates[0].case
-    assert len(case.expected_sources) == 2 and len({s.doc for s in case.seed_spans}) == 2
-
-    fresh = config.model_copy(update={"cache_dir": tmp_path / "fresh"})  # the response cache would replay the first answer
-    install(fresh, tmp_path, MultiDraft=lambda u: {"question": "q", "span_a": "a", "span_b": "b", "facts_a": ["x"], "facts_b": []})
-    gen = generator(requirements(), corpus, fresh)
-    gen.multidoc(3)
-    assert not gen.out.candidates and gen.out.rejected  # an empty fact list fails the draft schema itself
-
-
-def test_ambiguous_questions_must_not_contain_their_discriminators(corpus, config, tmp_path) -> None:
-    def ambiguous(question: str):
-        def handler(user: str) -> dict:
-            a, b = passage_of(user, "Reading 1 passage"), passage_of(user, "Reading 2 passage")
-            return {"question": question, "readings": [
-                {"reading": "annual", "discriminators": ["annual"], "span": first_sentence(a),
-                 "key_facts": [re.search(r"\d+", a).group(0)]},
-                {"reading": "sick", "discriminators": ["sick"], "span": first_sentence(b),
-                 "key_facts": [re.search(r"\d+", b).group(0)]}]}
-        return handler
-
-    install(config, tmp_path, AmbiguousDraft=ambiguous("How many days of leave do I get?"))
-    gen = generator(requirements(), corpus, config)
-    gen.ambiguous(4)
-    prose_pairs = [c for c in gen.out.candidates]
-    assert prose_pairs and prose_pairs[0].case.expected_status == "needs_clarification"
-    assert len(prose_pairs[0].case.interpretations) == 2
-
-    fresh = config.model_copy(update={"cache_dir": tmp_path / "fresh"})
-    install(fresh, tmp_path, AmbiguousDraft=ambiguous("How many days of annual leave do I get?"))
-    gen = generator(requirements(), corpus, fresh)
-    gen.ambiguous(4)
-    assert not gen.out.candidates and any("discriminator" in r.reason for r in gen.out.rejected)
 
 
 def test_refusal_candidates_come_from_must_refuse_gaps_and_unrequired_tools(corpus, config, tmp_path) -> None:
@@ -378,19 +263,13 @@ def test_a_live_aspect_refusal_on_a_split_topic_is_allowed_but_a_whole_topic_ref
 def full_handlers() -> dict:
     return {
         "AnswerableDraft": good_answerable,
-        "MultiDraft": lambda u: {"question": "Considering both, what applies?",
-                                 "span_a": first_sentence(passage_of(u, "Passage A")), "span_b": first_sentence(passage_of(u, "Passage B")),
-                                 "facts_a": [re.search(r"\d[\d,]*", passage_of(u, "Passage A")).group(0)],
-                                 "facts_b": [re.search(r"\d[\d,]*", passage_of(u, "Passage B")).group(0)]},
-        "AmbiguousDraft": lambda u: {"question": "How many days do I get?", "readings": [
-            {"reading": "annual", "discriminators": ["annual"], "span": first_sentence(passage_of(u, "Reading 1 passage")),
-             "key_facts": [re.search(r"\d+", passage_of(u, "Reading 1 passage")).group(0)]},
-            {"reading": "sick", "discriminators": ["sick"], "span": first_sentence(passage_of(u, "Reading 2 passage")),
-             "key_facts": [re.search(r"\d+", passage_of(u, "Reading 2 passage")).group(0)]}]},
+        "MergedQuestion": lambda u: {"question": "Putting both together, what leave and ordering rules apply to me?"},
+        "AmbiguousDraft": lambda u: {"question": "How many days do I get?", "reading_a": "annual", "reading_b": "sick"},
         "QuestionsDraft": lambda u: {"questions": ["A realistic refusal question " + (re.search(r"Subject[^:]*: (.+)", u).group(1) if "Subject" in u else "about tools") + "?"]},
         "QuestionDraft": lambda u: {"question": "What is the price for HD-1 from S01?"},
-        "ComputePlan": lambda u: plan().model_dump(),
-        "AnswerFromContext": lambda u: {"answer": passage_of(u, "Passage\\(s\\)")},
+        "TemplateChoice": lambda u: {"template": "product", "bindings": [], "question": "?"},
+        "AnswerBearing": lambda u: {"reason": "it is the answer", "needed": True},
+        "AnswerFromContext": lambda u: {"answer": passage_of(u, "Passage\(s\)")},
         "Probes": lambda u: {"questions": ["Is the cafe open on Sunday?", "What does the cafe sell near the entrance?"]},
         "Support": lambda u: {"chunk_id": "", "span": "NONE"},
         "JudgeSupport": lambda u: {"reason": "", "quote": "", "answers": False},
@@ -415,16 +294,6 @@ def test_the_full_build_writes_every_artifact_and_never_exceeds_the_target(corpu
     for line in (out / "eval_set.jsonl").read_text().splitlines():  # every seed span is real text at real offsets
         for span in json.loads(line)["seed_spans"]:
             assert corpus.docs[span["doc"]].canonical_text[span["char_start"]:span["char_end"]] == span["span_text"]
-
-
-def test_computed_cases_use_the_calculator_value_not_the_models(corpus, config, tmp_path) -> None:
-    install(config, tmp_path, **full_handlers())
-    gen = generator(requirements(capabilities_needed=["arithmetic", "structured_lookup"]), corpus, config)
-    gen.tool_cases(4)
-    computed = [c.case for c in gen.out.candidates if c.case.origin == "computed"]
-    assert computed and computed[0].key_facts[0].text == "4788", gen.out.rejected
-    assert sorted(computed[0].expected_tools) == ["calculator", "csv_lookup"]
-    assert computed[0].validation["expected_value_computed_by_code"] is True
 
 
 # ---- isolation ----------------------------------------------------------------------------------------
@@ -542,34 +411,3 @@ def test_a_multidoc_question_that_one_document_answers_is_rejected(config, tmp_p
     install(fresh, tmp_path, AnswerFromContext=lambda u: {"answer": "The alpha rule and the beta rule both apply."})
     kept, _ = judge_answerability([cand], fresh)
     assert kept == [cand]
-
-
-def test_unused_variables_and_single_source_plans_are_rejected(corpus) -> None:
-    extra = plan()
-    extra.variables.append(PlanVar(name="lead", source="csv", doc="parts.csv", column="unit_price_usd",
-                                   row_key=[KV(column="part_no", value="HD-2"), KV(column="supplier", value="S01")]))
-    with pytest.raises(PlanRejected, match="not used in the formula"):
-        verify_plan(extra, corpus)
-    table_only = ComputePlan(
-        question="What do 3 units of HD-1 from S01 and 2 units of HD-2 from S01 cost?",
-        variables=[PlanVar(name="a", source="csv", doc="parts.csv", column="unit_price_usd",
-                           row_key=[KV(column="part_no", value="HD-1"), KV(column="supplier", value="S01")]),
-                   PlanVar(name="b", source="csv", doc="parts.csv", column="unit_price_usd",
-                           row_key=[KV(column="part_no", value="HD-2"), KV(column="supplier", value="S01")])],
-        formula="a * 3 + b * 2")
-    assert verify_plan(table_only, corpus).answer == 3161.0  # fine on its own...
-    with pytest.raises(PlanRejected, match="combine a table value with a rule"):
-        verify_plan(table_only, corpus, cross_source=True)  # ...but not when the case must cross sources
-
-
-def test_a_number_hidden_inside_an_identifier_is_not_a_bound_fact(corpus) -> None:
-    """Regression: 'delivery_cost = 0' was bound to a span whose only '0' sits inside the identifier S01."""
-    sneaky = ComputePlan(
-        question="What do 3 units of HD-1 from S01 cost including delivery?",
-        variables=[PlanVar(name="price", source="csv", doc="parts.csv", column="unit_price_usd",
-                           row_key=[KV(column="part_no", value="HD-1"), KV(column="supplier", value="S01")]),
-                   PlanVar(name="delivery", source="prose", doc="terms.md", span_text="Suppliers S01 and S02 terms", number_text="0"),
-                   PlanVar(name="qty", source="question", number_text="3")],
-        formula="price * qty + delivery")
-    with pytest.raises(PlanRejected, match="not a number in its span"):
-        verify_plan(sneaky, corpus)

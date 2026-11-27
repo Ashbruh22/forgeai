@@ -1,0 +1,35 @@
+{
+  "planted_facts_file": "hr_shore",
+  "coverage": {
+    "planted_facts": 25,
+    "fully_covered": 3,
+    "partly_covered": 9,
+    "not_reached": 13,
+    "fraction_fully_covered": 0.12,
+    "fraction_reached": 0.48,
+    "not_reached_ids": [
+      "F-L00",
+      "F-L04",
+      "F-L05",
+      "F-L06",
+      "F-X01",
+      "F-L07",
+      "F-T01",
+      "F-T02",
+      "F-X02",
+      "F-T06",
+      "F-T07",
+      "F-C06",
+      "F-C08"
+    ]
+  },
+  "key_fact_agreement": {
+    "checked": 19,
+    "agree": 19,
+    "conflicts": 0,
+    "fraction": 1.0,
+    "unplanted_detail_in_a_planted_span": 0,
+    "not_checkable_no_planted_fact_in_span": 12,
+    "disagreements": []
+  }
+}

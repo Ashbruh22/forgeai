@@ -1,0 +1,32 @@
+{
+  "attached": [
+    {
+      "tool": "csv_lookup",
+      "attached": true,
+      "reason": "needed and verified",
+      "requirement_id": "T1",
+      "justification": "The tool is needed to find what is in stock at each port by filtering the CSV file.",
+      "necessity_quote": "What is in stock at each port?"
+    },
+    {
+      "tool": "calculator",
+      "attached": true,
+      "reason": "needed and verified",
+      "requirement_id": "T3",
+      "justification": "The tool is needed to calculate the cost with discounts accurately.",
+      "necessity_quote": "cost with discounts"
+    },
+    {
+      "tool": "current_date",
+      "attached": true,
+      "reason": "needed and verified",
+      "requirement_id": "T4",
+      "justification": "The tool is needed to determine when the parts will arrive from today's date.",
+      "necessity_quote": "When will the parts arrive?"
+    }
+  ],
+  "rejected": [],
+  "unattached_tools": [
+    "weather"
+  ]
+}

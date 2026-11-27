@@ -60,6 +60,12 @@ class Thresholds(BaseModel):
     dedup_similarity: float = 0.90
     fewshot_leakage_similarity: float = 0.80
     fact_fuzzy_score: int = 85
+    # Compositional eval cases (P5.1): two single-document questions are merged only if their embeddings
+    # fall in this band (related, but not near-duplicates); two statements are an ambiguity candidate
+    # only if their number-masked sentences are at least this similar.
+    compose_similarity_min: float = 0.5
+    compose_similarity_max: float = 0.9
+    ambiguity_similarity_min: float = 0.80
 
 
 class Limits(BaseModel):

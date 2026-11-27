@@ -1,0 +1,65 @@
+{
+  "target_total": 32,
+  "floor": 20,
+  "valid_cases": 32,
+  "floor_met": true,
+  "generation_rounds": 2,
+  "targets": {
+    "answerable": 14,
+    "multidoc": 7,
+    "ambiguous": 4,
+    "out_of_scope": 7,
+    "tool_required": 0
+  },
+  "generated_candidates": {
+    "answerable": 23,
+    "ambiguous": 2,
+    "out_of_scope": 22,
+    "multidoc": 6
+  },
+  "validated_after_filters": {
+    "answerable": 14,
+    "multidoc": 6,
+    "ambiguous": 1,
+    "out_of_scope": 16
+  },
+  "selected": {
+    "answerable": 14,
+    "multidoc": 6,
+    "ambiguous": 1,
+    "out_of_scope": 11
+  },
+  "split": {
+    "dev": 23,
+    "test": 9
+  },
+  "rejections_by_reason": {
+    "contradicts the requirements": 6,
+    "no key facts": 1,
+    "answer_span is not a verbatim quote of the seed": 2,
+    "fact anchoring failed": 1,
+    "question copies the passage": 1,
+    "no answer-bearing key fact": 1,
+    "independent answerability failed": 8,
+    "duplicate (embedding similarity)": 1
+  },
+  "candidates_attempted": 58,
+  "rejection_rate": 0.362,
+  "shortfall": {
+    "multidoc": 1,
+    "ambiguous": 3
+  },
+  "coverage": {
+    "items": 15,
+    "covered": 15,
+    "uncovered": [],
+    "cases": 32,
+    "uncovered_in_dev": []
+  },
+  "key_facts_per_case": {
+    "1": 12,
+    "2": 7,
+    "3": 1,
+    "0": 12
+  }
+}

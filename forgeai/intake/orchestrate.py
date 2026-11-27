@@ -155,8 +155,16 @@ def reject_conflicting_assumptions(
             [(f"X{i}", item) for i, (_, item) in enumerate(to_probe)], req.purpose, index, config,
             with_near_miss=False)
         for (field, item), cov in zip(to_probe, coverage, strict=True):
-            if cov.verdict != "UNSUPPORTED":
-                spans = [f"{p.chunk_id}: {p.span}" for p in cov.probes if p.supported]
+            # Only a SUPPORTED verdict (at least 2 of 3 probes verified by both checks) counts as the corpus
+            # supporting it. PARTIAL did not: "legal advice" got 1 of 3 from a sentence about legal
+            # prosecution, which is not support for giving legal advice (P5.1 correction 4).
+            # The span must also be ABOUT the item: it has to contain at least half of the item's content terms.
+            # "personal data requests" was "supported" by spans on personal devices and leave notice, each sharing
+            # one word ("personal", "requests") with it.
+            terms = content_terms(item)
+            on_topic = [p for p in cov.probes if p.supported and len(content_terms(p.span) & terms) * 2 >= len(terms)]
+            if cov.verdict == "SUPPORTED" and len(on_topic) >= 2:
+                spans = [f"{p.chunk_id}: {p.span}" for p in on_topic]
                 rejected.append(RejectedAssumption(
                     field=field, item=item, conflict_with="corpus", evidence=spans,
                     detail=f"the documents answer questions about it ({cov.verdict}); excluding it would "

@@ -31,3 +31,6 @@ huggingface/
 
 # Logs
 *.log
+
+# Cold-cache build used to time a full unseen build (P5.1)
+.cache_cold/

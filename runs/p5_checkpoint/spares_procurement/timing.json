@@ -1,0 +1,54 @@
+{
+  "intake": {
+    "wall_seconds": 209.1,
+    "llm_calls": 107,
+    "cache_hits": 7,
+    "live_llm_seconds": 193.4,
+    "model_load_seconds": 59.3,
+    "model_swaps": 7,
+    "fallbacks": 0,
+    "by_model": {
+      "llama3.1:8b": 34,
+      "qwen3:8b": 66
+    },
+    "finished": "2026-11-26T19:07:52"
+  },
+  "generate": {
+    "wall_seconds": 37.2,
+    "llm_calls": 5,
+    "cache_hits": 0,
+    "live_llm_seconds": 37.1,
+    "model_load_seconds": 24.3,
+    "model_swaps": 2,
+    "fallbacks": 0,
+    "by_model": {
+      "llama3.1:8b": 3,
+      "qwen3:8b": 2
+    },
+    "finished": "2026-11-26T19:08:32"
+  },
+  "evals": {
+    "wall_seconds": 28294.4,
+    "llm_calls": 39,
+    "cache_hits": 3,
+    "live_llm_seconds": 54.2,
+    "model_load_seconds": 0.7,
+    "model_swaps": 0,
+    "fallbacks": 0,
+    "by_model": {
+      "qwen3:8b": 36
+    },
+    "finished": "2026-11-27T03:00:07"
+  },
+  "audit": {
+    "wall_seconds": 0.0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "live_llm_seconds": 0.0,
+    "model_load_seconds": 0.0,
+    "model_swaps": 0,
+    "fallbacks": 0,
+    "by_model": {},
+    "finished": "2026-11-27T03:00:11"
+  }
+}

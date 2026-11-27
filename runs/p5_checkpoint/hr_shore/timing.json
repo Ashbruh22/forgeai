@@ -1,0 +1,51 @@
+{
+  "intake": {
+    "wall_seconds": 10.6,
+    "llm_calls": 127,
+    "cache_hits": 127,
+    "live_llm_seconds": 0.0,
+    "model_load_seconds": 0.0,
+    "model_swaps": 0,
+    "fallbacks": 0,
+    "by_model": {},
+    "finished": "2026-11-26T18:33:12"
+  },
+  "generate": {
+    "wall_seconds": 36.1,
+    "llm_calls": 3,
+    "cache_hits": 0,
+    "live_llm_seconds": 36.0,
+    "model_load_seconds": 24.5,
+    "model_swaps": 2,
+    "fallbacks": 0,
+    "by_model": {
+      "llama3.1:8b": 1,
+      "qwen3:8b": 2
+    },
+    "finished": "2026-11-26T18:33:56"
+  },
+  "evals": {
+    "wall_seconds": 20.2,
+    "llm_calls": 102,
+    "cache_hits": 100,
+    "live_llm_seconds": 13.0,
+    "model_load_seconds": 8.6,
+    "model_swaps": 0,
+    "fallbacks": 0,
+    "by_model": {
+      "qwen3:8b": 2
+    },
+    "finished": "2026-11-26T19:04:19"
+  },
+  "audit": {
+    "wall_seconds": 0.0,
+    "llm_calls": 0,
+    "cache_hits": 0,
+    "live_llm_seconds": 0.0,
+    "model_load_seconds": 0.0,
+    "model_swaps": 0,
+    "fallbacks": 0,
+    "by_model": {},
+    "finished": "2026-11-26T19:04:21"
+  }
+}

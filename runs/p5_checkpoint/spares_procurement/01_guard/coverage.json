@@ -1,0 +1,341 @@
+{
+  "topics": [
+    {
+      "topic_id": "T1",
+      "topic": "What is in stock at each port?",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "Which ports have the Bearing set (standard) for the Purifier in stock as of November 1, 2026?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c208",
+          "span": "stock_port: Rotterdam",
+          "max_dense": 0.7591507434844971,
+          "evidence_dense": 0.7570546865463257,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Rotterdam",
+          "context": "part_no: PP-8597 | description: Bearing set (standard) | equipment: Purifier | maker: Pelagic Purifiers | supplier_id: S01 | unit_price_usd: 381.64 | moq: 5 | lead_time_days: 10 | stock_port: Rotterdam | snapshot_date: 2026-11-01"
+        },
+        {
+          "question": "What are the stock ports for the Bearing set (standard) part number PP-8597?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c208",
+          "span": "stock_port: Rotterdam",
+          "max_dense": 0.8068935871124268,
+          "evidence_dense": 0.8068935871124268,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Rotterdam",
+          "context": "part_no: PP-8597 | description: Bearing set (standard) | equipment: Purifier | maker: Pelagic Purifiers | supplier_id: S01 | unit_price_usd: 381.64 | moq: 5 | lead_time_days: 10 | stock_port: Rotterdam | snapshot_date: 2026-11-01"
+        },
+        {
+          "question": "Which stock port has the Bearing set (standard) available at Fujairah as of the snapshot date?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c210",
+          "span": "stock_port: Fujairah",
+          "max_dense": 0.7801727652549744,
+          "evidence_dense": 0.7801727652549744,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "Fujairah",
+          "context": "part_no: PP-8597 | description: Bearing set (standard) | equipment: Purifier | maker: Pelagic Purifiers | supplier_id: S03 | unit_price_usd: 399.96 | moq: 10 | lead_time_days: 28 | stock_port: Fujairah | snapshot_date: 2026-11-01"
+        }
+      ],
+      "evidence": [
+        "spares_catalogue.csv#c208",
+        "spares_catalogue.csv#c210"
+      ],
+      "aspects": [
+        {
+          "aspect": "Where is the item listed as being held (stock port) according to the documents?",
+          "verdict": "SUPPORTED",
+          "needs_live_values": false,
+          "probes": [
+            {
+              "question": "What is the stock port location for the Gland packing set (heavy duty) with part number VC-9668?",
+              "supported": true,
+              "chunk_id": "spares_catalogue.csv#c300",
+              "span": "stock_port: Singapore",
+              "max_dense": 0.8109506368637085,
+              "evidence_dense": 0.8109506368637085,
+              "reason": "verified by both checks",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "Singapore",
+              "context": "part_no: VC-9668 | description: Gland packing set (heavy duty) | equipment: Cargo Pump | maker: Vantor Cargo Pumps | supplier_id: S03 | unit_price_usd: 297.13 | moq: 10 | lead_time_days: 42 | stock_port: Singapore | snapshot_date: 2026-11-01"
+            },
+            {
+              "question": "According to the documents, which stock port is listed for the Casing wear plate (heavy duty) with part number VC-2187?",
+              "supported": true,
+              "chunk_id": "spares_catalogue.csv#c273",
+              "span": "stock_port: Dubai",
+              "max_dense": 0.8220841884613037,
+              "evidence_dense": 0.8220841884613037,
+              "reason": "verified by both checks",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "Dubai",
+              "context": "part_no: VC-2187 | description: Casing wear plate (heavy duty) | equipment: Cargo Pump | maker: Vantor Cargo Pumps | supplier_id: S03 | unit_price_usd: 3464.43 | moq: 5 | lead_time_days: 7 | stock_port: Dubai | snapshot_date: 2026-11-01"
+            },
+            {
+              "question": "Where is the Gland packing set (standard) with part number VC-6931 currently held in stock according to the provided data?",
+              "supported": true,
+              "chunk_id": "spares_catalogue.csv#c283",
+              "span": "stock_port: Rotterdam",
+              "max_dense": 0.7925103306770325,
+              "evidence_dense": 0.7893438935279846,
+              "reason": "verified by both checks",
+              "code_ok": true,
+              "substring_ok": true,
+              "judge_ok": true,
+              "judge_quote": "stock_port: Rotterdam",
+              "context": "part_no: VC-6931 | description: Gland packing set (standard) | equipment: Cargo Pump | maker: Vantor Cargo Pumps | supplier_id: S01 | unit_price_usd: 42.00 | moq: 2 | lead_time_days: 14 | stock_port: Rotterdam | snapshot_date: 2026-11-01"
+            }
+          ],
+          "evidence": [
+            "spares_catalogue.csv#c300",
+            "spares_catalogue.csv#c273",
+            "spares_catalogue.csv#c283"
+          ]
+        },
+        {
+          "aspect": "What is the current availability status of the item at each port?",
+          "verdict": null,
+          "needs_live_values": true,
+          "probes": [],
+          "evidence": []
+        }
+      ],
+      "effective_verdict": "PARTIAL"
+    },
+    {
+      "topic_id": "T2",
+      "topic": "Which suppliers offer the part?",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "Which suppliers offer the cartridge assembly (standard) for Turbochargers made by Marlow Turbo?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c173",
+          "span": "supplier_id: S02",
+          "max_dense": 0.7890859246253967,
+          "evidence_dense": 0.7890859246253967,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "supplier_id: S02",
+          "context": "part_no: MT-8424 | description: Cartridge assembly (standard) | equipment: Turbocharger | maker: Marlow Turbo | supplier_id: S02 | unit_price_usd: 31.48 | moq: 2 | lead_time_days: 56 | stock_port: Houston | snapshot_date: 2026-11-01"
+        },
+        {
+          "question": "What are the supplier IDs for the part MT-8424?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c173",
+          "span": "supplier_id: S02",
+          "max_dense": 0.7203083038330078,
+          "evidence_dense": 0.7203083038330078,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "supplier_id: S02",
+          "context": "part_no: MT-8424 | description: Cartridge assembly (standard) | equipment: Turbocharger | maker: Marlow Turbo | supplier_id: S02 | unit_price_usd: 31.48 | moq: 2 | lead_time_days: 56 | stock_port: Houston | snapshot_date: 2026-11-01"
+        },
+        {
+          "question": "Which suppliers are listed for the Cartridge assembly (standard) part?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c172",
+          "span": "supplier_id: S01",
+          "max_dense": 0.7631175518035889,
+          "evidence_dense": 0.7631175518035889,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "S01",
+          "context": "part_no: MT-8424 | description: Cartridge assembly (standard) | equipment: Turbocharger | maker: Marlow Turbo | supplier_id: S01 | unit_price_usd: 34.57 | moq: 1 | lead_time_days: 28 | stock_port: Rotterdam | snapshot_date: 2026-11-01"
+        }
+      ],
+      "evidence": [
+        "spares_catalogue.csv#c173",
+        "spares_catalogue.csv#c172"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    },
+    {
+      "topic_id": "T3",
+      "topic": "What is the cost with discounts?",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What is the discount rate for an order with a total value of USD 15,000 before any discount is applied?",
+          "supported": true,
+          "chunk_id": "terms_norvik_marine_supply.pdf#c3",
+          "span": "An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "max_dense": 0.7410847544670105,
+          "evidence_dense": 0.7083433866500854,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "context": "2.1 The applicable discount tier for an order is determined by the total value of the order before any discount is applied. 5% discount applies to orders with a total value between USD 5,000 and USD 14,999. 2.2 An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999. The discount is calculated on the total value of the order before discount. 2.3 A 12% discount is applicable to orders with a total value of USD 50,000 or more. The discount is calculated on the total value of the order before discount. 2.4 The discount is applied to the entire order and is not cumulative with any other discounts or promotions. The discount is calculated based on the total value of the order before discount. 2.5 The supplier shall confirm the applicable discount tier in writing upon receipt of the order. The confirmation shall include the total value of the order and the applicable discount rate. 2.6 The discount is valid for the order as originally submitted and cannot be adjusted or modified after the order has been confirmed. The discount is not transferable or applicable to subsequent orders. 2.7 The supplier shall ensure that all orders are processed in accordance with the applicable discount tier. The discount is applied automatically upon confirmation of the order."
+        },
+        {
+          "question": "What discount applies to an order with a total value between USD 10,000 and USD 29,999 before any discount is applied?",
+          "supported": true,
+          "chunk_id": "terms_kestrel_marine_spares.pdf#c3",
+          "span": "A discount of 6% is applicable for orders valued between USD 10,000 and USD 29,999.",
+          "max_dense": 0.7523070573806763,
+          "evidence_dense": 0.7227563858032227,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "A discount of 6% is applicable for orders valued between USD 10,000 and USD 29,999.",
+          "context": "2.1 Discount tiers apply to the total value of one order before discount. 2.2 3% applies to orders with a total value between USD 2,000 and USD 9,999. 2.3 A discount of 6% is applicable for orders valued between USD 10,000 and USD 29,999. 2.4 A discount of 10% is applicable for orders valued at USD 30,000 or more. 2.5 The discount is calculated and applied at the time of order processing by the purchasing department. 2.6 The purchasing department is responsible for verifying the order value before applying the discount. 2.7 Discounts are not cumulative and are based solely on the total order value as stated in the purchase order. 2.8 The supplier is required to confirm the applicable discount rate in writing upon receipt of the order."
+        },
+        {
+          "question": "What is the discount rate for an order with a total value of USD 30,000 before any discount is applied?",
+          "supported": true,
+          "chunk_id": "terms_kestrel_marine_spares.pdf#c3",
+          "span": "A discount of 10% is applicable for orders valued at USD 30,000 or more.",
+          "max_dense": 0.7454023361206055,
+          "evidence_dense": 0.7273659706115723,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "A discount of 10% is applicable for orders valued at USD 30,000 or more.",
+          "context": "2.1 Discount tiers apply to the total value of one order before discount. 2.2 3% applies to orders with a total value between USD 2,000 and USD 9,999. 2.3 A discount of 6% is applicable for orders valued between USD 10,000 and USD 29,999. 2.4 A discount of 10% is applicable for orders valued at USD 30,000 or more. 2.5 The discount is calculated and applied at the time of order processing by the purchasing department. 2.6 The purchasing department is responsible for verifying the order value before applying the discount. 2.7 Discounts are not cumulative and are based solely on the total order value as stated in the purchase order. 2.8 The supplier is required to confirm the applicable discount rate in writing upon receipt of the order."
+        }
+      ],
+      "evidence": [
+        "terms_norvik_marine_supply.pdf#c3",
+        "terms_kestrel_marine_spares.pdf#c3"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    },
+    {
+      "topic_id": "T4",
+      "topic": "When will the parts arrive?",
+      "verdict": "SUPPORTED",
+      "probes": [
+        {
+          "question": "What is the lead time for the Cartridge assembly (heavy duty) part MT-6017 from supplier S01?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c163",
+          "span": "lead_time_days: 42",
+          "max_dense": 0.8174847364425659,
+          "evidence_dense": 0.8174847364425659,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "lead_time_days: 42",
+          "context": "part_no: MT-6017 | description: Cartridge assembly (heavy duty) | equipment: Turbocharger | maker: Marlow Turbo | supplier_id: S01 | unit_price_usd: 47.77 | moq: 2 | lead_time_days: 42 | stock_port: Rotterdam | snapshot_date: 2026-11-01"
+        },
+        {
+          "question": "How long does it take for the Cartridge assembly (heavy duty) part MT-6017 to arrive from Rotterdam when ordered from supplier S02?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c164",
+          "span": "lead_time_days: 42",
+          "max_dense": 0.80726557970047,
+          "evidence_dense": 0.80726557970047,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "lead_time_days: 42",
+          "context": "part_no: MT-6017 | description: Cartridge assembly (heavy duty) | equipment: Turbocharger | maker: Marlow Turbo | supplier_id: S02 | unit_price_usd: 51.98 | moq: 10 | lead_time_days: 42 | stock_port: Rotterdam | snapshot_date: 2026-11-01"
+        },
+        {
+          "question": "What is the lead time for the Cartridge assembly (heavy duty) part MT-6017 from both suppliers S01 and S02?",
+          "supported": true,
+          "chunk_id": "spares_catalogue.csv#c163",
+          "span": "lead_time_days: 42",
+          "max_dense": 0.7842013835906982,
+          "evidence_dense": 0.7808962464332581,
+          "reason": "verified by both checks",
+          "code_ok": true,
+          "substring_ok": true,
+          "judge_ok": true,
+          "judge_quote": "lead_time_days: 42",
+          "context": "part_no: MT-6017 | description: Cartridge assembly (heavy duty) | equipment: Turbocharger | maker: Marlow Turbo | supplier_id: S01 | unit_price_usd: 47.77 | moq: 2 | lead_time_days: 42 | stock_port: Rotterdam | snapshot_date: 2026-11-01"
+        }
+      ],
+      "evidence": [
+        "spares_catalogue.csv#c163",
+        "spares_catalogue.csv#c164"
+      ],
+      "aspects": [],
+      "effective_verdict": "SUPPORTED"
+    }
+  ],
+  "calibration": {
+    "min_score": 0.6706,
+    "min_score_bounds": [
+      0.5706,
+      0.7706
+    ],
+    "separable": false,
+    "calibrated": true,
+    "note": "LOW CONFIDENCE: distributions overlap (in-scope p10=0.721, near-miss p90=0.781); threshold set 0.05 below the in-scope p10 to preserve recall; unanswerable near-misses rely on the refusal policy",
+    "in_scope_probe_max_similarity": [
+      0.7571,
+      0.8069,
+      0.7802,
+      0.7891,
+      0.7203,
+      0.7631,
+      0.7083,
+      0.7228,
+      0.7274,
+      0.8175,
+      0.8073,
+      0.7809
+    ],
+    "near_miss_probe_max_similarity": [
+      0.7745,
+      0.6997,
+      0.787,
+      0.7753,
+      0.712,
+      0.6974
+    ]
+  },
+  "check_agreement": {
+    "probes_total": 23,
+    "probes_with_verbatim_span": 21,
+    "both_pass": 17,
+    "code_check_only": 4,
+    "judge_only": 0,
+    "neither": 0,
+    "disagreement_rate": 0.19
+  },
+  "gaps": [
+    {
+      "id": "G-LIVE-1",
+      "kind": "live_data",
+      "description": "The brief asks for current or real-time information, but the documents are a static snapshot and no tool provides it: \"It should also tell them what's in stock right now at each port.\" The recorded version (Where is the item listed as being held (stock port) according to the documents?) IS answerable from the documents as of 2026-11-01; only the live value is refused.",
+      "recommended_action": "refuse_with_redirect",
+      "topic_id": "T1",
+      "aspect": "What is the current availability status of the item at each port?",
+      "evidence": [
+        "It should also tell them what's in stock right now at each port."
+      ],
+      "redirect": "I do not have information on this. Please contact the relevant team directly."
+    }
+  ]
+}
