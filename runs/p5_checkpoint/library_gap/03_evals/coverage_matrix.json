@@ -1,0 +1,283 @@
+{
+  "summary": {
+    "items": 16,
+    "covered": 14,
+    "uncovered": [
+      "topic:T4",
+      "aspect:T6/Recorded shelf location and copy count"
+    ],
+    "cases": 22,
+    "uncovered_in_dev": []
+  },
+  "items": [
+    {
+      "id": "topic:T1",
+      "kind": "topic",
+      "requirement": "Are there any fines for overdue books?",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "lib-A01",
+        "lib-M02"
+      ],
+      "note": "",
+      "dev_cases": [
+        "lib-M02"
+      ],
+      "test_cases": [
+        "lib-A01"
+      ]
+    },
+    {
+      "id": "topic:T2",
+      "kind": "topic",
+      "requirement": "What is the loan period for books?",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "lib-A02"
+      ],
+      "note": "",
+      "dev_cases": [
+        "lib-A02"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "topic:T3",
+      "kind": "topic",
+      "requirement": "Can I renew my library card?",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "lib-A02"
+      ],
+      "note": "",
+      "dev_cases": [
+        "lib-A02"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "topic:T4",
+      "kind": "topic",
+      "requirement": "Is the book 'Pride and Prejudice' available?",
+      "expects": "answered",
+      "status": "UNCOVERED",
+      "cases": [],
+      "note": "",
+      "explanation": "25 candidates were written for this item and all were rejected: independent answerability failed x25",
+      "dev_cases": [],
+      "test_cases": []
+    },
+    {
+      "id": "topic:T6",
+      "kind": "topic",
+      "requirement": "tell visitors whether a specific book is on the shelf right now",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "lib-A03",
+        "lib-A07"
+      ],
+      "note": "",
+      "dev_cases": [
+        "lib-A03"
+      ],
+      "test_cases": [
+        "lib-A07"
+      ]
+    },
+    {
+      "id": "aspect:T6/Recorded shelf location and copy count",
+      "kind": "aspect",
+      "requirement": "Recorded shelf location and copy count (as of 2026-11-20)",
+      "expects": "answered",
+      "status": "UNCOVERED",
+      "cases": [],
+      "note": "",
+      "explanation": "6 candidates were written for this item and all were rejected: duplicate (embedding similarity) x6",
+      "dev_cases": [],
+      "test_cases": []
+    },
+    {
+      "id": "gap:G-T5",
+      "kind": "gap",
+      "requirement": "What are the cafe menu options?",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "lib-O01",
+        "lib-O09"
+      ],
+      "note": "",
+      "dev_cases": [
+        "lib-O09"
+      ],
+      "test_cases": [
+        "lib-O01"
+      ]
+    },
+    {
+      "id": "gap:G-LIVE-1",
+      "kind": "gap",
+      "requirement": "Current availability of the book on the shelf",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "lib-O02",
+        "lib-O10"
+      ],
+      "note": "",
+      "dev_cases": [
+        "lib-O10"
+      ],
+      "test_cases": [
+        "lib-O02"
+      ]
+    },
+    {
+      "id": "refuse:R1",
+      "kind": "refuse",
+      "requirement": "legal advice",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "lib-O03",
+        "lib-O08"
+      ],
+      "note": "",
+      "dev_cases": [
+        "lib-O03"
+      ],
+      "test_cases": [
+        "lib-O08"
+      ]
+    },
+    {
+      "id": "negtool:csv_lookup",
+      "kind": "negtool",
+      "requirement": "csv_lookup is not needed, so the assistant must decline it",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "lib-O04",
+        "lib-O11"
+      ],
+      "note": "",
+      "dev_cases": [
+        "lib-O04",
+        "lib-O11"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "negtool:calculator",
+      "kind": "negtool",
+      "requirement": "calculator is not needed, so the assistant must decline it",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "lib-O05",
+        "lib-O12"
+      ],
+      "note": "",
+      "dev_cases": [
+        "lib-O05"
+      ],
+      "test_cases": [
+        "lib-O12"
+      ]
+    },
+    {
+      "id": "negtool:current_date",
+      "kind": "negtool",
+      "requirement": "current_date is not needed, so the assistant must decline it",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "lib-O06"
+      ],
+      "note": "",
+      "dev_cases": [
+        "lib-O06"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "negtool:weather",
+      "kind": "negtool",
+      "requirement": "weather is not needed, so the assistant must decline it",
+      "expects": "refused",
+      "status": "COVERED",
+      "cases": [
+        "lib-O07"
+      ],
+      "note": "",
+      "dev_cases": [
+        "lib-O07"
+      ],
+      "test_cases": []
+    },
+    {
+      "id": "ask:A1",
+      "kind": "ask",
+      "requirement": "fines and library card membership",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "lib-A01",
+        "lib-A02",
+        "lib-M02"
+      ],
+      "note": "maps to ['topic:T1', 'topic:T3']",
+      "dev_cases": [
+        "lib-A02",
+        "lib-M02"
+      ],
+      "test_cases": [
+        "lib-A01"
+      ]
+    },
+    {
+      "id": "ask:A2",
+      "kind": "ask",
+      "requirement": "tell visitors whether a specific book is on the shelf right now",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "lib-A03",
+        "lib-A07",
+        "lib-O02",
+        "lib-O10"
+      ],
+      "note": "maps to ['gap:G-LIVE-1', 'topic:T6']",
+      "dev_cases": [
+        "lib-A03",
+        "lib-O10"
+      ],
+      "test_cases": [
+        "lib-A07",
+        "lib-O02"
+      ]
+    },
+    {
+      "id": "ask:A3",
+      "kind": "ask",
+      "requirement": "answer questions about the cafe menu",
+      "expects": "answered",
+      "status": "COVERED",
+      "cases": [
+        "lib-O01",
+        "lib-O09"
+      ],
+      "note": "maps to ['gap:G-T5']",
+      "dev_cases": [
+        "lib-O09"
+      ],
+      "test_cases": [
+        "lib-O01"
+      ]
+    }
+  ]
+}

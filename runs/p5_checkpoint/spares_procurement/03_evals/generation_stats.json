@@ -1,0 +1,72 @@
+{
+  "target_total": 32,
+  "floor": 20,
+  "valid_cases": 27,
+  "floor_met": true,
+  "generation_rounds": 5,
+  "targets": {
+    "answerable": 12,
+    "multidoc": 5,
+    "ambiguous": 4,
+    "out_of_scope": 7,
+    "tool_required": 4
+  },
+  "generated_candidates": {
+    "answerable": 22,
+    "ambiguous": 10,
+    "out_of_scope": 16,
+    "tool_required": 7,
+    "multidoc": 3
+  },
+  "validated_after_filters": {
+    "answerable": 11,
+    "multidoc": 1,
+    "ambiguous": 1,
+    "out_of_scope": 10,
+    "tool_required": 6
+  },
+  "selected": {
+    "answerable": 11,
+    "multidoc": 1,
+    "ambiguous": 1,
+    "out_of_scope": 10,
+    "tool_required": 4
+  },
+  "split": {
+    "dev": 20,
+    "test": 7
+  },
+  "rejections_by_reason": {
+    "contradicts the requirements": 5,
+    "question does not identify one table row": 30,
+    "no key facts": 1,
+    "question copies the passage": 7,
+    "computed case failed verification": 46,
+    "no answer-bearing key fact": 1,
+    "independent answerability failed": 9,
+    "the corpus can answer it": 1,
+    "the merged question dropped one of the two questions": 2,
+    "duplicate (embedding similarity)": 13,
+    "template is not one of the offered templates": 4
+  },
+  "candidates_attempted": 148,
+  "rejection_rate": 0.804,
+  "shortfall": {
+    "answerable": 1,
+    "multidoc": 4,
+    "ambiguous": 3
+  },
+  "coverage": {
+    "items": 18,
+    "covered": 18,
+    "uncovered": [],
+    "cases": 27,
+    "uncovered_in_dev": []
+  },
+  "key_facts_per_case": {
+    "2": 2,
+    "1": 13,
+    "3": 1,
+    "0": 11
+  }
+}

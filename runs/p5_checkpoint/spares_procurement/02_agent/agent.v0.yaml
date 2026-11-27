@@ -166,4 +166,4 @@ provenance:
       near-miss p90=0.781); threshold set 0.05 below the in-scope p10 to preserve recall; unanswerable
       near-misses rely on the refusal policy'
     query_rewrite: off by default; the optimizer may enable it for retrieval misses
-  fewshot_leakage_check: 'pending: needs the eval set (P5); see forgeai/generator/fewshot.py'
+  fewshot_leakage_check: 'passed: 0 examples checked against 27 eval questions'

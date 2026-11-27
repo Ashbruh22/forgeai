@@ -82,6 +82,18 @@ def fact_in_text(kind: str, fact: str, text: str, strict: bool = True) -> bool:
     return phrase_in_text(fact, text, strict)
 
 
+def quantity_match(fact: str, answer: str) -> bool:
+    """Every quantity of ``fact`` ("capped at 15 dollars", "copies: 3") occurs in ``answer`` ("$15", "3 copies")
+    with the same value and a compatible unit (an unknown unit on either side is compatible)."""
+    from forgeai.evals.units import quantities_in
+
+    wanted = quantities_in(fact)
+    found = quantities_in(answer)
+    return bool(wanted) and all(
+        any(abs(w.value - f.value) < 1e-9 and (w.unit is None or f.unit is None or w.unit == f.unit) for f in found)
+        for w in wanted)
+
+
 def ngram_overlap(question: str, source: str, n: int = 3) -> float:
     """Share of the question's word trigrams that also occur in ``source`` (0 = fully paraphrased).
 

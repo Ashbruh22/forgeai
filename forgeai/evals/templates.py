@@ -212,7 +212,10 @@ def render_menu(menu: Menu, sentences: list[tuple[str, SeedSpan, list[Quantity]]
     if row_facts and menu.row_table is not None:
         lines.append(f"TABLE ROW ({menu.row_table.doc}): {menu.row_identity}")
         lines += [f"  [{f.id}] {f.description}" for f in row_facts]
-        lines.append(f"  columns that name rows: {', '.join(menu.row_table.columns)}")
+        row = menu.row_table.rows[menu.row_index]
+        shared = [f"{c} ({sum(r[c] == row[c] for r in menu.row_table.rows)} rows share this row's value)"
+                  for c in menu.row_table.columns if c not in {f.column for f in row_facts}]
+        lines.append(f"  columns, with how many rows share this row's value (for `extreme`: the group column must be shared by 2 to 6 rows): {'; '.join(shared)}")
     for s, (sentence, _, quantities) in enumerate(sentences, 1):
         lines.append(f"SENTENCE S{s}: \"{sentence}\"")
         for q_i, q in enumerate(quantities, 1):

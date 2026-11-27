@@ -19,7 +19,7 @@ UNIT_NAMES = frozenset({MONEY, QUANTITY, RATE, DAYS, WORKING_DAYS, DATE, "months
 _CURRENCY = r"(?:USD|US\$|EUR|GBP|SGD|\$|€|£)"
 QUANTITY_RE = re.compile(
     rf"(?P<pre>{_CURRENCY})?\s*(?P<num>(?<![\w.])\d[\d,]*(?:\.\d+)?)"
-    rf"(?:\s*(?P<post>%|percent\b|per\s+cent\b|(?:working|business|calendar)\s+days?\b|days?\b|weeks?\b|months?\b|years?\b|hours?\b|{_CURRENCY}\b))?",
+    rf"(?:\s*(?P<post>%|percent\b|per\s+cent\b|(?:working|business|calendar)\s+days?\b|days?\b|weeks?\b|months?\b|years?\b|hours?\b|dollars?\b|euros?\b|{_CURRENCY}\b))?",
     re.IGNORECASE)
 
 _COLUMN_WORDS: list[tuple[str, tuple[str, ...]]] = [
@@ -54,7 +54,7 @@ def column_unit(column: str, sample: list[str]) -> str | None:
 
 def _unit_from_words(pre: str | None, post: str | None) -> str | None:
     pre, post = (pre or "").upper(), (post or "").lower().strip()
-    if pre or post.upper() in {"USD", "US$", "EUR", "GBP", "SGD", "$", "€", "£"}:
+    if pre or post.upper() in {"USD", "US$", "EUR", "GBP", "SGD", "$", "€", "£"} or post.startswith(("dollar", "euro")):
         return MONEY
     if post in ("%", "percent") or post.startswith("per"):
         return RATE

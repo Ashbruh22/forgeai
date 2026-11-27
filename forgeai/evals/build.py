@@ -27,7 +27,7 @@ from forgeai.evals.consistency import assert_cases_consistent, violation
 from forgeai.evals.corpus import EvalCorpus
 from forgeai.evals.coverage import Item, build_items, build_matrix, case_covers, uncovered_items
 from forgeai.evals.generators import Candidate, Generator
-from forgeai.evals.matching import fact_in_text
+from forgeai.evals.matching import fact_in_text, quantity_match
 from forgeai.evals.models import EvalCase, KeyFact, RejectedCase
 from forgeai.guard.guard import evaluate_probes
 from forgeai.intake.schema import Requirements
@@ -93,7 +93,7 @@ def restates_the_question(fact: str, question: str) -> bool:
     if re.search(r"\d", fact):  # a number or a date is the information itself, never a restatement
         return False
     terms = content_terms(fact)
-    return bool(terms) and len(terms & content_terms(question)) / len(terms) >= 0.5
+    return bool(terms) and len(terms & content_terms(question)) / len(terms) >= 0.8
 
 
 def prune_facts(candidates: list[Candidate], config: ForgeConfig) -> tuple[list[Candidate], list[RejectedCase]]:
@@ -155,7 +155,8 @@ def judge_answerability(candidates: list[Candidate], config: ForgeConfig) -> tup
             AnswerFromContext, judge.name, judge.temperature, seed=judge.seed, fallback=AnswerFromContext(),
         ).answer
         facts = [f for f in cand.case.key_facts if f.kind not in ("snapshot_date", "relative_date")]
-        recovered = [f for f in facts if fact_in_text(f.kind, f.text, answer, strict=False)]
+        recovered = [f for f in facts if fact_in_text(f.kind, f.text, answer, strict=False)
+                     or (f.kind == "phrase" and quantity_match(f.text, answer))]
         # Every key fact is answer-bearing by now (``prune_facts``), so the PRIMARY fact must be recovered
         # plus at least half of all of them. The threshold is unchanged from the first P5 build.
         ok = bool(facts) and facts[0] in recovered and len(recovered) * 2 >= len(facts)
@@ -204,7 +205,7 @@ def dedupe(candidates: list[Candidate], embedder: Embedder, threshold: float) ->
         return a.question in b.provenance.get("composed_from", []) or b.question in a.provenance.get("composed_from", [])
 
     for i, cand in enumerate(candidates):
-        twin = next((j for j in kept if float(vectors[i] @ vectors[j]) > threshold
+        twin = None if cand.case.aspect else next((j for j in kept if float(vectors[i] @ vectors[j]) > threshold
                      and not related(cand.case, candidates[j].case)), None)
         if twin is None:
             kept.append(i)

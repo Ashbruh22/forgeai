@@ -1,0 +1,68 @@
+{
+  "intake": {
+    "wall_seconds": 252.4,
+    "llm_calls": 117,
+    "cache_hits": 0,
+    "live_llm_seconds": 192.2,
+    "model_load_seconds": 62.3,
+    "model_swaps": 7,
+    "fallbacks": 0,
+    "by_model": {
+      "llama3.1:8b": 33,
+      "qwen3:8b": 84
+    },
+    "ram": {
+      "system_ram_total_gb": 15.7,
+      "peak_system_ram_used_gb": 14.6,
+      "min_free_ram_gb": 1.1,
+      "min_free_ram_pct": 6.9,
+      "low_memory_warnings": 60,
+      "forgeai_process_peak_gb": 0.0
+    },
+    "finished": "2026-11-27T17:53:12"
+  },
+  "generate": {
+    "wall_seconds": 36.8,
+    "llm_calls": 3,
+    "cache_hits": 0,
+    "live_llm_seconds": 36.8,
+    "model_load_seconds": 22.7,
+    "model_swaps": 2,
+    "fallbacks": 0,
+    "by_model": {
+      "llama3.1:8b": 1,
+      "qwen3:8b": 2
+    },
+    "ram": {
+      "system_ram_total_gb": 15.7,
+      "peak_system_ram_used_gb": 12.2,
+      "min_free_ram_gb": 3.5,
+      "min_free_ram_pct": 22.3,
+      "low_memory_warnings": 0,
+      "forgeai_process_peak_gb": 0.0
+    },
+    "finished": "2026-11-27T17:54:22"
+  },
+  "evals": {
+    "wall_seconds": 392.8,
+    "llm_calls": 279,
+    "cache_hits": 109,
+    "live_llm_seconds": 366.0,
+    "model_load_seconds": 156.9,
+    "model_swaps": 18,
+    "fallbacks": 0,
+    "by_model": {
+      "llama3.1:8b": 28,
+      "qwen3:8b": 142
+    },
+    "ram": {
+      "system_ram_total_gb": 15.7,
+      "peak_system_ram_used_gb": 13.0,
+      "min_free_ram_gb": 2.7,
+      "min_free_ram_pct": 17.0,
+      "low_memory_warnings": 0,
+      "forgeai_process_peak_gb": 0.0
+    },
+    "finished": "2026-11-27T18:01:14"
+  }
+}

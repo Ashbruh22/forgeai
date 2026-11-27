@@ -411,3 +411,11 @@ def test_a_multidoc_question_that_one_document_answers_is_rejected(config, tmp_p
     install(fresh, tmp_path, AnswerFromContext=lambda u: {"answer": "The alpha rule and the beta rule both apply."})
     kept, _ = judge_answerability([cand], fresh)
     assert kept == [cand]
+
+
+def test_a_phrase_fact_with_a_quantity_is_recovered_when_the_answer_states_the_same_quantity() -> None:
+    from forgeai.evals.matching import quantity_match
+
+    assert quantity_match("capped at 15 dollars per item", "$15") and quantity_match("copies: 3", "There are 3 copies available.")
+    assert not quantity_match("capped at 15 dollars per item", "15 days") and not quantity_match("30 days", "It is 20 days.")
+    assert not quantity_match("the Ethics Hotline", "the Ethics Hotline")  # no quantity: not this function's business

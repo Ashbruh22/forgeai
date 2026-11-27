@@ -15,6 +15,8 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
+from forgeai.resources import MemoryMonitor
+
 
 def _trace_slice(trace: Path, offset: int) -> list[dict[str, Any]]:
     if not trace.is_file():
@@ -44,15 +46,20 @@ def summarize_calls(rows: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 @contextmanager
-def stage_timer(run_dir: Path, stage: str) -> Iterator[None]:
+def stage_timer(run_dir: Path, stage: str, warn_below_free_pct: float = 15.0) -> Iterator[None]:
     trace = run_dir / "trace.jsonl"
     offset = trace.stat().st_size if trace.is_file() else 0
     started = time.perf_counter()
+    monitor = MemoryMonitor(warn_below_free_pct=warn_below_free_pct)
+    monitor.__enter__()
     try:
         yield
     finally:
+        monitor.__exit__(None, None, None)
         entry = {"wall_seconds": round(time.perf_counter() - started, 1), **summarize_calls(_trace_slice(trace, offset)),
-                 "finished": time.strftime("%Y-%m-%dT%H:%M:%S")}
+                 "ram": monitor.summary(), "finished": time.strftime("%Y-%m-%dT%H:%M:%S")}
+        with trace.open("a", encoding="utf-8") as handle:  # peak RAM per stage is also part of the trace
+            handle.write(json.dumps({"event": "stage_resources", "stage": stage, **entry["ram"]}) + chr(10))
         path = run_dir / "timing.json"
         try:
             data = json.loads(path.read_text(encoding="utf-8"))

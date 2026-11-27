@@ -1,6 +1,15 @@
 # ForgeAI configuration. Exact model tags/digests are recorded in every run's manifest.json.
 ollama_host: http://localhost:11434
-num_ctx: 8192
+num_ctx: 8192            # fallback; each role below sets its own, sized from the largest measured prompt
+ollama_timeout_s: 180    # per call; a timeout is retried once, then that candidate is skipped (logged)
+min_free_ram_pct: 15     # a stage warns when free RAM drops below this
+# Ollama SERVER settings we rely on (set as user environment variables, then restart Ollama). They are
+# verified against the server's own start-up log at the beginning of every stage and recorded in manifest.json.
+ollama_env:
+  OLLAMA_NUM_PARALLEL: "1"
+  OLLAMA_FLASH_ATTENTION: "1"
+  OLLAMA_KV_CACHE_TYPE: q8_0
+  OLLAMA_MAX_LOADED_MODELS: "1"
 max_output_tokens: 1536   # hard cap per reply; a runaway generation timed out at 600 s once
 think: false            # reasoning/thinking mode off for all roles (agent, generator, judge)
 
@@ -8,6 +17,7 @@ agent_model:            # agent + generator model
   name: qwen3:8b
   temperature: 0.1
   seed: 7
+  num_ctx: 6144          # largest measured prompt 2,672 tokens + 1,536 output cap = 4,208; 46% headroom
 
 # Judge model is a config value, chosen by MEASURED canary accuracy (spec §6.2),
 # not by guesswork. Candidates: gemma3:4b, llama3.1:8b. Must differ in family
@@ -16,6 +26,7 @@ judge_model:
   name: llama3.1:8b
   temperature: 0.0
   seed: 7
+  num_ctx: 4096          # largest measured judge prompt 699 tokens (+ 1,536 cap); the P6 judge prompt is expected under 2,000
 
 embedding_model: BAAI/bge-small-en-v1.5
 embedding_revision: 5c38ec7c405ec4b44b94cc5a9bb96e735b38267a   # pinned HF commit

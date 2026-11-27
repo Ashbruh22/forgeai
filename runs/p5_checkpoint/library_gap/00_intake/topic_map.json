@@ -1,0 +1,53 @@
+{
+  "topics": [
+    {
+      "topic_id": "topic_0",
+      "label": "Library Policies and Rules",
+      "description": "These passages explain the borrowing periods, renewal policies, fees for overdue items, and operating hours of the Brightwater Library.",
+      "size": 4,
+      "docs": [
+        "library_rules.md"
+      ],
+      "chunk_ids": [
+        "library_rules.md#c0",
+        "library_rules.md#c1",
+        "library_rules.md#c2",
+        "library_rules.md#c3"
+      ]
+    },
+    {
+      "topic_id": "topic_1",
+      "label": "Classic Literature Titles",
+      "description": "These passages represent a collection of classic literature titles with their authors, shelf locations, copy counts, and snapshot dates.",
+      "size": 8,
+      "docs": [
+        "books.csv"
+      ],
+      "chunk_ids": [
+        "books.csv#c1",
+        "books.csv#c2",
+        "books.csv#c3",
+        "books.csv#c4",
+        "books.csv#c5",
+        "books.csv#c6",
+        "books.csv#c7",
+        "books.csv#c8"
+      ]
+    },
+    {
+      "topic_id": "topic_2",
+      "label": "Room Specifications",
+      "description": "These passages provide details about different rooms, including their capacity, hourly fee, and projector availability.",
+      "size": 4,
+      "docs": [
+        "rooms.csv"
+      ],
+      "chunk_ids": [
+        "rooms.csv#c1",
+        "rooms.csv#c2",
+        "rooms.csv#c3",
+        "rooms.csv#c4"
+      ]
+    }
+  ]
+}

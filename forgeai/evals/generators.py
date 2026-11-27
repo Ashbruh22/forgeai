@@ -208,6 +208,12 @@ class Generator:
 
     def _one_answerable(self, chunk: Chunk, salt: int, snapshot: tuple[str, str, str] | None) -> None:
         focus = load_prompt("evals/focus").render({"aspect": snapshot[1]})[1] if snapshot else ""
+        if chunk.kind == "row":  # several rows look alike: the question must say which one it means
+            table = self.corpus.tables.get(chunk.doc)
+            if table is not None and chunk.row is not None and chunk.row <= len(table.rows):
+                row = table.rows[chunk.row - 1]
+                key = ", ".join(f"{c} {row[c]}" for c in self.identifying_columns(table))
+                focus += chr(10) + load_prompt("evals/row_identity").render({"key": key})[1]
         draft = self._call("evals/answerable", {"doc": chunk.doc, "passage": chunk.text, "focus": focus},
                            AnswerableDraft, salt)
         question = draft.question.strip()  # type: ignore[attr-defined]
