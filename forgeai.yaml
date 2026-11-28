@@ -48,3 +48,9 @@ limits:                 # hard limits from the assignment
   min_eval_cases: 20
   max_tool_calls_per_turn: 3
   max_llm_retries: 2
+
+judge:                  # layer-2 options, decided by the canaries (docs/DECISIONS.md section J)
+  use_nli: false
+  nli_model: cross-encoder/nli-deberta-v3-small
+  nli_revision: fa2804872c3b4bd748f38c0185cc85775361e735   # pinned HF commit
+  nli_contradiction_min: 0.7

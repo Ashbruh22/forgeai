@@ -13,12 +13,12 @@ from forgeai.ingest.loaders import load_document
 from forgeai.intake.schema import load_requirements
 
 ROOT = Path(__file__).parents[1]
-RUNS = sorted((ROOT / "runs" / "p5_checkpoint").glob("*/03_evals/eval_set.jsonl"))
+RUNS = sorted([*(ROOT / "runs" / "p5_checkpoint").glob("*/03_evals/eval_set.jsonl"), *(ROOT / "runs" / "p6_1_checkpoint").glob("*/03_evals/eval_set.jsonl")])
 DOCS = {"hr_shore": ROOT / "data" / "hr_shore" / "docs", "spares_procurement": ROOT / "data" / "spares_procurement" / "docs",
         "library_gap": ROOT / "data" / "_smoke" / "docs"}
 
 
-@pytest.fixture(params=RUNS or [None], ids=lambda p: p.parents[1].name if p else "none")
+@pytest.fixture(params=RUNS or [None], ids=lambda p: f"{p.parents[2].name}/{p.parents[1].name}" if p else "none")
 def run(request):
     if request.param is None:
         pytest.skip("no committed eval sets yet")

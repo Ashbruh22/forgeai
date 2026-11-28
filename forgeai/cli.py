@@ -257,6 +257,18 @@ def audit(
                   f"key-fact agreement {result['key_fact_agreement']['agree']}/{result['key_fact_agreement']['checked']}")
 
 
+@app.command()
+def freeze(
+    run: Path = typer.Option(..., help="Run folder holding 03_evals/eval_set.jsonl"),
+    config_path: Path = typer.Option(Path("forgeai.yaml"), "--config", help="forgeai.yaml"),
+) -> None:
+    """Freeze the eval set: write its sha256 into the run's manifest.json. Scoring refuses a changed set afterwards."""
+    from forgeai.evals.freeze import freeze_eval_set
+
+    entry = freeze_eval_set(run, load_config(config_path))
+    console.print(f"frozen {entry['cases']} cases, sha256 {entry['sha256'][:16]}... in {run / 'manifest.json'}")
+
+
 def _merge_resources(out: Path, stage: str) -> None:
     """Copy this stage's RAM summary (peak, lowest free, who held the memory at the peak) into resources.json."""
     path = out / "resources.json"
@@ -273,6 +285,7 @@ def canaries(
     config_path: Path = typer.Option(Path("forgeai.yaml"), "--config", help="forgeai.yaml"),
     judges: str = typer.Option("llama3.1:8b,gemma3:4b", help="Candidate judge models, comma separated"),
     per_demo: int = typer.Option(5, help="Gold answers per demo"),
+    nli: bool = typer.Option(False, "--nli/--no-nli", help="Add the NLI contradiction check to layer 2 (measured, not assumed)"),
 ) -> None:
     """Judge canaries: build gold answers and perturbations in code, run every candidate judge, choose one by the numbers."""
     from datetime import date
@@ -298,7 +311,13 @@ def canaries(
             candidate = config.model_copy(update={"judge_model": spec})
             set_client(LLMClient(candidate, trace_path=out / "trace.jsonl"))
             console.print(f"judge {name}: {candidate.num_ctx_for(name)} context")
-            results[name] = run_canaries(pool, spec, today=date.today(), fuzzy_min=config.thresholds.fact_fuzzy_score)
+            checker = None
+            if nli:
+                from forgeai.judge.nli import NliChecker
+
+                checker = NliChecker(config.judge.nli_model, config.judge.nli_revision)
+            results[name] = run_canaries(pool, spec, today=date.today(), fuzzy_min=config.thresholds.fact_fuzzy_score,
+                                         nli=checker, nli_min=config.judge.nli_contradiction_min)
             (out / f"canaries_{name.replace(':', '_')}.json").write_text(json.dumps(results[name], indent=2), encoding="utf-8")
             console.print(f"  {name}: " + ", ".join(f"{k} {v['pipeline_accuracy']}/{v['layer2_accuracy']}" for k, v in results[name]["table"].items()))
     for earlier in sorted(out.glob("canaries_*.json")):  # judges measured by an earlier command are part of the comparison
@@ -323,7 +342,14 @@ def baseline(
     """Iteration 0: run agent v0 on every dev and test case, judge all answers, write the scorecards."""
     from forgeai.judge.baseline import run_baseline
 
+    from forgeai.evals.freeze import EvalSetChangedError, EvalSetNotFrozenError, assert_eval_set_frozen
+
     config = load_config(config_path)
+    try:
+        assert_eval_set_frozen(run)
+    except (EvalSetChangedError, EvalSetNotFrozenError) as exc:
+        console.print(f"[red]{exc}[/red]")
+        raise typer.Exit(7) from exc
     canary = json.loads(canaries_path.read_text(encoding="utf-8"))
     if canary["choice"]["chosen"] != config.judge_model.name:
         console.print(f"[red]forgeai.yaml judge_model is {config.judge_model.name} but the canaries chose {canary['choice']['chosen']}.[/red]")

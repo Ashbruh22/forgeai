@@ -1,8 +1,11 @@
 """Layer 2 of the judge (spec §6.2): a language model, only where layer 1 cannot decide.
 
-* Claim support: the answer is split into atomic claims and each is rated against the RETRIEVED CONTEXT (and the
-  results of the tools the agent called) and nothing else. "Supported" counts only with a quote copied from that
-  context, verified as a substring here.
+* Claim support: the answer is split into atomic claims, repeated claims are dropped, and each claim is rated against
+  the RETRIEVED CONTEXT and the FULL results of the tools the agent called, and nothing else. A claim with a number or
+  a date is decided by code (``claims.numeric_verdict``); any other claim by the judge model, whose "supported"
+  counts only with a quote copied from the evidence and verified as a substring, and which an optional NLI check
+  can turn into "contradicted". Only an answer-bearing claim that is unsupported or contradicted fails a case; one
+  unsupported claim that bears no answer is logged as low confidence.
 * Fact equivalence: a key fact that failed deterministic matching may be upgraded to a pass only if the judge quotes
   the span of the answer that states it; the quote is verified as a substring of the answer, must carry the fact's
   numbers, and must agree with it on negation.
@@ -15,17 +18,26 @@ iteration number, a case id or a candidate id (``tests/test_judge.py`` checks ev
 from __future__ import annotations
 
 import re
+from datetime import date
+
 from pydantic import BaseModel, Field
 
 from forgeai.config import ModelSpec
 from forgeai.evals.matching import NEGATIONS, numbers_in
 from forgeai.evals.models import EvalCase
+from rapidfuzz import fuzz
+
+from forgeai.judge.claims import (
+    answer_bearing, best_span, build_spans, dedupe_claims, negation_mismatch, numeric_verdict, sentence_negation_checks,
+    answer_number_checks,
+)
 from forgeai.judge.models import CaseRun, ClaimVerdict, FactCheck, Layer1, Layer2
+from forgeai.judge.nli import NliChecker
 from forgeai.llm import call_structured
-from forgeai.textmatch import is_verbatim
+from forgeai.textmatch import is_verbatim, normalize
 
 MAX_CLAIMS = 8
-CONTEXT_CHARS = 6000
+CONTEXT_CHARS = 9000
 LONG_REFUSAL_WORDS = 40
 _WORDS = re.compile(r"[a-z0-9]+")
 
@@ -37,6 +49,7 @@ class ClaimList(BaseModel):
 class SupportVerdict(BaseModel):
     reason: str = ""
     supported: bool = False
+    missing: str = ""
     quote: str = ""
 
 
@@ -47,32 +60,70 @@ class Equivalence(BaseModel):
 
 
 def format_context(run: CaseRun) -> str:
-    """The retrieved chunks and the tool results the agent had: the only evidence a claim may rest on."""
-    parts = [chunk.text for chunk in run.retrieved]
-    parts += [f"Tool result: {r.tool} {r.args} gave {r.result}" for r in run.answer.tool_calls]
-    context = "\n\n".join(parts) or "No context was retrieved."
-    return context[:CONTEXT_CHARS]
+    """The evidence the judge may use: FULL tool results first (never cut), then whole retrieved chunks until the budget
+    is used up. A tool result is never truncated: a calculation's value and inputs are the evidence for a computed claim."""
+    parts = [f"Tool result: {r.tool} {r.args} gave {r.result}" for r in run.answer.tool_calls]
+    used = sum(len(p) for p in parts)
+    for chunk in run.retrieved:
+        if used + len(chunk.text) > CONTEXT_CHARS and parts:
+            break
+        parts.append(chunk.text)
+        used += len(chunk.text)
+    return (chr(10) * 2).join(parts) or "No context was retrieved."
 
 
 def _negations(text: str) -> set[str]:
     return set(_WORDS.findall(text.lower())) & NEGATIONS
 
 
-def judge_claims(question: str, answer_text: str, context: str, judge: ModelSpec) -> list[ClaimVerdict]:
-    """Decompose the answer and rate every claim against ``context`` (batched per answer, one call per claim)."""
-    listed = call_structured("judge.decompose", "judge/decompose_claims", {"question": question, "answer": answer_text},
+def near_verbatim(quote: str, context: str, minimum: int = 93) -> bool:
+    """A quote the judge copied with a small slip (an ellipsis, a dropped word) still counts if 93%+ of it is in the evidence."""
+    return len(quote.strip()) >= 15 and fuzz.partial_ratio(normalize(quote).lower(), normalize(context).lower()) >= minimum
+
+
+def judge_claims(case: EvalCase, run: CaseRun, judge: ModelSpec, today: date, *, nli: NliChecker | None = None,
+                 nli_min: float = 0.7, fuzzy_min: int = 85) -> tuple[list[ClaimVerdict], int]:
+    """Decompose the answer, drop repeated claims, then rate each claim: numbers and dates by code against the
+    evidence (context and full tool results), every other claim by the judge model. Returns the verdicts and the
+    number of duplicate claims dropped."""
+    answer_text = run.answer.answer
+    listed = call_structured("judge.decompose", "judge/decompose_claims", {"question": case.question, "answer": answer_text},
                              ClaimList, judge.name, judge.temperature, seed=judge.seed, fallback=ClaimList())
+    raw_claims = [c for c in listed.claims if c.strip()]
+    claims = dedupe_claims(raw_claims)
+    spans = build_spans(run)
+    context = format_context(run)
     verdicts: list[ClaimVerdict] = []
-    for claim in [c.strip() for c in listed.claims if c.strip()][:MAX_CLAIMS]:
-        raw = call_structured("judge.support", "judge/claim_support", {"context": context, "claim": claim},
+    for claim in claims:
+        bearing = answer_bearing(claim, case, today, fuzzy_min)
+        decided = numeric_verdict(claim, spans)
+        if decided is not None:
+            verdicts.append(decided)
+            continue
+        raw = call_structured("judge.support", "judge/claim_check", {"context": context, "claim": claim},
                               SupportVerdict, judge.name, judge.temperature, seed=judge.seed,
                               fallback=SupportVerdict(reason="the judge returned no valid verdict"))
-        verified = bool(raw.quote.strip()) and is_verbatim(raw.quote, context)
-        verdicts.append(ClaimVerdict(claim=claim, supported=raw.supported and verified, quote=raw.quote,
-                                     reason=raw.reason if verified or not raw.supported else
-                                     f"{raw.reason} [rejected: the quote is not a verbatim span of the context]",
-                                     quote_verified=verified))
-    return verdicts
+        verified = bool(raw.quote.strip()) and (is_verbatim(raw.quote, context) or near_verbatim(raw.quote, context))
+        verdict, missing = ("supported", "") if raw.supported and verified else ("unsupported", raw.missing or raw.reason)
+        if raw.supported and not verified:
+            missing = "the judge quoted text that is not in the evidence"
+        probs: dict[str, float] = {}
+        if verdict == "supported" and negation_mismatch(claim, raw.quote):
+            verdict, missing = "contradicted", f"the claim and the quoted evidence {raw.quote[:100]!r} disagree on negation"
+        if verdict == "supported" and nli is not None:
+            span, _ = best_span(claim, spans)
+            premise = span.text if span else raw.quote
+            probs = nli.probabilities(premise, claim)
+            if probs.get("contradiction", 0.0) >= nli_min:
+                verdict, missing = "contradicted", f"an NLI check finds the claim contradicted by {premise[:100]!r}"
+        verdicts.append(ClaimVerdict(
+            claim=claim, supported=verdict == "supported", quote=raw.quote, quote_verified=verified, verdict=verdict,
+            missing=missing, kind="text", answer_bearing=bearing, nli=probs,
+            reason=f"claim {claim!r}: {raw.reason}" + ("" if verdict == "supported" else f" Missing: {missing}")))
+    seen = {c.claim for c in verdicts}
+    extra = sentence_negation_checks(answer_text, spans) + answer_number_checks(answer_text, case.question, spans)
+    verdicts += [v for v in extra if v.claim not in seen]
+    return verdicts, len(raw_claims) - len(claims)
 
 
 def try_upgrade(question: str, check: FactCheck, answer_text: str, judge: ModelSpec) -> tuple[FactCheck, dict]:
@@ -94,7 +145,8 @@ def try_upgrade(question: str, check: FactCheck, answer_text: str, judge: ModelS
     return upgraded, {**log, "upgraded": True}
 
 
-def run_layer2(case: EvalCase, run: CaseRun, layer1: Layer1, judge: ModelSpec) -> tuple[Layer2, Layer1]:
+def run_layer2(case: EvalCase, run: CaseRun, layer1: Layer1, judge: ModelSpec, *, today: date, nli: NliChecker | None = None,
+               nli_min: float = 0.7, fuzzy_min: int = 85) -> tuple[Layer2, Layer1]:
     """Layer 2 for one case. Returns the verdicts and layer 1 with any verified fact upgrades applied."""
     answer = run.answer
     out = Layer2(ran=False)
@@ -103,8 +155,13 @@ def run_layer2(case: EvalCase, run: CaseRun, layer1: Layer1, judge: ModelSpec) -
 
     if answer.status == "answered" and answer.answer.strip():
         out.ran = True
-        out.claims = judge_claims(case.question, answer.answer, format_context(run), judge)
-        out.unsupported = sum(1 for c in out.claims if not c.supported)
+        out.claims, out.duplicates_dropped = judge_claims(case, run, judge, today, nli=nli, nli_min=nli_min, fuzzy_min=fuzzy_min)
+        failing = [c for c in out.claims if not c.supported and c.answer_bearing]
+        minor = [c for c in out.claims if not c.supported and not c.answer_bearing]
+        out.unsupported = len(failing) + (len(minor) if len(minor) > 1 else 0)  # a lone minor claim is logged, not failed
+        out.minor_unsupported = [c.claim for c in minor]
+        if len(minor) == 1 and not failing:
+            out.notes.append(f"low confidence: one claim that bears no answer is unsupported ({minor[0].claim!r}): {minor[0].missing}")
         if not out.claims:
             out.notes.append("the judge found no factual claim in the answer")
         for position, check in enumerate(facts):

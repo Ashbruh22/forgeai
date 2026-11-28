@@ -1,0 +1,135 @@
+{
+  "forgeai_version": "0.1.0",
+  "created_utc": "2026-11-28T06:54:38+00:00",
+  "git_sha": "a22d80ba55ee33e61668b16e8144a73af75cdce5",
+  "python": "3.11.9",
+  "models": {
+    "agent": {
+      "name": "qwen3:8b",
+      "temperature": 0.1,
+      "seed": 7,
+      "digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "num_ctx": 6144
+    },
+    "judge": {
+      "name": "llama3.1:8b",
+      "temperature": 0.0,
+      "seed": 7,
+      "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+      "num_ctx": 4096
+    }
+  },
+  "llm": {
+    "think": false,
+    "num_ctx": 8192,
+    "num_ctx_per_role": {
+      "agent": 6144,
+      "judge": 4096
+    },
+    "max_output_tokens": 1536,
+    "timeout_s": 180.0,
+    "ollama_max_loaded_models": "1",
+    "ollama_env_wanted": {
+      "OLLAMA_NUM_PARALLEL": "1",
+      "OLLAMA_FLASH_ATTENTION": "1",
+      "OLLAMA_KV_CACHE_TYPE": "q8_0",
+      "OLLAMA_MAX_LOADED_MODELS": "1"
+    },
+    "ollama_env_process": {
+      "OLLAMA_NUM_PARALLEL": null,
+      "OLLAMA_FLASH_ATTENTION": null,
+      "OLLAMA_KV_CACHE_TYPE": null,
+      "OLLAMA_MAX_LOADED_MODELS": "1"
+    }
+  },
+  "embedding": {
+    "name": "BAAI/bge-small-en-v1.5",
+    "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a"
+  },
+  "thresholds": {
+    "dev_pass_rate": 0.9,
+    "max_fabricated_on_refusals": 0,
+    "canary_accuracy_min": 0.9,
+    "paraphrase_overlap_max": 0.5,
+    "dedup_similarity": 0.9,
+    "fewshot_leakage_similarity": 0.8,
+    "fact_fuzzy_score": 85,
+    "compose_similarity_min": 0.5,
+    "compose_similarity_max": 0.9,
+    "ambiguity_similarity_min": 0.8
+  },
+  "limits": {
+    "max_clarifying_questions": 5,
+    "max_fix_cycles": 3,
+    "min_eval_cases": 20,
+    "max_tool_calls_per_turn": 3,
+    "max_llm_retries": 2
+  },
+  "prompt_versions": {
+    "_repair": 1,
+    "_selftest": 1,
+    "evals/ambiguous_question": 1,
+    "evals/answer_bearing": 1,
+    "evals/answer_from_context": 1,
+    "evals/answerable": 5,
+    "evals/compute_template": 2,
+    "evals/focus": 1,
+    "evals/lookup_question": 1,
+    "evals/merge_questions": 1,
+    "evals/negative_tool": 1,
+    "evals/refusal_question": 1,
+    "evals/row_identity": 1,
+    "generator/ambiguity_policy": 1,
+    "generator/audience_tone_fallback": 1,
+    "generator/citation_rules": 2,
+    "generator/grounding_rules": 1,
+    "generator/identity": 1,
+    "generator/identity_fallback": 1,
+    "generator/output_contract": 2,
+    "generator/refusal_item": 2,
+    "generator/refusal_item_live": 1,
+    "generator/refusal_policy": 1,
+    "generator/scope": 1,
+    "generator/snapshot_note": 1,
+    "generator/tool_need": 3,
+    "generator/tool_policy_attached": 1,
+    "generator/tool_policy_missing": 1,
+    "generator/tool_policy_none": 1,
+    "generator/tool_proposal": 3,
+    "guard/extract_support": 1,
+    "guard/judge_support": 4,
+    "guard/near_miss": 2,
+    "guard/probes": 2,
+    "guard/split_live_instruction": 1,
+    "guard/split_topic": 2,
+    "ingest/summary": 1,
+    "ingest/topic_label": 1,
+    "intake/apply_answer": 2,
+    "intake/draft": 1,
+    "intake/question": 3,
+    "intake/refusal_conflict": 2,
+    "intake/self_answer": 1,
+    "judge/claim_support": 2,
+    "judge/decompose_claims": 2,
+    "judge/fact_equivalence": 1,
+    "runner/agent_turn": 1,
+    "runner/query_rewrite": 1,
+    "runner/system_compile": 1,
+    "runner/tool_protocol": 1,
+    "tools/calculator": 1,
+    "tools/csv_lookup": 1,
+    "tools/current_date": 1,
+    "tools/need/calculator": 1,
+    "tools/need/csv_lookup": 1,
+    "tools/need/current_date": 1,
+    "tools/need/weather": 1,
+    "tools/weather": 1
+  },
+  "eval_set": {
+    "path": "03_evals/eval_set.jsonl",
+    "sha256": "9639779a1f93aeb2c28a4db7085a4215f0c2c27de3aa9cc0223dae97ed8029fa",
+    "cases": 27,
+    "frozen_utc": "2026-11-28T06:54:38Z",
+    "git_sha": "a22d80ba55ee33e61668b16e8144a73af75cdce5"
+  }
+}

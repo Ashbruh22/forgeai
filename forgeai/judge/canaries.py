@@ -217,11 +217,12 @@ def build_canaries(demo: str, cases: list[EvalCase], chunks: list[Chunk], per_de
     return out
 
 
-def run_canaries(canaries: list[Canary], judge: ModelSpec, *, today: date, fuzzy_min: int = 85) -> dict[str, Any]:
+def run_canaries(canaries: list[Canary], judge: ModelSpec, *, today: date, fuzzy_min: int = 85, nli: Any = None,
+                 nli_min: float = 0.7) -> dict[str, Any]:
     """Score every canary with ``judge`` and tabulate detection accuracy per perturbation type."""
     items: list[dict[str, Any]] = []
     for canary in canaries:
-        score = score_case(canary.case, canary.run, judge, today=today, fuzzy_min=fuzzy_min)
+        score = score_case(canary.case, canary.run, judge, today=today, fuzzy_min=fuzzy_min, nli=nli, nli_min=nli_min)
         clean = score.layer2.unsupported == 0 and not score.layer2.refusal_claims
         items.append({"id": canary.id, "kind": canary.kind, "should_pass": canary.should_pass,
                       "pipeline_ok": score.passed == canary.should_pass,
@@ -235,7 +236,7 @@ def run_canaries(canaries: list[Canary], judge: ModelSpec, *, today: date, fuzzy
         table[kind] = {
             "n": len(group), "pipeline_accuracy": round(sum(i["pipeline_ok"] for i in group) / len(group), 3) if group else None,
             "layer2_accuracy": round(sum(i["layer2_ok"] for i in scored2) / len(scored2), 3) if scored2 else None}
-    return {"judge": judge.name, "table": table, "items": items}
+    return {"judge": judge.name, "nli": bool(nli), "table": table, "items": items}
 
 
 def layer2_mean(result: dict[str, Any]) -> float:

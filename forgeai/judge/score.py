@@ -14,6 +14,7 @@ from forgeai.evals.models import EvalCase
 from forgeai.judge.layer1 import check_layer1
 from forgeai.judge.layer2 import run_layer2
 from forgeai.judge.models import CaseRun, CaseScore, Layer1, Layer2
+from forgeai.judge.nli import NliChecker
 
 
 def decide(case: EvalCase, l1: Layer1, l2: Layer2) -> list[str]:
@@ -39,24 +40,32 @@ def decide(case: EvalCase, l1: Layer1, l2: Layer2) -> list[str]:
             failed.append("citation invalid: " + "; ".join(l1.citation_issues))
         if l1.interpretations_covered != l1.interpretations_total:
             failed.append(f"answer covers {l1.interpretations_covered} of {l1.interpretations_total} readings")
-        if l2.unsupported:
-            failed.append(f"{l2.unsupported} unsupported claim(s)")
+        failed += _claim_failures(l2)
         return failed
 
     if not l1.status_ok:
         failed.append(f"status is {l1.status}, expected {case.expected_status}")
     if l1.citation_issues:
         failed.append("citation invalid: " + "; ".join(l1.citation_issues))
-    if case.type in ("answerable", "multidoc") and l1.source_ok is False:
+    if case.type == "tool_required" and case.tool_mode == "optional":
+        if l1.grounded_ok is False:
+            failed.append("not grounded: " + "; ".join(l1.tool_notes))
+    elif case.type in ("answerable", "multidoc") and l1.source_ok is False:
         failed.append(f"expected source not cited: {l1.sources_missing}")
     missing = [f.fact for f in l1.facts if not f.matched]
     if missing:
         failed.append(f"key facts missing: {missing}")
-    if case.type == "tool_required" and l1.tool_ok is False:
+    if case.type == "tool_required" and case.tool_mode == "required" and l1.tool_ok is False:
         failed.append("tool check failed: " + "; ".join(l1.tool_notes))
-    if l2.unsupported:
-        failed.append(f"{l2.unsupported} unsupported claim(s)")
+    failed += _claim_failures(l2)
     return failed
+
+
+def _claim_failures(l2: Layer2) -> list[str]:
+    """One line per failing claim: which claim, and what the evidence lacks or says instead."""
+    lines = [f"{c.verdict} claim {c.claim!r}: {c.missing}" for c in l2.claims
+             if not c.supported and (c.answer_bearing or len(l2.minor_unsupported) > 1)]
+    return lines or ([f"{l2.unsupported} unsupported claim(s)"] if l2.unsupported else [])
 
 
 def _disagreements(case: EvalCase, before: Layer1, after: Layer1, l2: Layer2) -> list[dict]:
@@ -70,7 +79,7 @@ def _disagreements(case: EvalCase, before: Layer1, after: Layer1, l2: Layer2) ->
              and all(f.matched for f in before.facts))
     if clean and l2.unsupported:
         found.append({"kind": "layer1_passes_layer2_ungrounded", "layer1": "every deterministic check passed",
-                      "layer2": [c.claim for c in l2.claims if not c.supported]})
+                      "layer2": [f"{c.claim}: {c.missing}" for c in l2.claims if not c.supported]})
     if after.status == "refused" and l2.refusal_claims:
         found.append({"kind": "refused_but_states_claims", "layer1": "status refused as expected", "layer2": l2.refusal_claims})
     if l2.claims and not l2.unsupported and any(not f.matched for f in after.facts):
@@ -80,16 +89,16 @@ def _disagreements(case: EvalCase, before: Layer1, after: Layer1, l2: Layer2) ->
 
 
 def score_case(case: EvalCase, run: CaseRun, judge: ModelSpec, *, today: date, fuzzy_min: int = 85,
-               low_confidence_types: Iterable[str] = ()) -> CaseScore:
+               low_confidence_types: Iterable[str] = (), nli: NliChecker | None = None, nli_min: float = 0.7) -> CaseScore:
     layer1 = check_layer1(case, run, today=today, fuzzy_min=fuzzy_min)
-    layer2, upgraded = run_layer2(case, run, layer1, judge)
+    layer2, upgraded = run_layer2(case, run, layer1, judge, today=today, nli=nli, nli_min=nli_min, fuzzy_min=fuzzy_min)
     reasons = decide(case, upgraded, layer2)
     without_upgrades = decide(case, layer1, layer2)
     contributed = bool(layer2.unsupported or layer2.refusal_claims or any(u["upgraded"] for u in layer2.upgrades))
     return CaseScore(
         case_id=case.id, type=case.type, split=case.split, passed=not reasons, reasons=reasons, layer1=upgraded, layer2=layer2,
         passed_without_layer2_upgrades=not without_upgrades, expected_status=case.expected_status,
-        low_confidence=bool(list(low_confidence_types)) and contributed, question=case.question,
+        low_confidence=(bool(list(low_confidence_types)) and contributed) or bool(layer2.minor_unsupported), question=case.question,
         answer_status=run.answer.status, answer_text=run.answer.answer or (run.answer.clarifying_question or ""),
         disagreements=_disagreements(case, layer1, upgraded, layer2),
     )

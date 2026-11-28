@@ -51,6 +51,15 @@ class ModelSpec(BaseModel):
         return model_family(self.name)
 
 
+class JudgeSettings(BaseModel):
+    """Layer-2 options chosen by measurement (canaries), not by taste."""
+
+    use_nli: bool = False  # NLI cross-encoder contradiction check per claim (kept only if it beats the LLM on negation)
+    nli_model: str = "cross-encoder/nli-deberta-v3-small"
+    nli_revision: str | None = None
+    nli_contradiction_min: float = 0.7  # contradiction probability that overrides a "supported" verdict
+
+
 class Thresholds(BaseModel):
     """Pass criteria (spec §1.5). Configurable, never hardcoded in logic."""
 
@@ -89,6 +98,7 @@ class ForgeConfig(BaseModel):
     think: bool = False  # Qwen3 reasoning mode; off for every role (agent, generator, judge)
     agent_model: ModelSpec
     judge_model: ModelSpec
+    judge: JudgeSettings = Field(default_factory=JudgeSettings)
     embedding_model: str = "BAAI/bge-small-en-v1.5"
     embedding_revision: str | None = None  # Hugging Face commit hash, pinned for reproducibility
     # bge models embed *queries* with an instruction prefix and documents without one.

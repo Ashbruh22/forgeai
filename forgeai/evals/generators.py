@@ -365,7 +365,7 @@ class Generator:
             case = EvalCase(
                 id="", type="tool_required", question=question, expected_status="answered",
                 expected_sources=[table.doc], key_facts=[KeyFact(text=value, kind=kind)],
-                seed_spans=[table.row_spans[index]], expected_tools=["csv_lookup"], origin="lookup",
+                seed_spans=[table.row_spans[index]], expected_tools=["csv_lookup"], tool_mode="optional", origin="lookup",
                 covers=list(covers or []), provenance=self._prov("evals/lookup_question"),
                 validation={"expected_value_computed_by_code": True, "source": "table cell", "column": column})
             self.out.candidates.append(Candidate(case, [], group=f"lookup:{table.doc}"))

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "Q1",
+    "field": "scope_out",
+    "text": "What specific topics related to HR policies or salary slips should the assistant avoid answering or assisting with?",
+    "kind": "interview"
+  },
+  {
+    "id": "Q2",
+    "field": "must_refuse",
+    "text": "What specific types of questions should the assistant always refuse to answer, such as personal data requests or legal advice?",
+    "kind": "interview"
+  },
+  {
+    "id": "Q3",
+    "field": "gaps",
+    "text": "The documents and tools cannot support these requests: Salary slip interpretation. Should the assistant refuse them with a redirect, or will you add documents? Reply 'refuse' to have the assistant refuse and redirect, or 'documents' if you will add documents.",
+    "kind": "gap"
+  }
+]
