@@ -66,10 +66,16 @@ def run_baseline(run_dir: Path, out: Path, config: ForgeConfig, embedder: Embedd
     tokens = _tokens(trace, offset, len(cases))
 
     low = list(canaries.get("low_confidence_types", []))
+    nli = None
+    if config.judge.use_nli:  # only if the canaries showed it beats the language model on negation
+        from forgeai.judge.nli import NliChecker
+
+        nli = NliChecker(config.judge.nli_model, config.judge.nli_revision)
     scores: dict[str, CaseScore] = {}
     for position, case in enumerate(cases, 1):  # stage 2: every answer judged
         scores[case.id] = score_case(case, runs[case.id], config.judge_model, today=today,
-                                     fuzzy_min=config.thresholds.fact_fuzzy_score, low_confidence_types=low)
+                                     fuzzy_min=config.thresholds.fact_fuzzy_score, low_confidence_types=low, nli=nli,
+                                     nli_min=config.judge.nli_contradiction_min)
         progress(f"judge {position}/{len(cases)} {'pass' if scores[case.id].passed else 'FAIL'}")
 
     k = runner.agent.retrieval.top_k

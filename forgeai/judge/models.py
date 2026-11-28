@@ -62,6 +62,7 @@ class Layer1(BaseModel):
     facts: list[FactCheck] = Field(default_factory=list)
     tools_called: list[str] = Field(default_factory=list)
     tool_ok: bool | None = None
+    grounded_ok: bool | None = None  # an optional-tool lookup: right value grounded in a cited row or in a tool result
     tool_notes: list[str] = Field(default_factory=list)
     retrieval_hit: bool | None = None
     retrieval_rank: int | None = None  # 1-based rank of the first retrieved chunk overlapping a seed span
@@ -79,12 +80,19 @@ class ClaimVerdict(BaseModel):
     quote: str = ""
     reason: str = ""
     quote_verified: bool = False
+    verdict: str = "supported"  # supported | unsupported | contradicted
+    missing: str = ""  # what the evidence lacks, or what it says instead
+    kind: str = "text"  # numeric: decided by code; text: decided by the judge model
+    answer_bearing: bool = True
+    nli: dict[str, float] = Field(default_factory=dict)
 
 
 class Layer2(BaseModel):
     ran: bool = False
     claims: list[ClaimVerdict] = Field(default_factory=list)
-    unsupported: int = 0
+    unsupported: int = 0  # answer-bearing claims that are unsupported or contradicted: these fail the case
+    minor_unsupported: list[str] = Field(default_factory=list)  # unsupported claims that bear no answer: logged, low confidence
+    duplicates_dropped: int = 0
     refusal_claims: list[str] = Field(default_factory=list)
     upgrades: list[dict[str, Any]] = Field(default_factory=list)  # fact-equivalence attempts and their outcome
     notes: list[str] = Field(default_factory=list)

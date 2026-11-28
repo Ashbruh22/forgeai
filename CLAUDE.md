@@ -78,3 +78,4 @@ Do ONE phase at a time. When a phase's exit test passes: commit, push, show the 
   requirement item is UNCOVERED. Computed eval cases come from templates (`forgeai/evals/templates.py`),
   multi-document and ambiguous cases from `forgeai/evals/compose.py`. `relative_date` key facts
   ("today + 18 days") must be resolved with `templates.resolve_relative_fact` when scoring (P6).
+- P6/P6.1: the judge is `forgeai/judge/` (layer 1 code, layer 2 `claims.py` + `layer2.py`, `canaries.py`). Test-split results live under `sealed/` and only `baseline.py` and `cli.py` may import `judge/sealed.py` (`tests/test_sealed.py`). Eval sets are frozen: `forgeai freeze` writes the hash into `manifest.json`, `assert_eval_set_frozen` must run before any scoring or optimizing. Lookup cases have `tool_mode: optional`. `judge.use_nli` is false by measurement.

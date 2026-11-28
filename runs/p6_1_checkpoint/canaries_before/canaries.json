@@ -1,0 +1,68 @@
+{
+  "choice": {
+    "chosen": "llama3.1:8b",
+    "ranking": [
+      {
+        "judge": "llama3.1:8b",
+        "layer2_macro_accuracy": 0.817,
+        "low_confidence_types": [
+          "negation",
+          "padded_correct",
+          "concise_correct"
+        ]
+      }
+    ],
+    "minimum": 0.9,
+    "low_confidence_types": [
+      "negation",
+      "padded_correct",
+      "concise_correct"
+    ]
+  },
+  "tables": {
+    "llama3.1:8b": {
+      "gold": {
+        "n": 35,
+        "pipeline_accuracy": 0.571,
+        "layer2_accuracy": 0.571
+      },
+      "number_swap": {
+        "n": 35,
+        "pipeline_accuracy": 1.0,
+        "layer2_accuracy": 1.0
+      },
+      "negation": {
+        "n": 35,
+        "pipeline_accuracy": 0.657,
+        "layer2_accuracy": 0.657
+      },
+      "wrong_document": {
+        "n": 29,
+        "pipeline_accuracy": 1.0,
+        "layer2_accuracy": null
+      },
+      "fabricated_clause": {
+        "n": 35,
+        "pipeline_accuracy": 1.0,
+        "layer2_accuracy": 1.0
+      },
+      "padded_correct": {
+        "n": 35,
+        "pipeline_accuracy": 0.629,
+        "layer2_accuracy": 0.629
+      },
+      "concise_correct": {
+        "n": 35,
+        "pipeline_accuracy": 0.8,
+        "layer2_accuracy": 0.8
+      }
+    }
+  },
+  "canary_count": 239,
+  "golds": 35,
+  "low_confidence_types": [
+    "negation",
+    "padded_correct",
+    "concise_correct"
+  ]
+}

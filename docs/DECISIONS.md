@@ -219,3 +219,56 @@ Tally: judge too lenient 6, code check too lenient 1, judge too strict 1, genuin
 **RAM breakdown (diagnosis only; nothing was changed).** Measured with Antigravity (15 processes, 1.0-1.2 GB) and the browser (Chrome 18-19 processes 1.3-1.9 GB plus Edge about 0.4-0.9 GB) STILL OPEN, so these are not "apps closed" figures. At the peak of each baseline (13.7-13.8 GB of 15.7 GB in use, 2.0 GB free), the largest holders were: Windows memory compression (1.8-2.2 GB), Chrome, `svchost` (90 processes, 1.3-1.4 GB), Defender `MsMpEng` (0.6-1.4 GB), Antigravity, Ollama's `llama-server` (0.9-1.5 GB resident; the model weights are on the GPU), and the ForgeAI Python process (0.2-0.6 GB). The sum of process RSS was 12.9-14.3 GB. So about 12 GB is mostly the rest of the machine; the pipeline itself (Ollama runner plus Python) is about 2 GB. A run with the IDE and browser closed is needed to confirm the baseline of the machine alone. Raw data: `runs/p6_checkpoint/*/resources.json`.
 
 **Live suite:** 36 passed, 0 failed (90 s). Offline: 361 passed, 1 skipped (the optimizer-import guard, which starts working when `forgeai/optimizer/` exists).
+
+
+## J. P6.1: judge hardening, eval-case fixes, frozen eval sets (2026-11-28)
+
+**Why.** P6's judge failed 27% of correct gold answers; an optimizer scored by it would chase noise. P6.1 re-measures on a larger canary set, hardens layer 2, fixes two eval-case defects in the GENERATOR (no case was edited by hand), freezes the eval sets and re-runs the baselines. Outputs: `runs/p6_1_checkpoint/` (inputs `00_intake`/`01_guard`/`02_agent` copied from `p5_checkpoint`, `03_evals` regenerated, `05_baseline`, `canaries_before|after|nli`).
+
+**Canaries.** 35 gold answers (every dev answerable or multi-document case of the three regenerated sets whose span has a number), 239 canaries per run. n = 35 per cell gives a Wilson 95% interval of about +-5 points at 90% accuracy and +-14 at 60%; the "+-3 points" asked for would need about 100 gold answers per cell, which these three corpora do not contain, so intervals are shown instead. Layer-2 accuracy (layer 1 is identical in every row); wrong-document is a layer-1 check, shown as pipeline accuracy.
+
+| type | before (P6 judge) | after (hardened) | after + NLI |
+|---|---|---|---|
+| gold control (should pass) | 0.571 [0.41-0.72] | **0.914** [0.78-0.97] | 0.914 |
+| number swap | 1.000 [0.90-1.00] | **1.000** [0.90-1.00] | 1.000 |
+| negation | 0.657 [0.49-0.79] | **0.943** [0.81-0.98] | 0.943 |
+| wrong document (layer 1) | 1.000 [0.88-1.00] | 1.000 | 1.000 |
+| fabricated clause | 1.000 [0.90-1.00] | **1.000** [0.90-1.00] | 1.000 |
+| padded but correct | 0.629 [0.46-0.77] | 0.771 [0.61-0.88] | 0.771 |
+| concise but correct | 0.800 [0.64-0.90] | **0.971** [0.85-0.99] | 0.971 |
+
+Targets: gold >= 0.90 met (0.914), number swap 1.0 met, fabricated >= 0.90 met (1.0), negation 0.943. **Missed: padded-but-correct 0.771 (below 0.90).** The judge model still rejects some true sentences that padding adds (it rates "the supplier ID is S03" unsupported when two rows are in the context). Layer-2 verdicts of that type stay flagged low-confidence on the scorecards.
+
+**What changed in layer 2** (`claims.py`, `layer2.py`, prompts `judge/decompose_claims` v3 and `judge/claim_check` v1 which replaces `claim_support`): (1) claims are deduplicated (token-sort similarity >= 88, a claim contained in a longer one is replaced by it) and capped at 8; (2) a claim with a figure (digits or a date) is decided by code: every number must occur in a span of the context or of a tool result that is also about the claim's subject (or in a cell whose label is the subject, spelled out or by initials, or in a row that names the claim's code); whole numbers must be equal, decimals may differ by rounding; (3) tool results are given in full, first, and never cut; (4) each sentence of the answer is also compared with the evidence span it is about, and every digit number of the answer must occur in the evidence or the question, because the decomposition sometimes drops a "not" or a swapped number; (5) negation uses one polarity class ("cannot", "may not", "never"), judged per clause, so a "not" in another clause of the same sentence is not a contradiction; (6) the judge's quote may carry a small slip (93% partial match) and every unsupported verdict names the claim and what is missing; (7) a case fails layer 2 only on an unsupported or contradicted ANSWER-BEARING claim (it has a figure, a key fact, or an entity of the question: a code, a quoted title, a capitalised name); one unsupported claim that bears no answer is logged and the case is flagged low-confidence, two or more fail it. The fabricated-clause target held under this rule because fabricated clauses carry figures.
+
+**NLI cross-encoder (approved download, `cross-encoder/nli-deberta-v3-small`, revision fa28048..., CPU, 1.1 GB).** Measured on the same canaries as a per-claim contradiction check against the best-matching span: it scored 142 claims, overrode none, and the negation row is identical (0.943). It does not beat the language model plus the deterministic polarity checks, so it is NOT kept (`judge.use_nli: false`; the code and the pinned revision stay so it can be re-measured). **Chosen judge configuration:** `llama3.1:8b` at temperature 0, `num_ctx` 4096, no NLI, prompts above. `gemma3:4b` was not re-measured under the hardened layer 2 (it took 80 minutes against 9 for llama in P6 and lost on macro accuracy).
+
+**Known limitations kept visible.** A numeric claim that repeats a number from the question (e.g. "15 units") is still required to occur in the evidence; for an answer that invents its inputs (`sp-T02`) this only adds noise to a verdict that is right anyway. Canaries are built from dev cases only; refusals are not canaried. A bare number in a cell needs its label in the answer to count (so "3" alone is not "copies: 3").
+
+**Layer-1 upgrade audit (library_gap, P6 baseline: all 8 fact upgrades that exist, fewer than the 10 asked for).** Every one was a legitimate paraphrase that layer 1 missed because of its own weakness, not a lenient judge:
+
+| case | key fact | answer says | verdict |
+|---|---|---|---|
+| lg-A01 | capped at 15 dollars per item | maximum fine ... is 15 dollars | paraphrase (capped/maximum, same amount and unit) |
+| lg-A04, A05, A08, A10, A11 | shelf: X | ... is on shelf X / is X | paraphrase (fuzzy matcher left "shelf:" punctuation in the token) |
+| lg-M03, lg-A03 | copies: 3 | There are 3 copies | paraphrase (same cause) |
+
+Fixes in layer 1 (`layer1.py`, `normalize.py`): punctuation-insensitive matching, "label: value" cells match on the value for any label (a bare number needs its label), same quantity and unit with at least half of the terms (synonym groups: maximum/capped, minimum, fee/charge, fine/penalty, ...) counts as a match. After the fix the hardened library_gap baseline has 0 upgrades; across all three demos there is 1 (`hr-A02`, "returning from the business trip" for "after returning from a trip", also a paraphrase). Layer 1 now carries the weight: the pass rate without layer-2 upgrades equals the headline rate everywhere except Demo A dev (0.75 against 0.79).
+
+**Eval-case defects fixed in the generator.** (1) Lookup cases carry `tool_mode: optional` (P2 decision: tool use is optional for lookups): they pass with a correct value grounded in a cited row OR a successful tool result; computed cases (`required`) still need their tool. (2) The multi-document merge is rejected when the merged question adds a derived-value word that neither parent had (total, sum, combined, overall, estimate, discounted, "how much would"...): two validated lookups are two inputs, not their combination. "cost" alone is not in the list (a first version with it rejected a legitimate two-value question). Regenerating (response cache, so only validators changed): Demo A 32 cases, identical (0 changed). Demo B 29 to 28: `sp-M01` (the "total cost" merge) removed; `sp-T01` and `sp-T03` now `optional`; 10 ids renumbered and 2 cases moved between dev and test because ids shift when a case is dropped (the split is stratified by the new set). library_gap 27, identical (0 changed). Per-demo diffs: `runs/p6_1_checkpoint/*/03_evals/diff_vs_p5.txt`.
+
+**Frozen.** `forgeai freeze --run <run>` writes `sha256`, case count, time and git SHA of `eval_set.jsonl` into the run's `manifest.json` (no run had a manifest before; the writer existed but was never called). `forgeai baseline` exits 7 if the hash changed or is missing; P7 must call `assert_eval_set_frozen` the same way. Tests: the hash is checked, a changed set is refused, the baseline command refuses, and every committed `p6_1_checkpoint` manifest still matches its eval set.
+
+**Baselines with the hardened judge and frozen sets (agent v0).** Pass rate, Wilson 95%:
+
+| demo | dev | test |
+|---|---|---|
+| A hr_shore | 19/24 = 0.79 [0.60, 0.91] | 5/8 = 0.63 [0.31, 0.86] |
+| B spares_procurement | 13/20 = 0.65 [0.43, 0.82] | 5/8 = 0.63 [0.31, 0.86] |
+| library_gap | 14/19 = 0.74 [0.51, 0.88] | 6/8 = 0.75 [0.41, 0.93] |
+
+(P6 baselines were 0.71 / 0.43 / 0.74 dev and 0.75 / 0.63 / 0.63 test.) Latency columns in these scorecards are not meaningful: the agent answers came from the response cache (same agent, same questions). Multi-document cases remain the weakest type (A 1/4 dev, 0/2 test; B 0/2; library_gap 0/3).
+
+**Verification.** Offline suite: 416 passed, 1 skipped. Full live suite: 36 passed, 0 failed.
+
+**Lesson (again).** A backslash-b in a Python regex written through a shell heredoc became a backspace character, and sed ate backslashes: use the Edit/Write tools or lookarounds, and grep for stray 0x08 bytes.

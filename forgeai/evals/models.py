@@ -38,6 +38,9 @@ class EvalCase(BaseModel):
     seed_spans: list[SeedSpan] = Field(default_factory=list)  # character offsets, not chunk ids
     interpretations: list[Interpretation] = Field(default_factory=list)
     expected_tools: list[str] = Field(default_factory=list)
+    # "required": the tool must be called (a computed case). "optional": the tool is one way to find a looked-up value;
+    # the case passes if the value is right and grounded in a cited row OR a tool result (P2 decision, applied in P6.1).
+    tool_mode: Literal["required", "optional"] = "required"
     # Where a refusal / answer expectation comes from, for the consistency check.
     origin: str = ""  # must_refuse | gap | near_miss | negative_tool | topic | snapshot | computed | lookup
     topic_ref: str = ""

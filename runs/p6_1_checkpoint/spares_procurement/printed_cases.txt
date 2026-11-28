@@ -1,0 +1,193 @@
+====================================================================================================
+sp-A01  type=answerable  split=dev  RESULT: FAIL
+QUESTION: What is the stock port for the part number PP-8597 from supplier S01?
+EXPECTED: status=answered  sources=['spares_catalogue.csv']  tools=[]
+  key facts: ['stock_port: Rotterdam (phrase)', '2026-11-01 (snapshot_date)']
+AGENT ANSWER: status=answered  latency=10.1s
+  The stock port for the part number PP-8597 from supplier S01 is Rotterdam.
+  CITATION spares_catalogue.csv [spares_catalogue.csv#c208]: "part_no: PP-8597 | description: Bearing set (standard) | equipment: Purifier | maker: Pelagic Purifiers | supplier_id: S01 | unit_price_usd: 381.64 | "
+  retrieved (6): spares_catalogue.csv#c172, spares_catalogue.csv#c208, spares_catalogue.csv#c226, spares_catalogue.csv#c148, spares_catalogue.csv#c163, spares_catalogue.csv#c220
+LAYER 1 (deterministic)
+  contract valid: ok 
+  status: ok (got answered)
+  citations valid: 1/1 
+  source correct (seed-span overlap): ok 
+  key fact 'stock_port: Rotterdam' [phrase]: ok via fuzzy token-set score >= 85 
+  key fact '2026-11-01' [snapshot_date]: FAIL via none expected 2026-11-01 
+  tools called: []  tool check: n/a 
+  retrieval hit@k: ok first-hit rank=2 docs hit=['spares_catalogue.csv']
+LAYER 2 (judge) ran=True  low_confidence=False
+  claim [supported] The stock port for the part number PP-8597 from supplier S01 is Rotterdam.
+      quote: 'part_no: PP-8597 | description: Bearing set (standard) | equipment: Purifier | maker: Pelagic Purifiers | supplier_id: S01 | unit_price_usd:'  reason: found in the context
+WHY: ["key facts missing: ['2026-11-01']"]
+LAYER 1 vs LAYER 2: [{"kind": "claims_supported_key_fact_missing", "layer1": ["2026-11-01"], "layer2": "every claim is supported by the retrieved context"}]
+====================================================================================================
+sp-X01  type=ambiguous  split=dev  RESULT: FAIL
+QUESTION: What is the warranty period for new parts supplied under the agreement?
+EXPECTED: status=needs_clarification  sources=['terms_kestrel_marine_spares.pdf', 'terms_norvik_marine_supply.pdf']  tools=[]
+  key facts: -
+  reading: Warranty period is 18 months  facts=['18 months']
+  reading: Warranty period is 12 months  facts=['12 months']
+AGENT ANSWER: status=refused  latency=0.0s
+  I do not have information on this. Please contact the relevant team directly.
+  TOOL csv_lookup({"file": "warranty_periods.csv", "filters": {"part_type": "new"}, "columns": ["supplier", "warranty_period"]}) -> ERROR: no such CSV file: warranty_periods.csv
+  retrieved (6): terms_aurelian_engineering_parts.pdf#c5, terms_kestrel_marine_spares.pdf#c5, terms_norvik_marine_supply.pdf#c5, terms_aurelian_engineering_parts.pdf#c1, terms_aurelian_engineering_parts.pdf#c7, terms_aurelian_engineering_parts.pdf#c0
+LAYER 1 (deterministic)
+  contract valid: ok 
+  status: FAIL (got refused)
+  citations valid: 0/0 
+  source correct (seed-span overlap): n/a 
+  tools called: ['csv_lookup']  tool check: n/a 
+  retrieval hit@k: ok first-hit rank=2 docs hit=['terms_kestrel_marine_spares.pdf', 'terms_norvik_marine_supply.pdf']
+  readings covered: 0/2
+LAYER 2 (judge) ran=False  low_confidence=False
+WHY: ['status is refused, expected needs_clarification or an answer covering every reading']
+====================================================================================================
+sp-O08  type=out_of_scope  split=dev  RESULT: FAIL
+QUESTION: What's the current stock status of the item across the major ports we operate in?
+EXPECTED: status=refused  sources=[]  tools=[]
+  key facts: -
+AGENT ANSWER: status=answered  latency=0.0s
+  As of 2026-11-01, the stock status of the item (Bearing set (standard)) across the major ports we operate in is as follows: Fujairah, Rotterdam, and Houston. The stock_port for this item is listed as Fujairah, Rotterdam, and Houston in the records.
+  CITATION spares_catalogue.csv [spares_catalogue.csv#c210]: "stock_port: Fujairah | snapshot_date: 2026-11-01"
+  CITATION spares_catalogue.csv [spares_catalogue.csv#c208]: "stock_port: Rotterdam | snapshot_date: 2026-11-01"
+  CITATION spares_catalogue.csv [spares_catalogue.csv#c209]: "stock_port: Fujairah | snapshot_date: 2026-11-01"
+  TOOL csv_lookup({"file": "spares_catalogue.csv", "filters": {"equipment": "Purifier"}, "columns": ["stock_port", "unit_price_usd", "supplier_id"]}) -> 30 matching rows (showing first 20)
+stock_port: Houston | unit_price_usd: 470.00 | supplier_id: S01
+stock_port: Rotterda
+  retrieved (6): spares_catalogue.csv#c210, spares_catalogue.csv#c208, spares_catalogue.csv#c209, spares_catalogue.csv#c148, spares_catalogue.csv#c292, spares_catalogue.csv#c285
+LAYER 1 (deterministic)
+  contract valid: ok 
+  status: FAIL (got answered)
+  citations valid: 3/3 
+  source correct (seed-span overlap): n/a 
+  tools called: ['csv_lookup']  tool check: n/a 
+  retrieval hit@k: n/a first-hit rank=None docs hit=[]
+LAYER 2 (judge) ran=True  low_confidence=True
+  claim [supported] The stock status of the item Bearing set (standard) is as of 2026-11-01
+      quote: 'part_no: PP-8597 | description: Bearing set (standard) | equipment: Purifier | maker: Pelagic Purifiers | supplier_id: S03 | unit_price_usd:'  reason: found in the context
+  claim [UNSUPPORTED] The item Bearing set (standard) is stocked in Fujairah
+      quote: ''  reason: claim 'The item Bearing set (standard) is stocked in Fujairah': Checking if the item Bearing set (standard) is stocked in Fujairah Missing: nothing says the item is stocked in Fujairah, but it is stoc
+  claim [UNSUPPORTED] The item Bearing set (standard) is stocked in Rotterdam
+      quote: ''  reason: claim 'The item Bearing set (standard) is stocked in Rotterdam': The claim is about the location of a specific item, but the evidence only shows the stock ports for the Purifier equipment, not the ite
+  claim [UNSUPPORTED] The item Bearing set (standard) is stocked in Houston
+      quote: ''  reason: claim 'The item Bearing set (standard) is stocked in Houston': Checking if the item Bearing set (standard) is stocked in Houston Missing: nothing says the item is stocked in Houston, but it is stocked
+  claim [UNSUPPORTED] The stock_port for the item Bearing set (standard) is listed as Fujairah
+      quote: ''  reason: claim 'The stock_port for the item Bearing set (standard) is listed as Fujairah': The claim is about the stock_port for the item Bearing set (standard), but the evidence shows multiple stock_ports for
+  claim [UNSUPPORTED] The stock_port for the item Bearing set (standard) is listed as Rotterdam
+      quote: ''  reason: claim 'The stock_port for the item Bearing set (standard) is listed as Rotterdam': The claim is about the stock_port for the item Bearing set (standard), but the evidence does not explicitly mention t
+WHY: ['status is answered, expected refused']
+====================================================================================================
+sp-T03  type=tool_required  split=dev  RESULT: PASS
+QUESTION: What is the snapshot date for the spare part with part number AC-4539 supplied by supplier S03?
+EXPECTED: status=answered  sources=['spares_catalogue.csv']  tools=['csv_lookup']
+  key facts: ['2026-11-01 (phrase)']
+AGENT ANSWER: status=answered  latency=0.0s
+  The snapshot date for the spare part with part number AC-4539 supplied by supplier S03 is 2026-11-01.
+  CITATION spares_catalogue.csv [spares_catalogue.csv#c15]: "part_no: AC-4539 | description: Piston ring kit (heavy duty) | equipment: Air Compressor | maker: Arkwright Compressors | supplier_id: S03 | unit_pric"
+  retrieved (6): spares_catalogue.csv#c27, spares_catalogue.csv#c3, spares_catalogue.csv#c18, spares_catalogue.csv#c15, spares_catalogue.csv#c174, spares_catalogue.csv#c165
+LAYER 1 (deterministic)
+  contract valid: ok 
+  status: ok (got answered)
+  citations valid: 1/1 
+  source correct (seed-span overlap): ok 
+  key fact '2026-11-01' [phrase]: ok via exact  
+  tools called: []  tool check: n/a 
+  retrieval hit@k: ok first-hit rank=4 docs hit=['spares_catalogue.csv']
+LAYER 2 (judge) ran=True  low_confidence=False
+  claim [supported] The snapshot date for the spare part with part number AC-4539 supplied by supplier S03 is 2026-11-01.
+      quote: 'part_no: AC-4539 | description: Piston ring kit (heavy duty) | equipment: Air Compressor | maker: Arkwright Compressors | supplier_id: S03 |'  reason: found in the context
+WHY: every check passed
+====================================================================================================
+sp-A02  type=answerable  split=dev  RESULT: PASS
+QUESTION: What is the unit price for the part with part number MT-8424 and supplier ID S01?
+EXPECTED: status=answered  sources=['spares_catalogue.csv']  tools=[]
+  key facts: ['34.57 (number)']
+AGENT ANSWER: status=answered  latency=0.0s
+  The unit price for the part with part number MT-8424 and supplier ID S01 is $34.57.
+  CITATION spares_catalogue.csv [spares_catalogue.csv#c172]: "part_no: MT-8424 | description: Cartridge assembly (standard) | equipment: Turbocharger | maker: Marlow Turbo | supplier_id: S01 | unit_price_usd: 34."
+  TOOL csv_lookup({"file": "spares_catalogue.csv", "filters": {"part_no": "MT-8424", "supplier_id": "S01"}, "columns": ["unit_price_usd"]}) -> 1 matching rows
+unit_price_usd: 34.57
+  retrieved (6): spares_catalogue.csv#c172, spares_catalogue.csv#c174, spares_catalogue.csv#c173, spares_catalogue.csv#c169, spares_catalogue.csv#c166, spares_catalogue.csv#c175
+LAYER 1 (deterministic)
+  contract valid: ok 
+  status: ok (got answered)
+  citations valid: 1/1 
+  source correct (seed-span overlap): ok 
+  key fact '34.57' [number]: ok via number  
+  tools called: ['csv_lookup']  tool check: n/a 
+  retrieval hit@k: ok first-hit rank=1 docs hit=['spares_catalogue.csv']
+LAYER 2 (judge) ran=True  low_confidence=False
+  claim [supported] The unit price for the part with part number MT-8424 and supplier ID S01 is $34.57.
+      quote: 'part_no: MT-8424 | description: Cartridge assembly (standard) | equipment: Turbocharger | maker: Marlow Turbo | supplier_id: S01 | unit_pric'  reason: found in the context
+WHY: every check passed
+====================================================================================================
+sp-A07  type=answerable  split=dev  RESULT: PASS
+QUESTION: What is the minimum order quantity for part number VC-9668 from supplier S03?
+EXPECTED: status=answered  sources=['spares_catalogue.csv']  tools=[]
+  key facts: ['10 (number)']
+AGENT ANSWER: status=answered  latency=0.0s
+  The minimum order quantity for part number VC-9668 from supplier S03 is 10.
+  CITATION spares_catalogue.csv [spares_catalogue.csv#c300]: "part_no: VC-9668 | description: Gland packing set (heavy duty) | equipment: Cargo Pump | maker: Vantor Cargo Pumps | supplier_id: S03 | unit_price_usd"
+  retrieved (6): spares_catalogue.csv#c279, spares_catalogue.csv#c300, spares_catalogue.csv#c294, spares_catalogue.csv#c297, spares_catalogue.csv#c296, spares_catalogue.csv#c291
+LAYER 1 (deterministic)
+  contract valid: ok 
+  status: ok (got answered)
+  citations valid: 1/1 
+  source correct (seed-span overlap): ok 
+  key fact '10' [number]: ok via number  
+  tools called: []  tool check: n/a 
+  retrieval hit@k: ok first-hit rank=2 docs hit=['spares_catalogue.csv']
+LAYER 2 (judge) ran=True  low_confidence=False
+  claim [supported] The minimum order quantity for part number VC-9668 from supplier S03 is 10.
+      quote: 'part_no: VC-9668 | description: Gland packing set (heavy duty) | equipment: Cargo Pump | maker: Vantor Cargo Pumps | supplier_id: S03 | unit'  reason: found in the context
+WHY: every check passed
+====================================================================================================
+sp-O03  type=out_of_scope  split=dev  RESULT: PASS
+QUESTION: Can you help me ensure our ship spare parts procurement process meets all regulatory compliance requirements?
+EXPECTED: status=refused  sources=[]  tools=[]
+  key facts: -
+AGENT ANSWER: status=refused  latency=0.0s
+  I do not have information on compliance. Please contact the relevant team directly.
+  retrieved (6): terms_aurelian_engineering_parts.pdf#c2, terms_aurelian_engineering_parts.pdf#c0, terms_aurelian_engineering_parts.pdf#c4, terms_aurelian_engineering_parts.pdf#c1, terms_kestrel_marine_spares.pdf#c0, terms_aurelian_engineering_parts.pdf#c7
+LAYER 1 (deterministic)
+  contract valid: ok 
+  status: ok (got refused)
+  citations valid: 0/0 
+  source correct (seed-span overlap): n/a 
+  tools called: []  tool check: n/a 
+  retrieval hit@k: n/a first-hit rank=None docs hit=[]
+LAYER 2 (judge) ran=False  low_confidence=False
+WHY: every check passed
+====================================================================================================
+sp-T02  type=tool_required  split=test  RESULT: FAIL
+QUESTION: What is the discounted cost for ordering 15 units of part MT-2474 under the S03 supplier?
+EXPECTED: status=answered  sources=['spares_catalogue.csv', 'terms_aurelian_engineering_parts.pdf']  tools=['calculator', 'csv_lookup']
+  key facts: ['18101.67 (number)']
+AGENT ANSWER: status=answered  latency=0.0s
+  The discounted cost for ordering 15 units of part MT-2474 under the S03 supplier is USD 200.10.
+  CITATION terms_aurelian_engineering_parts.pdf [c3]: "2.1 The applicable discount rate for an order is determined by the total value of the order before any discount is applied. 4% applies to orders with "
+  TOOL calculator({"expression": "round(15 * 14.5 * (1 - 0.08), 2)"}) -> 200.1
+  retrieved (1): terms_aurelian_engineering_parts.pdf#c3
+LAYER 1 (deterministic)
+  contract valid: ok 
+  status: ok (got answered)
+  citations valid: 0/1 ["citation: chunk_id 'c3' does not exist"]
+  source correct (seed-span overlap): FAIL missing ['spares_catalogue.csv', 'terms_aurelian_engineering_parts.pdf']
+  key fact '18101.67' [number]: FAIL via none  
+  tools called: ['calculator']  tool check: FAIL ["expected tool 'csv_lookup' was not called", "final value '18101.67' not in the answer within tolerance"]
+  retrieval hit@k: ok first-hit rank=1 docs hit=['terms_aurelian_engineering_parts.pdf']
+LAYER 2 (judge) ran=True  low_confidence=True
+  claim [UNSUPPORTED] The discounted cost for ordering 15 units of part MT-2474 under the S03 supplier is USD 200.10.
+      quote: ''  reason: claim 'The discounted cost for ordering 15 units of part MT-2474 under the S03 supplier is USD 200.10.': the number(s) 15, 2474, 200.1 do not occur together in any evidence
+  claim [supported] The discounted cost is USD 200.10.
+      quote: "calculator {'expression': 'round(15 * 14.5 * (1 - 0.08), 2)'} -> 200.1"  reason: found in a tool result
+  claim [UNSUPPORTED] 15 units of part MT-2474 under the S03 supplier is ordered.
+      quote: ''  reason: claim '15 units of part MT-2474 under the S03 supplier is ordered.': the number(s) 15, 2474 do not occur together in any evidence
+  claim [supported] The cost is USD 200.10.
+      quote: "calculator {'expression': 'round(15 * 14.5 * (1 - 0.08), 2)'} -> 200.1"  reason: found in a tool result
+  claim [UNSUPPORTED] The cost for ordering 15 units of part MT-2474 is USD 200.10.
+      quote: ''  reason: claim 'The cost for ordering 15 units of part MT-2474 is USD 200.10.': the number(s) 15, 2474, 200.1 do not occur together in any evidence
+  claim [UNSUPPORTED] The cost for ordering part MT-2474 under the S03 supplier is USD 200.10.
+      quote: ''  reason: claim 'The cost for ordering part MT-2474 under the S03 supplier is USD 200.10.': the number(s) 2474, 200.1 do not occur together in any evidence
+WHY: ["citation invalid: citation: chunk_id 'c3' does not exist", "key facts missing: ['18101.67']", "tool check failed: expected tool 'csv_lookup' was not called; final value '18101.67' not in the answer within tolerance", "unsupported claim 'The discounted cost for ordering 15 units of part MT-2474 under the S03 supplier is USD 200.10.': no span of the context or tool results contains 15, 2474, 200.1", "unsupported claim '15 units of part MT-2474 under the S03 supplier is ordered.': no span of the context or tool results contains 15, 2474", "unsupported claim 'The cost for ordering 15 units of part MT-2474 is USD 200.10.': no span of the context or tool results contains 15, 2474, 200.1", "unsupported claim 'The cost for ordering part MT-2474 under the S03 supplier is USD 200.10.': no span of the context or tool results contains 2474, 200.1"]

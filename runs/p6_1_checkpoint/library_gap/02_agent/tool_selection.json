@@ -1,0 +1,27 @@
+{
+  "attached": [
+    {
+      "tool": "csv_lookup",
+      "attached": true,
+      "reason": "needed and verified",
+      "requirement_id": "T4",
+      "justification": "To check if 'Pride and Prejudice' is available, the csv_lookup tool is needed to filter the book availability data from the CSV file.",
+      "necessity_quote": "Is the book 'Pride and Prejudice' available?"
+    }
+  ],
+  "rejected": [
+    {
+      "tool": "current_date",
+      "attached": false,
+      "reason": "veto: the topic does not itself ask for a time-dependent value (a date, a forecast)",
+      "requirement_id": "T1",
+      "justification": "To determine if there are fines for overdue books, the current_date tool is needed to calculate the overdue period and apply the fine rules.",
+      "necessity_quote": ""
+    }
+  ],
+  "unattached_tools": [
+    "calculator",
+    "current_date",
+    "weather"
+  ]
+}

@@ -55,7 +55,7 @@ def kf(text: str, kind: str = "phrase") -> KeyFact:
 
 
 def case(**kw) -> EvalCase:
-    base = dict(id="x-1", type="answerable", question="How much annual leave do full-time staff get?", expected_status="answered",
+    base = dict(id="x-1", type="answerable", question="How much annual leave does grade G7 staff get?", expected_status="answered",
                 split="dev", seed_spans=[span("a.md", TEXT_A, 100)], key_facts=[kf("24", "number")], expected_sources=["a.md"])
     return EvalCase(**{**base, **kw})
 
@@ -153,11 +153,11 @@ def test_an_ambiguous_case_counts_the_readings_an_answer_covers() -> None:
 # ---- layer 2 -----------------------------------------------------------------------------------------------------
 
 
-def judge_handlers(*, claims=("Employees get 24 working days.",), supported=True, quote="24 working days of annual leave",
+def judge_handlers(*, claims=("Grade G7 staff receive annual leave.",), supported=True, quote="annual leave per calendar year",
                    expressed=False, equiv_quote=""):
     return dict(
         ClaimList=lambda u: {"claims": list(claims)},
-        SupportVerdict=lambda u: {"reason": "r", "supported": supported, "quote": quote},
+        SupportVerdict=lambda u: {"reason": "r", "supported": supported, "missing": "" if supported else "nothing says so", "quote": quote},
         Equivalence=lambda u: {"reason": "r", "expressed": expressed, "quote": equiv_quote})
 
 
@@ -166,18 +166,18 @@ def test_a_supported_claim_needs_a_quote_that_is_really_in_the_context(config, t
     assert score_case(case(), run_of(), JUDGE, today=TODAY).layer2.unsupported == 0
     install(config, tmp_path, **judge_handlers(quote="a sentence the context does not contain"))
     score = score_case(case(), run_of(), JUDGE, today=TODAY)
-    assert score.layer2.unsupported == 1 and "not a verbatim span" in score.layer2.claims[0].reason
+    assert score.layer2.unsupported == 1 and "not in the evidence" in score.layer2.claims[0].missing
     assert not score.passed and "unsupported claim" in score.reasons[-1]
 
 
 def test_a_failed_key_fact_is_upgraded_only_by_a_verified_quote_that_carries_its_numbers_and_negation(config, tmp_path) -> None:
-    c = case(key_facts=[kf("full-time staff get 24 days off")])
-    text = "Staff who work full time are entitled to 24 days off."
-    install(config, tmp_path, **judge_handlers(expressed=True, equiv_quote="entitled to 24 days off"))
+    c = case(key_facts=[kf("entitled to 24 days of holiday allowance")])
+    text = "Staff get 24 days off in the year."
+    install(config, tmp_path, **judge_handlers(expressed=True, equiv_quote="get 24 days off"))
     good = score_case(c, run_of(text), JUDGE, today=TODAY)
     assert good.passed and good.layer1.facts[0].method == "judge_upgrade" and not good.passed_without_layer2_upgrades
     assert [d["kind"] for d in good.disagreements] == ["fact_upgraded"]
-    for quote, why in [("entitled to 25 days off", "no verbatim quote"), ("full time", "numbers"), ("", "no verbatim quote")]:
+    for quote, why in [("get 25 days off", "no verbatim quote"), ("off in the year", "numbers"), ("", "no verbatim quote")]:
         install(config, tmp_path, **judge_handlers(expressed=True, equiv_quote=quote))
         refused = score_case(c, run_of(text), JUDGE, today=TODAY)
         assert not refused.passed and refused.disagreements[0]["kind"] == "upgrade_refused" and why in refused.disagreements[0]["why_not"]

@@ -85,6 +85,22 @@ def merge_facts(a: EvalCase, b: EvalCase) -> list[KeyFact]:
     return list({f.text: f for f in ordered}.values())[:MAX_FACTS]
 
 
+DERIVED = re.compile(
+    r"(?<!\w)(total|totals|sum|combined|overall|altogether|net|estimate|estimated|calculate|calculated|"
+    r"discounted|payable|how much (?:would|will|do|does)|in all)(?!\w)", re.IGNORECASE)
+
+
+def derived_terms(text: str) -> set[str]:
+    """Words that ask for a value computed from other values (a total, a cost after a discount, an estimate)."""
+    return {m.group(0).lower() for m in DERIVED.finditer(text)}
+
+
+def asks_for_derived_value(merged: str, first: str, second: str) -> set[str]:
+    """Derived-value words the merge ADDED. Two validated lookups give two inputs, not their combination: a question
+    that asks for the combination ("total cost") has an answer the case's key facts do not contain."""
+    return derived_terms(merged) - derived_terms(first) - derived_terms(second)
+
+
 def compose_multidoc(gen: Generator, singles: list[Candidate], limit: int) -> None:
     from forgeai.evals.generators import Candidate
 
@@ -118,6 +134,11 @@ def compose_multidoc(gen: Generator, singles: list[Candidate], limit: int) -> No
         overlap = max(ngram_overlap(question, p) for p in (*a.passages, *b.passages))
         if overlap >= t.paraphrase_overlap_max:
             gen.out.reject("multidoc", question, "question copies the passage", f"overlap {overlap:.2f}")
+            continue
+        added = asks_for_derived_value(question, a.case.question, b.case.question)
+        if added:
+            gen.out.reject("multidoc", question, "asks for a value the key facts do not determine",
+                           f"the merge added {sorted(added)}; the key facts are inputs, not their combination")
             continue
         facts = merge_facts(a.case, b.case)
         groups = [[f for f in facts if f in a.case.key_facts], [f for f in facts if f in b.case.key_facts]]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "Q1",
+    "field": "scope_out",
+    "text": "What topics related to the library, cafe, or membership should the assistant avoid answering, even if they seem connected to the provided documents?",
+    "kind": "interview"
+  },
+  {
+    "id": "Q2",
+    "field": "must_refuse",
+    "text": "What kinds of questions should the assistant always refuse to answer, such as personal data or legal advice?",
+    "kind": "interview"
+  },
+  {
+    "id": "Q3",
+    "field": "tone",
+    "text": "What tone should the assistant use when providing information about library services, book availability, and cafe menu details?",
+    "kind": "interview"
+  },
+  {
+    "id": "Q4",
+    "field": "gaps",
+    "text": "The documents and tools cannot support these requests: What are the cafe menu options?; Current availability of the book on the shelf. Should the assistant refuse them with a redirect, or will you add documents? Reply 'refuse' to have the assistant refuse and redirect, or 'documents' if you will add documents.",
+    "kind": "gap"
+  }
+]
