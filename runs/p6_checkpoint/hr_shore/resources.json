@@ -1,0 +1,167 @@
+{
+  "ollama_env": {
+    "expected": {
+      "OLLAMA_NUM_PARALLEL": "1",
+      "OLLAMA_FLASH_ATTENTION": "1",
+      "OLLAMA_KV_CACHE_TYPE": "q8_0",
+      "OLLAMA_MAX_LOADED_MODELS": "1"
+    },
+    "server_log": {
+      "OLLAMA_NUM_PARALLEL": "1",
+      "OLLAMA_FLASH_ATTENTION": "true",
+      "OLLAMA_KV_CACHE_TYPE": "q8_0",
+      "OLLAMA_MAX_LOADED_MODELS": "1"
+    },
+    "took_effect": {
+      "OLLAMA_NUM_PARALLEL": true,
+      "OLLAMA_FLASH_ATTENTION": true,
+      "OLLAMA_KV_CACHE_TYPE": true,
+      "OLLAMA_MAX_LOADED_MODELS": true
+    },
+    "log_file": "C:\\Users\\ashri\\AppData\\Local\\Ollama\\server.log",
+    "log_found": true
+  },
+  "models": [
+    {
+      "name": "qwen3:8b",
+      "size_gb": 5.09,
+      "gpu_pct": 100,
+      "context": 6144,
+      "fully_on_gpu": true
+    },
+    {
+      "name": "llama3.1:8b",
+      "size_gb": 4.69,
+      "gpu_pct": 100,
+      "context": 4096,
+      "fully_on_gpu": true
+    }
+  ],
+  "ram_gb": {
+    "total": 15.7,
+    "free_at_start": 4.3
+  },
+  "embedding": {
+    "model": "BAAI/bge-small-en-v1.5",
+    "device": "cpu",
+    "torch_sees_cuda": false
+  },
+  "stages": {
+    "baseline": {
+      "system_ram_total_gb": 15.7,
+      "peak_system_ram_used_gb": 13.7,
+      "min_free_ram_gb": 2.1,
+      "min_free_ram_pct": 13.1,
+      "low_memory_warnings": 16,
+      "forgeai_process_peak_gb": 0.0,
+      "top_processes_at_peak": {
+        "captured_at": "08:54:05",
+        "sum_of_process_rss_gb": 12.94,
+        "top_processes": [
+          {
+            "name": "MemCompression",
+            "pid": 4468,
+            "rss_gb": 1.83
+          },
+          {
+            "name": "llama-server.exe",
+            "pid": 30372,
+            "rss_gb": 1.5
+          },
+          {
+            "name": "MsMpEng.exe",
+            "pid": 7356,
+            "rss_gb": 0.62
+          },
+          {
+            "name": "Antigravity IDE.exe",
+            "pid": 1704,
+            "rss_gb": 0.35
+          },
+          {
+            "name": "Antigravity IDE.exe",
+            "pid": 24632,
+            "rss_gb": 0.33
+          },
+          {
+            "name": "chrome.exe",
+            "pid": 13744,
+            "rss_gb": 0.32
+          },
+          {
+            "name": "chrome.exe",
+            "pid": 29472,
+            "rss_gb": 0.32
+          },
+          {
+            "name": "chrome.exe",
+            "pid": 3388,
+            "rss_gb": 0.29
+          },
+          {
+            "name": "claude.exe",
+            "pid": 19976,
+            "rss_gb": 0.28
+          },
+          {
+            "name": "chrome.exe",
+            "pid": 37920,
+            "rss_gb": 0.27
+          }
+        ],
+        "top_programs": [
+          {
+            "program": "chrome.exe",
+            "processes": 19,
+            "rss_gb": 1.89
+          },
+          {
+            "program": "MemCompression",
+            "processes": 1,
+            "rss_gb": 1.83
+          },
+          {
+            "program": "llama-server.exe",
+            "processes": 1,
+            "rss_gb": 1.5
+          },
+          {
+            "program": "svchost.exe",
+            "processes": 90,
+            "rss_gb": 1.33
+          },
+          {
+            "program": "Antigravity IDE.exe",
+            "processes": 15,
+            "rss_gb": 1.22
+          },
+          {
+            "program": "MsMpEng.exe",
+            "processes": 1,
+            "rss_gb": 0.62
+          },
+          {
+            "program": "msedge.exe",
+            "processes": 12,
+            "rss_gb": 0.31
+          },
+          {
+            "program": "claude.exe",
+            "processes": 1,
+            "rss_gb": 0.28
+          },
+          {
+            "program": "python3.11.exe",
+            "processes": 1,
+            "rss_gb": 0.22
+          },
+          {
+            "program": "msedgewebview2.exe",
+            "processes": 12,
+            "rss_gb": 0.22
+          }
+        ]
+      }
+    }
+  }
+}

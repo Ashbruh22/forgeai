@@ -1,0 +1,5 @@
+{"case_id": "sp-A01", "kind": "claims_supported_key_fact_missing", "layer1": ["2026-11-01"], "layer2": "every claim is supported by the retrieved context"}
+{"case_id": "sp-A09", "kind": "fact_upgraded", "layer1": "key fact not matched", "layer2": "stated in the answer", "fact": "An 8% discount is applicable", "judge_says_expressed": true, "quote": "8%", "reason": "The answer directly states the discount rate for the specified order value range.", "upgraded": true}
+{"case_id": "sp-A10", "kind": "layer1_passes_layer2_ungrounded", "layer1": "every deterministic check passed", "layer2": ["The unit price for the part with part_no LF-7041 and supplier_id S02 is $1567.21."]}
+{"case_id": "sp-M02", "kind": "fact_upgraded", "layer1": "key fact not matched", "layer2": "stated in the answer", "fact": "net 60 days period", "judge_says_expressed": true, "quote": "net 60 days", "reason": "The answer states the required fact, but also includes additional information.", "upgraded": true}
+{"case_id": "sp-T04", "kind": "claims_supported_key_fact_missing", "layer1": ["34166.33"], "layer2": "every claim is supported by the retrieved context"}

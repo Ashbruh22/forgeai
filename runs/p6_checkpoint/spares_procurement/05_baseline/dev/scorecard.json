@@ -1,0 +1,127 @@
+{
+  "cases": 21,
+  "pass_rate": {
+    "passes": 9,
+    "n": 21,
+    "rate": 0.429,
+    "wilson95": [
+      0.245,
+      0.635
+    ]
+  },
+  "pass_rate_without_layer2_upgrades": {
+    "passes": 9,
+    "n": 21,
+    "rate": 0.429,
+    "wilson95": [
+      0.245,
+      0.635
+    ]
+  },
+  "pass_rate_by_type": {
+    "ambiguous": {
+      "passes": 0,
+      "n": 1,
+      "rate": 0.0,
+      "wilson95": [
+        0.0,
+        0.793
+      ]
+    },
+    "answerable": {
+      "passes": 2,
+      "n": 7,
+      "rate": 0.286,
+      "wilson95": [
+        0.082,
+        0.641
+      ]
+    },
+    "multidoc": {
+      "passes": 0,
+      "n": 3,
+      "rate": 0.0,
+      "wilson95": [
+        0.0,
+        0.562
+      ]
+    },
+    "out_of_scope": {
+      "passes": 6,
+      "n": 7,
+      "rate": 0.857,
+      "wilson95": [
+        0.487,
+        0.974
+      ]
+    },
+    "tool_required": {
+      "passes": 1,
+      "n": 3,
+      "rate": 0.333,
+      "wilson95": [
+        0.061,
+        0.792
+      ]
+    }
+  },
+  "groundedness": {
+    "passes": 6,
+    "n": 11,
+    "rate": 0.545,
+    "wilson95": [
+      0.28,
+      0.787
+    ],
+    "note": "answered cases whose every claim is supported by the retrieved context (layer 2)"
+  },
+  "key_fact_recall": {
+    "matched": 11,
+    "total": 19,
+    "rate": 0.579,
+    "layer1_only_rate": 0.474
+  },
+  "refusal": {
+    "precision": 0.6,
+    "recall": 0.857,
+    "refused_by_agent": 10,
+    "refusal_expected": 7,
+    "answered_when_refusal_expected": 1
+  },
+  "citation_validity": {
+    "valid": 16,
+    "total": 17,
+    "rate": 0.941
+  },
+  "retrieval_hit_at_k": {
+    "k": 6,
+    "hits": 11,
+    "n": 14,
+    "rate": 0.786,
+    "mean_first_hit_rank": 2
+  },
+  "tool_accuracy": {
+    "correct": 1,
+    "n": 3,
+    "rate": 0.333
+  },
+  "latency_ms": {
+    "mean": 4540,
+    "median": 2281,
+    "max": 15420
+  },
+  "tokens_per_case": {
+    "agent_in": 4692,
+    "agent_out": 186,
+    "note": "live calls only; cached answers carry no token counts"
+  },
+  "layer2_low_confidence_types": [
+    "negation",
+    "padded_correct",
+    "concise_correct"
+  ],
+  "low_confidence_cases": 5,
+  "split": "dev",
+  "judge": "llama3.1:8b",
+  "scored_on": "2026-11-28"
+}

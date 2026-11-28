@@ -1,0 +1,23 @@
+{
+  "judge": "llama3.1:8b",
+  "scored_on": "2026-11-28",
+  "top_k": 5,
+  "layer2_low_confidence_types": [
+    "negation",
+    "padded_correct",
+    "concise_correct"
+  ],
+  "dev": {
+    "cases": 24,
+    "pass_rate": {
+      "passes": 17,
+      "n": 24,
+      "rate": 0.708,
+      "wilson95": [
+        0.508,
+        0.851
+      ]
+    }
+  },
+  "mean_agent_latency_ms": 10152
+}
