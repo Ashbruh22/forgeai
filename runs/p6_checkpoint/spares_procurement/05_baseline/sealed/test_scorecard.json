@@ -1,0 +1,118 @@
+{
+  "cases": 8,
+  "pass_rate": {
+    "passes": 5,
+    "n": 8,
+    "rate": 0.625,
+    "wilson95": [
+      0.306,
+      0.863
+    ]
+  },
+  "pass_rate_without_layer2_upgrades": {
+    "passes": 5,
+    "n": 8,
+    "rate": 0.625,
+    "wilson95": [
+      0.306,
+      0.863
+    ]
+  },
+  "pass_rate_by_type": {
+    "answerable": {
+      "passes": 2,
+      "n": 3,
+      "rate": 0.667,
+      "wilson95": [
+        0.208,
+        0.939
+      ]
+    },
+    "multidoc": {
+      "passes": 0,
+      "n": 1,
+      "rate": 0.0,
+      "wilson95": [
+        0.0,
+        0.793
+      ]
+    },
+    "out_of_scope": {
+      "passes": 3,
+      "n": 3,
+      "rate": 1.0,
+      "wilson95": [
+        0.438,
+        1.0
+      ]
+    },
+    "tool_required": {
+      "passes": 0,
+      "n": 1,
+      "rate": 0.0,
+      "wilson95": [
+        0.0,
+        0.793
+      ]
+    }
+  },
+  "groundedness": {
+    "passes": 3,
+    "n": 5,
+    "rate": 0.6,
+    "wilson95": [
+      0.231,
+      0.882
+    ],
+    "note": "answered cases whose every claim is supported by the retrieved context (layer 2)"
+  },
+  "key_fact_recall": {
+    "matched": 5,
+    "total": 6,
+    "rate": 0.833,
+    "layer1_only_rate": 0.833
+  },
+  "refusal": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "refused_by_agent": 3,
+    "refusal_expected": 3,
+    "answered_when_refusal_expected": 0
+  },
+  "citation_validity": {
+    "valid": 4,
+    "total": 6,
+    "rate": 0.667
+  },
+  "retrieval_hit_at_k": {
+    "k": 6,
+    "hits": 5,
+    "n": 5,
+    "rate": 1.0,
+    "mean_first_hit_rank": 1
+  },
+  "tool_accuracy": {
+    "correct": 0,
+    "n": 1,
+    "rate": 0.0
+  },
+  "latency_ms": {
+    "mean": 8310,
+    "median": 5042,
+    "max": 20332
+  },
+  "tokens_per_case": {
+    "agent_in": 4692,
+    "agent_out": 186,
+    "note": "live calls only; cached answers carry no token counts"
+  },
+  "layer2_low_confidence_types": [
+    "negation",
+    "padded_correct",
+    "concise_correct"
+  ],
+  "low_confidence_cases": 2,
+  "split": "test",
+  "judge": "llama3.1:8b",
+  "scored_on": "2026-11-28"
+}

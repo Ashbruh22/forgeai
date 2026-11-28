@@ -1,0 +1,1 @@
+{"case_id": "lg-A03", "kind": "fact_upgraded", "layer1": "key fact not matched", "layer2": "stated in the answer", "fact": "copies: 3", "judge_says_expressed": true, "quote": "There are 3 copies of 'Pride and Prejudice' available.", "reason": "The answer directly states the number of copies available.", "upgraded": true}

@@ -1,0 +1,4293 @@
+{
+  "judge": "llama3.1:8b",
+  "table": {
+    "gold": {
+      "n": 15,
+      "pipeline_accuracy": 0.733,
+      "layer2_accuracy": 0.733
+    },
+    "number_swap": {
+      "n": 15,
+      "pipeline_accuracy": 1.0,
+      "layer2_accuracy": 1.0
+    },
+    "negation": {
+      "n": 15,
+      "pipeline_accuracy": 0.533,
+      "layer2_accuracy": 0.533
+    },
+    "wrong_document": {
+      "n": 12,
+      "pipeline_accuracy": 1.0,
+      "layer2_accuracy": null
+    },
+    "fabricated_clause": {
+      "n": 15,
+      "pipeline_accuracy": 1.0,
+      "layer2_accuracy": 1.0
+    },
+    "padded_correct": {
+      "n": 15,
+      "pipeline_accuracy": 0.6,
+      "layer2_accuracy": 0.6
+    },
+    "concise_correct": {
+      "n": 15,
+      "pipeline_accuracy": 0.8,
+      "layer2_accuracy": 0.8
+    }
+  },
+  "items": [
+    {
+      "id": "hr_shore/hr-M03/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "Annual leave requests need 10 working days notice to allow adequate planning. In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+      "claims": [
+        {
+          "claim": "Annual leave requests need 10 working days notice.",
+          "supported": true,
+          "quote": "Annual leave requests need 10 working days notice to allow adequate planning.",
+          "reason": "The claim is supported because it is a specific policy regarding annual leave requests.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Annual leave requests need notice to allow adequate planning.",
+          "supported": true,
+          "quote": "Annual leave requests need 10 working days notice to allow adequate planning.",
+          "reason": "The claim is a general statement about the purpose of notice for annual leave requests.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to contact their manager directly if they need to handle an urgent work matter while on leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the context's requirement for employees to contact their manager directly in case of an urgent work-related matter during leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to seek approval from their manager before taking any action if they need to handle an urgent work matter while on leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the context's requirement for employees to contact their manager directly and seek approval before taking any action in case of an urgent work-related matter during leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to contact their manager directly if they need to handle an urgent work matter during leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the policy for employees on leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to seek approval before taking any action if they need to handle an urgent work matter during leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the context's requirement for employees to contact their manager directly and seek approval before taking any action in case of an urgent work-related matter during leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to seek approval from their manager before taking any action if they need to handle an urgent work matter while on leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the context's requirement for employees to contact their manager directly and seek approval before taking any action in case of an urgent work-related matter during leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to contact their manager directly and seek approval before taking any action if they need to handle an urgent work matter during leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is related to handling urgent work matters during leave.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-M03/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "key facts missing: ['10 working days']",
+        "3 unsupported claim(s)"
+      ],
+      "answer": "Annual leave requests need 17 working days notice to allow adequate planning. In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+      "claims": [
+        {
+          "claim": "Annual leave requests need 17 working days notice.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is not supported because it contradicts the information in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "17 working days is the amount of notice required for annual leave requests.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is not supported because the context specifies 10 working days notice for annual leave requests.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The notice period for annual leave requests is 17 working days.",
+          "supported": false,
+          "quote": "Annual leave requests need 10 working days notice to allow adequate planning.",
+          "reason": "The claim is not supported because the context states that annual leave requests need 10 working days notice.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees need to contact their manager directly if they need to handle an urgent work matter while on leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the company's policy for handling urgent work-related matters during leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees must seek approval from their manager before taking any action on an urgent work matter while on leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the company's policy regarding employees on leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to seek approval from their manager before taking any action on an urgent work matter while on leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is related to the policy on leave and work-related activities while on leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to contact their manager directly if they need to handle an urgent work matter while on leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the context's requirement for employees to contact their manager directly in case of an urgent work-related matter during leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Urgent work-related matters during leave require approval from the manager.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the policy for employees on leave.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-M03/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "2 unsupported claim(s)"
+      ],
+      "answer": "Annual leave requests need 10 working days notice to allow adequate planning. In the event of an urgent work-related matter during leave, employees are not required to contact their manager directly and seek approval before taking any action.",
+      "claims": [
+        {
+          "claim": "Annual leave requests need 10 working days notice.",
+          "supported": true,
+          "quote": "Annual leave requests need 10 working days notice to allow adequate planning.",
+          "reason": "The claim is supported because it is a specific policy regarding annual leave requests.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Annual leave requests need 10 working days notice to allow adequate planning.",
+          "supported": true,
+          "quote": "Annual leave requests need 10 working days notice to allow adequate planning.",
+          "reason": "The claim is supported because it is a specific policy regarding annual leave requests.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are not required to contact their manager directly and seek approval before taking any action in the event of an urgent work-related matter during leave.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim contradicts the policy stated in section 9.6.",
+          "quote_verified": false
+        },
+        {
+          "claim": "In the event of an urgent work-related matter during leave, employees are not required to contact their manager directly and seek approval before taking any action.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim contradicts the policy stated in section 9.6.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-M03/wrong_document",
+      "kind": "wrong_document",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": null,
+      "passed": false,
+      "reasons": [
+        "expected source not cited: ['code_of_conduct_it_policy.pdf', 'leave_policy.pdf']"
+      ],
+      "answer": "Annual leave requests need 10 working days notice to allow adequate planning. In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+      "claims": [
+        {
+          "claim": "Annual leave requests need 10 working days notice.",
+          "supported": true,
+          "quote": "Annual leave requests need 10 working days notice to allow adequate planning.",
+          "reason": "The claim is a specific policy regarding annual leave requests.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Annual leave requests need notice to allow adequate planning.",
+          "supported": true,
+          "quote": "Annual leave requests need 10 working days notice to allow adequate planning.",
+          "reason": "The claim is a general statement about the purpose of notice for annual leave requests.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to contact their manager directly if they need to handle an urgent work matter while on leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the company's policy regarding urgent work-related matters during leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to seek approval from their manager before taking any action if they need to handle an urgent work matter while on leave.",
+          "supported": true,
+          "quote": "In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the company's policy regarding handling urgent work matters while on leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to contact their manager directly if they need to handle an urgent work matter during leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the company's policy regarding handling urgent work matters during leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to seek approval before taking any action if they need to handle an urgent work matter during leave.",
+          "supported": true,
+          "quote": "In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the company's policy regarding handling urgent work matters during leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to seek approval from their manager before taking any action if they need to handle an urgent work matter while on leave.",
+          "supported": true,
+          "quote": "In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the company's policy regarding handling urgent work matters while on leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to contact their manager directly and seek approval before taking any action if they need to handle an urgent work matter during leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the company's policy regarding handling urgent work matters during leave.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-M03/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "2 unsupported claim(s)"
+      ],
+      "answer": "Annual leave requests need 10 working days notice to allow adequate planning. In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action. In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "Annual leave requests need 10 working days notice to allow adequate planning.",
+          "supported": true,
+          "quote": "Annual leave requests need 10 working days notice to allow adequate planning.",
+          "reason": "The claim is supported because it is a specific policy regarding annual leave requests.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to contact their manager directly if they need to handle an urgent work-related matter while on leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is related to handling urgent work-related matters while on leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees need to seek approval from their manager before taking any action on an urgent work-related matter while on leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the company's policy regarding employees on leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "A 37% surcharge applies to annual leave requests made after the first quarter of 2019.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim mentions a specific percentage and a specific time period, but the context does not mention any surcharge or percentage for annual leave requests.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The first quarter of 2019 is a specific time period.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention the first quarter of 2019.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-M03/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. Annual leave requests need 10 working days notice to allow adequate planning. In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action. 4.1 All leave requests must be submitted through the HR portal to ensure proper record-keeping and timely processing. Employees are required to provide sufficient details about the dates and nature of the leave to facilitate manager review. Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "Annual leave requests need 10 working days notice to allow adequate planning.",
+          "supported": true,
+          "quote": "Annual leave requests need 10 working days notice to allow adequate planning.",
+          "reason": "The claim is supported because it is a specific policy regarding annual leave requests.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to contact their manager directly if they need to handle an urgent work-related matter while on leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is related to handling urgent work-related matters while on leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees must seek approval from their manager before taking any action on an urgent work-related matter while on leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the company's policy regarding urgent work-related matters during leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "All leave requests must be submitted through the HR portal.",
+          "supported": true,
+          "quote": "4.1 All leave requests must be submitted through the HR portal to ensure proper record-keeping and timely processing.",
+          "reason": "The claim is a general policy statement regarding leave requests.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to provide sufficient details about the dates and nature of the leave to facilitate manager review.",
+          "supported": true,
+          "quote": "Employees are required to provide sufficient details about the dates and nature of the leave to facilitate manager review.",
+          "reason": "The claim is being evaluated based on the context provided.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to provide 10 working days notice for annual leave requests.",
+          "supported": true,
+          "quote": "Annual leave requests need 10 working days notice to allow adequate planning.",
+          "reason": "The claim is about the notice period for annual leave requests.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Annual leave requests must be submitted through the HR portal to ensure proper record-keeping and timely processing.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the submission of annual leave requests, but the context only mentions that all leave requests must be submitted through the HR portal.",
+          "quote_verified": false
+        },
+        {
+          "claim": "Employees are required to provide details about the dates and nature of the leave for annual leave requests.",
+          "supported": true,
+          "quote": "Employees are required to provide sufficient details about the dates and nature of the leave to facilitate manager review.",
+          "reason": "The claim is about the requirements for annual leave requests.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-M03/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "10 working days; contact their manager directly; seek approval before taking any action",
+      "claims": [
+        {
+          "claim": "The notice period for annual leave requests is 10 working days.",
+          "supported": true,
+          "quote": "Annual leave requests need 10 working days notice to allow adequate planning.",
+          "reason": "The claim is being evaluated based on the provided context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees should contact their manager directly if they need to handle an urgent work matter while on leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the company's policy for handling urgent work-related matters during leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees should seek approval before taking any action if they need to handle an urgent work matter while on leave.",
+          "supported": true,
+          "quote": "9.6 In the event of an urgent work-related matter during leave, employees are required to contact their manager directly and seek approval before taking any action.",
+          "reason": "The claim is based on the company's policy for handling urgent work-related matters during leave.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A01/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "24 working days of annual leave per calendar year.",
+      "claims": [
+        {
+          "claim": "Full-time shore employees get 24 working days of annual leave.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The claim is based on the company's policy regarding annual leave for full-time shore employees.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The annual leave is per calendar year.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The claim is about the annual leave entitlement, which is explicitly stated to be per calendar year.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Full-time shore employees get annual leave.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The context explicitly states the annual leave entitlement for full-time shore employees.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A01/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "key facts missing: ['24 working days']",
+        "6 unsupported claim(s)"
+      ],
+      "answer": "31 working days of annual leave per calendar year.",
+      "claims": [
+        {
+          "claim": "Full-time shore employees get 31 working days of annual leave.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim states 24 working days, not 31.",
+          "quote_verified": false
+        },
+        {
+          "claim": "Full-time shore employees get annual leave.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The context explicitly states the annual leave entitlement for full-time shore employees.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Annual leave is 31 working days.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context states that annual leave is 24 working days, not 31.",
+          "quote_verified": false
+        },
+        {
+          "claim": "Annual leave is per calendar year.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The claim is about the time period over which annual leave is granted.",
+          "quote_verified": true
+        },
+        {
+          "claim": "31 is the number of working days of annual leave.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about a different topic than the one mentioned in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "31 is the number of working days of annual leave per calendar year.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is incorrect because the context states 24 working days of annual leave per calendar year.",
+          "quote_verified": false
+        },
+        {
+          "claim": "31 is the number of working days of annual leave per year.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is incorrect because the context states 24 working days of annual leave per calendar year.",
+          "quote_verified": false
+        },
+        {
+          "claim": "31 working days is the number of annual leave.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention 31 working days as the annual leave entitlement.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A01/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "It is not true that 24 working days of annual leave per calendar year.",
+      "claims": [
+        {
+          "claim": "Full-time shore employees get annual leave.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The context explicitly states the annual leave entitlement for full-time shore employees.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Annual leave is not 24 working days per calendar year.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context states that annual leave is 24 working days per calendar year.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A01/wrong_document",
+      "kind": "wrong_document",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": null,
+      "passed": false,
+      "reasons": [
+        "expected source not cited: ['leave_policy.pdf']"
+      ],
+      "answer": "24 working days of annual leave per calendar year.",
+      "claims": [
+        {
+          "claim": "Full-time shore employees get 24 working days of annual leave.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The claim is about annual leave for full-time shore employees.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The annual leave is per calendar year.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The claim is about the annual leave policy, which is described in section 2 of the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Full-time shore employees get annual leave.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The context mentions annual leave entitlement for full-time shore employees.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A01/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "24 working days of annual leave per calendar year. In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "Full-time shore employees get 24 working days of annual leave per calendar year.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The claim is based on the company's policy regarding annual leave for full-time shore employees.",
+          "quote_verified": true
+        },
+        {
+          "claim": "A 37% surcharge applies to requests made after the first quarter of 2019.",
+          "supported": false,
+          "quote": "",
+          "reason": "There is no mention of a surcharge in the provided context.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A01/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. 24 working days of annual leave per calendar year. 2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year. This entitlement accrues at a rate of 2 working days per month. Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The claim is a statement about the annual leave entitlement of full-time shore employees.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The entitlement accrues at a rate of 2 working days per month.",
+          "supported": true,
+          "quote": "2.2 Leave accrual is automatically tracked by the human resources department and recorded in the employee's personal leave account. This account is updated monthly in accordance with the accrual rate.",
+          "reason": "The claim is about the accrual rate of annual leave.",
+          "quote_verified": true
+        },
+        {
+          "claim": "24 working days of annual leave per calendar year.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The claim is about annual leave entitlement.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A01/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "24 working days; per calendar year",
+      "claims": [
+        {
+          "claim": "Full-time shore employees get 24 working days of annual leave.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The claim is based on the company's policy regarding annual leave for full-time shore employees.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The annual leave is per calendar year.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The claim is about the annual leave entitlement, which is explicitly stated to be per calendar year.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The number of working days of annual leave is 24.",
+          "supported": true,
+          "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave per calendar year.",
+          "reason": "The claim is based on the company's policy regarding annual leave.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A04/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "throughout their employment and for 2 years after employment ends",
+      "claims": [
+        {
+          "claim": "employees must maintain confidentiality throughout their employment",
+          "supported": true,
+          "quote": "4.1 All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends.",
+          "reason": "The claim is a general requirement for employees.",
+          "quote_verified": true
+        },
+        {
+          "claim": "employees must maintain confidentiality for 2 years after employment ends",
+          "supported": true,
+          "quote": "4.1 All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends.",
+          "reason": "The claim is related to confidentiality and employment duration.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A04/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "key facts missing: ['2 years after employment ends']",
+        "1 unsupported claim(s)"
+      ],
+      "answer": "throughout their employment and for 9 years after employment ends",
+      "claims": [
+        {
+          "claim": "employees must maintain confidentiality throughout their employment",
+          "supported": true,
+          "quote": "4.1 All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends.",
+          "reason": "The claim is a general requirement for employees.",
+          "quote_verified": true
+        },
+        {
+          "claim": "employees must maintain confidentiality for 9 years after employment ends",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim specifies a longer period of time than stated in the context.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A04/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": true,
+      "reasons": [],
+      "answer": "It is not true that throughout their employment and for 2 years after employment ends",
+      "claims": [
+        {
+          "claim": "Employees must maintain confidentiality throughout their employment",
+          "supported": true,
+          "quote": "4.1 All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends.",
+          "reason": "The claim is a general statement of the confidentiality policy.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees must maintain confidentiality for 2 years after employment ends",
+          "supported": true,
+          "quote": "4.1 All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends.",
+          "reason": "The claim is based on the company's confidentiality policy.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A04/wrong_document",
+      "kind": "wrong_document",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": null,
+      "passed": false,
+      "reasons": [
+        "expected source not cited: ['code_of_conduct_it_policy.pdf']"
+      ],
+      "answer": "throughout their employment and for 2 years after employment ends",
+      "claims": [
+        {
+          "claim": "employees must maintain confidentiality throughout their employment",
+          "supported": true,
+          "quote": "4.1 All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends.",
+          "reason": "The claim is related to confidentiality, which is a specific requirement mentioned in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "employees must maintain confidentiality for 2 years after employment ends",
+          "supported": true,
+          "quote": "4.1 All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends.",
+          "reason": "The claim is related to confidentiality and employment duration.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A04/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "throughout their employment and for 2 years after employment ends In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "Employees must maintain confidentiality throughout their employment.",
+          "supported": true,
+          "quote": "4.1 All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends.",
+          "reason": "The claim is a general statement of the confidentiality policy.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees must maintain confidentiality for 2 years after employment ends.",
+          "supported": true,
+          "quote": "4.1 All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends.",
+          "reason": "The claim is based on the company's confidentiality policy.",
+          "quote_verified": true
+        },
+        {
+          "claim": "A 37% surcharge applies to requests made after the first quarter of 2019.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about a surcharge, but the context is about confidentiality and business travel policies.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A04/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. throughout their employment and for 2 years after employment ends 4.1 All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends. 4.2 Employees must not disclose any confidential information to third parties, including but not limited to former colleagues, contractors, or external auditors, without prior written authorization from the Chief Compliance Officer. Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "Employees are required to maintain the confidentiality of all company and client information.",
+          "supported": true,
+          "quote": "4.1 All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends.",
+          "reason": "The claim is related to confidentiality and employee responsibilities.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The information that employees must maintain confidentiality about includes operational data.",
+          "supported": true,
+          "quote": "All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data,",
+          "reason": "The claim is about the types of information that employees must maintain confidentiality about.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The information that employees must maintain confidentiality about includes financial records.",
+          "supported": true,
+          "quote": "financial records",
+          "reason": "The claim is about the type of confidential information employees must maintain.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The information that employees must maintain confidentiality about includes communication logs.",
+          "supported": true,
+          "quote": "including but not limited to operational data, financial records, and communication logs,",
+          "reason": "The claim is about the types of information that employees must maintain confidentiality about.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees must maintain confidentiality for 2 years after employment ends.",
+          "supported": true,
+          "quote": "4.1 All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends.",
+          "reason": "The claim is based on the company's confidentiality policy.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees must not disclose confidential information to third parties without prior written authorization.",
+          "supported": true,
+          "quote": "Employees must not disclose any confidential information to third parties, including but not limited to former colleagues, contractors, or external auditors, without prior written authorization from the Chief Compliance Officer.",
+          "reason": "The claim is a direct requirement stated in the confidentiality policy.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Prior written authorization to disclose confidential information must come from the Chief Compliance Officer.",
+          "supported": true,
+          "quote": "Employees must not disclose any confidential information to third parties, including but not limited to former colleagues, contractors, or external auditors, without prior written authorization from the Chief Compliance Officer.",
+          "reason": "The claim is specific about the requirement for prior written authorization to disclose confidential information.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees must not disclose confidential information to former colleagues without prior written authorization.",
+          "supported": true,
+          "quote": "Employees must not disclose any confidential information to third parties, including but not limited to former colleagues, contractors, or external auditors, without prior written authorization from the Chief Compliance Officer.",
+          "reason": "The claim is specific about the type of third party and the requirement for prior written authorization.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A04/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "2 years after employment ends",
+      "claims": [
+        {
+          "claim": "Employees must maintain confidentiality for 2 years after employment ends.",
+          "supported": true,
+          "quote": "4.1 All employees are required to maintain the confidentiality of all company and client information, including but not limited to operational data, financial records, and communication logs, throughout their employment and for 2 years after employment ends.",
+          "reason": "The claim is based on the company's confidentiality policy.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A09/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "The one day of time off in lieu must be taken within 60 days of the travel date",
+      "claims": [
+        {
+          "claim": "The one day of time off in lieu must be taken within 60 days of the travel date",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "The claim is supported because it is explicitly stated in the Leave and Holiday Policy.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The one day of time off in lieu must be taken within 60 days",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date",
+          "reason": "The claim is supported because it is explicitly stated in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Time off in lieu must be taken within 60 days of the travel date",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "The claim is supported because it is a specific requirement for time off in lieu.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Time off in lieu must be taken within 60 days",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date",
+          "reason": "The claim is supported because it is explicitly stated in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "One day of time off in lieu must be taken within 60 days of the travel date",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "The claim is based on the policy for employees who travel on a public holiday or weekend day in their home location.",
+          "quote_verified": true
+        },
+        {
+          "claim": "One day of time off in lieu must be taken within 60 days",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date",
+          "reason": "The claim is supported because it is a specific requirement stated in the Leave and Holiday Policy.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Time off in lieu must be taken within 60 days",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date",
+          "reason": "The claim is supported because it is explicitly stated in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Time off in lieu must be taken within 60 days of the travel date",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "The claim is supported because it is a specific requirement for time off in lieu.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A09/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "key facts missing: ['60 days of the travel date']",
+        "5 unsupported claim(s)"
+      ],
+      "answer": "The one day of time off in lieu must be taken within 67 days of the travel date",
+      "claims": [
+        {
+          "claim": "The one day of time off in lieu must be taken within 67 days of the travel date",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim specifies a different time limit than the one stated in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The one day of time off in lieu must be taken",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "within 60 days of the travel date",
+          "quote_verified": true
+        },
+        {
+          "claim": "Time off in lieu must be taken within 67 days of the travel date",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim specifies a different time limit than the one stated in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "Time off in lieu must be taken",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "within 60 days of the travel date",
+          "quote_verified": true
+        },
+        {
+          "claim": "One day of time off in lieu must be taken within 67 days of the travel date",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim specifies a different time limit than the one stated in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "One day of time off in lieu must be taken",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date",
+          "reason": "The claim is based on the policy that employees must take one day of time off in lieu within 60 days of the travel date.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Time off in lieu must be taken within 67 days of the travel date",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim specifies a different time limit than the one stated in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "67 days is the time limit for taking time off in lieu",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is not supported because the context states 60 days, not 67 days.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A09/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "5 unsupported claim(s)"
+      ],
+      "answer": "The one day of time off in lieu must not be taken within 60 days of the travel date",
+      "claims": [
+        {
+          "claim": "The one day of time off in lieu must not be taken",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is too absolute, as the context states that the time off in lieu must be taken within 60 days of the travel date.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The one day of time off in lieu must not be taken within 60 days",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim contradicts the context, which states that the one day of time off in lieu must be taken within 60 days.",
+          "quote_verified": false
+        },
+        {
+          "claim": "60 is the number of days within which the one day of time off in lieu must not be taken",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "The claim is based on the context's requirement for the one day of time off in lieu to be taken within 60 days of the travel date.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The one day of time off in lieu must not be taken after the travel date",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim contradicts the actual policy, which states that the time off in lieu must be taken within 60 days of the travel date.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The travel date is a date before which the one day of time off in lieu must not be taken",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date",
+          "reason": "The claim is based on the context of the Leave and Holiday Policy, which states that the time off in lieu must be taken within 60 days of the travel date.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The one day of time off in lieu must not be taken within 60 days of the travel date",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim contradicts the context, which states that the time off in lieu must be taken within 60 days of the travel date.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The one day of time off in lieu is a time off in lieu that must not be taken within 60 days",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is the opposite of what the context says.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The travel date is a date after which the one day of time off in lieu can be taken",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date",
+          "reason": "The claim is based on the context's statement about when the one day of time off in lieu can be taken.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A09/wrong_document",
+      "kind": "wrong_document",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": null,
+      "passed": false,
+      "reasons": [
+        "expected source not cited: ['travel_expense_policy.pdf']"
+      ],
+      "answer": "The one day of time off in lieu must be taken within 60 days of the travel date",
+      "claims": [
+        {
+          "claim": "The one day of time off in lieu must be taken within 60 days of the travel date",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "The claim is supported because it is explicitly stated in the Leave and Holiday Policy.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The one day of time off in lieu must be taken within 60 days",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date",
+          "reason": "The claim is supported because it is explicitly stated in the Leave and Holiday Policy.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Time off in lieu must be taken within 60 days of the travel date",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "The claim is based on the policy for employees who travel on a public holiday or weekend day.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Time off in lieu must be taken within 60 days",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date",
+          "reason": "The claim is supported because it is explicitly stated in the Leave and Holiday Policy.",
+          "quote_verified": true
+        },
+        {
+          "claim": "One day of time off in lieu must be taken within 60 days of the travel date",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "The claim is based on the policy for employees who travel on a public holiday or weekend day.",
+          "quote_verified": true
+        },
+        {
+          "claim": "One day of time off in lieu must be taken within 60 days",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date",
+          "reason": "The claim is based on the policy for employees who travel on a public holiday or weekend day.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Time off in lieu must be taken within 60 days",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date",
+          "reason": "The claim is supported because it is explicitly stated in the Leave and Holiday Policy.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Time off in lieu must be taken within 60 days of the travel date",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "The claim is based on the policy for employees who travel on a public holiday or weekend day.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A09/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "The one day of time off in lieu must be taken within 60 days of the travel date In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "The one day of time off in lieu must be taken within 60 days of the travel date",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "The claim is supported because it is explicitly stated in the Leave and Holiday Policy.",
+          "quote_verified": true
+        },
+        {
+          "claim": "A 37% surcharge applies to requests made after the first quarter of 2019",
+          "supported": false,
+          "quote": "",
+          "reason": "There is no mention of a surcharge in the context.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A09/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. The one day of time off in lieu must be taken within 60 days of the travel date 6.1 Employees who travel on a public holiday or weekend day in their home location will receive one day of time off in lieu for each such day, as defined in the Leave and Holiday Policy. 6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave. Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "The one day of time off in lieu must be taken within 60 days of the travel date",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "The claim is supported because it is explicitly stated in the Leave and Holiday Policy.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees who travel on a public holiday or weekend day in their home location will receive one day of time off in lieu for each such day",
+          "supported": true,
+          "quote": "6.1 Employees who travel on a public holiday or weekend day in their home location will receive one day of time off in lieu for each such day, as defined in the Leave and Holiday Policy.",
+          "reason": "The claim is related to employees who travel on a public holiday or weekend day in their home location.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The one day of time off in lieu is not deducted from annual leave",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "The claim is supported because it aligns with the policy that the time off in lieu is not deducted from annual leave.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A09/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "60 days of the travel date",
+      "claims": [
+        {
+          "claim": "Time off in lieu must be taken within 60 days of the travel date.",
+          "supported": true,
+          "quote": "6.2 The one day of time off in lieu must be taken within 60 days of the travel date and is not deducted from annual leave.",
+          "reason": "The claim is supported because it is explicitly stated in the Leave and Holiday Policy.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A12/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "USD 60 per day",
+      "claims": [
+        {
+          "claim": "The daily meal allowance for business travel is USD 60 per day.",
+          "supported": true,
+          "quote": "5.1 The daily meal allowance provided to employees while travelling is USD 60 per day, intended to cover standard food expenses during business trips.",
+          "reason": "The claim is about the daily meal allowance for business travel.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A12/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "key facts missing: ['USD 60 per day']",
+        "1 unsupported claim(s)"
+      ],
+      "answer": "USD 67 per day",
+      "claims": [
+        {
+          "claim": "The daily meal allowance for business travel is USD 67 per day.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is not supported because it states a different daily meal allowance than the one mentioned in the context.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A12/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "It is not true that USD 60 per day",
+      "claims": [
+        {
+          "claim": "The daily meal allowance for business travel is not USD 60 per day",
+          "supported": false,
+          "quote": "",
+          "reason": "The context states that the daily meal allowance is USD 60 per day.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A12/wrong_document",
+      "kind": "wrong_document",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": null,
+      "passed": false,
+      "reasons": [
+        "expected source not cited: ['travel_expense_policy.pdf']"
+      ],
+      "answer": "USD 60 per day",
+      "claims": [
+        {
+          "claim": "The daily meal allowance for business travel is USD 60 per day.",
+          "supported": true,
+          "quote": "5.1 The daily meal allowance provided to employees while travelling is USD 60 per day, intended to cover standard food expenses during business trips.",
+          "reason": "The claim is related to business travel and meal allowance.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A12/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "2 unsupported claim(s)"
+      ],
+      "answer": "USD 60 per day In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "The daily meal allowance for business travel is USD 60 per day.",
+          "supported": true,
+          "quote": "5.1 The daily meal allowance provided to employees while travelling is USD 60 per day, intended to cover standard food expenses during business trips.",
+          "reason": "The claim is about the daily meal allowance for business travel.",
+          "quote_verified": true
+        },
+        {
+          "claim": "A 37% surcharge applies to requests made after the first quarter of 2019.",
+          "supported": false,
+          "quote": "",
+          "reason": "There is no mention of a surcharge in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The first quarter of 2019 is a specific time period.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention the first quarter of 2019.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A12/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. USD 60 per day 5.1 The daily meal allowance provided to employees while travelling is USD 60 per day, intended to cover standard food expenses during business trips. 5.2 Employees are required to submit itemized receipts for all meal expenses incurred, which must be dated and signed by the employee to confirm authenticity. Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "The daily meal allowance provided to employees while travelling is USD 60 per day.",
+          "supported": true,
+          "quote": "5.1 The daily meal allowance provided to employees while travelling is USD 60 per day, intended to cover standard food expenses during business trips.",
+          "reason": "The claim is about the daily meal allowance provided to employees while travelling.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The daily meal allowance is intended to cover standard food expenses during business trips.",
+          "supported": true,
+          "quote": "5.1 The daily meal allowance provided to employees while travelling is USD 60 per day, intended to cover standard food expenses during business trips.",
+          "reason": "The claim is about the purpose of the daily meal allowance.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Employees are required to submit itemized receipts for all meal expenses incurred.",
+          "supported": true,
+          "quote": "Employees are required to submit itemized receipts for all meal expenses incurred, which must be dated and signed by the employee to confirm authenticity.",
+          "reason": "The claim is based on the company's policy for meal expenses.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The itemized receipts must be dated.",
+          "supported": true,
+          "quote": "which must be dated and signed by the employee to confirm authenticity.",
+          "reason": "The claim is about the requirements for itemized receipts.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The itemized receipts must be signed by the employee to confirm authenticity.",
+          "supported": true,
+          "quote": "which must be dated and signed by the employee to confirm authenticity.",
+          "reason": "The claim is about the requirement for itemized receipts to be signed by the employee.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "hr_shore/hr-A12/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "USD 60 per day",
+      "claims": [
+        {
+          "claim": "The daily meal allowance for business travel is USD 60 per day.",
+          "supported": true,
+          "quote": "5.1 The daily meal allowance provided to employees while travelling is USD 60 per day, intended to cover standard food expenses during business trips.",
+          "reason": "The claim is about the daily meal allowance for business travel.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-M01/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": false,
+      "reasons": [
+        "7 unsupported claim(s)"
+      ],
+      "answer": "part_no: MT-6017 | unit_price_usd: 47.77 An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+      "claims": [
+        {
+          "claim": "The part number is MT-6017.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the part number, but the context is about the details of the part.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The unit price in USD is 47.77.",
+          "supported": true,
+          "quote": "unit_price_usd: 47.77",
+          "reason": "The claim is a specific piece of information from the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "An 8% discount is applicable.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about a discount, but the context does not specify which part number or order value it applies to.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the discount tier, but the context does not specify the part numbers or their prices.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The total cost is the unit price minus the discount.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention the total cost or the discount calculation.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The discount is 8% of the unit price.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is not supported because it only mentions the unit price, but the discount is applied to the total value of the order.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The discount amount is 8% of 47.77.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is based on a specific unit price, but the context does not specify that the discount is applied to the unit price.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The discount amount is 3.8196.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention the discount amount.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-M01/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "key facts missing: ['47.77']",
+        "8 unsupported claim(s)"
+      ],
+      "answer": "part_no: MT-6017 | unit_price_usd: 54.77 An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+      "claims": [
+        {
+          "claim": "The part number is MT-6017.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the part number, but the context is about the details of the part.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The unit price in USD is 54.77.",
+          "supported": false,
+          "quote": "",
+          "reason": "The unit price in USD is not 54.77, it is 47.77.",
+          "quote_verified": false
+        },
+        {
+          "claim": "An 8% discount is applicable.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about a discount, but the context does not specify which part number or order value it applies to.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the discount tier, but the context does not specify the part numbers or their prices.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The total cost is the unit price minus the discount.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention the total cost or the discount calculation.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The discount is 8% of the unit price.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is not supported because it only mentions the unit price, but the discount is applied to the total value of the order.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The discount amount is 8% of 54.77.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim mentions a specific price of 54.77, but the context does not mention this price.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The discount amount is 4.3584.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention the discount amount.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-M01/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "2 unsupported claim(s)"
+      ],
+      "answer": "part_no: MT-6017 | unit_price_usd: 47.77 An 8% discount is not applicable to orders with a total value between USD 15,000 and USD 49,999.",
+      "claims": [
+        {
+          "claim": "The part number is MT-6017.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the part number, but the context is about the details of the part.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The unit price in USD is 47.77.",
+          "supported": true,
+          "quote": "unit_price_usd: 47.77",
+          "reason": "The claim is a specific piece of information from the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "An 8% discount is not applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim contradicts the discount policy stated in the context.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-M01/wrong_document",
+      "kind": "wrong_document",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": null,
+      "passed": false,
+      "reasons": [
+        "expected source not cited: ['spares_catalogue.csv', 'terms_norvik_marine_supply.pdf']",
+        "6 unsupported claim(s)"
+      ],
+      "answer": "part_no: MT-6017 | unit_price_usd: 47.77 An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+      "claims": [
+        {
+          "claim": "The part number is MT-6017.",
+          "supported": true,
+          "quote": "part_no: MT-6017",
+          "reason": "The claim is about the part number, but the context is about the part number and other details.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The unit price in USD is 47.77.",
+          "supported": true,
+          "quote": "unit_price_usd: 47.77",
+          "reason": "The claim is a specific piece of information from the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "An 8% discount is applicable.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about a discount, but the context does not specify which part or order it applies to.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the discount tier, but the context only mentions the discount tiers for orders with a total value between USD 5,000 and USD 14,999, and USD 50,000 or more.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The total cost is the unit price minus the discount.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention the total cost or how it is calculated.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The discount is 8% of the unit price.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim only mentions the discount rate, but not the unit price.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The discount amount is 8% of 47.77.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is based on a specific unit price, but the context does not specify that the discount is applied to this unit price.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The discount amount is 3.8196.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not provide the discount amount.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-M01/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "6 unsupported claim(s)"
+      ],
+      "answer": "part_no: MT-6017 | unit_price_usd: 47.77 An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999. In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "The part number is MT-6017.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the part number, but the context is about the details of the part.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The unit price in USD is 47.77.",
+          "supported": true,
+          "quote": "unit_price_usd: 47.77",
+          "reason": "The claim is a specific piece of information from the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "supported": true,
+          "quote": "An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "reason": "The claim is about a specific discount tier and its applicable range.",
+          "quote_verified": true
+        },
+        {
+          "claim": "A 37% surcharge applies to requests made after the first quarter of 2019.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim mentions a surcharge, but the context only discusses discounts.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The first quarter of 2019 is a specific time period.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention the first quarter of 2019.",
+          "quote_verified": false
+        },
+        {
+          "claim": "There is an internal addendum.",
+          "supported": false,
+          "quote": "",
+          "reason": "There is no mention of an internal addendum in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The internal addendum is related to a surcharge.",
+          "supported": false,
+          "quote": "",
+          "reason": "There is no mention of an internal addendum in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The surcharge is 37%.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention a surcharge.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-M01/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": false,
+      "reasons": [
+        "2 unsupported claim(s)"
+      ],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. part_no: MT-6017 | unit_price_usd: 47.77 An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999. part_no: MT-6017 | description: Cartridge assembly (heavy duty) | equipment: Turbocharger | maker: Marlow Turbo | supplier_id: S01 | unit_price_usd: 47.77 | moq: 2 | lead_time_days: 42 | stock_port: Rotterdam | snapshot_date: 2026-11-01 2.1 The applicable discount tier for an order is determined by the total value of the order before any discount is applied. Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "The part number is MT-6017.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the part number, but the context is about the details of the part.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The unit price in USD is 47.77.",
+          "supported": true,
+          "quote": "unit_price_usd: 47.77",
+          "reason": "The claim is a specific piece of information from the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "supported": true,
+          "quote": "An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "reason": "The claim is about a specific discount tier and its applicable range.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part number MT-6017 is a Cartridge assembly (heavy duty).",
+          "supported": true,
+          "quote": "description: Cartridge assembly (heavy duty)",
+          "reason": "The claim is based on the description of the part number MT-6017.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part number MT-6017 is used in a Turbocharger.",
+          "supported": true,
+          "quote": "equipment: Turbocharger",
+          "reason": "The part number MT-6017 is associated with a Turbocharger in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part number MT-6017 is made by Marlow Turbo.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the manufacturer of the part, but the context only mentions the maker of the part.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The part number MT-6017 is supplied by S01.",
+          "supported": true,
+          "quote": "part_no: MT-6017 | description: Cartridge assembly (heavy duty) | equipment: Turbocharger | maker: Marlow Turbo | supplier_id: S01 | unit_price_usd: 47.77 | moq: 2 | lead_time_days: 42 | stock_port: Rotterdam | snapshot_date: 2026-11-01",
+          "reason": "The part number MT-6017 is associated with supplier S01.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The unit price in USD for part number MT-6017 is 47.77.",
+          "supported": true,
+          "quote": "unit_price_usd: 47.77",
+          "reason": "The claim is a direct statement from the context.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-M01/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": false,
+      "reasons": [
+        "2 unsupported claim(s)"
+      ],
+      "answer": "47.77; An 8% discount is applicable; USD 15,000 and USD 49,999",
+      "claims": [
+        {
+          "claim": "The total cost for part number MT-6017 from supplier S01 is 47.77.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the unit price of part number MT-6017, but it does not mention the total cost.",
+          "quote_verified": false
+        },
+        {
+          "claim": "An 8% discount is applicable for orders in the range of USD 15,000 to USD 49,999.",
+          "supported": true,
+          "quote": "An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "reason": "The claim is about a specific discount tier and its applicable range.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The applicable discount rate is 8%.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is based on the total value of the order, which is not provided in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The range for the discount is USD 15,000 to USD 49,999.",
+          "supported": true,
+          "quote": "An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "reason": "The claim specifies a specific discount range.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The total cost for part number MT-6017 from supplier S01 is in USD.",
+          "supported": true,
+          "quote": "unit_price_usd: 47.77",
+          "reason": "The claim is about the total cost of a specific part from a specific supplier.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The discount rate for orders in the range of USD 15,000 to USD 49,999 is 8%.",
+          "supported": true,
+          "quote": "2.2 An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "reason": "The claim is based on the discount tiers specified in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The total cost for part number MT-6017 from supplier S01 is 47.77 USD.",
+          "supported": true,
+          "quote": "unit_price_usd: 47.77",
+          "reason": "The claim is a simple statement of fact from the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The discount is applicable for orders in the range of USD 15,000 to USD 49,999.",
+          "supported": true,
+          "quote": "2.2 An 8% discount is applicable to orders with a total value between USD 15,000 and USD 49,999.",
+          "reason": "The claim is based on the discount tiers specified in the context.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A01/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "part_no: PP-8597 | stock_port: Rotterdam | snapshot_date: 2026-11-01",
+      "claims": [
+        {
+          "claim": "The part number is PP-8597.",
+          "supported": true,
+          "quote": "part_no: PP-8597",
+          "reason": "The claim is directly stated in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The stock port is Rotterdam.",
+          "supported": true,
+          "quote": "stock_port: Rotterdam",
+          "reason": "The claim is about the stock port, which is mentioned in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The snapshot date is 2026-11-01.",
+          "supported": true,
+          "quote": "snapshot_date: 2026-11-01",
+          "reason": "The claim is about the snapshot date, which is mentioned in the context.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A01/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "part_no: PP-8604 | stock_port: Rotterdam | snapshot_date: 2026-11-01",
+      "claims": [
+        {
+          "claim": "The part number is PP-8604.",
+          "supported": false,
+          "quote": "",
+          "reason": "The part number in the claim does not match any part number in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The stock port is Rotterdam.",
+          "supported": true,
+          "quote": "stock_port: Rotterdam",
+          "reason": "The claim is about the stock port, which is mentioned in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The snapshot date is 2026-11-01.",
+          "supported": true,
+          "quote": "snapshot_date: 2026-11-01",
+          "reason": "The claim is about the snapshot date, which is mentioned in the context.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A01/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": true,
+      "reasons": [],
+      "answer": "It is not true that part_no: PP-8597 | stock_port: Rotterdam | snapshot_date: 2026-11-01",
+      "claims": [
+        {
+          "claim": "part_no: PP-8597",
+          "supported": true,
+          "quote": "part_no: PP-8597",
+          "reason": "The claim is a specific part number.",
+          "quote_verified": true
+        },
+        {
+          "claim": "stock_port: Rotterdam",
+          "supported": true,
+          "quote": "stock_port: Rotterdam",
+          "reason": "The claim is about the stock port of a specific part.",
+          "quote_verified": true
+        },
+        {
+          "claim": "snapshot_date: 2026-11-01",
+          "supported": true,
+          "quote": "snapshot_date: 2026-11-01",
+          "reason": "The claim is about the snapshot date of the parts.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A01/wrong_document",
+      "kind": "wrong_document",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": null,
+      "passed": false,
+      "reasons": [
+        "expected source not cited: ['spares_catalogue.csv']"
+      ],
+      "answer": "part_no: PP-8597 | stock_port: Rotterdam | snapshot_date: 2026-11-01",
+      "claims": [
+        {
+          "claim": "The part number is PP-8597.",
+          "supported": true,
+          "quote": "part_no: PP-8597",
+          "reason": "The claim is directly stated in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The stock port is Rotterdam.",
+          "supported": true,
+          "quote": "stock_port: Rotterdam",
+          "reason": "The claim is about the stock port, which is mentioned in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The snapshot date is 2026-11-01.",
+          "supported": true,
+          "quote": "snapshot_date: 2026-11-01",
+          "reason": "The claim is about the snapshot date, which is mentioned in the context.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A01/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "part_no: PP-8597 | stock_port: Rotterdam | snapshot_date: 2026-11-01 In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "The part number is PP-8597.",
+          "supported": true,
+          "quote": "part_no: PP-8597",
+          "reason": "The claim is directly stated in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The stock port is Rotterdam.",
+          "supported": true,
+          "quote": "stock_port: Rotterdam",
+          "reason": "The claim is about the stock port, which is mentioned in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The snapshot date is 2026-11-01.",
+          "supported": true,
+          "quote": "snapshot_date: 2026-11-01",
+          "reason": "The claim is about the snapshot date, which is mentioned in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "A 37% surcharge applies to requests made after the first quarter of 2019.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim mentions a surcharge and a specific date (2019), but the context does not mention any surcharges or dates.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A01/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. part_no: PP-8597 | stock_port: Rotterdam | snapshot_date: 2026-11-01 part_no: PP-8597 | description: Bearing set (standard) | equipment: Purifier | maker: Pelagic Purifiers | supplier_id: S01 | unit_price_usd: 381.64 | moq: 5 | lead_time_days: 10 | stock_port: Rotterdam | snapshot_date: 2026-11-01 Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "The stock port for the part number PP-8597 from supplier S01 is Rotterdam.",
+          "supported": true,
+          "quote": "stock_port: Rotterdam",
+          "reason": "The claim is about the stock port for a specific part number from a specific supplier.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part number is PP-8597.",
+          "supported": true,
+          "quote": "part_no: PP-8597",
+          "reason": "The claim is directly stated in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The supplier is S01.",
+          "supported": true,
+          "quote": "supplier_id: S01",
+          "reason": "The supplier is mentioned as S01 in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The snapshot date is 2026-11-01.",
+          "supported": true,
+          "quote": "snapshot_date: 2026-11-01",
+          "reason": "The claim is about the snapshot date, which is mentioned in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The description is Bearing set (standard).",
+          "supported": true,
+          "quote": "description: Bearing set (standard)",
+          "reason": "The claim is about the description of part_no: PP-8597",
+          "quote_verified": true
+        },
+        {
+          "claim": "The equipment is Purifier.",
+          "supported": true,
+          "quote": "equipment: Purifier",
+          "reason": "The claim is about the equipment of a specific part.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The maker is Pelagic Purifiers.",
+          "supported": true,
+          "quote": "maker: Pelagic Purifiers",
+          "reason": "The claim is about the maker of a specific part.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The unit price in USD is 381.64.",
+          "supported": true,
+          "quote": "unit_price_usd: 381.64",
+          "reason": "The claim is about the unit price in USD for part PP-8597.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A01/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "Rotterdam; 2026-11-01",
+      "claims": [
+        {
+          "claim": "The stock port for the part number PP-8597 from supplier S01 is Rotterdam.",
+          "supported": true,
+          "quote": "stock_port: Rotterdam",
+          "reason": "The claim is about the stock port for a specific part number from a specific supplier.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The stock port for the part number PP-8597 from supplier S01 is located in Rotterdam.",
+          "supported": true,
+          "quote": "stock_port: Rotterdam",
+          "reason": "The claim is about the stock port of a specific part number from a specific supplier.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The stock port for the part number PP-8597 from supplier S01 is in Rotterdam.",
+          "supported": true,
+          "quote": "stock_port: Rotterdam",
+          "reason": "The claim is about the stock port of a specific part number from a specific supplier.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The stock port for the part number PP-8597 from supplier S01 is at Rotterdam.",
+          "supported": true,
+          "quote": "stock_port: Rotterdam",
+          "reason": "The claim is about the stock port for a specific part number from a specific supplier.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The stock port for the part number PP-8597 from supplier S01 is Rotterdam.",
+          "supported": true,
+          "quote": "stock_port: Rotterdam",
+          "reason": "The claim is about the stock port for a specific part number from a specific supplier.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The stock port for the part number PP-8597 from supplier S01 is in Rotterdam.",
+          "supported": true,
+          "quote": "stock_port: Rotterdam",
+          "reason": "The claim is about the stock port of a specific part number from a specific supplier.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The stock port for the part number PP-8597 from supplier S01 is at Rotterdam.",
+          "supported": true,
+          "quote": "stock_port: Rotterdam",
+          "reason": "The claim is about the stock port for a specific part number from a specific supplier.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The stock port is Rotterdam.",
+          "supported": true,
+          "quote": "stock_port: Rotterdam",
+          "reason": "The claim is about the stock port, which is mentioned in the context.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A05/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "part_no: VC-9668 | moq: 10",
+      "claims": [
+        {
+          "claim": "The part number is VC-9668.",
+          "supported": true,
+          "quote": "part_no: VC-9668",
+          "reason": "The part number is specified in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The minimum order quantity is 10.",
+          "supported": true,
+          "quote": "moq: 10",
+          "reason": "The claim is about the minimum order quantity of part VC-9668.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The supplier is S03.",
+          "supported": true,
+          "quote": "supplier_id: S03",
+          "reason": "The supplier ID is S03, which matches the claim.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A05/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "key facts missing: ['10']",
+        "1 unsupported claim(s)"
+      ],
+      "answer": "part_no: VC-9668 | moq: 17",
+      "claims": [
+        {
+          "claim": "The part number is VC-9668.",
+          "supported": true,
+          "quote": "part_no: VC-9668",
+          "reason": "The part number is specified in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The minimum order quantity is 17.",
+          "supported": false,
+          "quote": "",
+          "reason": "The minimum order quantity is higher than the given values.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A05/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "It is not true that part_no: VC-9668 | moq: 10",
+      "claims": [
+        {
+          "claim": "part_no: VC-9668",
+          "supported": true,
+          "quote": "part_no: VC-9668",
+          "reason": "The claim is a specific part number.",
+          "quote_verified": true
+        },
+        {
+          "claim": "moq: 10",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the minimum order quantity (moq) of a specific part.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A05/wrong_document",
+      "kind": "wrong_document",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": null,
+      "passed": false,
+      "reasons": [
+        "expected source not cited: ['spares_catalogue.csv']",
+        "3 unsupported claim(s)"
+      ],
+      "answer": "part_no: VC-9668 | moq: 10",
+      "claims": [
+        {
+          "claim": "The part number is VC-9668.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the part number, but the context shows multiple part numbers.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The minimum order quantity is 10.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim specifies a minimum order quantity of 10, but the context shows different minimum order quantities for different parts.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The supplier is S03.",
+          "supported": false,
+          "quote": "",
+          "reason": "The supplier ID is given as S01, not S03.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A05/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "part_no: VC-9668 | moq: 10 In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "The minimum order quantity for part number VC-9668 is 10.",
+          "supported": true,
+          "quote": "moq: 10",
+          "reason": "The claim matches the part number and the minimum order quantity in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "A 37% surcharge applies to requests made after the first quarter of 2019.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention a surcharge or any date related to the first quarter of 2019.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The part number is VC-9668.",
+          "supported": true,
+          "quote": "part_no: VC-9668",
+          "reason": "The part number is specified in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The supplier is S03.",
+          "supported": true,
+          "quote": "supplier_id: S03",
+          "reason": "The supplier ID is S03, which matches the claim.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A05/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. part_no: VC-9668 | moq: 10 part_no: VC-9668 | description: Gland packing set (heavy duty) | equipment: Cargo Pump | maker: Vantor Cargo Pumps | supplier_id: S03 | unit_price_usd: 297.13 | moq: 10 | lead_time_days: 42 | stock_port: Singapore | snapshot_date: 2026-11-01 Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "The minimum order quantity for part number VC-9668 is 10.",
+          "supported": true,
+          "quote": "moq: 10",
+          "reason": "The claim matches the part number and the minimum order quantity in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part number VC-9668 is for a Gland packing set (heavy duty).",
+          "supported": true,
+          "quote": "description: Gland packing set (heavy duty)",
+          "reason": "The claim matches the description of the part number VC-9668.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part number VC-9668 is used in the Cargo Pump.",
+          "supported": true,
+          "quote": "equipment: Cargo Pump",
+          "reason": "The claim is about the equipment associated with the part number VC-9668.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part number VC-9668 is made by Vantor Cargo Pumps.",
+          "supported": true,
+          "quote": "maker: Vantor Cargo Pumps",
+          "reason": "The claim is based on the 'maker' field in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part number VC-9668 is supplied by S03.",
+          "supported": true,
+          "quote": "supplier_id: S03",
+          "reason": "The part number VC-9668 is associated with supplier_id S03.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The unit price of part number VC-9668 in USD is 297.13.",
+          "supported": true,
+          "quote": "unit_price_usd: 297.13",
+          "reason": "The claim matches the information in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The lead time for part number VC-9668 is 42 days.",
+          "supported": true,
+          "quote": "lead_time_days: 42",
+          "reason": "The claim is about the lead time for part number VC-9668.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part number VC-9668 is stocked in Singapore.",
+          "supported": true,
+          "quote": "stock_port: Singapore",
+          "reason": "The part number VC-9668 is associated with the stock port Singapore.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A05/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "10",
+      "claims": [
+        {
+          "claim": "The minimum order quantity for part number VC-9668 from supplier S03 is 10.",
+          "supported": true,
+          "quote": "moq: 10",
+          "reason": "The claim matches the part number and supplier ID in the context.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A07/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+      "claims": [
+        {
+          "claim": "Customers have to pay for goods after receiving an invoice.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is based on the payment terms specified in the agreement.",
+          "quote_verified": true
+        },
+        {
+          "claim": "All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is a direct quote from the agreement.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The date of invoice is relevant for calculating the payment deadline.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is about the relevance of the date of invoice for calculating the payment deadline.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The payment deadline is net 45 days.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is a specific detail from the agreement.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Net 45 days is the payment deadline.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The context specifies the payment deadline as net 45 days from the date of invoice.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The payment deadline is 45 days.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is a specific detail mentioned in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The payment deadline is 45 days net.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is a specific detail from the agreement.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Customers have 45 days net to pay for goods after receiving an invoice.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about payment terms after receiving an invoice, but the context specifies payment terms from the date of invoice.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A07/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "key facts missing: ['net 45 days']",
+        "6 unsupported claim(s)"
+      ],
+      "answer": "All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 52 days from the date of invoice.",
+      "claims": [
+        {
+          "claim": "Customers have to pay for goods after receiving an invoice.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is based on the payment terms specified in the agreement.",
+          "quote_verified": true
+        },
+        {
+          "claim": "All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 52 days from the date of invoice.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim specifies 52 days, but the context specifies 45 days.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The payment period for goods supplied by Norvik Marine Supply under this agreement is net 52 days from the date of invoice.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim states a different payment period than the one specified in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The payment period for goods supplied by Norvik Marine Supply under this agreement is 52 days.",
+          "supported": false,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The context specifies a payment period of 45 days, not 52 days.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Customers have to pay for goods supplied by Norvik Marine Supply under this agreement within 52 days from the date of invoice.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim specifies 52 days, but the context specifies 45 days.",
+          "quote_verified": false
+        },
+        {
+          "claim": "Customers have to pay for goods supplied by Norvik Marine Supply under this agreement within net 52 days from the date of invoice.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim specifies 52 days, but the context specifies 45 days.",
+          "quote_verified": false
+        },
+        {
+          "claim": "Customers have to pay for goods supplied by Norvik Marine Supply under this agreement within net 52 days.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim specifies 52 days, but the context specifies 45 days.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The payment period for goods supplied by Norvik Marine Supply under this agreement is net.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The context specifies the payment period as net 45 days.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A07/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": true,
+      "reasons": [],
+      "answer": "It is not true that All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+      "claims": [
+        {
+          "claim": "All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is a direct quote from the agreement.",
+          "quote_verified": true
+        },
+        {
+          "claim": "All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice is true",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is a direct statement from the agreement.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A07/wrong_document",
+      "kind": "wrong_document",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": null,
+      "passed": false,
+      "reasons": [
+        "expected source not cited: ['terms_norvik_marine_supply.pdf']",
+        "7 unsupported claim(s)"
+      ],
+      "answer": "All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+      "claims": [
+        {
+          "claim": "Customers have to pay for goods after receiving an invoice.",
+          "supported": false,
+          "quote": "All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice. All payments shall be made to the bank account details provided by Norvik Marine Supply in writing at the time of order confirmation. The buyer is required to issue payment within the net 60 days period following the date of invoice. Payment shall be made via bank transfer to the account details provided by Aurelian Engineering Parts in writing.",
+          "reason": "The claim is a general statement about payment terms, but the specific terms vary between suppliers. [rejected: the quote is not a verbatim span of the context]",
+          "quote_verified": false
+        },
+        {
+          "claim": "All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about Norvik Marine Supply, but the context is about Aurelian Engineering Parts.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The date of invoice is relevant for calculating the payment deadline.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The context mentions the date of invoice as a factor in calculating the payment deadline.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The payment deadline is net 45 days.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the payment deadline for Norvik Marine Supply, but the context provided is about Aurelian Engineering Parts.",
+          "quote_verified": false
+        },
+        {
+          "claim": "Net 45 days is the payment deadline.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context specifies a different payment deadline for Norvik Marine Supply.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The payment deadline is 45 days.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context states a different payment deadline for Aurelian Engineering Parts.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The payment deadline is 45 days net.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context states a different payment deadline for Aurelian Engineering Parts.",
+          "quote_verified": false
+        },
+        {
+          "claim": "Customers have 45 days net to pay for goods after receiving an invoice.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the payment terms for goods supplied by Norvik Marine Supply, but the context provided is about the payment terms for goods supplied by Aurelian Engineering Parts.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A07/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "3 unsupported claim(s)"
+      ],
+      "answer": "All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice. In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "Customers have to pay for goods after receiving an invoice within net 45 days.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about payment terms after receiving an invoice, but the context specifies the payment term as 45 days from the date of invoice, not after receiving the invoice.",
+          "quote_verified": false
+        },
+        {
+          "claim": "A 37% surcharge applies to requests made after the first quarter of 2019.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention a surcharge or any date related to the first quarter of 2019.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The first quarter of 2019 is a specific time period.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention the first quarter of 2019.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A07/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": false,
+      "reasons": [
+        "2 unsupported claim(s)"
+      ],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice. 6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice. 6.2 Once an order has been dispatched by Norvik Marine Supply, it shall not be cancelled by the customer under any circumstances. Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "Customers have to pay for goods within net 45 days from the date of invoice.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is a general statement about payment terms, but the context only specifies the payment terms for Norvik Marine Supply.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The date of invoice is the date when the goods are dispatched.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention the date of invoice as the date when the goods are dispatched.",
+          "quote_verified": false
+        },
+        {
+          "claim": "Customers have to pay for goods within 45 days from the date of invoice.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is based on the payment terms specified in the agreement.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The date of invoice is the date when the goods are received.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention the date of invoice in relation to the date when the goods are received.",
+          "quote_verified": false
+        },
+        {
+          "claim": "Customers have to pay for goods within 45 days from the date of invoice.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is based on the payment terms specified in the agreement.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Customers have to pay for goods within 45 days from the date of invoice.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is based on the payment terms specified in the agreement.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Customers have to pay for goods within 45 days from the date of invoice.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is based on the payment terms specified in the agreement.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Customers have to pay for goods within 45 days from the date of invoice.",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is based on the payment terms specified in the agreement.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A07/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "net 45 days",
+      "claims": [
+        {
+          "claim": "The payment term is net",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is about the payment term.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The payment term is 45 days",
+          "supported": true,
+          "quote": "6.1 All payments for goods supplied by Norvik Marine Supply under this agreement shall be made within net 45 days from the date of invoice.",
+          "reason": "The claim is about the payment term, which is specified in clause 6.1 of the agreement.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A10/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "part_no: LF-7041 | unit_price_usd: 1567.21 | moq: 1",
+      "claims": [
+        {
+          "claim": "The unit price for the part with part_no LF-7041 is 1567.21 USD.",
+          "supported": true,
+          "quote": "unit_price_usd: 1567.21",
+          "reason": "The claim is about the unit price of a specific part.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part with part_no LF-7041 has a minimum order quantity of 1.",
+          "supported": true,
+          "quote": "moq: 1",
+          "reason": "The context explicitly states the minimum order quantity for the part LF-7041.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part with part_no LF-7041 is supplied by supplier_id S02.",
+          "supported": true,
+          "quote": "supplier_id: S02",
+          "reason": "The context specifies the supplier_id for part LF-7041 as S02.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A10/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "key facts missing: ['1567.21']",
+        "1 unsupported claim(s)"
+      ],
+      "answer": "part_no: LF-7041 | unit_price_usd: 1574.21 | moq: 1",
+      "claims": [
+        {
+          "claim": "The unit price for the part with part_no LF-7041 is 1574.21 USD.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about a different topic than the unit price of the part with part_no LF-7041.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The part with part_no LF-7041 has a minimum order quantity of 1.",
+          "supported": true,
+          "quote": "moq: 1",
+          "reason": "The context explicitly states the minimum order quantity for the part LF-7041.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part with part_no LF-7041 is supplied by supplier_id S02.",
+          "supported": true,
+          "quote": "supplier_id: S02",
+          "reason": "The context specifies the supplier_id for part LF-7041 as S02.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A10/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": true,
+      "reasons": [],
+      "answer": "It is not true that part_no: LF-7041 | unit_price_usd: 1567.21 | moq: 1",
+      "claims": [
+        {
+          "claim": "The unit price for part LF-7041 is 1567.21 USD.",
+          "supported": true,
+          "quote": "unit_price_usd: 1567.21",
+          "reason": "The claim is about the unit price of part LF-7041, which is mentioned in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The minimum order quantity for part LF-7041 is 1.",
+          "supported": true,
+          "quote": "moq: 1",
+          "reason": "The claim is about the minimum order quantity for part LF-7041, which is specified in the context.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A10/wrong_document",
+      "kind": "wrong_document",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": null,
+      "passed": false,
+      "reasons": [
+        "expected source not cited: ['spares_catalogue.csv']",
+        "1 unsupported claim(s)"
+      ],
+      "answer": "part_no: LF-7041 | unit_price_usd: 1567.21 | moq: 1",
+      "claims": [
+        {
+          "claim": "The unit price for the part with part_no LF-7041 is 1567.21 USD.",
+          "supported": true,
+          "quote": "unit_price_usd: 1567.21",
+          "reason": "The claim is about the unit price of a specific part.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part with part_no LF-7041 has a minimum order quantity of 1.",
+          "supported": true,
+          "quote": "moq: 1",
+          "reason": "The context explicitly states the minimum order quantity for the part LF-7041.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part with part_no LF-7041 is supplied by supplier_id S02.",
+          "supported": false,
+          "quote": "part_no: LF-7041 | supplier_id: S02",
+          "reason": "The part number and supplier ID are explicitly mentioned in the context. [rejected: the quote is not a verbatim span of the context]",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A10/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "2 unsupported claim(s)"
+      ],
+      "answer": "part_no: LF-7041 | unit_price_usd: 1567.21 | moq: 1 In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "The unit price for the part with part_no LF-7041 is 1567.21 USD.",
+          "supported": true,
+          "quote": "unit_price_usd: 1567.21",
+          "reason": "The claim is about the unit price of a specific part.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The minimum order quantity for the part with part_no LF-7041 is 1.",
+          "supported": false,
+          "quote": "part_no: LF-7041 | moq: 1",
+          "reason": "The claim is about the part with part_no LF-7041, and the context provides information about multiple parts. [rejected: the quote is not a verbatim span of the context]",
+          "quote_verified": false
+        },
+        {
+          "claim": "A 37% surcharge applies to requests made after the first quarter of 2019 for the part with part_no LF-7041.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention a surcharge or any specific date for the part with part_no LF-7041.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A10/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. part_no: LF-7041 | unit_price_usd: 1567.21 | moq: 1 part_no: LF-7041 | description: Fuel rail pressure sensor (heavy duty) | equipment: Fuel Injection System | maker: Lindqvist Fuel Systems | supplier_id: S02 | unit_price_usd: 1567.21 | moq: 1 | lead_time_days: 10 | stock_port: Dubai | snapshot_date: 2026-11-01 Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "The unit price for the part with part_no LF-7041 and supplier_id S02 is 1567.21 USD.",
+          "supported": true,
+          "quote": "unit_price_usd: 1567.21",
+          "reason": "The claim is about the unit price of a specific part with supplier_id S02.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The minimum order quantity for the part with part_no LF-7041 and supplier_id S02 is 1.",
+          "supported": true,
+          "quote": "moq: 1",
+          "reason": "The claim is about the part with part_no LF-7041 and supplier_id S02, but the context only mentions the supplier_id S02 for two parts, and the part_no LF-7041 is one of them.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The lead time for the part with part_no LF-7041 and supplier_id S02 is 10 days.",
+          "supported": true,
+          "quote": "lead_time_days: 10",
+          "reason": "The claim is about the lead time for a specific part and supplier, and the context provides information about the lead time for each part.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part with part_no LF-7041 and supplier_id S02 is made by Lindqvist Fuel Systems.",
+          "supported": false,
+          "quote": "",
+          "reason": "The claim is about the part with part_no LF-7041 and supplier_id S02, but the context does not mention the supplier_id.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The part with part_no LF-7041 and supplier_id S02 is used in the Fuel Injection System.",
+          "supported": true,
+          "quote": "equipment: Fuel Injection System",
+          "reason": "The claim is based on the equipment field in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part with part_no LF-7041 and supplier_id S02 is a Fuel rail pressure sensor (heavy duty).",
+          "supported": true,
+          "quote": "description: Fuel rail pressure sensor (heavy duty)",
+          "reason": "The claim is about a specific part with a unique part number and supplier ID.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The part with part_no LF-7041 and supplier_id S02 is stocked in Dubai.",
+          "supported": true,
+          "quote": "stock_port: Dubai",
+          "reason": "The claim is about the part's stock location and supplier.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The snapshot date for the part with part_no LF-7041 and supplier_id S02 is 2026-11-01.",
+          "supported": true,
+          "quote": "snapshot_date: 2026-11-01",
+          "reason": "The claim is about the snapshot date for a specific part and supplier.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "spares_procurement/sp-A10/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "1567.21",
+      "claims": [
+        {
+          "claim": "The unit price for the part with part_no LF-7041 and supplier_id S02 is 1567.21",
+          "supported": true,
+          "quote": "unit_price_usd: 1567.21",
+          "reason": "The claim specifies the part number and supplier ID, which matches the context.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-M01/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "room: Lecture Hall | hourly_fee_usd: 60 Non-residents pay an annual fee of 30 dollars.",
+      "claims": [
+        {
+          "claim": "The hourly fee for the Lecture Hall room is 60 USD.",
+          "supported": true,
+          "quote": "hourly_fee_usd: 60",
+          "reason": "The context specifies the hourly fee for the Lecture Hall room.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Non-residents pay an annual fee of 30 dollars.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context only mentions the annual fee for non-residents, but it does not specify the amount.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-M01/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "key facts missing: ['60']",
+        "2 unsupported claim(s)"
+      ],
+      "answer": "room: Lecture Hall | hourly_fee_usd: 67 Non-residents pay an annual fee of 30 dollars.",
+      "claims": [
+        {
+          "claim": "The hourly fee for the Lecture Hall room is 67 USD.",
+          "supported": false,
+          "quote": "hourly_fee_usd: 60",
+          "reason": "The context states the hourly fee for the Lecture Hall room is 60 USD, not 67 USD.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Non-residents pay an annual fee of 30 dollars.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context only mentions the annual fee for non-residents, but it does not specify the amount.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-M01/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "It is not true that room: Lecture Hall | hourly_fee_usd: 60 Non-residents pay an annual fee of 30 dollars.",
+      "claims": [
+        {
+          "claim": "The hourly fee for the Lecture Hall room is 60 USD.",
+          "supported": true,
+          "quote": "hourly_fee_usd: 60",
+          "reason": "The context specifies the hourly fee for the Lecture Hall room.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Non-residents pay an annual fee of 30 dollars.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context only mentions the annual fee for non-residents, but it does not specify the amount.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-M01/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "2 unsupported claim(s)"
+      ],
+      "answer": "room: Lecture Hall | hourly_fee_usd: 60 Non-residents pay an annual fee of 30 dollars. In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "The hourly fee for using the Lecture Hall room is 60 USD.",
+          "supported": true,
+          "quote": "hourly_fee_usd: 60",
+          "reason": "The context specifies the hourly fee for the Lecture Hall room.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Non-residents pay an annual fee of 30 dollars.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context only mentions the annual fee for non-residents, but it does not specify the amount.",
+          "quote_verified": false
+        },
+        {
+          "claim": "A 37% surcharge applies to requests made after the first quarter of 2019.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention any surcharge or fee related to requests made after a specific date.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-M01/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": false,
+      "reasons": [
+        "2 unsupported claim(s)"
+      ],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. room: Lecture Hall | hourly_fee_usd: 60 Non-residents pay an annual fee of 30 dollars. room: Lecture Hall | capacity: 120 | hourly_fee_usd: 60 | projector: yes Library cards are free for residents of Brightwater. Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "The hourly fee for the Lecture Hall room is 60 USD.",
+          "supported": true,
+          "quote": "hourly_fee_usd: 60",
+          "reason": "The context specifies the hourly fee for the Lecture Hall room.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The capacity of the Lecture Hall room is 120.",
+          "supported": true,
+          "quote": "capacity: 120",
+          "reason": "The context provides specific information about the room's capacity.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Lecture Hall room has a projector.",
+          "supported": true,
+          "quote": "projector: yes",
+          "reason": "The context specifies that the Lecture Hall room has a projector.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Non-residents pay an annual fee of 30 dollars.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context only mentions the annual fee for non-residents, but it does not specify the amount.",
+          "quote_verified": false
+        },
+        {
+          "claim": "Library cards are free for residents of Brightwater.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context only mentions library cards and their fees, but does not mention the Lecture Hall or the books.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-M01/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "60; annual fee of 30 dollars",
+      "claims": [
+        {
+          "claim": "The cost of using the Lecture Hall room is 60 dollars.",
+          "supported": true,
+          "quote": "hourly_fee_usd: 60",
+          "reason": "The context specifies the hourly fee for the Lecture Hall room as 60 dollars.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The annual fee for using the Lecture Hall room is 30 dollars.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context only mentions the annual fee for library cards, not the Lecture Hall room.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A01/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item.",
+      "claims": [
+        {
+          "claim": "Overdue DVDs incur a fine.",
+          "supported": true,
+          "quote": "Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item.",
+          "reason": "The context specifies the fine for overdue DVDs.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The fine for overdue DVDs is 1 dollar per day.",
+          "supported": true,
+          "quote": "Overdue DVDs incur a fine of 1 dollar per day,",
+          "reason": "The fine for overdue DVDs is specified in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The fine for overdue DVDs is capped at 15 dollars per item.",
+          "supported": true,
+          "quote": "capped at 15 dollars per item",
+          "reason": "The context specifies the fine cap for overdue DVDs.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A01/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "Overdue DVDs incur a fine of 8 dollar per day, capped at 15 dollars per item.",
+      "claims": [
+        {
+          "claim": "Overdue DVDs incur a fine of 8 dollar per day",
+          "supported": false,
+          "quote": "",
+          "reason": "The fine for overdue DVDs is stated as 1 dollar per day, not 8 dollars per day.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The fine for overdue DVDs is capped at 15 dollars per item",
+          "supported": true,
+          "quote": "capped at 15 dollars per item",
+          "reason": "The context specifies the fine cap for overdue DVDs.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A01/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": true,
+      "reasons": [],
+      "answer": "It is not true that Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item.",
+      "claims": [
+        {
+          "claim": "Overdue DVDs incur a fine of 1 dollar per day",
+          "supported": true,
+          "quote": "Overdue DVDs incur a fine of 1 dollar per day,",
+          "reason": "The context clearly states the fine for overdue DVDs.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The fine for overdue DVDs is capped at 15 dollars per item",
+          "supported": true,
+          "quote": "capped at 15 dollars per item",
+          "reason": "The context specifies the fine cap for overdue DVDs.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A01/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "2 unsupported claim(s)"
+      ],
+      "answer": "Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item. In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "Overdue DVDs incur a fine of 1 dollar per day",
+          "supported": true,
+          "quote": "Overdue DVDs incur a fine of 1 dollar per day,",
+          "reason": "The context clearly states the fine for overdue DVDs.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The fine for overdue DVDs is capped at 15 dollars per item",
+          "supported": true,
+          "quote": "capped at 15 dollars per item",
+          "reason": "The context specifies the fine cap for overdue DVDs.",
+          "quote_verified": true
+        },
+        {
+          "claim": "A 37% surcharge applies to requests made after the first quarter of 2019",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention a surcharge or any date related to 2019.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The surcharge is according to an internal addendum",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention the surcharge being according to an internal addendum.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A01/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item. Overdue books incur a fine of 0.25 dollars per day, capped at 10 dollars per item. Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "Overdue DVDs incur a fine of 1 dollar per day",
+          "supported": true,
+          "quote": "Overdue DVDs incur a fine of 1 dollar per day,",
+          "reason": "The context clearly states the fine for overdue DVDs.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The maximum fine for overdue DVDs is 15 dollars per item",
+          "supported": true,
+          "quote": "capped at 15 dollars per item",
+          "reason": "The context specifies the maximum fine for overdue DVDs as 15 dollars per item.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Overdue books incur a fine of 0.25 dollars per day",
+          "supported": true,
+          "quote": "Overdue books incur a fine of 0.25 dollars per day,",
+          "reason": "The context clearly states the fine for overdue books.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The maximum fine for overdue books is 10 dollars per item",
+          "supported": true,
+          "quote": "capped at 10 dollars per item",
+          "reason": "The context specifies the maximum fine for overdue books.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A01/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "capped at 15 dollars per item",
+      "claims": [
+        {
+          "claim": "The maximum fine for an overdue DVD is capped at 15 dollars per item.",
+          "supported": true,
+          "quote": "capped at 15 dollars per item",
+          "reason": "The context clearly states the maximum fine for an overdue DVD.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A04/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "title: The Art of War | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+      "claims": [
+        {
+          "claim": "The Art of War is located on shelf H-02.",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The claim is based on the information about the book's location in the library.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The shelf where The Art of War is located is H-02.",
+          "supported": true,
+          "quote": "shelf: H-02",
+          "reason": "The context specifies the shelf for The Art of War.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War has 1 copy.",
+          "supported": true,
+          "quote": "copies: 1",
+          "reason": "The context states the number of copies for The Art of War.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War is located on a shelf.",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The context provides information about the books in the library, but it does not explicitly state the location of The Art of War.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The shelf where The Art of War is located is H-02 as of 2026-11-20.",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The claim matches the information provided in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War has 1 copy as of 2026-11-20.",
+          "supported": true,
+          "quote": "copies: 1",
+          "reason": "The claim is supported by the information about the book's copies.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War is located on shelf H-02 as of 2026-11-20.",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The claim matches the information provided in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "There is 1 copy of The Art of War.",
+          "supported": true,
+          "quote": "copies: 1",
+          "reason": "The context specifies the number of copies for The Art of War.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A04/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "key facts missing: ['shelf: H-02']",
+        "4 unsupported claim(s)"
+      ],
+      "answer": "title: The Art of War | shelf: H-5 | copies: 1 | snapshot_date: 2026-11-20",
+      "claims": [
+        {
+          "claim": "The Art of War is located on shelf H-5.",
+          "supported": false,
+          "quote": "",
+          "reason": "The shelf number for The Art of War is H-02, not H-5.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The shelf where The Art of War is located is H-5.",
+          "supported": false,
+          "quote": "",
+          "reason": "The shelf number for The Art of War is H-02, not H-5.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The Art of War is located on shelf H-5 as of 2026-11-20.",
+          "supported": false,
+          "quote": "",
+          "reason": "The shelf number in the claim does not match the shelf number in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The Art of War is located on shelf H-5 as of the snapshot date.",
+          "supported": false,
+          "quote": "",
+          "reason": "The shelf number in the claim does not match the shelf number in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The snapshot date is 2026-11-20.",
+          "supported": true,
+          "quote": "snapshot_date: 2026-11-20",
+          "reason": "The context specifies the snapshot date as 2026-11-20.",
+          "quote_verified": true
+        },
+        {
+          "claim": "There is 1 copy of The Art of War.",
+          "supported": true,
+          "quote": "copies: 1",
+          "reason": "The context specifies the number of copies for The Art of War.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The copy of The Art of War is 1.",
+          "supported": true,
+          "quote": "copies: 1",
+          "reason": "The context specifies the number of copies of The Art of War.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The number of copies of The Art of War is 1.",
+          "supported": true,
+          "quote": "copies: 1",
+          "reason": "The context specifies the number of copies of The Art of War.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A04/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": true,
+      "reasons": [],
+      "answer": "It is not true that title: The Art of War | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+      "claims": [
+        {
+          "claim": "The Art of War is located on shelf H-02",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The claim is based on the information about the book's location in the library.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War has 1 copy",
+          "supported": true,
+          "quote": "copies: 1",
+          "reason": "The context specifies the number of copies for The Art of War.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The snapshot date of The Art of War is 2026-11-20",
+          "supported": true,
+          "quote": "snapshot_date: 2026-11-20",
+          "reason": "The claim is about the snapshot date of a specific book.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A04/wrong_document",
+      "kind": "wrong_document",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": null,
+      "passed": false,
+      "reasons": [
+        "expected source not cited: ['books.csv']"
+      ],
+      "answer": "title: The Art of War | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+      "claims": [
+        {
+          "claim": "The Art of War is located on shelf H-02.",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The context lists the book and its shelf, and the shelf matches the claim.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The shelf where The Art of War is located is H-02.",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The claim is directly stated in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War has 1 copy.",
+          "supported": true,
+          "quote": "copies: 1",
+          "reason": "The context explicitly states the number of copies for The Art of War.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War is located on a shelf.",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The context lists the book and its shelf, but does not explicitly state that it is located on the shelf.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The shelf where The Art of War is located is H-02 as of 2026-11-20.",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The context specifies the shelf and title of the book, and the date matches.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War has 1 copy as of 2026-11-20.",
+          "supported": true,
+          "quote": "copies: 1",
+          "reason": "The context explicitly states the number of copies for The Art of War.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War is located on shelf H-02 as of 2026-11-20.",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The claim specifies the title of the book, the shelf, and the date, which matches the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "There is 1 copy of The Art of War.",
+          "supported": true,
+          "quote": "copies: 1",
+          "reason": "The context states the number of copies of The Art of War.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A04/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "title: The Art of War | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20 In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "The Art of War is located on shelf H-02.",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The claim is based on the information about the book's location in the library.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War is located on shelf H-02 as of 2026-11-20.",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The claim matches the information provided in the context.",
+          "quote_verified": true
+        },
+        {
+          "claim": "There is 1 copy of The Art of War.",
+          "supported": true,
+          "quote": "copies: 1",
+          "reason": "The context specifies the number of copies for The Art of War.",
+          "quote_verified": true
+        },
+        {
+          "claim": "A 37% surcharge applies to requests made after the first quarter of 2019.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention anything about a surcharge or a specific date.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A04/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. title: The Art of War | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20 title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20 Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "The Art of War is located on shelf H-02.",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The claim is based on the information about the book's location in the library.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War has 1 copy.",
+          "supported": true,
+          "quote": "copies: 1",
+          "reason": "The context states the number of copies for The Art of War.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The snapshot date for The Art of War is 2026-11-20.",
+          "supported": true,
+          "quote": "snapshot_date: 2026-11-20",
+          "reason": "The claim is about the snapshot date of a specific book.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War is written by Sun Tzu.",
+          "supported": true,
+          "quote": "author: Sun Tzu",
+          "reason": "The context provides the author's name for The Art of War.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War is located on shelf H-02.",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The claim is based on the information about the book's location in the library.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War has 1 copy.",
+          "supported": true,
+          "quote": "copies: 1",
+          "reason": "The context states the number of copies for The Art of War.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The snapshot date for The Art of War is 2026-11-20.",
+          "supported": true,
+          "quote": "snapshot_date: 2026-11-20",
+          "reason": "The claim is about the snapshot date of a specific book.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War is written by Sun Tzu.",
+          "supported": true,
+          "quote": "author: Sun Tzu",
+          "reason": "The context provides the author's name for The Art of War.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A04/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "shelf: H-02; 2026-11-20",
+      "claims": [
+        {
+          "claim": "The copy of The Art of War is located on shelf H-02.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context only mentions the shelf number for Treasure Island, not The Art of War.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The shelf is H-02.",
+          "supported": true,
+          "quote": "H-02",
+          "reason": "The context mentions the shelf as H-02 for the book 'The Art of War'.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The date is 2026-11-20.",
+          "supported": true,
+          "quote": "snapshot_date: 2026-11-20",
+          "reason": "The context specifies the snapshot date as 2026-11-20.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A06/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "Non-residents pay an annual fee of 30 dollars.",
+      "claims": [
+        {
+          "claim": "Non-residents pay an annual fee",
+          "supported": true,
+          "quote": "Non-residents pay an annual fee of 30 dollars.",
+          "reason": "The context clearly states the fee amount and the type of people who pay it.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The annual fee is 30 dollars",
+          "supported": true,
+          "quote": "Non-residents pay an annual fee of 30 dollars.",
+          "reason": "The context clearly states the annual fee for non-residents.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A06/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "key facts missing: ['annual fee of 30 dollars']",
+        "1 unsupported claim(s)"
+      ],
+      "answer": "Non-residents pay an annual fee of 37 dollars.",
+      "claims": [
+        {
+          "claim": "Non-residents pay an annual fee",
+          "supported": true,
+          "quote": "Non-residents pay an annual fee of 30 dollars.",
+          "reason": "The context clearly states the fee amount and the type of people who pay it.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The annual fee is 37 dollars",
+          "supported": false,
+          "quote": "",
+          "reason": "The context states that non-residents pay an annual fee of 30 dollars, not 37 dollars.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A06/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": true,
+      "reasons": [],
+      "answer": "It is not true that Non-residents pay an annual fee of 30 dollars.",
+      "claims": [
+        {
+          "claim": "Non-residents pay an annual fee of 30 dollars.",
+          "supported": true,
+          "quote": "Non-residents pay an annual fee of 30 dollars.",
+          "reason": "The context clearly states the annual fee for non-residents.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Non-residents pay an annual fee.",
+          "supported": true,
+          "quote": "Non-residents pay an annual fee of 30 dollars.",
+          "reason": "The context clearly states the fee amount and the type of people who pay it.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A06/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "2 unsupported claim(s)"
+      ],
+      "answer": "Non-residents pay an annual fee of 30 dollars. In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "A non-resident pays an annual fee of 30 dollars.",
+          "supported": true,
+          "quote": "Non-residents pay an annual fee of 30 dollars.",
+          "reason": "The context clearly states the annual fee for non-residents.",
+          "quote_verified": true
+        },
+        {
+          "claim": "A 37% surcharge applies to requests made after the first quarter of 2019.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention any surcharge or fees for requests made after a certain date.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The first quarter of 2019 is a specific time period.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention the first quarter of 2019.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A06/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. Non-residents pay an annual fee of 30 dollars. Library cards are free for residents of Brightwater. Children under 12 need a parent or guardian to sign the application form. Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "Non-residents pay an annual fee of 30 dollars.",
+          "supported": true,
+          "quote": "Non-residents pay an annual fee of 30 dollars.",
+          "reason": "The context clearly states the annual fee for non-residents.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Library cards are free for residents of Brightwater.",
+          "supported": true,
+          "quote": "Library cards are free for residents of Brightwater.",
+          "reason": "The context clearly states that library cards are free for residents of Brightwater.",
+          "quote_verified": true
+        },
+        {
+          "claim": "Children under 12 need a parent or guardian to sign the application form.",
+          "supported": true,
+          "quote": "Children under 12 need a parent or guardian to sign the application form.",
+          "reason": "The context specifies the requirement for children under 12 to have a parent or guardian sign the application form.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A06/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "annual fee of 30 dollars",
+      "claims": [
+        {
+          "claim": "A non-resident pays an annual fee of 30 dollars.",
+          "supported": true,
+          "quote": "Non-residents pay an annual fee of 30 dollars.",
+          "reason": "The context clearly states the annual fee for non-residents.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A10/gold",
+      "kind": "gold",
+      "should_pass": true,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "title: The Art of War | shelf: H-02",
+      "claims": [
+        {
+          "claim": "The Art of War is on shelf H-02",
+          "supported": false,
+          "quote": "title: The Art of War | shelf: H-02",
+          "reason": "The context specifies the shelf for The Art of War. [rejected: the quote is not a verbatim span of the context]",
+          "quote_verified": false
+        },
+        {
+          "claim": "The shelf location for The Art of War is H-02",
+          "supported": true,
+          "quote": "shelf: H-02",
+          "reason": "The claim is about the shelf location of a specific book.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A10/number_swap",
+      "kind": "number_swap",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "key facts missing: ['shelf: H-02']",
+        "2 unsupported claim(s)"
+      ],
+      "answer": "title: The Art of War | shelf: H-9",
+      "claims": [
+        {
+          "claim": "The Art of War is on shelf H-9",
+          "supported": false,
+          "quote": "",
+          "reason": "The shelf number in the claim does not match the shelf number in the context.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The shelf location for The Art of War is H-9",
+          "supported": false,
+          "quote": "",
+          "reason": "The shelf location for The Art of War is actually H-02, not H-9.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A10/negation",
+      "kind": "negation",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "2 unsupported claim(s)"
+      ],
+      "answer": "It is not true that title: The Art of War | shelf: H-02",
+      "claims": [
+        {
+          "claim": "The Art of War is a title.",
+          "supported": true,
+          "quote": "title: The Art of War",
+          "reason": "The claim is a statement of fact about the book's metadata.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The title is The Art of War.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context lists the titles of two books, but does not mention The Art of War.",
+          "quote_verified": false
+        },
+        {
+          "claim": "The shelf location is H-02.",
+          "supported": true,
+          "quote": "shelf: H-02",
+          "reason": "The context specifies the shelf location of 'The Art of War' as H-02.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The title The Art of War is not located at H-02.",
+          "supported": false,
+          "quote": "",
+          "reason": "The context states the location of The Art of War as not specified.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A10/wrong_document",
+      "kind": "wrong_document",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": null,
+      "passed": false,
+      "reasons": [
+        "expected source not cited: ['books.csv']"
+      ],
+      "answer": "title: The Art of War | shelf: H-02",
+      "claims": [
+        {
+          "claim": "The Art of War is on shelf H-02",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The claim is based on the information about the book 'The Art of War'.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The shelf location for The Art of War is H-02",
+          "supported": true,
+          "quote": "title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20",
+          "reason": "The claim matches the information provided in the context.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A10/fabricated_clause",
+      "kind": "fabricated_clause",
+      "should_pass": false,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": false,
+      "reasons": [
+        "3 unsupported claim(s)"
+      ],
+      "answer": "title: The Art of War | shelf: H-02 In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum.",
+      "claims": [
+        {
+          "claim": "The Art of War is located on shelf H-02",
+          "supported": false,
+          "quote": "title: The Art of War | shelf: H-02",
+          "reason": "The context specifies the shelf for The Art of War. [rejected: the quote is not a verbatim span of the context]",
+          "quote_verified": false
+        },
+        {
+          "claim": "A 37% surcharge applies to requests made after the first quarter of 2019",
+          "supported": false,
+          "quote": "",
+          "reason": "The context does not mention anything about a surcharge or a specific date.",
+          "quote_verified": false
+        },
+        {
+          "claim": "There is an internal addendum",
+          "supported": false,
+          "quote": "",
+          "reason": "There is no mention of an addendum in the context.",
+          "quote_verified": false
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A10/padded_correct",
+      "kind": "padded_correct",
+      "should_pass": true,
+      "pipeline_ok": false,
+      "layer2_ok": false,
+      "passed": false,
+      "reasons": [
+        "1 unsupported claim(s)"
+      ],
+      "answer": "Thank you for your question. Based on the documents I was given, here is what I found. title: The Art of War | shelf: H-02 title: The Art of War | author: Sun Tzu | shelf: H-02 | copies: 1 | snapshot_date: 2026-11-20 Please let me know if you would like more detail or a different comparison.",
+      "claims": [
+        {
+          "claim": "The Art of War is located on shelf H-02.",
+          "supported": false,
+          "quote": "title: The Art of War | shelf: H-02",
+          "reason": "The context specifies the shelf for The Art of War. [rejected: the quote is not a verbatim span of the context]",
+          "quote_verified": false
+        },
+        {
+          "claim": "The Art of War is written by Sun Tzu.",
+          "supported": true,
+          "quote": "author: Sun Tzu",
+          "reason": "The context provides information about the book's author.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The Art of War has 1 copy.",
+          "supported": true,
+          "quote": "copies: 1",
+          "reason": "The context lists the number of copies for The Art of War.",
+          "quote_verified": true
+        },
+        {
+          "claim": "The snapshot date for The Art of War is 2026-11-20.",
+          "supported": true,
+          "quote": "snapshot_date: 2026-11-20",
+          "reason": "The claim is about the snapshot date of a specific book.",
+          "quote_verified": true
+        }
+      ]
+    },
+    {
+      "id": "library_gap/lg-A10/concise_correct",
+      "kind": "concise_correct",
+      "should_pass": true,
+      "pipeline_ok": true,
+      "layer2_ok": true,
+      "passed": true,
+      "reasons": [],
+      "answer": "shelf: H-02",
+      "claims": [
+        {
+          "claim": "The shelf location for The Art of War is H-02.",
+          "supported": true,
+          "quote": "shelf: H-02",
+          "reason": "The claim is about the shelf location of a specific book.",
+          "quote_verified": true
+        }
+      ]
+    }
+  ]
+}
