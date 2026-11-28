@@ -1,0 +1,79 @@
+{
+  "stop_reason": "plateau: two consecutive cycles produced no accepted patch",
+  "noise_floor": 0,
+  "iterations": [
+    {
+      "iteration": 1,
+      "accepted": true,
+      "status": "accepted",
+      "category": "retrieval_miss",
+      "patch": "retrieval_miss/top_k+2",
+      "candidates_considered": 14,
+      "citation_repairs_dev": 1,
+      "dev_before": {
+        "passes": 12,
+        "n": 20,
+        "rate": 0.6
+      },
+      "dev_after": {
+        "passes": 15,
+        "n": 20,
+        "rate": 0.75
+      },
+      "fixed": [
+        "sp-M01",
+        "sp-O08",
+        "sp-X01"
+      ],
+      "regressed": [],
+      "gate": "confirmed: 3 of 3 fixes held on the rerun; net gain 3 exceeds the noise floor 0"
+    },
+    {
+      "iteration": 2,
+      "accepted": false,
+      "status": "rejected: gate",
+      "category": "retrieval_miss",
+      "patch": "retrieval_miss/top_k+2",
+      "candidates_considered": 12,
+      "citation_repairs_dev": 2,
+      "dev_before": {
+        "passes": 15,
+        "n": 20,
+        "rate": 0.75
+      },
+      "dev_after": {
+        "passes": 15,
+        "n": 20,
+        "rate": 0.75
+      },
+      "fixed": [],
+      "regressed": [],
+      "gate": "net gain 0 does not exceed the noise floor 0"
+    },
+    {
+      "iteration": 3,
+      "accepted": false,
+      "status": "rejected: gate",
+      "category": "retrieval_miss",
+      "patch": "retrieval_miss/query_rewrite",
+      "candidates_considered": 11,
+      "citation_repairs_dev": 5,
+      "dev_before": {
+        "passes": 15,
+        "n": 20,
+        "rate": 0.75
+      },
+      "dev_after": {
+        "passes": 13,
+        "n": 20,
+        "rate": 0.65
+      },
+      "fixed": [],
+      "regressed": [
+        "sp-O08",
+        "sp-X01"
+      ],
+      "gate": "2 cases regressed (at most 1 allowed)"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "iteration": 2,
+  "category": "prompt_defect",
+  "category_counts": {
+    "prompt_defect": 2
+  },
+  "target_cases": [
+    "hr-A14",
+    "hr-O07"
+  ],
+  "failures": {
+    "hr-A14": {
+      "category": "prompt_defect",
+      "section": "citation_rules",
+      "low_confidence": false,
+      "tags": [
+        "citation_source"
+      ],
+      "reason": "wrong or invalid citation: the expected source was not cited"
+    },
+    "hr-M04": {
+      "category": "hallucination",
+      "section": "grounding_rules",
+      "low_confidence": true,
+      "tags": [],
+      "reason": "nothing says confidentiality requirements for former employees specifically, but it does say for all employees, including former employees, for 2 years after employment ends; nothing says employees mu"
+    },
+    "hr-O07": {
+      "category": "prompt_defect",
+      "section": "scope",
+      "low_confidence": false,
+      "tags": [
+        "expected_refused"
+      ],
+      "reason": "answered (or asked to clarify) where the question is out of scope and should be refused"
+    }
+  },
+  "patch_id": "prompt_defect/citation_rules",
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/prompt_sections/citation_rules",
+      "value": "Cite the chunk behind every claim. Copy 'doc' and 'chunk_id' exactly as shown in the context: a chunk_id always looks like <file name>#c<number>, for example 'policy.pdf#c12', and must be written in full. The 'quote' must be a short span copied word for word from that chunk's text, never paraphrased. Do not cite a chunk you did not use. Do not put tool results in citations."
+    }
+  ],
+  "rationale": "1 failing case(s) point at the citation_rules section",
+  "noise_floor": 0,
+  "candidates_considered": 5,
+  "candidates": [
+    {
+      "patch": "prompt_defect/citation_rules",
+      "category": "prompt_defect",
+      "rationale": "1 failing case(s) point at the citation_rules section",
+      "status": "chosen"
+    },
+    {
+      "patch": "prompt_defect/scope",
+      "category": "prompt_defect",
+      "rationale": "1 failing case(s) point at the scope section",
+      "status": "not reached: a better-ranked candidate was chosen"
+    },
+    {
+      "patch": "hallucination/grounding_rules",
+      "category": "hallucination",
+      "rationale": "strengthen the grounding rules: quote before you claim",
+      "status": "not reached: a better-ranked candidate was chosen"
+    },
+    {
+      "patch": "hallucination/min_score+0.05",
+      "category": "hallucination",
+      "rationale": "raise the evidence threshold so weakly related chunks are not treated as evidence",
+      "status": "not reached: a better-ranked candidate was chosen"
+    },
+    {
+      "patch": "hallucination/temperature=0",
+      "category": "hallucination",
+      "rationale": "sample deterministically",
+      "status": "not reached: a better-ranked candidate was chosen"
+    }
+  ],
+  "score_before": {
+    "dev": {
+      "passes": 21,
+      "n": 24,
+      "rate": 0.875
+    }
+  },
+  "score_after": {
+    "dev": {
+      "passes": 21,
+      "n": 24,
+      "rate": 0.875
+    }
+  },
+  "fixed": [],
+  "regressed": [],
+  "still_failing": [
+    "hr-A14",
+    "hr-M04",
+    "hr-O07"
+  ],
+  "net_gain": 0,
+  "accepted": false,
+  "gate_reason": "net gain 0 does not exceed the noise floor 0",
+  "confirmation": null,
+  "status": "rejected: gate",
+  "rejected_drafts": 0,
+  "dev_scorecard": {
+    "pass_rate": {
+      "passes": 21,
+      "n": 24,
+      "rate": 0.875,
+      "wilson95": [
+        0.69,
+        0.957
+      ]
+    },
+    "groundedness": 0.941
+  },
+  "citation_repairs_dev": 4
+}

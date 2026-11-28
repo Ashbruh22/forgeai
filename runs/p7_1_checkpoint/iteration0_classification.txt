@@ -1,0 +1,33 @@
+## hr_shore: 3 dev failures of 24
+- hallucination: 1
+    hr-M04 [multidoc] section=grounding_rules low_confidence=True :: nothing says confidentiality requirements for former employees specifically, but it does say for all employees
+- wrong_refusal: 0
+- retrieval_miss: 0
+- prompt_defect: 2
+    hr-A14 [answerable] section=citation_rules low_confidence=False :: wrong or invalid citation: the expected source was not cited
+    hr-O07 [out_of_scope] section=scope low_confidence=False :: answered (or asked to clarify) where the question is out of scope and should be refused
+
+## spares_procurement: 8 dev failures of 20
+- hallucination: 3
+    sp-A01 [answerable] section=grounding_rules low_confidence=True :: The evidence does not specify the supplier, it only mentions that the supplier_id is S01, which is the same fo
+    sp-A03 [answerable] section=grounding_rules low_confidence=True :: the identifier s01 is in neither the context nor a tool result; the number(s) s01 appear in neither the contex
+    sp-O08 [out_of_scope] section=grounding_rules low_confidence=True :: answered a question that should be refused, with unsupported claims
+- wrong_refusal: 1
+    sp-X01 [ambiguous] section=refusal_policy low_confidence=False :: refused an ambiguous question whose passages were retrieved
+- retrieval_miss: 3
+    sp-A09 [answerable] section=- low_confidence=False :: refused and no gold chunk was retrieved
+    sp-M01 [multidoc] section=- low_confidence=False :: no gold chunk (or not every expected document) was among the retrieved chunks
+    sp-M02 [multidoc] section=- low_confidence=False :: refused and no gold chunk was retrieved
+- prompt_defect: 1
+    sp-T04 [tool_required] section=tool_policy low_confidence=False :: final value '34166.33' not in the answer within tolerance
+
+## library_gap: 4 dev failures of 19
+- hallucination: 0
+- wrong_refusal: 0
+- retrieval_miss: 3
+    lg-M01 [multidoc] section=- low_confidence=False :: refused and no gold chunk was retrieved
+    lg-M03 [multidoc] section=- low_confidence=False :: no gold chunk (or not every expected document) was among the retrieved chunks
+    lg-M04 [multidoc] section=- low_confidence=False :: refused and no gold chunk was retrieved
+- prompt_defect: 1
+    lg-A04 [answerable] section=scope low_confidence=False :: the answer lacks required facts (kinds: snapshot_date) that were supported by the evidence
+

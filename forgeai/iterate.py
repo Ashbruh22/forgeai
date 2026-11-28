@@ -42,6 +42,7 @@ class Ruler:
         self.run_dir, self.fresh_cache = run_dir, run_dir / ".cache_confirm"
         self.base_dir = run_dir / "02_agent"  # the corpus path of agent.v0.yaml is relative to this folder
         self.low, self.progress = low_confidence_types, progress
+        self.repairs: dict[str, list[dict[str, str]]] = {}
         self.nli = None
         if config.judge.use_nli:
             from forgeai.judge.nli import NliChecker
@@ -51,8 +52,12 @@ class Ruler:
     def run(self, agent: AgentDef, cases: list[EvalCase], label: str) -> tuple[dict[str, CaseRun], dict[str, CaseScore]]:
         runner = AgentRunner(agent, self.base_dir, self.config, self.embedder)
         runs: dict[str, CaseRun] = {}
+        self.repairs = {}  # case id -> citation repairs of the last run (product robustness, logged)
         for position, case in enumerate(cases, 1):  # stage 1: every answer from the agent model
-            runs[case.id] = to_case_run(case, runner.ask(case.question), runner)
+            result = runner.ask(case.question)
+            runs[case.id] = to_case_run(case, result, runner)
+            if result.citation_repairs:
+                self.repairs[case.id] = result.citation_repairs
             self.progress(f"{label}: agent {position}/{len(cases)}")
         scores: dict[str, CaseScore] = {}
         for position, case in enumerate(cases, 1):  # stage 2: every answer judged (one model swap)
@@ -69,7 +74,7 @@ class DevEvaluator:
 
     def dev(self, agent: AgentDef, iteration: int) -> DevResult:
         runs, scores = self.ruler.run(agent, self.cases, f"iter {iteration} dev")
-        return DevResult(scores, runs)
+        return DevResult(scores, runs, dict(self.ruler.repairs))
 
 
     def confirm(self, agent: AgentDef, case_ids: list[str], iteration: int) -> dict[str, CaseScore]:
@@ -84,6 +89,20 @@ class DevEvaluator:
         finally:
             set_client(previous)
         return scores
+
+
+def leakage_check_for(embedder: Embedder, dev_questions: list[str]):  # noqa: ANN201
+    """Spec 5.5 for a few-shot patch: the highest cosine similarity between the example's question and any DEV question
+    (the optimizer must not see the test split, so the dev questions stand for the eval questions here)."""
+    import numpy as np
+
+    vectors = np.asarray(embedder.encode(dev_questions))
+
+    def check(shot) -> float:  # noqa: ANN001
+        one = np.asarray(embedder.encode([shot.question]))
+        return float((one @ vectors.T).max()) if len(dev_questions) else 0.0
+
+    return check
 
 
 def check_frozen(run_dir: Path, config: ForgeConfig) -> None:
@@ -163,12 +182,15 @@ def run_optimizer(run_dir: Path, out: Path, config: ForgeConfig, embedder: Embed
             state["before"] = after
 
     result = optimize(agent0=agent0, cases=dev, baseline=baseline, evaluator=DevEvaluator(ruler, list(dev.values())), config=config, out=out,
-                      corpus_dir=corpus_dir, noise_floor=int(noise["noise_floor"]), vocabulary=vocabulary, after_iteration=after_iteration)
+                      corpus_dir=corpus_dir, noise_floor=int(noise["noise_floor"]), vocabulary=vocabulary, after_iteration=after_iteration,
+                      leakage_check=leakage_check_for(embedder, [c.question for c in dev.values()]))
     final_dir = out / "05_final"
     write_agent(result.final, final_dir, corpus_dir)
     (final_dir / "agent_diff.txt").write_text(agent_diff(agent0_path, result.final, corpus_dir), encoding="utf-8")
     summary = {"stop_reason": result.stop_reason, "noise_floor": noise["noise_floor"],
-               "iterations": [{"iteration": r.iteration, "accepted": r.accepted, "category": r.change["category"], "patch": r.change["patch_id"],
+               "iterations": [{"iteration": r.iteration, "accepted": r.accepted, "status": r.change["status"], "category": r.change["category"],
+                               "patch": r.change["patch_id"], "candidates_considered": r.change["candidates_considered"],
+                               "citation_repairs_dev": r.change["citation_repairs_dev"],
                                "dev_before": r.change["score_before"]["dev"], "dev_after": r.change["score_after"]["dev"],
                                "fixed": r.change["fixed"], "regressed": r.change["regressed"], "gate": r.change["gate_reason"]} for r in result.iterations]}
     (out / "04_iterations" / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")

@@ -60,8 +60,12 @@ def run_baseline(run_dir: Path, out: Path, config: ForgeConfig, embedder: Embedd
 
     offset = trace.stat().st_size if trace.is_file() else 0
     runs: dict[str, CaseRun] = {}
+    repairs: dict[str, list[dict[str, str]]] = {}
     for position, case in enumerate(cases, 1):  # stage 1: every answer from the agent model
-        runs[case.id] = to_case_run(case, runner.ask(case.question), runner)
+        result = runner.ask(case.question)
+        runs[case.id] = to_case_run(case, result, runner)
+        if result.citation_repairs:
+            repairs[case.id] = result.citation_repairs
         progress(f"agent {position}/{len(cases)} {case.type}")
     tokens = _tokens(trace, offset, len(cases))
 
@@ -92,6 +96,9 @@ def run_baseline(run_dir: Path, out: Path, config: ForgeConfig, embedder: Embedd
         else:
             sealed.write_test(out, split_runs, split_scores, card)
         summary[split] = {"cases": len(part), "pass_rate": card["pass_rate"]}
+    (out / "05_baseline" / "citation_repairs.json").write_text(
+        json.dumps({"count": sum(len(v) for v in repairs.values()), "cases": len(repairs), "repairs": repairs}, indent=2), encoding="utf-8")
+    summary["citation_repairs"] = sum(len(v) for v in repairs.values())
     visible = {k: v for k, v in summary.items() if k != "test"}  # the file the optimizer may read says nothing about test
     visible["mean_agent_latency_ms"] = round(statistics.mean(r.latency_ms for r in runs.values()))
     (out / "05_baseline" / "summary.json").write_text(json.dumps(visible, indent=2), encoding="utf-8")

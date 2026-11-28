@@ -1,0 +1,119 @@
+
+## hr_shore: stopped: plateau: two consecutive cycles produced no accepted patch (noise floor 0)
+citation repairs in the baseline run (dev+test): 8 in cases ['hr-A05', 'hr-M02', 'hr-M03', 'hr-M06', 'hr-O07']
+
+| iter | patch | status | dev | test (sealed) | fixed | regressed | candidates | dev repairs |
+|---|---|---|---|---|---|---|---|---|
+| 0 | baseline | - | 21/24 | 6/8 | - | - | - | - |
+| 1 | prompt_defect/citation_format | rejected: gate | 21/24 | 6/8 | 0 | 0 | 6 | 4 |
+| 2 | prompt_defect/citation_rules | rejected: gate | 21/24 | 6/8 | 0 | 0 | 5 | 4 |
+
+cycle 1: category prompt_defect (counts {'prompt_defect': 2}), targets ['hr-A14', 'hr-O07']
+  gate: net gain 0 does not exceed the noise floor 0
+  - prompt_defect/prompt_defect/citation_format: chosen
+  - prompt_defect/prompt_defect/citation_rules: not reached: a better-ranked candidate was chosen
+  - prompt_defect/prompt_defect/scope: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/grounding_rules: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/min_score+0.05: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/temperature=0: not reached: a better-ranked candidate was chosen
+
+cycle 2: category prompt_defect (counts {'prompt_defect': 2}), targets ['hr-A14', 'hr-O07']
+  gate: net gain 0 does not exceed the noise floor 0
+  - prompt_defect/prompt_defect/citation_rules: chosen
+  - prompt_defect/prompt_defect/scope: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/grounding_rules: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/min_score+0.05: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/temperature=0: not reached: a better-ranked candidate was chosen
+
+## library_gap: stopped: plateau: two consecutive cycles produced no accepted patch (noise floor 1)
+citation repairs in the baseline run (dev+test): 3 in cases ['lg-A01', 'lg-A02', 'lg-M04']
+
+| iter | patch | status | dev | test (sealed) | fixed | regressed | candidates | dev repairs |
+|---|---|---|---|---|---|---|---|---|
+| 0 | baseline | - | 15/19 | 6/8 | - | - | - | - |
+| 1 | retrieval_miss/reserve_prose=1 | rejected: gate | 15/19 | 6/8 | 0 | 0 | 9 | 3 |
+| 2 | retrieval_miss/top_k+2 | rejected: gate | 15/19 | 6/8 | 0 | 0 | 8 | 3 |
+
+cycle 1: category retrieval_miss (counts {'prompt_defect': 1, 'retrieval_miss': 3}), targets ['lg-M01', 'lg-M03', 'lg-M04']
+  gate: net gain 0 does not exceed the noise floor 1
+  - retrieval_miss/retrieval_miss/reserve_prose=1: chosen
+  - retrieval_miss/retrieval_miss/top_k+2: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/query_rewrite: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/chunk_size+30%: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/chunk_size-30%: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/min_score-0.05: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/overlap+20: not reached: a better-ranked candidate was chosen
+  - prompt_defect/prompt_defect/snapshot_dates: not reached: a better-ranked candidate was chosen
+  - prompt_defect/prompt_defect/scope: not reached: a better-ranked candidate was chosen
+
+cycle 2: category retrieval_miss (counts {'prompt_defect': 1, 'retrieval_miss': 3}), targets ['lg-M01', 'lg-M03', 'lg-M04']
+  gate: net gain 0 does not exceed the noise floor 1
+  - retrieval_miss/retrieval_miss/top_k+2: chosen
+  - retrieval_miss/retrieval_miss/query_rewrite: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/chunk_size+30%: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/chunk_size-30%: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/min_score-0.05: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/overlap+20: not reached: a better-ranked candidate was chosen
+  - prompt_defect/prompt_defect/snapshot_dates: not reached: a better-ranked candidate was chosen
+  - prompt_defect/prompt_defect/scope: not reached: a better-ranked candidate was chosen
+
+## spares_procurement: stopped: plateau: two consecutive cycles produced no accepted patch (noise floor 0)
+citation repairs in the baseline run (dev+test): 1 in cases ['sp-T02']
+
+| iter | patch | status | dev | test (sealed) | fixed | regressed | candidates | dev repairs |
+|---|---|---|---|---|---|---|---|---|
+| 0 | baseline | - | 12/20 | 5/8 | - | - | - | - |
+| 1 | retrieval_miss/top_k+2 | accepted | 15/20 | 5/8 | 3 | 0 | 14 | 1 |
+| 2 | retrieval_miss/top_k+2 | rejected: gate | 15/20 | 5/8 | 0 | 0 | 12 | 2 |
+| 3 | retrieval_miss/query_rewrite | rejected: gate | 13/20 | 5/8 | 0 | 2 | 11 | 5 |
+
+cycle 1: category retrieval_miss (counts {'retrieval_miss': 3, 'wrong_refusal': 1, 'prompt_defect': 1}), targets ['sp-A09', 'sp-M01', 'sp-M02']
+  gate: confirmed: 3 of 3 fixes held on the rerun; net gain 3 exceeds the noise floor 0
+  - retrieval_miss/retrieval_miss/top_k+2: chosen
+  - retrieval_miss/retrieval_miss/query_rewrite: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/chunk_size+30%: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/chunk_size-30%: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/min_score-0.05: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/overlap+20: not reached: a better-ranked candidate was chosen
+  - wrong_refusal/wrong_refusal/ambiguity_policy: not reached: a better-ranked candidate was chosen
+  - wrong_refusal/wrong_refusal/refusal_policy: not reached: a better-ranked candidate was chosen
+  - wrong_refusal/wrong_refusal/min_score-0.05: not reached: a better-ranked candidate was chosen
+  - prompt_defect/prompt_defect/tool_policy: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/gap_refusal: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/grounding_rules: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/min_score+0.05: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/temperature=0: not reached: a better-ranked candidate was chosen
+
+cycle 2: category retrieval_miss (counts {'prompt_defect': 2, 'retrieval_miss': 2}), targets ['sp-A09', 'sp-M02']
+  gate: net gain 0 does not exceed the noise floor 0
+  - retrieval_miss/retrieval_miss/top_k+2: chosen
+  - retrieval_miss/retrieval_miss/query_rewrite: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/chunk_size+30%: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/chunk_size-30%: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/min_score-0.05: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/overlap+20: not reached: a better-ranked candidate was chosen
+  - prompt_defect/prompt_defect/snapshot_dates: not reached: a better-ranked candidate was chosen
+  - prompt_defect/prompt_defect/scope: not reached: a better-ranked candidate was chosen
+  - prompt_defect/prompt_defect/tool_policy: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/grounding_rules: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/min_score+0.05: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/temperature=0: not reached: a better-ranked candidate was chosen
+
+cycle 3: category retrieval_miss (counts {'prompt_defect': 2, 'retrieval_miss': 2}), targets ['sp-A09', 'sp-M02']
+  gate: 2 cases regressed (at most 1 allowed)
+  - retrieval_miss/retrieval_miss/query_rewrite: chosen
+  - retrieval_miss/retrieval_miss/chunk_size+30%: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/chunk_size-30%: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/min_score-0.05: not reached: a better-ranked candidate was chosen
+  - retrieval_miss/retrieval_miss/overlap+20: not reached: a better-ranked candidate was chosen
+  - prompt_defect/prompt_defect/snapshot_dates: not reached: a better-ranked candidate was chosen
+  - prompt_defect/prompt_defect/scope: not reached: a better-ranked candidate was chosen
+  - prompt_defect/prompt_defect/tool_policy: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/grounding_rules: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/min_score+0.05: not reached: a better-ranked candidate was chosen
+  - hallucination/hallucination/temperature=0: not reached: a better-ranked candidate was chosen
+trajectory sp-T02: it0:test:fail it1:test:fail it2:test:fail it3:test:fail
+trajectory sp-A01: it0:dev:fail it1:dev:fail it2:dev:fail it3:dev:fail
+trajectory sp-X01: it0:dev:fail it1:dev:PASS it2:dev:PASS it3:dev:fail
+trajectory sp-O08: it0:dev:fail it1:dev:PASS it2:dev:PASS it3:dev:fail
+trajectory sp-A06: it0:test:PASS it1:test:PASS it2:test:PASS it3:test:PASS

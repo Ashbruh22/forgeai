@@ -266,13 +266,15 @@ def test_a_seeded_retrieval_bug_is_classified_and_fixed_in_one_cycle(tmp_path, c
     assert (tmp_path / "04_iterations" / "iter_1" / "agent.yaml").is_file() and (tmp_path / "04_iterations" / "iter_1" / "dev" / "scorecard.json").is_file()
 
 
-def test_a_patch_that_does_not_beat_the_noise_floor_is_reverted_and_the_loop_stops_at_the_plateau(tmp_path, config) -> None:
+def test_a_patch_that_does_not_beat_the_noise_floor_is_reverted_and_two_rejections_in_a_row_are_a_plateau(tmp_path, config) -> None:
     cases, evaluator, baseline = seeded_bug_setup(tmp_path, 6)
     result = optimize(agent0=agent(), cases=cases, baseline=baseline, evaluator=evaluator, config=config, out=tmp_path, corpus_dir=tmp_path / "docs",
                       noise_floor=6)  # the same +6 gain is not above a noise floor of 6
     change = json.loads((tmp_path / "04_iterations" / "iter_1" / "change.json").read_text(encoding="utf-8"))
-    assert not change["accepted"] and "noise floor" in change["gate_reason"]
-    assert result.final.retrieval.top_k == 3 and "plateau" in result.stop_reason and len(result.iterations) == 1  # reverted
+    assert not change["accepted"] and "noise floor" in change["gate_reason"] and change["status"] == "rejected: gate"
+    # P7.1: a rejected patch does not end the run; the next candidate is tried, and two rejections in a row are a plateau
+    assert result.final.retrieval.top_k == 3 and "plateau" in result.stop_reason and len(result.iterations) == 2  # both reverted
+    assert [r.change["patch_id"] for r in result.iterations][0] == "retrieval_miss/top_k+2"
 
 
 def test_the_loop_never_runs_more_than_three_cycles_after_the_baseline(tmp_path, config) -> None:
@@ -294,7 +296,7 @@ def test_the_loop_stops_when_nothing_is_patchable(tmp_path, config) -> None:
     a.retrieval.chunking.size_tokens = 800
     a.retrieval.chunking.overlap_tokens = 320
     result = optimize(agent0=a, cases=cases, baseline=baseline, evaluator=evaluator, config=config, out=tmp_path, corpus_dir=tmp_path / "docs", noise_floor=0)
-    assert result.iterations == [] and "no patchable failure" in result.stop_reason
+    assert result.iterations == [] and "all candidates exhausted" in result.stop_reason
 
 
 def test_a_text_patch_goes_through_the_critic_and_the_guard_and_a_copied_question_is_logged_as_rejected(tmp_path, config) -> None:
@@ -351,3 +353,130 @@ def test_a_patch_rejected_by_the_first_run_is_not_rerun(tmp_path, config) -> Non
     cases, evaluator, baseline = seeded_bug_setup(tmp_path, 6)
     optimize(agent0=agent(), cases=cases, baseline=baseline, evaluator=evaluator, config=config, out=tmp_path, corpus_dir=tmp_path / "docs", noise_floor=6)
     assert evaluator.confirmed == []
+
+
+
+# ---- P7.1: loop control, the complete patch library, tags, citation repair ---------------------------------------
+
+
+def test_a_rejected_patch_does_not_end_the_run_the_next_untried_candidate_is_tried(tmp_path, config) -> None:
+    cases = {f"c{i}": case(f"c{i}") for i in range(6)}
+    evaluator = Scripted(cases, lambda a, c: a.retrieval.query_rewrite)  # only the query rewrite fixes these cases
+    baseline = evaluator.dev(agent(), 0)
+    result = optimize(agent0=agent(), cases=cases, baseline=baseline, evaluator=evaluator, config=config, out=tmp_path, corpus_dir=tmp_path / "docs",
+                      noise_floor=1)
+    first = json.loads((tmp_path / "04_iterations" / "iter_1" / "change.json").read_text(encoding="utf-8"))
+    second = json.loads((tmp_path / "04_iterations" / "iter_2" / "change.json").read_text(encoding="utf-8"))
+    assert first["patch_id"] == "retrieval_miss/top_k+2" and first["status"] == "rejected: gate"
+    assert second["patch_id"] == "retrieval_miss/query_rewrite" and second["status"] == "accepted" and len(second["fixed"]) == 6
+    assert result.final.retrieval.query_rewrite and result.final.retrieval.top_k == 3  # the rejected patch stayed reverted
+    assert "target met" in result.stop_reason
+
+
+def test_every_candidate_considered_is_logged_with_why_it_was_chosen_or_not_reached(tmp_path, config) -> None:
+    cases = {f"c{i}": case(f"c{i}") for i in range(6)}
+    evaluator = Scripted(cases, lambda a, c: a.retrieval.top_k >= 5)
+    baseline = evaluator.dev(agent(), 0)
+    optimize(agent0=agent(), cases=cases, baseline=baseline, evaluator=evaluator, config=config, out=tmp_path, corpus_dir=tmp_path / "docs", noise_floor=0)
+    log = json.loads((tmp_path / "04_iterations" / "iter_1" / "candidates.json").read_text(encoding="utf-8"))
+    assert log[0]["patch"] == "retrieval_miss/top_k+2" and log[0]["status"] == "chosen"
+    assert len(log) > 3 and all(e["status"].startswith("not reached") for e in log[1:])
+    change = json.loads((tmp_path / "04_iterations" / "iter_1" / "change.json").read_text(encoding="utf-8"))
+    assert change["candidates_considered"] == len(log)
+
+
+def test_a_candidate_that_fails_its_check_is_skipped_logged_and_never_tried_again(tmp_path, config) -> None:
+    from tests.test_judge import install
+
+    cases = {"c0": case("c0", question="How many days of leave does grade G7 get each year?")}
+    a = agent()
+    evaluator = Scripted(cases, lambda ag, c: False)
+    baseline = evaluator.dev(a, 0)
+    baseline.scores["c0"] = score(cases["c0"], unsupported=1)
+    install(config, tmp_path, SectionDraft=lambda u: {"rationale": "r", "text": "How many days of leave does grade G7 get each year? Always answer."})
+    optimize(agent0=a, cases=cases, baseline=baseline, evaluator=evaluator, config=config, out=tmp_path, corpus_dir=tmp_path / "docs", noise_floor=0)
+    log = json.loads((tmp_path / "04_iterations" / "iter_1" / "candidates.json").read_text(encoding="utf-8"))
+    assert log[0]["patch"] == "hallucination/grounding_rules" and log[0]["status"].startswith("skipped") and log[0]["reasons"]
+    assert next(e for e in log if e["status"] == "chosen")["patch"] == "hallucination/min_score+0.05"  # the next candidate took the cycle
+
+
+def test_the_new_patches_are_offered_for_the_failures_that_call_for_them() -> None:
+    a = agent()
+    gap = [Failure("o1", HALLUCINATION, "grounding_rules", "", tags=("expected_refused",))]
+    ids = [p.id for p in candidates(HALLUCINATION, a, gap, [])]
+    assert ids[0] == "hallucination/gap_refusal" and next(p for p in candidates(HALLUCINATION, a, gap, []) if p.id == ids[0]).section == "refusal_policy"
+    assert "hallucination/gap_refusal" not in [p.id for p in candidates(HALLUCINATION, a, [Failure("c", HALLUCINATION, "grounding_rules", "")], [])]
+    amb = [Failure("a1", WRONG_REFUSAL, "refusal_policy", "", tags=("ambiguous",))]
+    assert [p.id for p in candidates(WRONG_REFUSAL, a, amb, [])][0] == "wrong_refusal/ambiguity_policy"
+    snap = [Failure("s1", PROMPT_DEFECT, "scope", "", tags=("snapshot_date",))]
+    assert [p.id for p in candidates(PROMPT_DEFECT, a, snap, [])][:2] == ["prompt_defect/snapshot_dates", "prompt_defect/scope"]
+    cit = [Failure("k1", PROMPT_DEFECT, "output_contract", "", tags=("contract_invalid", "citation_invalid"))]
+    ids = [p.id for p in candidates(PROMPT_DEFECT, a, cit, [])]
+    assert ids == ["prompt_defect/citation_format", "prompt_defect/output_contract", "prompt_defect/few_shot_format"]  # the few-shot comes last
+
+
+def test_the_few_shot_patch_adds_one_domain_free_format_example_within_bounds() -> None:
+    a = agent()
+    cit = [Failure("k1", PROMPT_DEFECT, "output_contract", "", tags=("contract_invalid",))]
+    shot = next(p for p in candidates(PROMPT_DEFECT, a, cit, []) if p.id == "prompt_defect/few_shot_format")
+    patched = apply_ops(a, shot.ops)
+    assert len(patched.prompt_sections.few_shot) == 1 and "example.md" in json.dumps(patched.prompt_sections.few_shot[0].reply)
+    twice = apply_ops(patched, next(p for p in candidates(PROMPT_DEFECT, patched, cit, []) if p.id == "prompt_defect/few_shot_format").ops)
+    assert len(twice.prompt_sections.few_shot) == 2
+    assert not [p for p in candidates(PROMPT_DEFECT, twice, cit, []) if p.id == "prompt_defect/few_shot_format"]  # the limit of two is reached
+
+
+def test_a_few_shot_example_too_close_to_a_dev_question_is_skipped(tmp_path, config) -> None:
+    from tests.test_judge import install
+
+    install(config, tmp_path, SectionDraft=lambda u: {"rationale": "r", "text": "What is the limit for item c0? Always answer."})  # every text draft is rejected
+    cases = {"c0": case("c0")}
+    evaluator = Scripted(cases, lambda ag, c: len(ag.prompt_sections.few_shot) > 0)
+    a = agent()
+    baseline = evaluator.dev(a, 0)
+    baseline.scores["c0"] = score(cases["c0"], contract=False)
+    optimize(agent0=a, cases=cases, baseline=baseline, evaluator=evaluator, config=config, out=tmp_path, corpus_dir=tmp_path / "docs", noise_floor=0,
+             leakage_check=lambda shot: 0.95)
+    log = json.loads((tmp_path / "04_iterations" / "iter_1" / "candidates.json").read_text(encoding="utf-8"))
+    entry = next(e for e in log if e["patch"] == "prompt_defect/few_shot_format")
+    assert entry["status"].startswith("skipped") and any("leakage" in r for r in entry["reasons"])
+
+
+def test_the_classifier_tags_the_kind_of_mistake_for_the_patch_chooser() -> None:
+    c = case("c1")
+    assert "citation_invalid" in classify(c, score(c, contract=False)).tags or "contract_invalid" in classify(c, score(c, contract=False)).tags
+    r = case("r1", "out_of_scope", "refused")
+    assert "expected_refused" in classify(r, score(r, status="answered", unsupported=1)).tags
+    amb = case("a1", "ambiguous", "answered")
+    assert "ambiguous" in classify(amb, score(amb, status="refused", hit=True)).tags
+
+
+# ---- the runner's citation repair (product robustness; the judge's checks are unchanged) -------------------------
+
+
+def _hit(cid: str, doc: str, text: str) -> Hit:
+    return Hit(Chunk(chunk_id=cid, doc=doc, index=0, text=text, kind="prose"), 1.0, 0.5, 0.0)  # type: ignore[arg-type]
+
+
+def test_a_wrong_or_malformed_chunk_id_is_corrected_when_the_quote_is_in_exactly_one_retrieved_chunk() -> None:
+    from forgeai.runner.contract import Citation
+    from forgeai.runner.runner import repair_citations
+
+    hits = [_hit("a.md#c1", "a.md", "The notice period is 30 days."), _hit("b.md#c2", "b.md", "Parental leave lasts 16 weeks.")]
+    fixed, repairs = repair_citations([Citation(doc="b.md", chunk_id="c5", quote="Parental leave lasts 16 weeks.")], hits)
+    assert fixed[0].chunk_id == "b.md#c2" and fixed[0].doc == "b.md" and repairs == [{
+        "from_chunk_id": "c5", "from_doc": "b.md", "to_chunk_id": "b.md#c2", "to_doc": "b.md", "quote": "Parental leave lasts 16 weeks."}]
+    wrong_doc, repairs2 = repair_citations([Citation(doc="a.md", chunk_id="a.md#c1", quote="Parental leave lasts 16 weeks.")], hits)
+    assert wrong_doc[0].chunk_id == "b.md#c2" and len(repairs2) == 1  # the quote is in another chunk than the one named
+
+
+def test_a_citation_is_not_repaired_when_the_quote_is_in_no_chunk_or_in_several_or_already_valid() -> None:
+    from forgeai.runner.contract import Citation
+    from forgeai.runner.runner import repair_citations
+
+    hits = [_hit("a.md#c1", "a.md", "Same sentence here."), _hit("b.md#c2", "b.md", "Same sentence here. And more.")]
+    nowhere = Citation(doc="a.md", chunk_id="zz", quote="A sentence that is nowhere.")
+    several = Citation(doc="a.md", chunk_id="zz", quote="Same sentence here.")
+    valid = Citation(doc="a.md", chunk_id="a.md#c1", quote="Same sentence here.")
+    fixed, repairs = repair_citations([nowhere, several, valid], hits)
+    assert fixed == [nowhere, several, valid] and repairs == []  # an invented quote stays invalid; so does an ambiguous one

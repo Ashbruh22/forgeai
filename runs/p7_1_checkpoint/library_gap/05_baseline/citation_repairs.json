@@ -1,0 +1,33 @@
+{
+  "count": 3,
+  "cases": 3,
+  "repairs": {
+    "lg-A01": [
+      {
+        "from_chunk_id": "c1",
+        "from_doc": "library_rules.md",
+        "to_chunk_id": "library_rules.md#c1",
+        "to_doc": "library_rules.md",
+        "quote": "Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item."
+      }
+    ],
+    "lg-A02": [
+      {
+        "from_chunk_id": "c0",
+        "from_doc": "library_rules.md",
+        "to_chunk_id": "library_rules.md#c0",
+        "to_doc": "library_rules.md",
+        "quote": "Books may be borrowed for 21 days. DVDs may be borrowed for 7 days. Members may "
+      }
+    ],
+    "lg-M04": [
+      {
+        "from_chunk_id": "c1",
+        "from_doc": "library_rules.md",
+        "to_chunk_id": "library_rules.md#c1",
+        "to_doc": "library_rules.md",
+        "quote": "Overdue DVDs incur a fine of 1 dollar per day, capped at 15 dollars per item."
+      }
+    ]
+  }
+}

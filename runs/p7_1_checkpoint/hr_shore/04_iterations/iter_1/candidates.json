@@ -1,0 +1,38 @@
+[
+  {
+    "patch": "prompt_defect/citation_format",
+    "category": "prompt_defect",
+    "rationale": "1 failing case(s) point at the citation_rules section: citations name the wrong chunk or source",
+    "status": "chosen"
+  },
+  {
+    "patch": "prompt_defect/citation_rules",
+    "category": "prompt_defect",
+    "rationale": "1 failing case(s) point at the citation_rules section",
+    "status": "not reached: a better-ranked candidate was chosen"
+  },
+  {
+    "patch": "prompt_defect/scope",
+    "category": "prompt_defect",
+    "rationale": "1 failing case(s) point at the scope section",
+    "status": "not reached: a better-ranked candidate was chosen"
+  },
+  {
+    "patch": "hallucination/grounding_rules",
+    "category": "hallucination",
+    "rationale": "strengthen the grounding rules: quote before you claim",
+    "status": "not reached: a better-ranked candidate was chosen"
+  },
+  {
+    "patch": "hallucination/min_score+0.05",
+    "category": "hallucination",
+    "rationale": "raise the evidence threshold so weakly related chunks are not treated as evidence",
+    "status": "not reached: a better-ranked candidate was chosen"
+  },
+  {
+    "patch": "hallucination/temperature=0",
+    "category": "hallucination",
+    "rationale": "sample deterministically",
+    "status": "not reached: a better-ranked candidate was chosen"
+  }
+]

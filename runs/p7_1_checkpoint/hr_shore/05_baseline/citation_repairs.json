@@ -1,0 +1,72 @@
+{
+  "count": 8,
+  "cases": 5,
+  "repairs": {
+    "hr-A05": [
+      {
+        "from_chunk_id": "c7",
+        "from_doc": "leave_policy.pdf",
+        "to_chunk_id": "leave_policy.pdf#c7",
+        "to_doc": "leave_policy.pdf",
+        "quote": "The shore office observes 12 public holidays per year, which are defined in the "
+      }
+    ],
+    "hr-M02": [
+      {
+        "from_chunk_id": "c8",
+        "from_doc": "travel_expense_policy.pdf",
+        "to_chunk_id": "travel_expense_policy.pdf#c8",
+        "to_doc": "travel_expense_policy.pdf",
+        "quote": "7.1 All expense claims must be submitted within 30 days of returning from the bu"
+      },
+      {
+        "from_chunk_id": "c11",
+        "from_doc": "code_of_conduct_it_policy.pdf",
+        "to_chunk_id": "code_of_conduct_it_policy.pdf#c11",
+        "to_doc": "code_of_conduct_it_policy.pdf",
+        "quote": "10.1 Upon identification of a breach of this policy, the employee may respond wi"
+      }
+    ],
+    "hr-M03": [
+      {
+        "from_chunk_id": "c5",
+        "from_doc": "leave_policy.pdf",
+        "to_chunk_id": "leave_policy.pdf#c5",
+        "to_doc": "leave_policy.pdf",
+        "quote": "Annual leave requests need 10 working days notice to allow adequate planning."
+      },
+      {
+        "from_chunk_id": "c10",
+        "from_doc": "code_of_conduct_it_policy.pdf",
+        "to_chunk_id": "code_of_conduct_it_policy.pdf#c10",
+        "to_doc": "code_of_conduct_it_policy.pdf",
+        "quote": "In the event of an urgent work-related matter during leave, employees are requir"
+      }
+    ],
+    "hr-M06": [
+      {
+        "from_chunk_id": "c3",
+        "from_doc": "leave_policy.pdf",
+        "to_chunk_id": "leave_policy.pdf#c3",
+        "to_doc": "leave_policy.pdf",
+        "quote": "2.1 Full-time shore employees are entitled to 24 working days of annual leave pe"
+      },
+      {
+        "from_chunk_id": "c7",
+        "from_doc": "code_of_conduct_it_policy.pdf",
+        "to_chunk_id": "code_of_conduct_it_policy.pdf#c7",
+        "to_doc": "code_of_conduct_it_policy.pdf",
+        "quote": "6.2 Passwords must be changed every 90 days to maintain account security. The sy"
+      }
+    ],
+    "hr-O07": [
+      {
+        "from_chunk_id": "c8",
+        "from_doc": "travel_expense_policy.pdf",
+        "to_chunk_id": "travel_expense_policy.pdf#c8",
+        "to_doc": "travel_expense_policy.pdf",
+        "quote": "Expense claims must be submitted through the company\u2019s internal reimbursement po"
+      }
+    ]
+  }
+}

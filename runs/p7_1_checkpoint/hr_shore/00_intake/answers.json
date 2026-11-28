@@ -1,0 +1,20 @@
+[
+  {
+    "question_id": "Q1",
+    "field": "scope_out",
+    "text": "The assistant should avoid answering questions related to personal data privacy, legal compliance issues, or matters outside the scope of the provided policies. Additionally, it should not assist with interpreting salary slips or providing financial advice.",
+    "answered_by": "ASSUMPTION"
+  },
+  {
+    "question_id": "Q2",
+    "field": "must_refuse",
+    "text": "The assistant should refuse to answer questions involving personal data requests, legal advice, or any matters outside the scope of HR policies such as leave, travel claims, and salary slips. It should also avoid providing guidance on ethical dilemmas or misconduct reporting unless explicitly covered in the provided policies.",
+    "answered_by": "ASSUMPTION"
+  },
+  {
+    "question_id": "Q3",
+    "field": "gaps",
+    "text": "refuse",
+    "answered_by": "ASSUMPTION"
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "stop_reason": "plateau: two consecutive cycles produced no accepted patch",
+  "noise_floor": 0,
+  "iterations": [
+    {
+      "iteration": 1,
+      "accepted": false,
+      "status": "rejected: gate",
+      "category": "prompt_defect",
+      "patch": "prompt_defect/citation_format",
+      "candidates_considered": 6,
+      "citation_repairs_dev": 4,
+      "dev_before": {
+        "passes": 21,
+        "n": 24,
+        "rate": 0.875
+      },
+      "dev_after": {
+        "passes": 21,
+        "n": 24,
+        "rate": 0.875
+      },
+      "fixed": [],
+      "regressed": [],
+      "gate": "net gain 0 does not exceed the noise floor 0"
+    },
+    {
+      "iteration": 2,
+      "accepted": false,
+      "status": "rejected: gate",
+      "category": "prompt_defect",
+      "patch": "prompt_defect/citation_rules",
+      "candidates_considered": 5,
+      "citation_repairs_dev": 4,
+      "dev_before": {
+        "passes": 21,
+        "n": 24,
+        "rate": 0.875
+      },
+      "dev_after": {
+        "passes": 21,
+        "n": 24,
+        "rate": 0.875
+      },
+      "fixed": [],
+      "regressed": [],
+      "gate": "net gain 0 does not exceed the noise floor 0"
+    }
+  ]
+}

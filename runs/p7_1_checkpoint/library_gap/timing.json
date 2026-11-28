@@ -1,0 +1,386 @@
+{
+  "baseline": {
+    "wall_seconds": 19.9,
+    "llm_calls": 81,
+    "cache_hits": 81,
+    "live_llm_seconds": 0.0,
+    "model_load_seconds": 0.0,
+    "model_swaps": 0,
+    "fallbacks": 0,
+    "by_model": {},
+    "ram": {
+      "system_ram_total_gb": 15.7,
+      "peak_system_ram_used_gb": 11.5,
+      "min_free_ram_gb": 4.2,
+      "min_free_ram_pct": 26.7,
+      "low_memory_warnings": 0,
+      "forgeai_process_peak_gb": 0.0,
+      "top_processes_at_peak": {
+        "captured_at": "19:05:05",
+        "sum_of_process_rss_gb": 13.49,
+        "top_processes": [
+          {
+            "name": "MemCompression",
+            "pid": 4304,
+            "rss_gb": 1.5
+          },
+          {
+            "name": "MsMpEng.exe",
+            "pid": 7084,
+            "rss_gb": 0.99
+          },
+          {
+            "name": "llama-server.exe",
+            "pid": 17964,
+            "rss_gb": 0.73
+          },
+          {
+            "name": "Antigravity IDE.exe",
+            "pid": 13100,
+            "rss_gb": 0.39
+          },
+          {
+            "name": "claude.exe",
+            "pid": 27600,
+            "rss_gb": 0.33
+          },
+          {
+            "name": "Antigravity IDE.exe",
+            "pid": 24224,
+            "rss_gb": 0.29
+          },
+          {
+            "name": "python3.11.exe",
+            "pid": 16768,
+            "rss_gb": 0.26
+          },
+          {
+            "name": "chrome.exe",
+            "pid": 20464,
+            "rss_gb": 0.2
+          },
+          {
+            "name": "agy.exe",
+            "pid": 26424,
+            "rss_gb": 0.16
+          },
+          {
+            "name": "explorer.exe",
+            "pid": 13144,
+            "rss_gb": 0.15
+          }
+        ],
+        "top_programs": [
+          {
+            "program": "Antigravity IDE.exe",
+            "processes": 15,
+            "rss_gb": 1.73
+          },
+          {
+            "program": "svchost.exe",
+            "processes": 89,
+            "rss_gb": 1.52
+          },
+          {
+            "program": "MemCompression",
+            "processes": 1,
+            "rss_gb": 1.5
+          },
+          {
+            "program": "chrome.exe",
+            "processes": 18,
+            "rss_gb": 1.09
+          },
+          {
+            "program": "MsMpEng.exe",
+            "processes": 1,
+            "rss_gb": 0.99
+          },
+          {
+            "program": "llama-server.exe",
+            "processes": 1,
+            "rss_gb": 0.73
+          },
+          {
+            "program": "msedge.exe",
+            "processes": 10,
+            "rss_gb": 0.43
+          },
+          {
+            "program": "claude.exe",
+            "processes": 1,
+            "rss_gb": 0.33
+          },
+          {
+            "program": "python3.11.exe",
+            "processes": 1,
+            "rss_gb": 0.26
+          },
+          {
+            "program": "msedgewebview2.exe",
+            "processes": 6,
+            "rss_gb": 0.23
+          }
+        ]
+      }
+    },
+    "finished": "2026-11-28T19:05:23"
+  },
+  "noise": {
+    "wall_seconds": 141.3,
+    "llm_calls": 60,
+    "cache_hits": 0,
+    "live_llm_seconds": 117.5,
+    "model_load_seconds": 14.4,
+    "model_swaps": 1,
+    "fallbacks": 0,
+    "by_model": {
+      "llama3.1:8b": 19,
+      "qwen3:8b": 41
+    },
+    "ram": {
+      "system_ram_total_gb": 15.7,
+      "peak_system_ram_used_gb": 11.7,
+      "min_free_ram_gb": 4.0,
+      "min_free_ram_pct": 25.6,
+      "low_memory_warnings": 0,
+      "forgeai_process_peak_gb": 0.0,
+      "top_processes_at_peak": {
+        "captured_at": "19:06:19",
+        "sum_of_process_rss_gb": 13.94,
+        "top_processes": [
+          {
+            "name": "MemCompression",
+            "pid": 4304,
+            "rss_gb": 1.61
+          },
+          {
+            "name": "llama-server.exe",
+            "pid": 8136,
+            "rss_gb": 0.92
+          },
+          {
+            "name": "MsMpEng.exe",
+            "pid": 7084,
+            "rss_gb": 0.87
+          },
+          {
+            "name": "python3.11.exe",
+            "pid": 4584,
+            "rss_gb": 0.6
+          },
+          {
+            "name": "Antigravity IDE.exe",
+            "pid": 13100,
+            "rss_gb": 0.35
+          },
+          {
+            "name": "Antigravity IDE.exe",
+            "pid": 24224,
+            "rss_gb": 0.32
+          },
+          {
+            "name": "claude.exe",
+            "pid": 27600,
+            "rss_gb": 0.3
+          },
+          {
+            "name": "chrome.exe",
+            "pid": 20464,
+            "rss_gb": 0.18
+          },
+          {
+            "name": "agy.exe",
+            "pid": 26424,
+            "rss_gb": 0.16
+          },
+          {
+            "name": "Antigravity IDE.exe",
+            "pid": 21840,
+            "rss_gb": 0.16
+          }
+        ],
+        "top_programs": [
+          {
+            "program": "Antigravity IDE.exe",
+            "processes": 15,
+            "rss_gb": 1.77
+          },
+          {
+            "program": "MemCompression",
+            "processes": 1,
+            "rss_gb": 1.61
+          },
+          {
+            "program": "svchost.exe",
+            "processes": 91,
+            "rss_gb": 1.56
+          },
+          {
+            "program": "chrome.exe",
+            "processes": 17,
+            "rss_gb": 0.99
+          },
+          {
+            "program": "llama-server.exe",
+            "processes": 1,
+            "rss_gb": 0.92
+          },
+          {
+            "program": "MsMpEng.exe",
+            "processes": 1,
+            "rss_gb": 0.87
+          },
+          {
+            "program": "python3.11.exe",
+            "processes": 1,
+            "rss_gb": 0.6
+          },
+          {
+            "program": "msedge.exe",
+            "processes": 10,
+            "rss_gb": 0.4
+          },
+          {
+            "program": "claude.exe",
+            "processes": 1,
+            "rss_gb": 0.3
+          },
+          {
+            "program": "msedgewebview2.exe",
+            "processes": 6,
+            "rss_gb": 0.24
+          }
+        ]
+      }
+    },
+    "finished": "2026-11-28T19:08:10"
+  },
+  "optimize": {
+    "wall_seconds": 106.0,
+    "llm_calls": 162,
+    "cache_hits": 162,
+    "live_llm_seconds": 0.0,
+    "model_load_seconds": 0.0,
+    "model_swaps": 0,
+    "fallbacks": 0,
+    "by_model": {},
+    "ram": {
+      "system_ram_total_gb": 15.7,
+      "peak_system_ram_used_gb": 11.6,
+      "min_free_ram_gb": 4.1,
+      "min_free_ram_pct": 26.1,
+      "low_memory_warnings": 0,
+      "forgeai_process_peak_gb": 0.0,
+      "top_processes_at_peak": {
+        "captured_at": "19:20:36",
+        "sum_of_process_rss_gb": 13.51,
+        "top_processes": [
+          {
+            "name": "MemCompression",
+            "pid": 4304,
+            "rss_gb": 1.35
+          },
+          {
+            "name": "MsMpEng.exe",
+            "pid": 7084,
+            "rss_gb": 0.97
+          },
+          {
+            "name": "llama-server.exe",
+            "pid": 34444,
+            "rss_gb": 0.73
+          },
+          {
+            "name": "claude.exe",
+            "pid": 27600,
+            "rss_gb": 0.37
+          },
+          {
+            "name": "chrome.exe",
+            "pid": 10808,
+            "rss_gb": 0.36
+          },
+          {
+            "name": "Antigravity IDE.exe",
+            "pid": 24224,
+            "rss_gb": 0.32
+          },
+          {
+            "name": "Antigravity IDE.exe",
+            "pid": 13100,
+            "rss_gb": 0.32
+          },
+          {
+            "name": "chrome.exe",
+            "pid": 15452,
+            "rss_gb": 0.28
+          },
+          {
+            "name": "python3.11.exe",
+            "pid": 8932,
+            "rss_gb": 0.26
+          },
+          {
+            "name": "chrome.exe",
+            "pid": 20464,
+            "rss_gb": 0.17
+          }
+        ],
+        "top_programs": [
+          {
+            "program": "Antigravity IDE.exe",
+            "processes": 15,
+            "rss_gb": 1.61
+          },
+          {
+            "program": "svchost.exe",
+            "processes": 89,
+            "rss_gb": 1.54
+          },
+          {
+            "program": "chrome.exe",
+            "processes": 17,
+            "rss_gb": 1.41
+          },
+          {
+            "program": "MemCompression",
+            "processes": 1,
+            "rss_gb": 1.35
+          },
+          {
+            "program": "MsMpEng.exe",
+            "processes": 1,
+            "rss_gb": 0.97
+          },
+          {
+            "program": "llama-server.exe",
+            "processes": 1,
+            "rss_gb": 0.73
+          },
+          {
+            "program": "msedge.exe",
+            "processes": 11,
+            "rss_gb": 0.55
+          },
+          {
+            "program": "claude.exe",
+            "processes": 1,
+            "rss_gb": 0.37
+          },
+          {
+            "program": "python3.11.exe",
+            "processes": 1,
+            "rss_gb": 0.26
+          },
+          {
+            "program": "msedgewebview2.exe",
+            "processes": 6,
+            "rss_gb": 0.24
+          }
+        ]
+      }
+    },
+    "finished": "2026-11-28T19:22:05"
+  }
+}

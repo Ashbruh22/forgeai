@@ -1,0 +1,15 @@
+{
+  "count": 1,
+  "cases": 1,
+  "repairs": {
+    "sp-T02": [
+      {
+        "from_chunk_id": "c3",
+        "from_doc": "terms_aurelian_engineering_parts.pdf",
+        "to_chunk_id": "terms_aurelian_engineering_parts.pdf#c3",
+        "to_doc": "terms_aurelian_engineering_parts.pdf",
+        "quote": "2.1 The applicable discount rate for an order is determined by the total value o"
+      }
+    ]
+  }
+}

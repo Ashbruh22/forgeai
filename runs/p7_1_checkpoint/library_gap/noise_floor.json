@@ -1,0 +1,11 @@
+{
+  "dev_cases": 19,
+  "noise_floor": 1,
+  "flipped_cases": [
+    "lg-O12"
+  ],
+  "baseline_passes": 15,
+  "rerun_passes": 14,
+  "answers_that_differ_in_text": 2,
+  "method": "agent v0 on dev, fresh cache for agent and judge, flips vs the baseline"
+}

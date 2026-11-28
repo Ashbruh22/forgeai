@@ -1,0 +1,9 @@
+{
+  "dev_cases": 24,
+  "noise_floor": 0,
+  "flipped_cases": [],
+  "baseline_passes": 21,
+  "rerun_passes": 21,
+  "answers_that_differ_in_text": 0,
+  "method": "agent v0 on dev, fresh cache for agent and judge, flips vs the baseline"
+}

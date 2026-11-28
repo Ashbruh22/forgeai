@@ -1,0 +1,107 @@
+{
+  "cases": 24,
+  "pass_rate": {
+    "passes": 21,
+    "n": 24,
+    "rate": 0.875,
+    "wilson95": [
+      0.69,
+      0.957
+    ]
+  },
+  "pass_rate_without_layer2_upgrades": {
+    "passes": 20,
+    "n": 24,
+    "rate": 0.833,
+    "wilson95": [
+      0.641,
+      0.933
+    ]
+  },
+  "pass_rate_by_type": {
+    "ambiguous": {
+      "passes": 1,
+      "n": 1,
+      "rate": 1.0,
+      "wilson95": [
+        0.207,
+        1.0
+      ]
+    },
+    "answerable": {
+      "passes": 10,
+      "n": 11,
+      "rate": 0.909,
+      "wilson95": [
+        0.623,
+        0.984
+      ]
+    },
+    "multidoc": {
+      "passes": 3,
+      "n": 4,
+      "rate": 0.75,
+      "wilson95": [
+        0.301,
+        0.954
+      ]
+    },
+    "out_of_scope": {
+      "passes": 7,
+      "n": 8,
+      "rate": 0.875,
+      "wilson95": [
+        0.529,
+        0.978
+      ]
+    }
+  },
+  "groundedness": {
+    "passes": 16,
+    "n": 17,
+    "rate": 0.941,
+    "wilson95": [
+      0.73,
+      0.99
+    ],
+    "note": "answered cases whose every claim is supported by the retrieved context (layer 2)"
+  },
+  "key_fact_recall": {
+    "matched": 23,
+    "total": 24,
+    "rate": 0.958,
+    "layer1_only_rate": 0.917
+  },
+  "refusal": {
+    "precision": 1.0,
+    "recall": 0.875,
+    "refused_by_agent": 7,
+    "refusal_expected": 8,
+    "answered_when_refusal_expected": 1
+  },
+  "citation_validity": {
+    "valid": 20,
+    "total": 21,
+    "rate": 0.952
+  },
+  "retrieval_hit_at_k": {
+    "k": 5,
+    "hits": 16,
+    "n": 16,
+    "rate": 1.0,
+    "mean_first_hit_rank": 1
+  },
+  "tool_accuracy": {
+    "correct": 0,
+    "n": 0,
+    "rate": null
+  },
+  "latency_ms": {
+    "mean": 21,
+    "median": 20,
+    "max": 29
+  },
+  "tokens_per_case": {},
+  "layer2_low_confidence_types": [],
+  "low_confidence_cases": 2
+}

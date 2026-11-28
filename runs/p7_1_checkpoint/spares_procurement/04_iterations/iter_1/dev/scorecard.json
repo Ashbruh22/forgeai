@@ -1,0 +1,116 @@
+{
+  "cases": 20,
+  "pass_rate": {
+    "passes": 15,
+    "n": 20,
+    "rate": 0.75,
+    "wilson95": [
+      0.531,
+      0.888
+    ]
+  },
+  "pass_rate_without_layer2_upgrades": {
+    "passes": 15,
+    "n": 20,
+    "rate": 0.75,
+    "wilson95": [
+      0.531,
+      0.888
+    ]
+  },
+  "pass_rate_by_type": {
+    "ambiguous": {
+      "passes": 1,
+      "n": 1,
+      "rate": 1.0,
+      "wilson95": [
+        0.207,
+        1.0
+      ]
+    },
+    "answerable": {
+      "passes": 4,
+      "n": 7,
+      "rate": 0.571,
+      "wilson95": [
+        0.25,
+        0.842
+      ]
+    },
+    "multidoc": {
+      "passes": 1,
+      "n": 2,
+      "rate": 0.5,
+      "wilson95": [
+        0.095,
+        0.905
+      ]
+    },
+    "out_of_scope": {
+      "passes": 7,
+      "n": 7,
+      "rate": 1.0,
+      "wilson95": [
+        0.646,
+        1.0
+      ]
+    },
+    "tool_required": {
+      "passes": 2,
+      "n": 3,
+      "rate": 0.667,
+      "wilson95": [
+        0.208,
+        0.939
+      ]
+    }
+  },
+  "groundedness": {
+    "passes": 10,
+    "n": 11,
+    "rate": 0.909,
+    "wilson95": [
+      0.623,
+      0.984
+    ],
+    "note": "answered cases whose every claim is supported by the retrieved context (layer 2)"
+  },
+  "key_fact_recall": {
+    "matched": 11,
+    "total": 16,
+    "rate": 0.688,
+    "layer1_only_rate": 0.688
+  },
+  "refusal": {
+    "precision": 0.778,
+    "recall": 1.0,
+    "refused_by_agent": 9,
+    "refusal_expected": 7,
+    "answered_when_refusal_expected": 0
+  },
+  "citation_validity": {
+    "valid": 15,
+    "total": 15,
+    "rate": 1.0
+  },
+  "retrieval_hit_at_k": {
+    "k": 6,
+    "hits": 11,
+    "n": 13,
+    "rate": 0.846,
+    "mean_first_hit_rank": 1.64
+  },
+  "tool_accuracy": {
+    "correct": 0,
+    "n": 1,
+    "rate": 0.0
+  },
+  "latency_ms": {
+    "mean": 635,
+    "median": 706,
+    "max": 1096
+  },
+  "tokens_per_case": {},
+  "layer2_low_confidence_types": [],
+  "low_confidence_cases": 2
+}

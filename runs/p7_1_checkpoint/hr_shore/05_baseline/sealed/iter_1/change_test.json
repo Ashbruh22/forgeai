@@ -1,0 +1,27 @@
+{
+  "iteration": 1,
+  "accepted": false,
+  "score_before": {
+    "test": {
+      "passes": 6,
+      "n": 8,
+      "rate": 0.75,
+      "wilson95": [
+        0.409,
+        0.929
+      ]
+    }
+  },
+  "score_after": {
+    "test": {
+      "passes": 6,
+      "n": 8,
+      "rate": 0.75,
+      "wilson95": [
+        0.409,
+        0.929
+      ]
+    }
+  },
+  "fixed": []
+}

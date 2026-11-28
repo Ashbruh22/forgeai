@@ -1,0 +1,147 @@
+{
+  "iteration": 2,
+  "category": "retrieval_miss",
+  "category_counts": {
+    "prompt_defect": 1,
+    "retrieval_miss": 3
+  },
+  "target_cases": [
+    "lg-M01",
+    "lg-M03",
+    "lg-M04"
+  ],
+  "failures": {
+    "lg-A04": {
+      "category": "prompt_defect",
+      "section": "scope",
+      "low_confidence": false,
+      "tags": [
+        "snapshot_date"
+      ],
+      "reason": "the answer lacks required facts (kinds: snapshot_date) that were supported by the evidence"
+    },
+    "lg-M01": {
+      "category": "retrieval_miss",
+      "section": "",
+      "low_confidence": false,
+      "tags": [],
+      "reason": "refused and no gold chunk was retrieved"
+    },
+    "lg-M03": {
+      "category": "retrieval_miss",
+      "section": "",
+      "low_confidence": false,
+      "tags": [],
+      "reason": "no gold chunk (or not every expected document) was among the retrieved chunks"
+    },
+    "lg-M04": {
+      "category": "retrieval_miss",
+      "section": "",
+      "low_confidence": false,
+      "tags": [],
+      "reason": "refused and no gold chunk was retrieved"
+    }
+  },
+  "patch_id": "retrieval_miss/top_k+2",
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/retrieval/top_k",
+      "value": 8
+    }
+  ],
+  "rationale": "the gold chunk was not among the top-k chunks: widen the window by two",
+  "noise_floor": 1,
+  "candidates_considered": 8,
+  "candidates": [
+    {
+      "patch": "retrieval_miss/top_k+2",
+      "category": "retrieval_miss",
+      "rationale": "the gold chunk was not among the top-k chunks: widen the window by two",
+      "status": "chosen"
+    },
+    {
+      "patch": "retrieval_miss/query_rewrite",
+      "category": "retrieval_miss",
+      "rationale": "rewrite the question into a standalone search query before retrieving",
+      "status": "not reached: a better-ranked candidate was chosen"
+    },
+    {
+      "patch": "retrieval_miss/chunk_size+30%",
+      "category": "retrieval_miss",
+      "rationale": "change the chunk size +30% so a passage is not split from its context (or a chunk dilutes it)",
+      "status": "not reached: a better-ranked candidate was chosen"
+    },
+    {
+      "patch": "retrieval_miss/chunk_size-30%",
+      "category": "retrieval_miss",
+      "rationale": "change the chunk size -30% so a passage is not split from its context (or a chunk dilutes it)",
+      "status": "not reached: a better-ranked candidate was chosen"
+    },
+    {
+      "patch": "retrieval_miss/min_score-0.05",
+      "category": "retrieval_miss",
+      "rationale": "lower the evidence threshold so a borderline chunk is not cut",
+      "status": "not reached: a better-ranked candidate was chosen"
+    },
+    {
+      "patch": "retrieval_miss/overlap+20",
+      "category": "retrieval_miss",
+      "rationale": "more overlap between neighbouring chunks",
+      "status": "not reached: a better-ranked candidate was chosen"
+    },
+    {
+      "patch": "prompt_defect/snapshot_dates",
+      "category": "prompt_defect",
+      "rationale": "1 failing case(s) point at the scope section: a snapshot answer lacks its 'as of' date",
+      "status": "not reached: a better-ranked candidate was chosen"
+    },
+    {
+      "patch": "prompt_defect/scope",
+      "category": "prompt_defect",
+      "rationale": "1 failing case(s) point at the scope section",
+      "status": "not reached: a better-ranked candidate was chosen"
+    }
+  ],
+  "score_before": {
+    "dev": {
+      "passes": 15,
+      "n": 19,
+      "rate": 0.789
+    }
+  },
+  "score_after": {
+    "dev": {
+      "passes": 15,
+      "n": 19,
+      "rate": 0.789
+    }
+  },
+  "fixed": [],
+  "regressed": [],
+  "still_failing": [
+    "lg-A04",
+    "lg-M01",
+    "lg-M03",
+    "lg-M04"
+  ],
+  "net_gain": 0,
+  "accepted": false,
+  "gate_reason": "net gain 0 does not exceed the noise floor 1",
+  "confirmation": null,
+  "status": "rejected: gate",
+  "rejected_drafts": 0,
+  "dev_scorecard": {
+    "pass_rate": {
+      "passes": 15,
+      "n": 19,
+      "rate": 0.789,
+      "wilson95": [
+        0.567,
+        0.915
+      ]
+    },
+    "groundedness": 0.889
+  },
+  "citation_repairs_dev": 3
+}

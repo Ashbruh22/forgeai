@@ -1,0 +1,83 @@
+{
+  "topics": [
+    {
+      "topic_id": "topic_0",
+      "label": "Ethics and Compliance Policies",
+      "description": "These passages outline the company's expectations for ethical behavior, compliance with policies, and procedures for reporting misconduct.",
+      "size": 12,
+      "docs": [
+        "code_of_conduct_it_policy.pdf"
+      ],
+      "chunk_ids": [
+        "code_of_conduct_it_policy.pdf#c0",
+        "code_of_conduct_it_policy.pdf#c1",
+        "code_of_conduct_it_policy.pdf#c2",
+        "code_of_conduct_it_policy.pdf#c3",
+        "code_of_conduct_it_policy.pdf#c4",
+        "code_of_conduct_it_policy.pdf#c5",
+        "code_of_conduct_it_policy.pdf#c6",
+        "code_of_conduct_it_policy.pdf#c7",
+        "code_of_conduct_it_policy.pdf#c8",
+        "code_of_conduct_it_policy.pdf#c9",
+        "code_of_conduct_it_policy.pdf#c10",
+        "code_of_conduct_it_policy.pdf#c11"
+      ]
+    },
+    {
+      "topic_id": "topic_1",
+      "label": "Travel and Expense Reimbursement",
+      "description": "These passages explain the procedures and policies for reimbursing business travel expenses, including advance payments, expense submission deadlines, required documentation, and travel booking guidelines.",
+      "size": 10,
+      "docs": [
+        "travel_expense_policy.pdf"
+      ],
+      "chunk_ids": [
+        "travel_expense_policy.pdf#c0",
+        "travel_expense_policy.pdf#c1",
+        "travel_expense_policy.pdf#c2",
+        "travel_expense_policy.pdf#c3",
+        "travel_expense_policy.pdf#c4",
+        "travel_expense_policy.pdf#c5",
+        "travel_expense_policy.pdf#c6",
+        "travel_expense_policy.pdf#c8",
+        "travel_expense_policy.pdf#c9",
+        "travel_expense_policy.pdf#c10"
+      ]
+    },
+    {
+      "topic_id": "topic_2",
+      "label": "Annual Leave Policy",
+      "description": "These passages explain the rules and procedures for annual leave and public holidays at Calder Bay Ship Management Ltd.",
+      "size": 8,
+      "docs": [
+        "leave_policy.pdf",
+        "travel_expense_policy.pdf"
+      ],
+      "chunk_ids": [
+        "leave_policy.pdf#c0",
+        "leave_policy.pdf#c1",
+        "leave_policy.pdf#c2",
+        "leave_policy.pdf#c3",
+        "leave_policy.pdf#c4",
+        "leave_policy.pdf#c7",
+        "leave_policy.pdf#c10",
+        "travel_expense_policy.pdf#c7"
+      ]
+    },
+    {
+      "topic_id": "topic_3",
+      "label": "Leave Entitlements and Procedures",
+      "description": "These passages explain the policies and procedures related to various types of leave, including compassionate leave, sick leave, annual leave, and maternity/paternity leave, along with the required documentation and notice periods.",
+      "size": 4,
+      "docs": [
+        "leave_policy.pdf"
+      ],
+      "chunk_ids": [
+        "leave_policy.pdf#c5",
+        "leave_policy.pdf#c6",
+        "leave_policy.pdf#c8",
+        "leave_policy.pdf#c9"
+      ]
+    }
+  ]
+}

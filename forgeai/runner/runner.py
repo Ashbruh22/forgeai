@@ -19,6 +19,7 @@ from forgeai.llm import call_structured
 from forgeai.runner.agent_def import EMPTY, AgentDef, compile_system_prompt
 from forgeai.runner.contract import Answer, Citation, ToolCallRecord, contract_issues
 from forgeai.runner.retrieval import Hit, HybridIndex, load_corpus_chunks
+from forgeai.textmatch import is_verbatim
 from forgeai.tools import ToolContext, ToolError, build_tools
 
 History = list[tuple[str, str]]
@@ -57,6 +58,7 @@ class RunResult:
     steps: list[dict[str, Any]] = field(default_factory=list)  # raw per-step trace for /debug
     search_query: str = ""
     latency_ms: float = 0.0
+    citation_repairs: list[dict[str, str]] = field(default_factory=list)  # chunk ids corrected by ``repair_citations``
 
     @property
     def contract_valid(self) -> bool:
@@ -75,6 +77,33 @@ def format_context(hits: list[Hit]) -> str:
 
 def format_history(history: History) -> str:
     return "\n".join(f"User: {q}\nAssistant: {a}" for q, a in history) or EMPTY
+
+
+def repair_citations(citations: list[Citation], hits: list[Hit]) -> tuple[list[Citation], list[dict[str, str]]]:
+    """Correct a citation whose chunk id is wrong or malformed when its quote identifies the chunk.
+
+    A citation is left alone if it is already valid (the chunk exists, belongs to the named document and contains the
+    quote). Otherwise, if the quote is verbatim in EXACTLY ONE retrieved chunk, the chunk id and document are set to that
+    chunk's and the change is logged. A quote found in no retrieved chunk (or in several) stays as it is: still invalid.
+    Product robustness only: the judge's checks are unchanged and see the repaired citation.
+    """
+    by_id = {h.chunk.chunk_id: h.chunk for h in hits}
+    fixed: list[Citation] = []
+    repairs: list[dict[str, str]] = []
+    for citation in citations:
+        named = by_id.get(citation.chunk_id)
+        if named is not None and named.doc == citation.doc and is_verbatim(citation.quote, named.text):
+            fixed.append(citation)
+            continue
+        owners = [h.chunk for h in hits if is_verbatim(citation.quote, h.chunk.text)]
+        if len(owners) == 1:
+            owner = owners[0]
+            repairs.append({"from_chunk_id": citation.chunk_id, "from_doc": citation.doc, "to_chunk_id": owner.chunk_id,
+                            "to_doc": owner.doc, "quote": citation.quote[:80]})
+            fixed.append(Citation(doc=owner.doc, chunk_id=owner.chunk_id, quote=citation.quote))
+        else:
+            fixed.append(citation)
+    return fixed, repairs
 
 
 class AgentRunner:
@@ -207,9 +236,10 @@ class AgentRunner:
         records: list[ToolCallRecord], trace: list[dict[str, Any]], started: float,
         extra: list[str] | None = None,
     ) -> RunResult:
+        citations, repairs = repair_citations(step.citations, hits)
         # tool_calls come from what was actually executed, never from model claims.
         answer = Answer(
-            status=step.status, answer=step.answer, citations=step.citations,
+            status=step.status, answer=step.answer, citations=citations,
             tool_calls=list(records), clarifying_question=step.clarifying_question,
         )
         issues = list(extra or [])
@@ -217,5 +247,5 @@ class AgentRunner:
             issues = contract_issues(answer, self.index.by_id)
         return RunResult(
             question=question, answer=answer, retrieved=hits, issues=issues, steps=list(trace),
-            search_query=query, latency_ms=(time.perf_counter() - started) * 1000,
+            search_query=query, latency_ms=(time.perf_counter() - started) * 1000, citation_repairs=repairs,
         )
