@@ -28,7 +28,9 @@ class EvalSetChangedError(RuntimeError):
 
 
 def eval_set_hash(run_dir: Path) -> str:
-    return hashlib.sha256((run_dir / EVAL_SET).read_bytes()).hexdigest()
+    """sha256 of the eval set with line endings normalised, so a checkout that converts LF to CRLF (git on Windows)
+    does not change the hash of an unchanged set."""
+    return hashlib.sha256((run_dir / EVAL_SET).read_bytes().replace(bytes([13, 10]), bytes([10]))).hexdigest()
 
 
 def _case_count(run_dir: Path) -> int:

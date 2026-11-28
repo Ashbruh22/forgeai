@@ -127,9 +127,9 @@
   },
   "eval_set": {
     "path": "03_evals/eval_set.jsonl",
-    "sha256": "5237b1787b6be12dc5d8134cab02b40554d0f99aff032d32f273ff41797b368d",
+    "sha256": "9f3aae7153c8e21e947c8f3b10d18b19680d726461b0e0c7c1a15feec67013ac",
     "cases": 32,
-    "frozen_utc": "2026-11-28T06:54:29Z",
-    "git_sha": "a22d80ba55ee33e61668b16e8144a73af75cdce5"
+    "frozen_utc": "2026-11-28T07:53:31Z",
+    "git_sha": "2ef291059e7a922c7f2784baf4354b1035b693ac"
   }
 }

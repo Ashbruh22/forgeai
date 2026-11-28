@@ -103,3 +103,11 @@ def test_a_computed_case_still_requires_its_tool() -> None:
     case = lookup_case(tool_mode="required", expected_tools=["calculator"], key_facts=[KeyFact(text="24", kind="number")])
     no_tool = check_layer1(case, run_of("The total is 24."), today=TODAY)
     assert no_tool.tool_ok is False and any("tool check failed" in r for r in decide(case, no_tool, Layer2()))
+
+
+def test_the_hash_does_not_change_when_a_checkout_converts_line_endings(tmp_path, config) -> None:
+    run = make_run(tmp_path)
+    freeze_eval_set(run, config, digests={})
+    path = run / "03_evals" / "eval_set.jsonl"
+    path.write_bytes(path.read_bytes().replace(bytes([10]), bytes([13, 10])))
+    assert assert_eval_set_frozen(run)
