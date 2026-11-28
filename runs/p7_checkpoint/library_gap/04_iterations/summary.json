@@ -1,0 +1,25 @@
+{
+  "stop_reason": "plateau: the last cycle produced no accepted patch",
+  "noise_floor": 0,
+  "iterations": [
+    {
+      "iteration": 1,
+      "accepted": false,
+      "category": "retrieval_miss",
+      "patch": "retrieval_miss/reserve_prose=1",
+      "dev_before": {
+        "passes": 14,
+        "n": 19,
+        "rate": 0.737
+      },
+      "dev_after": {
+        "passes": 14,
+        "n": 19,
+        "rate": 0.737
+      },
+      "fixed": [],
+      "regressed": [],
+      "gate": "net gain 0 does not exceed the noise floor 0"
+    }
+  ]
+}

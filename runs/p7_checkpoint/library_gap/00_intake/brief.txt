@@ -1,0 +1,1 @@
+Build an assistant for Brightwater Library visitors that answers questions about loan periods, fines and library card membership. It should also tell visitors whether a specific book is on the shelf right now, and answer questions about the cafe menu.

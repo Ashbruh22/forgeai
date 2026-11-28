@@ -1,0 +1,3 @@
+{"case_id": "sp-A01", "kind": "claims_supported_key_fact_missing", "layer1": ["2026-11-01"], "layer2": "every claim is supported by the retrieved context"}
+{"case_id": "sp-A03", "kind": "layer1_passes_layer2_ungrounded", "layer1": "every deterministic check passed", "layer2": ["The discount rate is as per the terms of Norvik Marine Supply (S01): the identifier s01 is in neither the context nor a tool result", "The discount rate for orders valued between USD 15,000 and USD 49,999 is 8%, as per the terms of Norvik Marine Supply (S01).: the number(s) s01 appear in neither the context, the tool results nor the question"]}
+{"case_id": "sp-T04", "kind": "claims_supported_key_fact_missing", "layer1": ["34166.33"], "layer2": "every claim is supported by the retrieved context"}

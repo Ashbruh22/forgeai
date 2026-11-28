@@ -1,0 +1,27 @@
+{
+  "stop_reason": "plateau: the last cycle produced no accepted patch",
+  "noise_floor": 1,
+  "iterations": [
+    {
+      "iteration": 1,
+      "accepted": false,
+      "category": "prompt_defect",
+      "patch": "prompt_defect/citation_rules",
+      "dev_before": {
+        "passes": 19,
+        "n": 24,
+        "rate": 0.792
+      },
+      "dev_after": {
+        "passes": 20,
+        "n": 24,
+        "rate": 0.833
+      },
+      "fixed": [
+        "hr-M06"
+      ],
+      "regressed": [],
+      "gate": "net gain 1 does not exceed the noise floor 1"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "stop_reason": "plateau: the last cycle produced no accepted patch",
+  "noise_floor": 0,
+  "iterations": [
+    {
+      "iteration": 1,
+      "accepted": true,
+      "category": "retrieval_miss",
+      "patch": "retrieval_miss/top_k+2",
+      "dev_before": {
+        "passes": 12,
+        "n": 20,
+        "rate": 0.6
+      },
+      "dev_after": {
+        "passes": 15,
+        "n": 20,
+        "rate": 0.75
+      },
+      "fixed": [
+        "sp-M01",
+        "sp-O08",
+        "sp-X01"
+      ],
+      "regressed": [],
+      "gate": "confirmed: 3 of 3 fixes held on the rerun; net gain 3 exceeds the noise floor 0"
+    },
+    {
+      "iteration": 2,
+      "accepted": false,
+      "category": "retrieval_miss",
+      "patch": "retrieval_miss/top_k+2",
+      "dev_before": {
+        "passes": 15,
+        "n": 20,
+        "rate": 0.75
+      },
+      "dev_after": {
+        "passes": 14,
+        "n": 20,
+        "rate": 0.7
+      },
+      "fixed": [],
+      "regressed": [
+        "sp-A04"
+      ],
+      "gate": "net gain -1 does not exceed the noise floor 0"
+    }
+  ]
+}

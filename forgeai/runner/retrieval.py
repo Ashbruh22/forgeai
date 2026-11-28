@@ -114,7 +114,7 @@ class HybridIndex:
         return float(scores[position]) if position is not None and len(scores) else 0.0
 
     def search(
-        self, query: str, top_k: int, dense_weight: float, bm25_weight: float, min_score: float
+        self, query: str, top_k: int, dense_weight: float, bm25_weight: float, min_score: float, reserve_prose: int = 0,
     ) -> list[Hit]:
         if not self.chunks or self._bm25 is None:
             return []
@@ -135,4 +135,22 @@ class HybridIndex:
             for i in np.argsort(-fused, kind="stable")
             if dense[i] >= min_score
         ]
-        return hits[:top_k]
+        chosen = hits[:top_k]
+        if reserve_prose > 0:
+            chosen = reserve_slots(hits, top_k, reserve_prose)
+        return chosen
+
+
+def reserve_slots(hits: list[Hit], top_k: int, reserve_prose: int) -> list[Hit]:
+    """Source diversity: ``reserve_prose`` of the ``top_k`` slots go to prose chunks when the ranking has them (above
+    min_score), so many table rows cannot crowd the documents' sentences out. The kept order is the fused ranking."""
+    chosen = hits[:top_k]
+    need = min(reserve_prose, top_k) - sum(1 for h in chosen if h.chunk.kind == "prose")
+    if need <= 0:
+        return chosen
+    extra = [h for h in hits[top_k:] if h.chunk.kind == "prose"][:need]
+    if not extra:
+        return chosen
+    droppable = [h for h in reversed(chosen) if h.chunk.kind != "prose"][: len(extra)]
+    keep = [h for h in chosen if h not in droppable] + extra
+    return sorted(keep, key=lambda h: -h.score)

@@ -1,0 +1,6 @@
+old 29 cases, new 28 cases
+  same question kept: 28  (renumbered id: 10, moved dev/test: 2, tool mode now optional: 2)
+  removed: 1   added: 0
+    - sp-M01 [multidoc] What is the total cost for part number MT-6017 from supplier S01, including the applicable discount rate for orders in t
+    ~ sp-T01 tool mode required -> optional: What is the minimum order quantity for the part with part number HD-5983 supplied by supplier S01?
+    ~ sp-T03 tool mode required -> optional: What is the snapshot date for the spare part with part number AC-4539 supplied by supplier S03?

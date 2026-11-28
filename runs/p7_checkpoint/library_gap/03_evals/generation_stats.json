@@ -1,0 +1,61 @@
+{
+  "target_total": 32,
+  "floor": 20,
+  "valid_cases": 27,
+  "floor_met": true,
+  "generation_rounds": 6,
+  "targets": {
+    "answerable": 14,
+    "multidoc": 7,
+    "ambiguous": 4,
+    "out_of_scope": 7,
+    "tool_required": 0
+  },
+  "generated_candidates": {
+    "answerable": 50,
+    "out_of_scope": 20,
+    "multidoc": 6
+  },
+  "validated_after_filters": {
+    "answerable": 11,
+    "multidoc": 4,
+    "out_of_scope": 12
+  },
+  "selected": {
+    "answerable": 11,
+    "multidoc": 4,
+    "out_of_scope": 12
+  },
+  "split": {
+    "dev": 19,
+    "test": 8
+  },
+  "rejections_by_reason": {
+    "contradicts the requirements": 4,
+    "question does not identify one table row": 11,
+    "the corpus can answer it": 3,
+    "the merged question dropped one of the two questions": 1,
+    "duplicate (embedding similarity)": 41,
+    "independent answerability failed": 1
+  },
+  "candidates_attempted": 88,
+  "rejection_rate": 0.693,
+  "shortfall": {
+    "answerable": 3,
+    "multidoc": 3,
+    "ambiguous": 4
+  },
+  "coverage": {
+    "items": 16,
+    "covered": 16,
+    "uncovered": [],
+    "cases": 27,
+    "uncovered_in_dev": []
+  },
+  "key_facts_per_case": {
+    "1": 9,
+    "2": 5,
+    "3": 1,
+    "0": 12
+  }
+}

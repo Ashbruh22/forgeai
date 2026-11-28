@@ -332,7 +332,7 @@ def test_canary_detection_is_tabulated_per_type_and_a_faithful_judge_scores_well
 def test_the_judge_is_chosen_by_layer_two_accuracy_and_low_types_are_listed() -> None:
     def table(**acc) -> dict:
         base = {k: {"n": 5, "pipeline_accuracy": 1.0, "layer2_accuracy": 1.0} for k in
-                ("gold", "number_swap", "negation", "wrong_document", "fabricated_clause", "padded_correct", "concise_correct")}
+                ("gold", "number_swap", "number_swap_given", "negation", "wrong_document", "fabricated_clause", "padded_correct", "concise_correct")}
         base["wrong_document"]["layer2_accuracy"] = None
         for k, v in acc.items():
             base[k]["layer2_accuracy"] = v

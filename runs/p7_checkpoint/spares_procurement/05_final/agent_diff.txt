@@ -1,0 +1,16 @@
+--- agent.v0.yaml
++++ 05_final/agent.yaml
+@@ -114,10 +114,10 @@
+     overlap_tokens: 60
+   csv_mode: row_as_record
+   hybrid:
+-    dense_weight: 0.5
+-    bm25_weight: 0.5
++    dense_weight: 0.3
++    bm25_weight: 0.7
+     fusion: rrf
+-  top_k: 6
++  top_k: 8
+   min_score: 0.6706
+   min_score_bounds:
+   - 0.5706

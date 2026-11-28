@@ -1,0 +1,149 @@
+{
+  "iteration": 1,
+  "category": "retrieval_miss",
+  "category_counts": {
+    "retrieval_miss": 3,
+    "wrong_refusal": 1,
+    "prompt_defect": 1
+  },
+  "target_cases": [
+    "sp-A09",
+    "sp-M01",
+    "sp-M02"
+  ],
+  "failures": {
+    "sp-A01": {
+      "category": "hallucination",
+      "section": "grounding_rules",
+      "low_confidence": true,
+      "reason": "The evidence does not specify the supplier, it only mentions that the supplier_id is S01, which is the same for all parts."
+    },
+    "sp-A03": {
+      "category": "hallucination",
+      "section": "grounding_rules",
+      "low_confidence": true,
+      "reason": "the identifier s01 is in neither the context nor a tool result; the number(s) s01 appear in neither the context, the tool results nor the question"
+    },
+    "sp-A09": {
+      "category": "retrieval_miss",
+      "section": "",
+      "low_confidence": false,
+      "reason": "refused and no gold chunk was retrieved"
+    },
+    "sp-M01": {
+      "category": "retrieval_miss",
+      "section": "",
+      "low_confidence": false,
+      "reason": "no gold chunk (or not every expected document) was among the retrieved chunks"
+    },
+    "sp-M02": {
+      "category": "retrieval_miss",
+      "section": "",
+      "low_confidence": false,
+      "reason": "refused and no gold chunk was retrieved"
+    },
+    "sp-X01": {
+      "category": "wrong_refusal",
+      "section": "refusal_policy",
+      "low_confidence": false,
+      "reason": "refused an ambiguous question whose passages were retrieved"
+    },
+    "sp-O08": {
+      "category": "hallucination",
+      "section": "grounding_rules",
+      "low_confidence": true,
+      "reason": "answered a question that should be refused, with unsupported claims"
+    },
+    "sp-T04": {
+      "category": "prompt_defect",
+      "section": "tool_policy",
+      "low_confidence": false,
+      "reason": "final value '34166.33' not in the answer within tolerance"
+    }
+  },
+  "patch_id": "retrieval_miss/top_k+2",
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/retrieval/top_k",
+      "value": 8
+    },
+    {
+      "op": "replace",
+      "path": "/retrieval/hybrid/bm25_weight",
+      "value": 0.7
+    },
+    {
+      "op": "replace",
+      "path": "/retrieval/hybrid/dense_weight",
+      "value": 0.3
+    }
+  ],
+  "rationale": "the gold chunk was not among the top-k chunks: widen the window by two; the questions carry exact codes, so shift the hybrid weight toward BM25",
+  "noise_floor": 0,
+  "score_before": {
+    "dev": {
+      "passes": 12,
+      "n": 20,
+      "rate": 0.6
+    }
+  },
+  "score_after": {
+    "dev": {
+      "passes": 15,
+      "n": 20,
+      "rate": 0.75
+    }
+  },
+  "fixed": [
+    "sp-M01",
+    "sp-O08",
+    "sp-X01"
+  ],
+  "regressed": [],
+  "still_failing": [
+    "sp-A01",
+    "sp-A03",
+    "sp-A09",
+    "sp-M02",
+    "sp-T04"
+  ],
+  "net_gain": 3,
+  "accepted": true,
+  "gate_reason": "confirmed: 3 of 3 fixes held on the rerun; net gain 3 exceeds the noise floor 0",
+  "confirmation": {
+    "rerun_cases": [
+      "sp-M01",
+      "sp-O08",
+      "sp-X01"
+    ],
+    "fixes_first_run": [
+      "sp-M01",
+      "sp-O08",
+      "sp-X01"
+    ],
+    "fixes_held": [
+      "sp-M01",
+      "sp-O08",
+      "sp-X01"
+    ],
+    "fixes_dropped": [],
+    "regressed_still_failing": [],
+    "regressed_passed_on_rerun": [],
+    "first_run_gate": "net gain 3 exceeds the noise floor 0 with 0 regression(s)"
+  },
+  "status": "accepted",
+  "rejected_drafts": 0,
+  "dev_scorecard": {
+    "pass_rate": {
+      "passes": 15,
+      "n": 20,
+      "rate": 0.75,
+      "wilson95": [
+        0.531,
+        0.888
+      ]
+    },
+    "groundedness": 0.909
+  }
+}

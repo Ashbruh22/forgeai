@@ -66,10 +66,10 @@ def test_the_optimizer_package_when_it_exists_cannot_reach_the_sealed_module_or_
         assert "sealed" not in text and "test_scorecard" not in text and "test_case_scores" not in text, path
 
 
-def test_only_the_baseline_and_the_command_line_import_the_sealed_module() -> None:
+def test_only_the_baseline_the_driver_and_the_command_line_import_the_sealed_module() -> None:
     importers = {path.relative_to(PACKAGE).as_posix() for path in PACKAGE.rglob("*.py")
                  if "forgeai.judge.sealed" in imports_of(path)}
-    assert importers <= {"judge/baseline.py", "cli.py"}, importers
+    assert importers <= {"judge/baseline.py", "cli.py", "iterate.py"}, importers
 
 
 def sample(case_id: str) -> CaseRun:

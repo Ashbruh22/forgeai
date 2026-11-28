@@ -39,9 +39,9 @@ from forgeai.judge.score import score_case
 from forgeai.runner.contract import Answer, Citation
 from forgeai.textmatch import is_verbatim, normalize
 
-PERTURBATIONS = ("number_swap", "negation", "wrong_document", "fabricated_clause", "padded_correct", "concise_correct")
-SHOULD_BE_DETECTED = {"number_swap", "negation", "wrong_document", "fabricated_clause"}
-LAYER2_SCORED = ("number_swap", "negation", "fabricated_clause", "padded_correct", "concise_correct")
+PERTURBATIONS = ("number_swap", "number_swap_given", "negation", "wrong_document", "fabricated_clause", "padded_correct", "concise_correct")
+SHOULD_BE_DETECTED = {"number_swap", "number_swap_given", "negation", "wrong_document", "fabricated_clause"}
+LAYER2_SCORED = ("number_swap", "number_swap_given", "negation", "fabricated_clause", "padded_correct", "concise_correct")
 GOLD = "gold"
 FABRICATION = "In addition, a 37% surcharge applies to requests made after the first quarter of 2019, according to an internal addendum."
 PADDING_OPEN = "Thank you for your question. Based on the documents I was given, here is what I found."
@@ -140,6 +140,23 @@ def number_swap(case: EvalCase, gold: CaseRun) -> CaseRun | None:
     return None
 
 
+def number_swap_given(case: EvalCase, gold: CaseRun) -> CaseRun | None:
+    """Replace a number of the answer by a DIFFERENT number the question contains (a code or a quantity the user wrote).
+    Counting the question's own numbers as given must not let this through: the number is in the wrong relation."""
+    given = [float(m.group(0).replace(",", "")) for m in NUMBER.finditer(case.question)]  # codes' digits included
+    text = gold.answer.answer
+    wanted = {n for f in case.key_facts if f.kind == "number" for n in numbers_in(f.text)}
+    tokens = [m for m in NUMBER.finditer(text) if m.group(0).replace(",", "").replace(".", "", 1).isdigit()]
+    tokens.sort(key=lambda m: float(m.group(0).replace(",", "")) not in wanted)
+    for match in tokens:
+        value = float(match.group(0).replace(",", ""))
+        for candidate in given:
+            if candidate != value:
+                swapped = text[: match.start()] + f"{candidate:g}" + text[match.end():]
+                return gold.model_copy(update={"answer": gold.answer.model_copy(update={"answer": swapped})})
+    return None
+
+
 def negation(gold: CaseRun) -> CaseRun:
     text = gold.answer.answer
     for aux in _AUXILIARIES:
@@ -208,7 +225,7 @@ def build_canaries(demo: str, cases: list[EvalCase], chunks: list[Chunk], per_de
             continue
         gold, gold_chunks = built
         variants = {
-            GOLD: gold, "number_swap": number_swap(case, gold), "negation": negation(gold),
+            GOLD: gold, "number_swap": number_swap(case, gold), "number_swap_given": number_swap_given(case, gold), "negation": negation(gold),
             "wrong_document": wrong_document(case, gold, chunks), "fabricated_clause": fabricated_clause(gold),
             "padded_correct": padded_correct(gold, gold_chunks), "concise_correct": concise_correct(case, gold)}
         for kind, run in variants.items():

@@ -199,5 +199,45 @@ def test_whole_numbers_must_match_exactly_but_decimals_may_differ_by_rounding() 
 
     assert not same_number(8604, 8597) and same_number(8597, 8597) and same_number(200.1, 200.10) and same_number(19.995, 20.0)
     spans = build_spans(run_of())
-    assert answer_number_checks("part_no: PP-24 | stock", "q", spans) == []
-    assert answer_number_checks("part_no: PP-25 | stock", "q", spans)  # 25 is not 24
+    assert answer_number_checks("There are 24 units in stock", "q", spans) == []
+    assert answer_number_checks("There are 25 units in stock", "q", spans)  # 25 is not 24
+
+
+def test_a_number_the_question_gives_is_supported_by_the_question_only_in_the_same_relation() -> None:
+    from forgeai.judge.claims import given_by_question
+
+    question = "What is the discounted cost for ordering 15 units of part MT-2474?"
+    assert given_by_question("The cost for 15 units of part MT-2474 is shown.", question, 15.0)
+    assert not given_by_question("The discounted cost is USD 15.", question, 15.0)  # same digits, another relation
+    assert not given_by_question("The minimum order quantity is 2474.", question, 2474.0)  # an identifier's digits are not a quantity
+    spans = build_spans(run_of(tools=[ToolCallRecord(tool="calculator", args={}, result="217.5")]))
+    echo = numeric_verdict("The order is for 15 units of part MT-2474.", spans, question)
+    assert echo.verdict == "supported" and "question gives" in echo.reason
+    assert numeric_verdict("The order is for 15 units and costs USD 218.", spans, question).verdict == "unsupported"
+    assert numeric_verdict("The discounted cost is USD 15.", spans, question).verdict == "unsupported"
+
+
+def test_an_identifier_must_occur_whole_in_the_evidence_and_its_digits_are_not_a_value() -> None:
+    from forgeai.ingest.models import Chunk
+    from forgeai.judge.models import RetrievedChunk
+
+    row = "part_no: MT-8424 | unit_price_usd: 34.57 | moq: 2"
+    chunk = Chunk(chunk_id="p.csv#c1", doc="p.csv", index=1, text=row, kind="row", char_start=0, char_end=len(row))
+    run = run_of("x").model_copy(update={"retrieved": [RetrievedChunk(chunk_id=chunk.chunk_id, doc=chunk.doc, char_start=0, char_end=len(row), text=row)]})
+    spans = build_spans(run)
+    assert numeric_verdict("The unit price of MT-8424 is 34.57.", spans, "price of MT-8424?").verdict == "supported"
+    swapped = numeric_verdict("The unit price of MT-8424 is 8424.", spans, "price of MT-8424?")
+    assert swapped.verdict == "unsupported" and "8424" in swapped.missing  # the part number is not a price
+    fake = numeric_verdict("The part MT-9999 costs 34.57.", spans, "what does it cost?")
+    assert fake.verdict == "unsupported" and "mt-9999" in fake.missing
+    assert numeric_verdict("Part MT-8424 is a cartridge.", spans, "q") is None  # an identifier that checks out: the judge decides the rest
+
+
+def test_a_percentage_is_not_supported_by_the_same_digits_in_another_unit() -> None:
+    from forgeai.judge.claims import units_agree
+
+    assert not units_agree("A 15000% discount applies.", "Orders between USD 15,000 and USD 49,999 get 8%.")
+    assert units_agree("An 8% discount applies.", "Orders between USD 15,000 and USD 49,999 get 8%.")
+    assert units_agree("The fee is USD 15,000.", "Orders between USD 15,000 and USD 49,999 get 8%.")
+    assert not units_agree("The fee is USD 8.", "An 8% discount applies.")
+    assert units_agree("There are 8 copies.", "An 8% discount applies.")  # no unit on the claim side: not a conflict

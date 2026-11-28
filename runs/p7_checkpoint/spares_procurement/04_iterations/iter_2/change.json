@@ -1,0 +1,97 @@
+{
+  "iteration": 2,
+  "category": "retrieval_miss",
+  "category_counts": {
+    "prompt_defect": 2,
+    "retrieval_miss": 2
+  },
+  "target_cases": [
+    "sp-A09",
+    "sp-M02"
+  ],
+  "failures": {
+    "sp-A01": {
+      "category": "prompt_defect",
+      "section": "citation_rules",
+      "low_confidence": false,
+      "reason": "wrong or invalid citation: the expected source was not cited"
+    },
+    "sp-A03": {
+      "category": "hallucination",
+      "section": "grounding_rules",
+      "low_confidence": true,
+      "reason": "the identifier s01 is in neither the context nor a tool result; the number(s) s01 appear in neither the context, the tool results nor the question"
+    },
+    "sp-A09": {
+      "category": "retrieval_miss",
+      "section": "",
+      "low_confidence": false,
+      "reason": "refused and no gold chunk was retrieved"
+    },
+    "sp-M02": {
+      "category": "retrieval_miss",
+      "section": "",
+      "low_confidence": false,
+      "reason": "refused and no gold chunk was retrieved"
+    },
+    "sp-T04": {
+      "category": "prompt_defect",
+      "section": "tool_policy",
+      "low_confidence": false,
+      "reason": "final value '34166.33' not in the answer within tolerance"
+    }
+  },
+  "patch_id": "retrieval_miss/top_k+2",
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/retrieval/top_k",
+      "value": 10
+    }
+  ],
+  "rationale": "the gold chunk was not among the top-k chunks: widen the window by two",
+  "noise_floor": 0,
+  "score_before": {
+    "dev": {
+      "passes": 15,
+      "n": 20,
+      "rate": 0.75
+    }
+  },
+  "score_after": {
+    "dev": {
+      "passes": 14,
+      "n": 20,
+      "rate": 0.7
+    }
+  },
+  "fixed": [],
+  "regressed": [
+    "sp-A04"
+  ],
+  "still_failing": [
+    "sp-A01",
+    "sp-A03",
+    "sp-A09",
+    "sp-M02",
+    "sp-T04"
+  ],
+  "net_gain": -1,
+  "accepted": false,
+  "gate_reason": "net gain -1 does not exceed the noise floor 0",
+  "confirmation": null,
+  "status": "rejected: gate",
+  "rejected_drafts": 0,
+  "dev_scorecard": {
+    "pass_rate": {
+      "passes": 14,
+      "n": 20,
+      "rate": 0.7,
+      "wilson95": [
+        0.481,
+        0.855
+      ]
+    },
+    "groundedness": 0.909
+  }
+}

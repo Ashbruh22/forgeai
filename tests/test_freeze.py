@@ -112,3 +112,42 @@ def test_the_hash_does_not_change_when_a_checkout_converts_line_endings(tmp_path
     lf = path.read_bytes().replace(bytes([13, 10]), bytes([10]))
     path.write_bytes(lf.replace(bytes([10]), bytes([13, 10])))  # CRLF whatever the file had before
     assert assert_eval_set_frozen(run)
+
+
+def test_the_judge_fingerprint_covers_config_prompts_and_scorer_code_and_a_change_to_any_is_refused(tmp_path, config, monkeypatch) -> None:
+    from forgeai.judge import fingerprint
+    from forgeai.judge.fingerprint import JudgeChangedError, JudgeNotFrozenError, assert_judge_frozen, freeze_judge, judge_fingerprint
+
+    run = make_run(tmp_path)
+    with pytest.raises(JudgeNotFrozenError):
+        assert_judge_frozen(run, config)
+    entry = freeze_judge(run, config)
+    assert set(entry["scorer_code"]) >= {"judge/layer2.py", "judge/claims.py", "evals/matching.py"}
+    assert any(k.startswith("judge/") for k in entry["prompt_versions"]) and entry["config"]["judge_model"]["name"] == config.judge_model.name
+    assert assert_judge_frozen(run, config) == entry["sha256"]
+    changed = config.model_copy(update={"judge_model": config.judge_model.model_copy(update={"temperature": 0.7})})
+    with pytest.raises(JudgeChangedError, match="config.judge_model"):
+        assert_judge_frozen(run, changed)
+    monkeypatch.setattr(fingerprint, "prompt_versions", lambda: {"judge/claim_check": 99})
+    with pytest.raises(JudgeChangedError, match="prompt_versions"):
+        assert_judge_frozen(run, config)
+    monkeypatch.undo()
+    monkeypatch.setattr(fingerprint, "_file_hash", lambda path: "tampered")
+    with pytest.raises(JudgeChangedError, match="scorer_code"):
+        assert_judge_frozen(run, config)
+
+
+def test_the_baseline_command_refuses_a_run_whose_judge_changed(tmp_path, config) -> None:
+    from typer.testing import CliRunner
+
+    from forgeai.cli import app
+    from forgeai.judge.fingerprint import freeze_judge
+
+    run = make_run(tmp_path)
+    freeze_eval_set(run, config, digests={})
+    freeze_judge(run, config)
+    manifest = json.loads((run / "manifest.json").read_text(encoding="utf-8"))
+    manifest["judge"]["scorer_code"]["judge/claims.py"] = "0" * 64
+    (run / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    result = CliRunner().invoke(app, ["baseline", "--run", str(run), "--out", str(tmp_path / "out"), "--canaries", str(tmp_path / "c.json")])
+    assert result.exit_code == 8 and "judge changed" in result.output.replace("\n", " ")

@@ -1,0 +1,116 @@
+{
+  "cases": 20,
+  "pass_rate": {
+    "passes": 14,
+    "n": 20,
+    "rate": 0.7,
+    "wilson95": [
+      0.481,
+      0.855
+    ]
+  },
+  "pass_rate_without_layer2_upgrades": {
+    "passes": 14,
+    "n": 20,
+    "rate": 0.7,
+    "wilson95": [
+      0.481,
+      0.855
+    ]
+  },
+  "pass_rate_by_type": {
+    "ambiguous": {
+      "passes": 1,
+      "n": 1,
+      "rate": 1.0,
+      "wilson95": [
+        0.207,
+        1.0
+      ]
+    },
+    "answerable": {
+      "passes": 3,
+      "n": 7,
+      "rate": 0.429,
+      "wilson95": [
+        0.158,
+        0.75
+      ]
+    },
+    "multidoc": {
+      "passes": 1,
+      "n": 2,
+      "rate": 0.5,
+      "wilson95": [
+        0.095,
+        0.905
+      ]
+    },
+    "out_of_scope": {
+      "passes": 7,
+      "n": 7,
+      "rate": 1.0,
+      "wilson95": [
+        0.646,
+        1.0
+      ]
+    },
+    "tool_required": {
+      "passes": 2,
+      "n": 3,
+      "rate": 0.667,
+      "wilson95": [
+        0.208,
+        0.939
+      ]
+    }
+  },
+  "groundedness": {
+    "passes": 10,
+    "n": 11,
+    "rate": 0.909,
+    "wilson95": [
+      0.623,
+      0.984
+    ],
+    "note": "answered cases whose every claim is supported by the retrieved context (layer 2)"
+  },
+  "key_fact_recall": {
+    "matched": 11,
+    "total": 16,
+    "rate": 0.688,
+    "layer1_only_rate": 0.688
+  },
+  "refusal": {
+    "precision": 0.778,
+    "recall": 1.0,
+    "refused_by_agent": 9,
+    "refusal_expected": 7,
+    "answered_when_refusal_expected": 0
+  },
+  "citation_validity": {
+    "valid": 13,
+    "total": 15,
+    "rate": 0.867
+  },
+  "retrieval_hit_at_k": {
+    "k": 6,
+    "hits": 11,
+    "n": 13,
+    "rate": 0.846,
+    "mean_first_hit_rank": 1.64
+  },
+  "tool_accuracy": {
+    "correct": 0,
+    "n": 1,
+    "rate": 0.0
+  },
+  "latency_ms": {
+    "mean": 5158,
+    "median": 4094,
+    "max": 14981
+  },
+  "tokens_per_case": {},
+  "layer2_low_confidence_types": [],
+  "low_confidence_cases": 2
+}

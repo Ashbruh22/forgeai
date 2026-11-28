@@ -96,7 +96,7 @@ def judge_claims(case: EvalCase, run: CaseRun, judge: ModelSpec, today: date, *,
     verdicts: list[ClaimVerdict] = []
     for claim in claims:
         bearing = answer_bearing(claim, case, today, fuzzy_min)
-        decided = numeric_verdict(claim, spans)
+        decided = numeric_verdict(claim, spans, case.question)
         if decided is not None:
             verdicts.append(decided)
             continue

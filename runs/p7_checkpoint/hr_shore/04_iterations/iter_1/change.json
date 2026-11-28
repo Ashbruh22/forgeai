@@ -1,0 +1,97 @@
+{
+  "iteration": 1,
+  "category": "prompt_defect",
+  "category_counts": {
+    "prompt_defect": 4
+  },
+  "target_cases": [
+    "hr-A14",
+    "hr-M03",
+    "hr-M06",
+    "hr-O07"
+  ],
+  "failures": {
+    "hr-A14": {
+      "category": "prompt_defect",
+      "section": "citation_rules",
+      "low_confidence": false,
+      "reason": "wrong or invalid citation: the expected source was not cited"
+    },
+    "hr-M03": {
+      "category": "prompt_defect",
+      "section": "citation_rules",
+      "low_confidence": false,
+      "reason": "wrong or invalid citation: the expected source was not cited"
+    },
+    "hr-M04": {
+      "category": "hallucination",
+      "section": "grounding_rules",
+      "low_confidence": true,
+      "reason": "nothing says confidentiality requirements for former employees specifically, but it does say for all employees, including former employees, for 2 years after employment ends; nothing says employees mu"
+    },
+    "hr-M06": {
+      "category": "prompt_defect",
+      "section": "citation_rules",
+      "low_confidence": false,
+      "reason": "wrong or invalid citation: the expected source was not cited"
+    },
+    "hr-O07": {
+      "category": "prompt_defect",
+      "section": "scope",
+      "low_confidence": false,
+      "reason": "answered (or asked to clarify) where the question is out of scope and should be refused"
+    }
+  },
+  "patch_id": "prompt_defect/citation_rules",
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/prompt_sections/citation_rules",
+      "value": "Cite the chunk behind every claim. Copy 'doc' and 'chunk_id' exactly as shown in the context: a chunk_id always looks like <file name>#c<number>, for example 'policy.pdf#c12', and must be written in full. The 'quote' must be a short span copied word for word from that chunk's text, never paraphrased. Do not cite a chunk you did not use. Do not put tool results in citations."
+    }
+  ],
+  "rationale": "3 failing case(s) point at the citation_rules section",
+  "noise_floor": 1,
+  "score_before": {
+    "dev": {
+      "passes": 19,
+      "n": 24,
+      "rate": 0.792
+    }
+  },
+  "score_after": {
+    "dev": {
+      "passes": 20,
+      "n": 24,
+      "rate": 0.833
+    }
+  },
+  "fixed": [
+    "hr-M06"
+  ],
+  "regressed": [],
+  "still_failing": [
+    "hr-A14",
+    "hr-M03",
+    "hr-M04",
+    "hr-O07"
+  ],
+  "net_gain": 1,
+  "accepted": false,
+  "gate_reason": "net gain 1 does not exceed the noise floor 1",
+  "confirmation": null,
+  "status": "rejected: gate",
+  "rejected_drafts": 0,
+  "dev_scorecard": {
+    "pass_rate": {
+      "passes": 20,
+      "n": 24,
+      "rate": 0.833,
+      "wilson95": [
+        0.641,
+        0.933
+      ]
+    },
+    "groundedness": 0.941
+  }
+}

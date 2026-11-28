@@ -264,9 +264,67 @@ def freeze(
 ) -> None:
     """Freeze the eval set: write its sha256 into the run's manifest.json. Scoring refuses a changed set afterwards."""
     from forgeai.evals.freeze import freeze_eval_set
+    from forgeai.judge.fingerprint import freeze_judge
 
-    entry = freeze_eval_set(run, load_config(config_path))
-    console.print(f"frozen {entry['cases']} cases, sha256 {entry['sha256'][:16]}... in {run / 'manifest.json'}")
+    config = load_config(config_path)
+    entry = freeze_eval_set(run, config)
+    judge = freeze_judge(run, config)
+    console.print(f"frozen {entry['cases']} cases, sha256 {entry['sha256'][:16]}... and the judge (sha256 {judge['sha256'][:16]}...) in {run / 'manifest.json'}")
+
+
+def _optimizer_context(run: Path, config_path: Path):  # noqa: ANN202
+    from forgeai.intake.schema import load_requirements
+
+    config = load_config(config_path)
+    req = load_requirements(run / "00_intake" / "requirements.yaml")
+    vocabulary = " ".join([req.purpose, req.audience, *[t.topic for t in req.must_answer_topics], *[t.topic for t in req.must_refuse_topics]])
+    return config, vocabulary
+
+
+@app.command()
+def noise(
+    run: Path = typer.Option(..., help="Run folder holding 02_agent/, 03_evals/ and 05_baseline/"),
+    canaries_path: Path = typer.Option(..., "--canaries", help="canaries.json (for the low-confidence types)"),
+    config_path: Path = typer.Option(Path("forgeai.yaml"), "--config", help="forgeai.yaml"),
+) -> None:
+    """The noise floor: re-run agent v0 on the dev split without any cache and count the cases whose verdict flips."""
+    from forgeai.iterate import measure_noise
+    from forgeai.judge import store
+
+    config = load_config(config_path)
+    low = json.loads(canaries_path.read_text(encoding="utf-8"))["low_confidence_types"]
+    preflight(config, run)
+    embedder = SentenceTransformerEmbedder(config.embedding_model, config.embedding_revision)
+    baseline = {s.case_id: s.passed for s in store.read_dev_scores(run)}
+    with run_lock(run, "noise"), stage_timer(run, "noise", config.min_free_ram_pct):
+        report = measure_noise(run, run, config, embedder, baseline, low, progress=lambda line: console.print(line, highlight=False))
+    _merge_resources(run, "noise")
+    console.print(f"noise floor: {report['noise_floor']} of {report['dev_cases']} dev cases flipped ({report['flipped_cases']})")
+
+
+@app.command()
+def optimize(
+    run: Path = typer.Option(..., help="Run folder holding the frozen eval set, the baseline and noise_floor.json"),
+    canaries_path: Path = typer.Option(..., "--canaries", help="canaries.json (for the low-confidence types)"),
+    config_path: Path = typer.Option(Path("forgeai.yaml"), "--config", help="forgeai.yaml"),
+) -> None:
+    """Phase 7: up to three optimizer cycles (classify, patch, re-run dev, gate); test scored into sealed/ only."""
+    from forgeai.evals.freeze import EvalSetChangedError, EvalSetNotFrozenError
+    from forgeai.iterate import run_optimizer
+    from forgeai.judge.fingerprint import JudgeChangedError, JudgeNotFrozenError
+
+    config, vocabulary = _optimizer_context(run, config_path)
+    low = json.loads(canaries_path.read_text(encoding="utf-8"))["low_confidence_types"]
+    preflight(config, run)
+    embedder = SentenceTransformerEmbedder(config.embedding_model, config.embedding_revision)
+    try:
+        with run_lock(run, "optimize"), stage_timer(run, "optimize", config.min_free_ram_pct):
+            result = run_optimizer(run, run, config, embedder, low, vocabulary, progress=lambda line: console.print(line, highlight=False))
+    except (EvalSetChangedError, EvalSetNotFrozenError, JudgeChangedError, JudgeNotFrozenError) as exc:
+        console.print(f"[red]{exc}[/red]")
+        raise typer.Exit(7) from exc
+    _merge_resources(run, "optimize")
+    console.print(f"stopped: {result.stop_reason}; {len(result.iterations)} cycle(s), accepted: {[r.iteration for r in result.iterations if r.accepted]}")
 
 
 def _merge_resources(out: Path, stage: str) -> None:
@@ -350,6 +408,13 @@ def baseline(
     except (EvalSetChangedError, EvalSetNotFrozenError) as exc:
         console.print(f"[red]{exc}[/red]")
         raise typer.Exit(7) from exc
+    from forgeai.judge.fingerprint import JudgeChangedError, JudgeNotFrozenError, assert_judge_frozen
+
+    try:
+        assert_judge_frozen(run, config)
+    except (JudgeChangedError, JudgeNotFrozenError) as exc:
+        console.print(f"[red]{exc}[/red]")
+        raise typer.Exit(8) from exc
     canary = json.loads(canaries_path.read_text(encoding="utf-8"))
     if canary["choice"]["chosen"] != config.judge_model.name:
         console.print(f"[red]forgeai.yaml judge_model is {config.judge_model.name} but the canaries chose {canary['choice']['chosen']}.[/red]")

@@ -117,7 +117,8 @@ class AgentRunner:
                 fallback=RewrittenQuery(query=question),
             ).query
         hits = self.index.search(
-            query, params.top_k, params.hybrid.dense_weight, params.hybrid.bm25_weight, params.min_score
+            query, params.top_k, params.hybrid.dense_weight, params.hybrid.bm25_weight, params.min_score,
+            params.reserve_prose,
         )
         return query, hits
 

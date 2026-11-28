@@ -32,3 +32,19 @@ def read_test_scorecard(out: Path) -> dict[str, Any]:
 def read_test_scores(out: Path) -> list[CaseScore]:
     path = sealed_dir(out) / "test_case_scores.jsonl"
     return [CaseScore.model_validate_json(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
+def write_iteration(out: Path, iteration: int, runs: list[CaseRun], scores: list[CaseScore], card: dict[str, Any],
+                    change_test: dict[str, Any]) -> Path:
+    """Test results of one optimizer iteration: answers, verdicts, scorecard and the test side of the change log."""
+    directory = sealed_dir(out) / f"iter_{iteration}"
+    write_split(directory, "test_", runs, scores, card)
+    (directory / "change_test.json").write_text(json.dumps(change_test, indent=2), encoding="utf-8")
+    return directory
+
+
+def read_iteration(out: Path, iteration: int) -> dict[str, Any]:
+    directory = sealed_dir(out) / f"iter_{iteration}"
+    return {"scorecard": json.loads((directory / "test_scorecard.json").read_text(encoding="utf-8")),
+            "change_test": json.loads((directory / "change_test.json").read_text(encoding="utf-8")),
+            "scores": [CaseScore.model_validate_json(line) for line in (directory / "test_case_scores.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]}

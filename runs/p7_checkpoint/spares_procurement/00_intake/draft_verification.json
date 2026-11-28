@@ -1,0 +1,57 @@
+{
+  "raw_draft": {
+    "agent_name": {
+      "value": "ShipSpareAssistant",
+      "confidence": "resolved_from_brief"
+    },
+    "purpose": {
+      "value": "Help technical superintendents find ship spares, compare suppliers, estimate costs, and track inventory.",
+      "confidence": "resolved_from_brief"
+    },
+    "audience": {
+      "value": "Technical superintendents",
+      "confidence": "resolved_from_brief"
+    },
+    "tone": {
+      "value": "Professional and concise",
+      "confidence": "resolved_from_brief"
+    },
+    "scope_in": {
+      "values": [
+        "ship spares",
+        "supplier comparison",
+        "order cost estimation",
+        "inventory availability"
+      ],
+      "confidence": "resolved_from_brief"
+    },
+    "scope_out": {
+      "values": [],
+      "confidence": "unresolved"
+    },
+    "must_answer": {
+      "values": [
+        "What is in stock at each port?",
+        "Which suppliers offer the part?",
+        "What is the cost with discounts?",
+        "When will the parts arrive?"
+      ],
+      "confidence": "resolved_from_brief"
+    },
+    "must_refuse": {
+      "values": [],
+      "confidence": "unresolved"
+    },
+    "capabilities": {
+      "values": [
+        "document_qa",
+        "structured_lookup",
+        "arithmetic"
+      ],
+      "confidence": "resolved_from_brief"
+    }
+  },
+  "dropped_unsupported": [
+    "tone: dropped 'Professional and concise' (no support in brief or documents)"
+  ]
+}

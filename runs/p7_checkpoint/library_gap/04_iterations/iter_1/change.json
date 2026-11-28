@@ -1,0 +1,96 @@
+{
+  "iteration": 1,
+  "category": "retrieval_miss",
+  "category_counts": {
+    "prompt_defect": 2,
+    "retrieval_miss": 3
+  },
+  "target_cases": [
+    "lg-M01",
+    "lg-M03",
+    "lg-M04"
+  ],
+  "failures": {
+    "lg-A02": {
+      "category": "prompt_defect",
+      "section": "citation_rules",
+      "low_confidence": false,
+      "reason": "wrong or invalid citation: the expected source was not cited"
+    },
+    "lg-A04": {
+      "category": "prompt_defect",
+      "section": "scope",
+      "low_confidence": false,
+      "reason": "the answer lacks required facts (kinds: snapshot_date) that were supported by the evidence"
+    },
+    "lg-M01": {
+      "category": "retrieval_miss",
+      "section": "",
+      "low_confidence": false,
+      "reason": "refused and no gold chunk was retrieved"
+    },
+    "lg-M03": {
+      "category": "retrieval_miss",
+      "section": "",
+      "low_confidence": false,
+      "reason": "no gold chunk (or not every expected document) was among the retrieved chunks"
+    },
+    "lg-M04": {
+      "category": "retrieval_miss",
+      "section": "",
+      "low_confidence": false,
+      "reason": "refused and no gold chunk was retrieved"
+    }
+  },
+  "patch_id": "retrieval_miss/reserve_prose=1",
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/retrieval/reserve_prose",
+      "value": 1
+    }
+  ],
+  "rationale": "the failing cases' documents are prose but the retrieved set held table rows only: keep a slot for prose (source diversity)",
+  "noise_floor": 0,
+  "score_before": {
+    "dev": {
+      "passes": 14,
+      "n": 19,
+      "rate": 0.737
+    }
+  },
+  "score_after": {
+    "dev": {
+      "passes": 14,
+      "n": 19,
+      "rate": 0.737
+    }
+  },
+  "fixed": [],
+  "regressed": [],
+  "still_failing": [
+    "lg-A02",
+    "lg-A04",
+    "lg-M01",
+    "lg-M03",
+    "lg-M04"
+  ],
+  "net_gain": 0,
+  "accepted": false,
+  "gate_reason": "net gain 0 does not exceed the noise floor 0",
+  "confirmation": null,
+  "status": "rejected: gate",
+  "rejected_drafts": 0,
+  "dev_scorecard": {
+    "pass_rate": {
+      "passes": 14,
+      "n": 19,
+      "rate": 0.737,
+      "wilson95": [
+        0.512,
+        0.882
+      ]
+    },
+    "groundedness": 0.889
+  }
+}

@@ -45,7 +45,8 @@ def _plain(text: str) -> str:
 
 
 def build_spans(run: CaseRun) -> list[Span]:
-    """Sentences and table cells of every retrieved chunk, and every line (and the whole text) of every tool result."""
+    """Sentences and table cells of every retrieved chunk, and every line (and the whole text) of every tool result.
+    (What the question gives is handled by ``given_by_question``, not as a span: it is not evidence.)"""
     spans: list[Span] = []
     for chunk in run.retrieved:
         for sentence in _SENTENCE.split(chunk.text):
@@ -114,14 +115,28 @@ def same_number(found: float, wanted: float) -> bool:
     return abs(found - wanted) <= max(0.01, 0.001 * abs(wanted))
 
 
+def units_agree(claim: str, span_text: str) -> bool:
+    """A percentage in the claim must be a percentage in the span, an amount of money an amount of money: the same
+    digits with another unit ("15000%" for "USD 15,000") are not the same quantity. An unknown unit is not a conflict."""
+    from forgeai.evals.units import MONEY, RATE, quantities_in
+
+    have = quantities_in(span_text)
+    for q in quantities_in(claim):
+        if q.unit in (MONEY, RATE):
+            same_value = [h for h in have if abs(h.value - q.value) < 1e-9 and h.unit is not None]
+            if same_value and not any(h.unit == q.unit for h in same_value):
+                return False
+    return True
+
+
 def best_span(claim: str, spans: list[Span], need_numbers: list[float] | None = None) -> tuple[Span | None, float]:
     """The span that shares the most of the claim's subject (and, if given, contains all of ``need_numbers``). Among
     spans nearly as good as the best, one whose negation agrees with the claim's is preferred."""
     scored: list[tuple[float, Span]] = []
     for span in spans:
         if need_numbers is not None:
-            have = numbers_in(span.text)
-            if not all(any(same_number(h, n) for h in have) for n in need_numbers):
+            have = value_numbers(span.text)
+            if not all(any(same_number(h, n) for h in have) for n in need_numbers) or not units_agree(claim, span.text):
                 continue
         scored.append((coverage(claim, span.text), span))
     if not scored:
@@ -139,10 +154,30 @@ def best_span(claim: str, spans: list[Span], need_numbers: list[float] | None = 
 _DIGITS = re.compile(r"(?<![\w.])\d[\d,]*(?:\.\d+)?")
 
 
+_ISO = re.compile(r"(?<!\d)\d{4}-\d{2}-\d{2}(?!\d)")
+_CODE_TOKEN = re.compile(r"(?<![\w-])[A-Za-z]{1,6}[-_]?\d[\w-]*")
+
+
+def strip_codes(text: str) -> str:
+    """The text without identifier tokens ("MT-8424", "S03"): their digits are part of a name, not a quantity."""
+    return _CODE_TOKEN.sub(" ", text)
+
+
+def claim_codes(text: str) -> set[str]:
+    """Identifier tokens of ``text`` (lowercase)."""
+    return {m.group(0).lower().strip("-_") for m in _CODE_TOKEN.finditer(text)}
+
+
+def value_numbers(text: str) -> list[float]:
+    """Numbers of ``text`` that are quantities: digits outside identifiers, and spelled-out numbers."""
+    return numbers_in(strip_codes(text))
+
+
 def claim_numbers(text: str) -> list[float]:
-    """The numbers written with digits ("one document" is not a quantity; spelled-out numbers go to the judge model)."""
+    """The quantities written with digits ("one document" is not a quantity; spelled-out numbers go to the judge model;
+    the digits of a part code are not a quantity either: the code is checked as a whole)."""
     out = []
-    for raw in _DIGITS.findall(_ISO.sub(" ", text)):
+    for raw in _DIGITS.findall(strip_codes(_ISO.sub(" ", text))):
         try:
             out.append(float(raw.replace(",", "")))
         except ValueError:
@@ -150,11 +185,8 @@ def claim_numbers(text: str) -> list[float]:
     return out
 
 
-_ISO = re.compile(r"(?<!\d)\d{4}-\d{2}-\d{2}(?!\d)")
-
-
 def has_figure(claim: str) -> bool:
-    return bool(claim_numbers(claim) or dates_in(claim))
+    return bool(claim_numbers(claim) or claim_codes(claim) or dates_in(claim))
 
 
 def codes_in(text: str) -> set[str]:
@@ -178,12 +210,43 @@ def label_names_claim(claim: str, span_text: str) -> bool:
     return 2 <= len(letters) <= 6 and any("".join(w[0] for w in words[i:i + len(letters)]) == letters for i in range(len(words)))
 
 
-def numeric_verdict(claim: str, spans: list[Span]) -> ClaimVerdict | None:
-    """Support for a claim that has a number or date, decided by code; None if the claim has none."""
-    numbers, dates = claim_numbers(claim), dates_in(claim)
-    if not numbers and not dates:
+def _window(text: str, number: float, size: int = 1) -> str:
+    """The words around the first occurrence of ``number`` in ``text``."""
+    words = normalize(text).split()
+    for position, word in enumerate(words):
+        if any(abs(n - number) < 1e-9 for n in claim_numbers(word)):
+            return " ".join(words[max(0, position - size): position + size + 1])
+    return ""
+
+
+def given_by_question(claim: str, question: str, number: float) -> bool:
+    """The user's own number, restated in the same relation ("15 units" for "15 units"): it needs no evidence. The same
+    digits in another relation ("USD 15" for "15 units") are not given."""
+    if not question or not any(abs(n - number) < 1e-9 for n in claim_numbers(question)):
+        return False
+    asked, stated = _window(question, number), _window(claim, number)
+    return bool(asked and stated and canonical_terms(asked) & canonical_terms(stated))
+
+
+def numeric_verdict(claim: str, spans: list[Span], question: str = "") -> ClaimVerdict | None:
+    """Support for a claim that has a number or date, decided by code; None if the claim has none. Numbers the question
+    gives (in the same relation) are supported by the question; the rest must be found in the evidence."""
+    numbers, dates, codes = claim_numbers(claim), dates_in(claim), claim_codes(claim)
+    if not numbers and not dates and not codes:
         return None
     base = {"claim": claim, "kind": "numeric", "answer_bearing": True}
+    text_of_evidence = " ".join(s.text.lower() for s in spans)
+    for code in sorted(codes):  # an identifier must occur as a whole in the evidence, or be the one the question names
+        if code not in text_of_evidence and code not in claim_codes(question):
+            return ClaimVerdict(**base, supported=False, verdict="unsupported", missing=f"the identifier {code} is in neither the context nor a tool result",
+                                reason=f"claim {claim!r}: the identifier {code} is nowhere in the evidence")
+    given = [n for n in numbers if given_by_question(claim, question, n)]
+    numbers = [n for n in numbers if n not in given]
+    if not numbers and not dates and not given:
+        return None  # only an identifier that checked out: the rest of the claim is for the judge model
+    if not numbers and not dates:
+        return ClaimVerdict(**base, supported=True, verdict="supported", quote=question[:300], quote_verified=True,
+                            reason="the numbers are the ones the question gives")
     for wanted_date in dates:
         if not any(wanted_date in dates_in(s.text) for s in spans):
             return ClaimVerdict(**base, supported=False, verdict="unsupported", missing=f"the date {wanted_date.isoformat()} is in neither the context nor a tool result",
@@ -250,14 +313,15 @@ def sentence_negation_checks(answer: str, spans: list[Span]) -> list[ClaimVerdic
 def answer_number_checks(answer: str, question: str, spans: list[Span]) -> list[ClaimVerdict]:
     """Every figure written with digits in the answer must occur in the evidence (or in the question, which the user
     wrote). A decomposition can leave a swapped or invented number out of its claims; this check cannot."""
-    evidence = [n for s in spans for n in numbers_in(s.text)]
-    asked = set(claim_numbers(question))
+    evidence = [n for s in spans for n in value_numbers(s.text)]
+    evidence_text = " ".join(s.text.lower() for s in spans)
     found: list[ClaimVerdict] = []
     for sentence in (s.strip() for s in _SENTENCE.split(answer)):
-        missing = [n for n in claim_numbers(sentence) if n not in asked
+        missing = [n for n in claim_numbers(sentence) if not given_by_question(sentence, question, n)
                    and not any(same_number(e, n) for e in evidence)]
+        missing += [c for c in sorted(claim_codes(sentence)) if c not in evidence_text and c not in claim_codes(question)]
         if missing and len(sentence.split()) >= 2:
-            shown = ", ".join(f"{n:g}" for n in missing)
+            shown = ", ".join(c if isinstance(c, str) else f"{c:g}" for c in missing)
             found.append(ClaimVerdict(claim=sentence, supported=False, verdict="unsupported", kind="numeric", answer_bearing=True,
                                       missing=f"the number(s) {shown} appear in neither the context, the tool results nor the question",
                                       reason=f"sentence {sentence!r} states {shown}, which no evidence contains"))

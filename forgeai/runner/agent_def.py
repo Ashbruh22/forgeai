@@ -64,6 +64,7 @@ class Retrieval(BaseModel):
     min_score: float = 0.25  # minimum dense cosine similarity for a chunk to count as evidence
     min_score_bounds: tuple[float, float] = (0.0, 1.0)  # the optimizer may move min_score only inside this
     query_rewrite: bool = False
+    reserve_prose: int = 0  # top_k slots kept for prose chunks (source diversity: table rows cannot crowd documents out)
 
 
 class AgentModel(BaseModel):
