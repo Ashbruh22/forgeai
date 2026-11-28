@@ -1,0 +1,115 @@
+{
+  "choice": {
+    "chosen": "llama3.1:8b",
+    "ranking": [
+      {
+        "judge": "llama3.1:8b",
+        "layer2_macro_accuracy": 0.787,
+        "low_confidence_types": [
+          "negation",
+          "padded_correct",
+          "concise_correct"
+        ]
+      },
+      {
+        "judge": "gemma3:4b",
+        "layer2_macro_accuracy": 0.747,
+        "low_confidence_types": [
+          "negation",
+          "fabricated_clause",
+          "padded_correct",
+          "concise_correct"
+        ]
+      }
+    ],
+    "minimum": 0.9,
+    "low_confidence_types": [
+      "negation",
+      "padded_correct",
+      "concise_correct"
+    ]
+  },
+  "tables": {
+    "gemma3:4b": {
+      "gold": {
+        "n": 15,
+        "pipeline_accuracy": 0.867,
+        "layer2_accuracy": 0.867
+      },
+      "number_swap": {
+        "n": 15,
+        "pipeline_accuracy": 1.0,
+        "layer2_accuracy": 1.0
+      },
+      "negation": {
+        "n": 15,
+        "pipeline_accuracy": 0.4,
+        "layer2_accuracy": 0.4
+      },
+      "wrong_document": {
+        "n": 12,
+        "pipeline_accuracy": 1.0,
+        "layer2_accuracy": null
+      },
+      "fabricated_clause": {
+        "n": 15,
+        "pipeline_accuracy": 0.667,
+        "layer2_accuracy": 0.667
+      },
+      "padded_correct": {
+        "n": 15,
+        "pipeline_accuracy": 0.867,
+        "layer2_accuracy": 0.867
+      },
+      "concise_correct": {
+        "n": 15,
+        "pipeline_accuracy": 0.8,
+        "layer2_accuracy": 0.8
+      }
+    },
+    "llama3.1:8b": {
+      "gold": {
+        "n": 15,
+        "pipeline_accuracy": 0.733,
+        "layer2_accuracy": 0.733
+      },
+      "number_swap": {
+        "n": 15,
+        "pipeline_accuracy": 1.0,
+        "layer2_accuracy": 1.0
+      },
+      "negation": {
+        "n": 15,
+        "pipeline_accuracy": 0.533,
+        "layer2_accuracy": 0.533
+      },
+      "wrong_document": {
+        "n": 12,
+        "pipeline_accuracy": 1.0,
+        "layer2_accuracy": null
+      },
+      "fabricated_clause": {
+        "n": 15,
+        "pipeline_accuracy": 1.0,
+        "layer2_accuracy": 1.0
+      },
+      "padded_correct": {
+        "n": 15,
+        "pipeline_accuracy": 0.6,
+        "layer2_accuracy": 0.6
+      },
+      "concise_correct": {
+        "n": 15,
+        "pipeline_accuracy": 0.8,
+        "layer2_accuracy": 0.8
+      }
+    }
+  },
+  "canary_count": 102,
+  "golds": 15,
+  "low_confidence_types": [
+    "negation",
+    "padded_correct",
+    "concise_correct"
+  ]
+}

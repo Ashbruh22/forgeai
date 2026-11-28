@@ -25,6 +25,7 @@ dependencies = [
     "rapidfuzz==3.14.6",
     "word2number==1.1",
     "dateparser==1.5.1",
+    "psutil==7.2.2",
 ]
 
 [project.optional-dependencies]

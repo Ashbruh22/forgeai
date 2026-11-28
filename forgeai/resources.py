@@ -17,6 +17,7 @@ import logging
 import os
 import sys
 import threading
+import time
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -67,6 +68,28 @@ def process_peak_gb() -> float:
         return 0.0
 
 
+def top_processes(limit: int = 10) -> dict[str, Any]:
+    """The processes holding the most RAM right now: individually and grouped by program name (a browser is
+    dozens of processes), with the sum of everything that is running."""
+    import psutil
+
+    rows: list[tuple[str, int, float]] = []
+    for proc in psutil.process_iter(["name", "pid", "memory_info"]):
+        info = proc.info
+        if info.get("memory_info") is not None:
+            rows.append((info.get("name") or "?", info["pid"], info["memory_info"].rss / 2**30))
+    grouped: dict[str, list[float]] = {}
+    for name, _, gb in rows:
+        grouped.setdefault(name, []).append(gb)
+    return {
+        "captured_at": time.strftime("%H:%M:%S"),
+        "sum_of_process_rss_gb": round(sum(gb for _, _, gb in rows), 2),
+        "top_processes": [{"name": n, "pid": pid, "rss_gb": round(gb, 2)} for n, pid, gb in sorted(rows, key=lambda r: -r[2])[:limit]],
+        "top_programs": [{"program": n, "processes": len(v), "rss_gb": round(sum(v), 2)}
+                         for n, v in sorted(grouped.items(), key=lambda kv: -sum(kv[1]))[:limit]],
+    }
+
+
 @dataclass
 class MemoryMonitor:
     """Samples RAM while a stage runs. Use as a context manager; ``summary()`` is JSON-ready."""
@@ -76,6 +99,8 @@ class MemoryMonitor:
     total_gb: float = 0.0
     min_free_gb: float = field(default=1e9)
     warnings: int = 0
+    peak_used_gb: float = 0.0
+    top_at_peak: dict[str, Any] = field(default_factory=dict)
     _stop: threading.Event = field(default_factory=threading.Event)
     _thread: threading.Thread | None = None
 
@@ -83,6 +108,9 @@ class MemoryMonitor:
         total, free = system_memory()
         self.total_gb = total
         self.min_free_gb = min(self.min_free_gb, free)
+        if total - free > self.peak_used_gb + 0.25:  # a new peak: remember who was holding the memory
+            self.peak_used_gb = total - free
+            self.top_at_peak = top_processes()
         if free / total * 100 < self.warn_below_free_pct:
             if self.warnings == 0:
                 log.warning("free RAM is %.1f GB (%.0f%% of %.1f GB), below the %.0f%% limit",
@@ -114,6 +142,7 @@ class MemoryMonitor:
             "min_free_ram_pct": round(self.min_free_gb / self.total_gb * 100, 1) if self.total_gb else None,
             "low_memory_warnings": self.warnings,
             "forgeai_process_peak_gb": round(process_peak_gb(), 2),
+            "top_processes_at_peak": self.top_at_peak,
         }
 
 
