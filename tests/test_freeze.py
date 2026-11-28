@@ -109,5 +109,6 @@ def test_the_hash_does_not_change_when_a_checkout_converts_line_endings(tmp_path
     run = make_run(tmp_path)
     freeze_eval_set(run, config, digests={})
     path = run / "03_evals" / "eval_set.jsonl"
-    path.write_bytes(path.read_bytes().replace(bytes([10]), bytes([13, 10])))
+    lf = path.read_bytes().replace(bytes([13, 10]), bytes([10]))
+    path.write_bytes(lf.replace(bytes([10]), bytes([13, 10])))  # CRLF whatever the file had before
     assert assert_eval_set_frozen(run)
